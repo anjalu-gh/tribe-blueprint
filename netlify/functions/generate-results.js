@@ -5,6 +5,7 @@
 
 const Anthropic = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
+const { Resend } = require('resend');
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -176,12 +177,138 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
     console.log('Step 3 skipped: no email or Zoho not configured');
   }
 
+  // ── Send Results Email via Resend ────────────────
+  if (resolvedEmail && process.env.RESEND_API_KEY) {
+    console.log('Step 4: Sending results email...');
+    try {
+      await sendResultsEmail(resolvedEmail, results);
+      console.log('Step 4 done: results email sent');
+    } catch (err) {
+      console.error('Email send error (non-fatal):', err.message);
+    }
+  }
+
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ results }),
   };
 };
+
+// ── EMAIL HELPER ─────────────────────────────────────────────
+async function sendResultsEmail(email, results) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const careerPathsHtml = (results.career_paths || []).map(c => `
+    <tr>
+      <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
+        <strong style="color:#3D1F0D;font-size:15px;">→ ${c.title}</strong>
+        <p style="margin:6px 0 0;color:#6B4C3B;font-size:14px;line-height:1.6;">${c.description}</p>
+      </td>
+    </tr>`).join('');
+
+  const businessIdeasHtml = (results.business_ideas || []).map(b => `
+    <tr>
+      <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
+        <strong style="color:#3D1F0D;font-size:15px;">→ ${b.name}</strong>
+        <p style="margin:6px 0 0;color:#6B4C3B;font-size:14px;line-height:1.6;">${b.description}</p>
+      </td>
+    </tr>`).join('');
+
+  const roadmapHtml = (results.roadmap || []).map((s, i) => `
+    <tr>
+      <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
+        <strong style="color:#3D1F0D;font-size:15px;">Step ${i + 1}: ${s.title}</strong>
+        <p style="margin:6px 0 0;color:#6B4C3B;font-size:14px;line-height:1.6;">${s.action}</p>
+      </td>
+    </tr>`).join('');
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#FDF6ED;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FDF6ED;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
+            <p style="margin:0 0 4px;color:#E8D5C0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Changing Tribes</p>
+            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Tribe Blueprint</h1>
+          </td>
+        </tr>
+
+        <!-- TRIBE NAME -->
+        <tr>
+          <td style="background:#C85C2D;padding:24px 32px;text-align:center;">
+            <p style="margin:0 0 4px;color:#FDF6ED;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Your Tribe Profile</p>
+            <h2 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">${results.tribe_name || ''}</h2>
+          </td>
+        </tr>
+
+        <!-- TRIBE DESCRIPTION -->
+        <tr>
+          <td style="background:#ffffff;padding:32px;border-left:1px solid #E8D5C0;border-right:1px solid #E8D5C0;">
+            <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.75;">${results.tribe_description || ''}</p>
+          </td>
+        </tr>
+
+        <!-- PAST ANALYSIS -->
+        <tr>
+          <td style="background:#FDF6ED;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 12px;color:#3D1F0D;font-size:18px;">🔍 Understanding Your Past</h3>
+            <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.75;">${results.past_analysis || ''}</p>
+          </td>
+        </tr>
+
+        <!-- CAREER PATHS -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🧭 Your Next Career Paths</h3>
+            <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
+          </td>
+        </tr>
+
+        <!-- BUSINESS IDEAS -->
+        <tr>
+          <td style="background:#FDF6ED;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🚀 Business Ideas For You</h3>
+            <table width="100%" cellpadding="0" cellspacing="0">${businessIdeasHtml}</table>
+          </td>
+        </tr>
+
+        <!-- ROADMAP -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🗺️ Your Transition Roadmap</h3>
+            <table width="100%" cellpadding="0" cellspacing="0">${roadmapHtml}</table>
+          </td>
+        </tr>
+
+        <!-- CTA -->
+        <tr>
+          <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
+            <p style="margin:0 0 16px;color:#E8D5C0;font-size:14px;line-height:1.6;">Ready to take the next step? Connect with the Changing Tribes community.</p>
+            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2024 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+
+  await resend.emails.send({
+    from: 'Tribe Blueprint <blueprint@changingtribes.com>',
+    to: email,
+    subject: `Your Tribe Blueprint: ${results.tribe_name || 'Results Inside'}`,
+    html,
+  });
+}
 
 // ── ZOHO CRM HELPER ─────────────────────────────────────────
 // Uses the refresh token to get a short-lived access token, then
