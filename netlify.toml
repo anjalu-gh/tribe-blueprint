@@ -1,0 +1,13 @@
+[build]
+  command   = "npm install"
+  publish   = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Redirect all paths to index.html (SPA fallback)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
