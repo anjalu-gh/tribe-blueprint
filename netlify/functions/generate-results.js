@@ -73,6 +73,7 @@ exports.handler = async (event) => {
   }
 
   // ── Verify access code ──────────────────────────
+  console.log('Step 1: Verifying access code...');
   const { data: accessData, error: accessErr } = await supabase
     .from('access_codes')
     .select('*')
@@ -80,8 +81,10 @@ exports.handler = async (event) => {
     .single();
 
   if (accessErr || !accessData) {
+    console.log('Access code invalid:', accessErr?.message);
     return { statusCode: 403, body: JSON.stringify({ error: 'Invalid or expired access code' }) };
   }
+  console.log('Step 1 done: access code valid');
 
   const resolvedEmail = email || accessData.email || '';
 
@@ -122,10 +125,11 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
 }`;
 
   // ── Call Claude ─────────────────────────────────
+  console.log('Step 2: Calling Claude API...');
   let results;
   try {
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     });
@@ -135,6 +139,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
       .replace(/\s*```$/i, '');
 
     results = JSON.parse(raw);
+    console.log('Step 2 done: Claude responded OK');
   } catch (aiErr) {
     console.error('AI / parse error:', aiErr.message);
     return { statusCode: 500, body: JSON.stringify({ error: 'Failed to generate results. Please try again.' }) };
