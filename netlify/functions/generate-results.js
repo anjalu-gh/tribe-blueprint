@@ -1,5 +1,5 @@
 // netlify/functions/generate-results.js
-// Verifies the access code, calls Claude API to generate personalised results,
+// Verifies the access code, calls Claude API to generate personalized results,
 // saves the assessment + results to Supabase, pushes a Contact to Zoho CRM,
 // and returns the JSON.
 
@@ -24,10 +24,10 @@ const QUESTION_LABELS = {
   q7:  { left: 'Motivated by stability',                  right: 'Motivated by growth and change' },
   q8:  { left: 'Helping individuals one-on-one',          right: 'Impacting large groups' },
   q9:  { left: 'Working with data and systems',           right: 'Working with people and relationships' },
-  q10: { left: 'Energised by competition',                right: 'Energised by cooperation' },
-  q11: { left: 'Deep, specialised expertise',             right: 'Broad, generalist knowledge' },
+  q10: { left: 'Energized by competition',                right: 'Energized by cooperation' },
+  q11: { left: 'Deep, specialized expertise',             right: 'Broad, generalist knowledge' },
   q12: { left: 'Attention to detail',                     right: 'Big-picture thinking' },
-  q13: { left: 'Creating new things',                     right: 'Managing and organising' },
+  q13: { left: 'Creating new things',                     right: 'Managing and organizing' },
   q14: { left: 'Communicating through writing',           right: 'Speaking / presenting' },
   q15: { left: 'Execution and doing',                     right: 'Strategy and planning' },
   q16: { left: 'Guaranteed, steady income',               right: 'Variable income with higher potential' },
@@ -35,7 +35,7 @@ const QUESTION_LABELS = {
   q18: { left: 'Careful decisions after research',        right: 'Quick decisions on instinct' },
   q19: { left: 'Low-risk, stable situations',             right: 'High-risk, high-reward situations' },
   q20: { left: 'Gradual, incremental change',             right: 'Bold leaps and big pivots' },
-  q21: { left: 'Financial security is top priority',      right: 'Personal fulfilment / purpose is top priority' },
+  q21: { left: 'Financial security is top priority',      right: 'Personal fulfillment / purpose is top priority' },
   q22: { left: 'Work-life balance non-negotiable',        right: 'Will sacrifice balance for success' },
   q23: { left: 'Local / community-level impact',          right: 'Global / large-scale impact' },
   q24: { left: 'Prefers being an employee',               right: 'Prefers being own boss' },
@@ -91,13 +91,13 @@ exports.handler = async (event) => {
   // ── Build Claude prompt ─────────────────────────
   const scoreSummary = buildScoreSummary(answers || {});
 
-  const prompt = `You are a deeply insightful career counsellor and business strategist working with Changing Tribes — a platform that helps people transition to new chapters of their professional lives.
+  const prompt = `You are a deeply insightful career counselor and business strategist working with Changing Tribes — a platform that helps people transition to new chapters of their professional lives.
 
 A person has completed a 25-question personality and skills assessment. Here are their results (each score is 1–10):
 
 ${scoreSummary}
 
-Based on these scores, generate a rich, personalised career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
+Based on these scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
 
 Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object — with this exact structure:
 
