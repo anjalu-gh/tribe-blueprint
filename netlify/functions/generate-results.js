@@ -165,9 +165,15 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
 
   // ── Push Contact to Zoho CRM ────────────────────
   if (resolvedEmail && process.env.ZOHO_CLIENT_ID) {
-    pushToZoho(resolvedEmail, results).catch(err =>
-      console.error('Zoho push error (non-fatal):', err.message)
-    );
+    console.log('Step 3: Pushing to Zoho CRM...');
+    try {
+      await pushToZoho(resolvedEmail, results);
+      console.log('Step 3 done: Zoho contact upserted');
+    } catch (err) {
+      console.error('Zoho push error (non-fatal):', err.message);
+    }
+  } else {
+    console.log('Step 3 skipped: no email or Zoho not configured');
   }
 
   return {
