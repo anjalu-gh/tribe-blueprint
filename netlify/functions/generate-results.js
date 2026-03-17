@@ -274,7 +274,7 @@ async function sendResultsEmail(email, results) {
         <tr>
           <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
             <p style="margin:0 0 4px;color:#E8D5C0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Changing Tribes</p>
-            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Tribe Blueprint</h1>
+            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Tribes Blueprint</h1>
           </td>
         </tr>
 
@@ -343,7 +343,7 @@ async function sendResultsEmail(email, results) {
   await resend.emails.send({
     from: 'Tribe Blueprint <blueprint@changingtribes.com>',
     to: email,
-    subject: `Your Tribe Blueprint: ${results.tribe_name || 'Results Inside'}`,
+    subject: `Your Tribes Blueprint: ${results.tribe_name || 'Results Inside'}`,
     html,
   });
 }
@@ -427,7 +427,7 @@ async function pushToZoho(email, results, answers) {
     .join('\n\n');
 
   const description =
-    `━━━ TRIBE BLUEPRINT ASSESSMENT ━━━\n` +
+    `━━━ TRIBES BLUEPRINT ASSESSMENT ━━━\n` +
     `Tribe Profile: ${results.tribe_name || ''}\n` +
     `${results.tribe_description || ''}\n\n` +
     `━━━ UNDERSTANDING THEIR PAST ━━━\n` +
