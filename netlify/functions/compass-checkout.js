@@ -20,7 +20,7 @@ exports.handler = async (event) => {
   }
 
   const appUrl     = process.env.APP_URL || 'https://blueprint.changingtribes.com';
-  const priceCents = parseInt(process.env.COMPASS_PRICE_CENTS || '4900', 10);
+  const priceCents = parseInt(process.env.COMPASS_PRICE_CENTS || '7900', 10);
 
   try {
     const session = await stripe.checkout.sessions.create({

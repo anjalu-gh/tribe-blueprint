@@ -692,7 +692,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo" onclick="showPage('landing')">
+  <div class="nav-logo" id="nav-logo-text" onclick="showPage('landing')">
     Tribes Blueprint
     <span>by Changing Tribes</span>
   </div>
@@ -893,7 +893,7 @@
 <div id="page-compass-access" class="page">
   <div class="compass-access-wrap">
     <h2>🧭 Tribes Compass</h2>
-    <p class="sub">Your Blueprint profile is already loaded. Tell us where you want to go and we'll map out your next 10 years.</p>
+    <p class="sub">We'll connect your transferable skills with new paths forward — no need to be "qualified" in the traditional sense. Tell us what career or business excites you and we'll map out your next 10 years.</p>
 
     <div id="compass-context-box" class="compass-context" style="display:none;">
       <strong>Your Tribes Blueprint Profile:</strong>
@@ -906,7 +906,7 @@
     </div>
 
     <div class="form-group">
-      <label for="compass-direction-input">Where do you want to go? <span style="font-weight:400;color:var(--muted)">(1–2 sentences)</span></label>
+      <label for="compass-direction-input">What Career or Business would you like to pursue? <span style="font-weight:400;color:var(--muted)">(1–2 sentences)</span></label>
       <textarea id="compass-direction-input" placeholder="e.g. I want to work with animals… or I want to move into healthcare… or I want to build something online that gives me freedom…"></textarea>
     </div>
 
@@ -927,7 +927,7 @@
     <div class="divider">or pay to access</div>
 
     <button class="btn-compass" onclick="startCompassCheckout()" style="width:100%;">
-      💳&nbsp;&nbsp;Pay &amp; Unlock Tribes Compass
+      💳&nbsp;&nbsp;Pay $79 &amp; Unlock Tribes Compass
     </button>
     <p class="security-note">Secure payment via Stripe · Results emailed instantly</p>
   </div>
@@ -1719,6 +1719,9 @@ const TEST_COMPASS_RESULTS = {
 window.addEventListener('load', () => {
   // Check for Tribes Compass domain — show Compass landing directly
   if (window.location.hostname.includes('tribescompass')) {
+    document.title = 'Tribes Compass — Your 10-Year Career Map | Changing Tribes';
+    const navLogo = document.getElementById('nav-logo-text');
+    if (navLogo) navLogo.innerHTML = 'Tribes Compass<span>by Changing Tribes</span>';
     showCompassAccess();
     return;
   }
