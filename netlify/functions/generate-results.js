@@ -14,51 +14,79 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
-// Human-readable labels for the 25 questions
+// Human-readable labels for all 40 questions
 const QUESTION_LABELS = {
-  q1:  { left: 'Working independently',                  right: 'Collaborating with a team' },
-  q2:  { left: 'Routine and structure',                   right: 'Variety and spontaneity' },
-  q3:  { left: 'Following clear instructions',            right: 'Setting own direction' },
-  q4:  { left: 'Working behind the scenes',               right: 'Being the face of something' },
-  q5:  { left: 'Hands-on / physical work',                right: 'Desk / digital work' },
-  q6:  { left: 'Analytical and logical thinking',         right: 'Creative and artistic expression' },
-  q7:  { left: 'Motivated by stability',                  right: 'Motivated by growth and change' },
-  q8:  { left: 'Helping individuals one-on-one',          right: 'Impacting large groups' },
-  q9:  { left: 'Working with data and systems',           right: 'Working with people and relationships' },
-  q10: { left: 'Energized by competition',                right: 'Energized by cooperation' },
-  q11: { left: 'Deep, specialized expertise',             right: 'Broad, generalist knowledge' },
-  q12: { left: 'Attention to detail',                     right: 'Big-picture thinking' },
-  q13: { left: 'Creating new things',                     right: 'Managing and organizing' },
-  q14: { left: 'Communicating through writing',           right: 'Speaking / presenting' },
-  q15: { left: 'Execution and doing',                     right: 'Strategy and planning' },
-  q16: { left: 'Guaranteed, steady income',               right: 'Variable income with higher potential' },
-  q17: { left: 'Established organisations',               right: 'Startups or building own thing' },
-  q18: { left: 'Careful decisions after research',        right: 'Quick decisions on instinct' },
-  q19: { left: 'Low-risk, stable situations',             right: 'High-risk, high-reward situations' },
-  q20: { left: 'Gradual, incremental change',             right: 'Bold leaps and big pivots' },
-  q21: { left: 'Financial security is top priority',      right: 'Personal fulfillment / purpose is top priority' },
-  q22: { left: 'Work-life balance non-negotiable',        right: 'Will sacrifice balance for success' },
-  q23: { left: 'Local / community-level impact',          right: 'Global / large-scale impact' },
-  q24: { left: 'Prefers being an employee',               right: 'Prefers being own boss' },
-  q25: { left: 'Driven by day-to-day enjoyment',          right: 'Driven by legacy and reputation' },
+  // ── HOW YOU WORK ──
+  q1:  { left: 'Working independently',                  right: 'Collaborating with a team',               category: 'How You Work' },
+  q2:  { left: 'Routine and structure',                   right: 'Variety and spontaneity',                 category: 'How You Work' },
+  q3:  { left: 'Following clear instructions',            right: 'Setting own direction',                   category: 'How You Work' },
+  q4:  { left: 'Working behind the scenes',               right: 'Being the face of something',             category: 'How You Work' },
+  q5:  { left: 'Hands-on / physical work',                right: 'Desk / digital work',                     category: 'How You Work' },
+  // ── WHAT ENERGIZES YOU ──
+  q6:  { left: 'Analytical and logical thinking',         right: 'Creative and artistic expression',        category: 'What Energizes You' },
+  q7:  { left: 'Motivated by stability',                  right: 'Motivated by growth and change',          category: 'What Energizes You' },
+  q8:  { left: 'Helping individuals one-on-one',          right: 'Impacting large groups',                  category: 'What Energizes You' },
+  q9:  { left: 'Working with data and systems',           right: 'Working with people and relationships',   category: 'What Energizes You' },
+  q10: { left: 'Energized by competition',                right: 'Energized by cooperation',                category: 'What Energizes You' },
+  // ── YOUR SKILLS & STRENGTHS ──
+  q11: { left: 'Deep, specialized expertise',             right: 'Broad, generalist knowledge',             category: 'Your Skills & Strengths' },
+  q12: { left: 'Attention to detail',                     right: 'Big-picture thinking',                    category: 'Your Skills & Strengths' },
+  q13: { left: 'Creating new things',                     right: 'Managing and organizing',                 category: 'Your Skills & Strengths' },
+  q14: { left: 'Communicating through writing',           right: 'Speaking / presenting',                   category: 'Your Skills & Strengths' },
+  q15: { left: 'Execution and doing',                     right: 'Strategy and planning',                   category: 'Your Skills & Strengths' },
+  // ── RISK & CHANGE ──
+  q16: { left: 'Guaranteed, steady income',               right: 'Variable income with higher potential',   category: 'Risk & Change' },
+  q17: { left: 'Established organizations',               right: 'Startups or building own thing',          category: 'Risk & Change' },
+  q18: { left: 'Careful decisions after research',        right: 'Quick decisions on instinct',             category: 'Risk & Change' },
+  q19: { left: 'Low-risk, stable situations',             right: 'High-risk, high-reward situations',       category: 'Risk & Change' },
+  q20: { left: 'Gradual, incremental change',             right: 'Bold leaps and big pivots',               category: 'Risk & Change' },
+  // ── YOUR VALUES & VISION ──
+  q21: { left: 'Financial security is top priority',      right: 'Personal fulfillment / purpose is top priority', category: 'Your Values & Vision' },
+  q22: { left: 'Work-life balance non-negotiable',        right: 'Will sacrifice balance for success',      category: 'Your Values & Vision' },
+  q23: { left: 'Local / community-level impact',          right: 'Global / large-scale impact',             category: 'Your Values & Vision' },
+  q24: { left: 'Prefers being an employee',               right: 'Prefers being own boss',                  category: 'Your Values & Vision' },
+  q25: { left: 'Driven by day-to-day enjoyment',          right: 'Driven by legacy and reputation',         category: 'Your Values & Vision' },
+  // ── WHAT YOU'VE BUILT & DONE ──
+  q26: { left: 'Built or managed systems, processes, and operations', right: 'Sold, pitched, or persuaded people to buy or act', category: "What You've Built & Done" },
+  q27: { left: 'Coached, taught, or developed other people',          right: 'Created original content, products, or creative work', category: "What You've Built & Done" },
+  q28: { left: 'Led or managed teams and organizations',              right: 'Built deep technical skills or specialized expertise', category: "What You've Built & Done" },
+  q29: { left: 'Strongest experience in large, established organizations', right: 'Strongest experience in small teams, startups, or self-directed work', category: "What You've Built & Done" },
+  q30: { left: 'Worked primarily within one industry or field',       right: 'Worked across multiple industries, worn many hats',    category: "What You've Built & Done" },
+  // ── YOUR HUMAN EDGE ──
+  q31: { left: 'Works best through screens and digital communication', right: 'Works best in person — physical presence matters',    category: 'Your Human Edge' },
+  q32: { left: 'Most effective with information, data, or content',   right: 'Most effective with emotions, relationships, wellbeing', category: 'Your Human Edge' },
+  q33: { left: 'Relies on proven frameworks and best practices',      right: 'Relies on gut instinct and reading human situations',   category: 'Your Human Edge' },
+  q34: { left: 'Prefers clearly defined problems with known solutions', right: 'Thrives on messy, ambiguous, human situations',      category: 'Your Human Edge' },
+  q35: { left: 'Energized by efficiency, scale, and systems',         right: 'Energized by deep, meaningful impact on specific people', category: 'Your Human Edge' },
+  // ── YOUR WORLD & CONTEXT ──
+  q36: { left: 'Wants to work locally, embedded in community',        right: 'Wants to work nationally or globally, location-independent', category: 'Your World & Context' },
+  q37: { left: 'Needs income from next move within ~6 months',        right: 'Has a year or more before needing income from something new', category: 'Your World & Context' },
+  q38: { left: 'Wants to work alone or with a very small team',       right: 'Wants to build a team and organization',               category: 'Your World & Context' },
+  q39: { left: 'Wants to serve individuals directly (B2C)',           right: 'Wants to serve businesses or organizations (B2B)',      category: 'Your World & Context' },
+  q40: { left: 'Drawn to the physical world — products, places, nature, food', right: 'Drawn to the digital/ideas world — online, knowledge, content, software', category: 'Your World & Context' },
 };
 
 function buildScoreSummary(answers) {
-  return Object.entries(answers)
-    .map(([id, score]) => {
-      const q = QUESTION_LABELS[id];
-      if (!q) return null;
-      const s = parseInt(score, 10);
-      const tendency =
-        s <= 2 ? `strongly leans toward "${q.left}"` :
-        s <= 4 ? `leans toward "${q.left}"` :
-        s === 5 ? `is balanced between "${q.left}" and "${q.right}"` :
-        s <= 7 ? `leans toward "${q.right}"` :
-                 `strongly leans toward "${q.right}"`;
-      return `- ${tendency} (score ${s}/10)`;
-    })
-    .filter(Boolean)
-    .join('\n');
+  // Group questions by category for a cleaner prompt
+  const groups = {};
+  Object.entries(answers).forEach(([id, score]) => {
+    const q = QUESTION_LABELS[id];
+    if (!q) return;
+    const s = parseInt(score, 10);
+    const tendency =
+      s <= 2 ? `strongly leans toward "${q.left}"` :
+      s <= 4 ? `leans toward "${q.left}"` :
+      s === 5 ? `is balanced between "${q.left}" and "${q.right}"` :
+      s <= 7 ? `leans toward "${q.right}"` :
+               `strongly leans toward "${q.right}"`;
+    const line = `  - ${tendency} (score ${s}/10)`;
+    if (!groups[q.category]) groups[q.category] = [];
+    groups[q.category].push(line);
+  });
+
+  return Object.entries(groups)
+    .map(([cat, lines]) => `${cat}:\n${lines.join('\n')}`)
+    .join('\n\n');
 }
 
 exports.handler = async (event) => {
@@ -94,30 +122,40 @@ exports.handler = async (event) => {
 
   const prompt = `You are a deeply insightful career counselor and business strategist working with Changing Tribes — a platform that helps people transition to new chapters of their professional lives.
 
-A person has completed a 25-question personality and skills assessment. Here are their results (each score is 1–10):
+A person has completed a 40-question personality, skills, and context assessment. Their responses are grouped into 8 categories below (each score is 1–10):
 
 ${scoreSummary}
 
-Based on these scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
+IMPORTANT GUIDANCE FOR EACH CATEGORY:
+
+1. "How You Work", "What Energizes You", "Your Skills & Strengths", "Risk & Change", "Your Values & Vision" — use these to build the person's core personality archetype and working style profile.
+
+2. "What You've Built & Done" — these are their PROVEN, TRANSFERABLE SKILLS. Use these to ground your career and business recommendations in what this person has actually done, not just what they prefer. A person with high scores toward "sold, pitched, persuaded" has real sales DNA. A person toward "coached, taught, developed" has real facilitation and mentoring ability. Use this category to add credibility and specificity to your suggestions.
+
+3. "Your Human Edge" — this is the AI-RESISTANCE profile. Use these scores to identify this person's most future-proof strengths — the capabilities that AI and automation genuinely cannot replace. High scores toward the right side of these questions (in-person work, emotional attunement, human judgment, ambiguity navigation, deep personal impact) indicate strong AI-resistant attributes. Explicitly factor this into career path and business idea recommendations — prioritize paths where human presence, trust, and judgment are irreplaceable.
+
+4. "Your World & Context" — use these as PRACTICAL CONSTRAINTS and signals. The income timeline (q37) should shape how aggressive or cautious the roadmap steps are. Local vs. global (q36) should shape whether suggestions are community-based or location-independent. Individual vs. organizational clients (q39) shapes whether suggestions are B2C or B2B. Physical vs. digital world (q40) should influence the type of business and career suggested.
+
+Based on all 40 scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
 
 Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object — with this exact structure:
 
 {
   "tribe_name": "The [Archetype Name]",
   "tribe_description": "2–3 sentences describing this person's unique archetype and what makes them stand out professionally.",
-  "past_analysis": "2–3 sentences about the kinds of roles and environments they have likely thrived or struggled in, based on their scores.",
+  "past_analysis": "2–3 sentences about the kinds of roles and environments they have likely thrived or struggled in, based on their scores — reference their proven skills and experience background specifically.",
   "career_paths": [
-    { "title": "Specific Career Title", "description": "2–3 sentences on why this path fits their exact profile and how they would excel." },
+    { "title": "Specific Career Title", "description": "2–3 sentences on why this path fits their exact profile, references their transferable skills, and explains why it is resilient to AI and automation." },
     { "title": "Specific Career Title", "description": "2–3 sentences." },
     { "title": "Specific Career Title", "description": "2–3 sentences." }
   ],
   "business_ideas": [
-    { "name": "Specific Business Type or Name", "description": "2–3 sentences on why this idea suits them and what makes it realistic to start." },
+    { "name": "Specific Business Type or Name", "description": "2–3 sentences on why this idea suits their proven skills, fits their practical context (local/global, B2C/B2B, timeline), and why it plays to human strengths AI cannot easily replace." },
     { "name": "Specific Business Type or Name", "description": "2–3 sentences." },
     { "name": "Specific Business Type or Name", "description": "2–3 sentences." }
   ],
   "roadmap": [
-    { "title": "Action Step Title", "action": "A specific, concrete action they can take in the next 30 days." },
+    { "title": "Action Step Title", "action": "A specific, concrete action they can take in the next 30 days — calibrated to their income timeline and practical context." },
     { "title": "Action Step Title", "action": "Specific action." },
     { "title": "Action Step Title", "action": "Specific action." },
     { "title": "Action Step Title", "action": "Specific action." },
