@@ -206,7 +206,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
   if (resolvedEmail && process.env.ZOHO_CLIENT_ID) {
     console.log('Step 3: Pushing to Zoho CRM...');
     try {
-      await pushToZoho(resolvedEmail, results);
+      await pushToZoho(resolvedEmail, results, answers);
       console.log('Step 3 done: Zoho contact upserted');
     } catch (err) {
       console.error('Zoho push error (non-fatal):', err.message);
@@ -352,7 +352,7 @@ async function sendResultsEmail(email, results) {
 // Uses the refresh token to get a short-lived access token, then
 // upserts a Contact by email so duplicates are never created.
 
-async function pushToZoho(email, results) {
+async function pushToZoho(email, results, answers) {
   const datacenter = process.env.ZOHO_DATACENTER || 'com'; // com | eu | in | com.au
 
   // Step 1: exchange refresh token for access token
@@ -381,24 +381,65 @@ async function pushToZoho(email, results) {
   const namePart  = email.split('@')[0].replace(/[._-]+/g, ' ');
   const lastName  = namePart.charAt(0).toUpperCase() + namePart.slice(1);
 
-  // Step 3: build the Contact payload
-  // Uses Description to store the full tribe profile summary.
-  // The "Lead_Source" picklist value must exist in your Zoho account —
-  // change it if needed under Setup → CRM Settings → Picklists.
-  const careerSummary = (results.career_paths || [])
-    .map(c => `• ${c.title}`)
-    .join('\n');
+  // Step 3: build the full Contact description
+  // Includes the complete assessment profile, all results, and the full roadmap.
 
-  const bizSummary = (results.business_ideas || [])
-    .map(b => `• ${b.name}`)
-    .join('\n');
+  // ── Assessment scores grouped by category ──
+  const scoreLines = [];
+  const categoryOrder = [
+    'How You Work', 'What Energizes You', 'Your Skills & Strengths',
+    'Risk & Change', 'Your Values & Vision',
+    "What You've Built & Done", 'Your Human Edge', 'Your World & Context',
+  ];
+  const scoreGroups = {};
+  Object.entries(answers || {}).forEach(([id, score]) => {
+    const q = QUESTION_LABELS[id];
+    if (!q) return;
+    const s = parseInt(score, 10);
+    const tendency =
+      s <= 2 ? `Strongly: ${q.left}` :
+      s <= 4 ? `Leans: ${q.left}` :
+      s === 5 ? `Balanced` :
+      s <= 7 ? `Leans: ${q.right}` :
+               `Strongly: ${q.right}`;
+    if (!scoreGroups[q.category]) scoreGroups[q.category] = [];
+    scoreGroups[q.category].push(`  ${tendency} (${s}/10)`);
+  });
+  categoryOrder.forEach(cat => {
+    if (scoreGroups[cat]) {
+      scoreLines.push(`${cat}:\n${scoreGroups[cat].join('\n')}`);
+    }
+  });
+
+  // ── Full career paths ──
+  const careerFull = (results.career_paths || [])
+    .map(c => `• ${c.title}\n  ${c.description}`)
+    .join('\n\n');
+
+  // ── Full business ideas ──
+  const bizFull = (results.business_ideas || [])
+    .map(b => `• ${b.name}\n  ${b.description}`)
+    .join('\n\n');
+
+  // ── Full roadmap ──
+  const roadmapFull = (results.roadmap || [])
+    .map((s, i) => `Step ${i + 1}: ${s.title}\n  ${s.action}`)
+    .join('\n\n');
 
   const description =
-    `Tribe Blueprint Assessment\n` +
-    `Tribe Profile: ${results.tribe_name || ''}\n\n` +
+    `━━━ TRIBE BLUEPRINT ASSESSMENT ━━━\n` +
+    `Tribe Profile: ${results.tribe_name || ''}\n` +
     `${results.tribe_description || ''}\n\n` +
-    `Suggested Career Paths:\n${careerSummary}\n\n` +
-    `Business Ideas:\n${bizSummary}`;
+    `━━━ UNDERSTANDING THEIR PAST ━━━\n` +
+    `${results.past_analysis || ''}\n\n` +
+    `━━━ ASSESSMENT SCORES ━━━\n` +
+    `${scoreLines.join('\n\n')}\n\n` +
+    `━━━ CAREER PATHS ━━━\n` +
+    `${careerFull}\n\n` +
+    `━━━ BUSINESS IDEAS ━━━\n` +
+    `${bizFull}\n\n` +
+    `━━━ TRANSITION ROADMAP ━━━\n` +
+    `${roadmapFull}`;
 
   const payload = {
     data: [
