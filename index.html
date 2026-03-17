@@ -339,12 +339,20 @@
       border: none;
       box-shadow: 0 2px 6px rgba(200,92,45,0.35);
     }
-    .slider-val {
-      text-align: center;
-      font-size: 0.82rem;
-      color: var(--orange);
-      font-weight: 700;
-      margin-top: 0.4rem;
+    .slider-wrap {
+      position: relative;
+      padding-bottom: 1.2rem;
+    }
+    .slider-center-tick {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      color: var(--muted);
+      opacity: 0.6;
+      pointer-events: none;
+      white-space: nowrap;
     }
     .submit-wrap { margin-top: 3rem; text-align: center; }
     .submit-wrap p { margin-top: 0.9rem; font-size: 0.82rem; color: var(--muted); }
@@ -740,21 +748,39 @@ function buildAssessment() {
           <span class="slider-label">${q.left}</span>
           <span class="slider-label right">${q.right}</span>
         </div>
-        <input type="range" id="${q.id}" min="1" max="10" value="5"
-               oninput="onSlide('${q.id}',this.value)" />
-        <div class="slider-val" id="${q.id}-val">5 / 10</div>
+        <div class="slider-wrap">
+          <input type="range" id="${q.id}" min="1" max="10" value="5"
+                 oninput="onSlide('${q.id}',this.value)" />
+          <div class="slider-center-tick">◆ neutral</div>
+        </div>
       `;
       container.appendChild(card);
     });
   });
 
+  // Initialise track fills for all sliders
+  categories.forEach(cat => cat.questions.forEach(q => initSliderTrack(q.id)));
   updateProgress();
 }
 
 function onSlide(id, val) {
   state.answers[id] = parseInt(val, 10);
-  document.getElementById(id + '-val').textContent = val + ' / 10';
+  // Color the track: orange from left up to thumb, light gray beyond
+  const pct = ((val - 1) / 9) * 100;
+  const slider = document.getElementById(id);
+  slider.style.background =
+    `linear-gradient(to right, var(--orange) 0%, var(--orange) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
   updateProgress();
+}
+
+function initSliderTrack(id) {
+  // Set initial track fill at midpoint (value 5 = ~44%)
+  const pct = ((5 - 1) / 9) * 100;
+  const slider = document.getElementById(id);
+  if (slider) {
+    slider.style.background =
+      `linear-gradient(to right, var(--orange) 0%, var(--orange) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+  }
 }
 
 function updateProgress() {
