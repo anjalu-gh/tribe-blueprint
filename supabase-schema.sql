@@ -63,6 +63,24 @@ ALTER TABLE assessments  ENABLE ROW LEVEL SECURITY;
 -- If you ever want to add an admin dashboard, create a policy here.
 
 
+-- ── 4. COMPASS ASSESSMENTS ──────────────────────────────────
+-- Stores Tribes Compass direction statements and AI-generated results.
+
+CREATE TABLE IF NOT EXISTS compass_assessments (
+  id                  UUID        DEFAULT gen_random_uuid() PRIMARY KEY,
+  access_code         TEXT        NOT NULL,
+  email               TEXT,
+  direction_statement TEXT,
+  blueprint_answers   JSONB,      -- snapshot of Blueprint scores used
+  results             JSONB,      -- full Compass AI results object
+  created_at          TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_compass_access_code ON compass_assessments (access_code);
+CREATE INDEX IF NOT EXISTS idx_compass_email        ON compass_assessments (email);
+
+ALTER TABLE compass_assessments ENABLE ROW LEVEL SECURITY;
+
 -- ═══════════════════════════════════════════════════════════
 --  SAMPLE DATA  —  uncomment and edit to create your coupons
 -- ═══════════════════════════════════════════════════════════

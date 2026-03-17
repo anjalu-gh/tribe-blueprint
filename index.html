@@ -456,6 +456,230 @@
     }
     footer a { color: var(--orange); text-decoration: none; }
 
+    /* ===== TRIBES COMPASS ===== */
+    .compass-upsell {
+      background: linear-gradient(135deg, var(--brown) 0%, #5a2e10 100%);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      margin: 2rem 0 1rem;
+      text-align: center;
+      color: var(--white);
+    }
+    .compass-upsell .badge {
+      background: var(--gold);
+      color: var(--brown);
+      margin-bottom: 1.2rem;
+    }
+    .compass-upsell h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .compass-upsell p {
+      color: #E8D5C0;
+      line-height: 1.75;
+      font-size: 0.95rem;
+      max-width: 560px;
+      margin: 0 auto 1.5rem;
+    }
+    .compass-upsell-features {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .compass-upsell-features li {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.82rem;
+      color: #E8D5C0;
+    }
+    .btn-compass {
+      background: var(--gold);
+      color: var(--brown);
+      padding: 1rem 2.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-compass:hover { background: #e6b420; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,160,23,0.35); }
+
+    /* Compass access page */
+    .compass-access-wrap {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .compass-access-wrap h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .compass-access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
+    .compass-context {
+      background: var(--brown);
+      color: #E8D5C0;
+      border-radius: 10px;
+      padding: 1rem 1.4rem;
+      font-size: 0.88rem;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+    .compass-context strong { color: var(--white); }
+    textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--brown);
+      resize: vertical;
+      min-height: 90px;
+      transition: border-color 0.2s;
+    }
+    textarea:focus { outline: none; border-color: var(--orange); }
+
+    /* Compass results */
+    .compass-results-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .compass-results-top {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+    }
+    .compass-results-top h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: var(--brown);
+      margin: 0.75rem 0 0.5rem;
+    }
+    .compass-direction-tag {
+      display: inline-block;
+      background: var(--brown);
+      color: #E8D5C0;
+      padding: 0.5rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-style: italic;
+      margin: 0.75rem 0 1.25rem;
+    }
+    .compass-intro { color: var(--muted); line-height: 1.75; font-size: 0.95rem; max-width: 640px; margin: 0 auto; }
+    .compass-career-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.4rem;
+      border: 1px solid var(--border);
+    }
+    .compass-career-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+    }
+    .compass-career-card .fit-text { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.5rem; }
+    .compass-career-card .ai-badge {
+      display: inline-block;
+      background: #EDF7ED;
+      color: var(--green);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .arc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .arc-phase {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+    }
+    .arc-phase .arc-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+    .arc-phase p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+    .compass-business-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 1.4rem;
+      border: 1px solid var(--border);
+    }
+    .compass-business-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+    .biz-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+    .biz-meta span {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      color: var(--brown);
+    }
+    .action-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid var(--orange);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .action-period {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.2rem;
+    }
+    .action-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--brown);
+      margin-bottom: 0.4rem;
+    }
+    .action-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+    @media (max-width: 600px) {
+      .arc-grid { grid-template-columns: 1fr; }
+      .compass-upsell { padding: 2rem 1.5rem; }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.5rem 2rem; }
@@ -633,6 +857,24 @@
       <ul class="result-list" id="roadmap-content"></ul>
     </div>
 
+    <!-- TRIBES COMPASS UPSELL -->
+    <div class="compass-upsell">
+      <div class="badge">✦ Take It Further</div>
+      <h2>Ready for Your Tribes Compass?</h2>
+      <p>You now know your profile. Tribes Compass takes your Blueprint results, adds where you want to go, and maps out exactly which career or business to pursue — and what the next 10 years could look like.</p>
+      <ul class="compass-upsell-features">
+        <li>🧭 3 AI-resistant career paths matched to your direction</li>
+        <li>📈 10-year arc for each career (Years 1–3, 4–7, 8–10)</li>
+        <li>🚀 3 business models built for your skills and direction</li>
+        <li>🗺️ 90-day action plan to get moving immediately</li>
+        <li>📧 Full report emailed to you instantly</li>
+      </ul>
+      <button class="btn-compass" onclick="showCompassAccess()">
+        Unlock Tribes Compass →
+      </button>
+      <p style="margin-top:1rem;font-size:0.8rem;opacity:0.65;">One-time access · Powered by AI · Results in under 60 seconds</p>
+    </div>
+
     <div class="cta-footer">
       <p>Want to go deeper? Connect with the Changing Tribes community.</p>
       <a href="https://changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
@@ -641,6 +883,104 @@
 
   <footer>
     <p>© 2024 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
+    <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: COMPASS ACCESS                          -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="page-compass-access" class="page">
+  <div class="compass-access-wrap">
+    <h2>🧭 Tribes Compass</h2>
+    <p class="sub">Your Blueprint profile is already loaded. Tell us where you want to go and we'll map out your next 10 years.</p>
+
+    <div id="compass-context-box" class="compass-context" style="display:none;">
+      <strong>Your Tribes Blueprint Profile:</strong>
+      <span id="compass-tribe-display"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="compass-email-input">Your Email Address</label>
+      <input type="email" id="compass-email-input" placeholder="you@example.com" />
+    </div>
+
+    <div class="form-group">
+      <label for="compass-direction-input">Where do you want to go? <span style="font-weight:400;color:var(--muted)">(1–2 sentences)</span></label>
+      <textarea id="compass-direction-input" placeholder="e.g. I want to work with animals… or I want to move into healthcare… or I want to build something online that gives me freedom…"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="compass-coupon-input">Have a Coupon Code?</label>
+      <div class="inline-row">
+        <input type="text" id="compass-coupon-input" placeholder="Enter coupon code" />
+        <button class="btn-secondary" onclick="applyCompassCoupon()">Apply</button>
+      </div>
+      <div id="compass-coupon-error"   class="msg error">That coupon code is not valid or has expired.</div>
+      <div id="compass-coupon-success" class="msg success">✓ Coupon applied! Click below to generate your Compass.</div>
+    </div>
+
+    <button id="compass-free-btn" class="btn-primary" onclick="submitCompass()" style="width:100%;display:none;margin-top:0.5rem;">
+      Generate My Tribes Compass →
+    </button>
+
+    <div class="divider">or pay to access</div>
+
+    <button class="btn-compass" onclick="startCompassCheckout()" style="width:100%;">
+      💳&nbsp;&nbsp;Pay &amp; Unlock Tribes Compass
+    </button>
+    <p class="security-note">Secure payment via Stripe · Results emailed instantly</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: COMPASS LOADING                         -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="page-compass-loading" class="page">
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <h2>Building Your Tribes Compass…</h2>
+    <p id="compass-loading-msg">Mapping your direction to your Blueprint profile…</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: COMPASS RESULTS                         -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="page-compass-results" class="page">
+  <div class="compass-results-wrap">
+    <div class="compass-results-top">
+      <div class="badge">✦ Your Tribes Compass Results</div>
+      <h2 id="compass-results-title">Your Direction Profile</h2>
+      <div class="compass-direction-tag" id="compass-direction-tag"></div>
+      <p class="compass-intro" id="compass-intro"></p>
+    </div>
+
+    <div id="compass-careers-section">
+      <div class="result-card" style="margin-bottom:0.5rem;">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🧭 Your Career Paths — 10-Year View</h3>
+        <div id="compass-careers-content"></div>
+      </div>
+    </div>
+
+    <div class="result-card" style="margin-top:1.4rem;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🚀 Business Models For You</h3>
+      <div id="compass-business-content"></div>
+    </div>
+
+    <div class="result-card" style="margin-top:1.4rem;">
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🗺️ Your 90-Day Action Plan</h3>
+      <div id="compass-action-content"></div>
+    </div>
+
+    <div class="cta-footer">
+      <p>Ready to take the next step? Connect with the Changing Tribes community.</p>
+      <a href="https://changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
     <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
   </footer>
 </div>
@@ -1077,8 +1417,316 @@ function displayResults(r) {
   showPage('results');
 }
 
+/* ══════════════════════════════════════════════════
+   TRIBES COMPASS
+══════════════════════════════════════════════════ */
+
+/* ── COMPASS STATE ──────────────────────────────── */
+const compass = {
+  email:      '',
+  accessCode: '',
+  direction:  '',
+  tribeName:  '',
+  testMode:   false,
+};
+
+/* ── SHOW COMPASS ACCESS PAGE ───────────────────── */
+function showCompassAccess() {
+  // Pre-fill email and tribe name from Blueprint if available
+  compass.email     = state.email || '';
+  compass.tribeName = document.getElementById('tribe-name')?.textContent || '';
+
+  if (compass.email) {
+    document.getElementById('compass-email-input').value = compass.email;
+  }
+  if (compass.tribeName) {
+    document.getElementById('compass-tribe-display').textContent = ' ' + compass.tribeName;
+    document.getElementById('compass-context-box').style.display = 'block';
+  }
+  showPage('compass-access');
+}
+
+/* ── COMPASS COUPON ─────────────────────────────── */
+async function applyCompassCoupon() {
+  const email  = document.getElementById('compass-email-input').value.trim();
+  const coupon = document.getElementById('compass-coupon-input').value.trim().toUpperCase();
+  const errEl  = document.getElementById('compass-coupon-error');
+  const okEl   = document.getElementById('compass-coupon-success');
+
+  if (!email)  { alert('Please enter your email address first.'); return; }
+  if (!coupon) { alert('Please enter a coupon code.'); return; }
+
+  errEl.style.display = 'none';
+  okEl.style.display  = 'none';
+
+  // Local test bypass
+  if (coupon === TEST_COUPON) {
+    compass.email      = email;
+    compass.accessCode = 'TEST-COMPASS-LOCAL';
+    compass.testMode   = true;
+    okEl.textContent   = '✓ Test coupon applied! Enter your direction and click below.';
+    okEl.style.display = 'block';
+    document.getElementById('compass-free-btn').style.display = 'block';
+    return;
+  }
+
+  try {
+    const res  = await fetch('/.netlify/functions/verify-coupon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, coupon }),
+    });
+    const data = await res.json();
+
+    if (data.valid) {
+      compass.email      = email;
+      compass.accessCode = data.access_code;
+      okEl.textContent   = '✓ Coupon applied! Enter your direction and click below.';
+      okEl.style.display = 'block';
+      document.getElementById('compass-free-btn').style.display = 'block';
+    } else {
+      errEl.style.display = 'block';
+    }
+  } catch {
+    errEl.style.display = 'block';
+  }
+}
+
+/* ── COMPASS CHECKOUT ───────────────────────────── */
+async function startCompassCheckout() {
+  const email = document.getElementById('compass-email-input').value.trim();
+  if (!email) { alert('Please enter your email address first.'); return; }
+  compass.email = email;
+
+  try {
+    const res  = await fetch('/.netlify/functions/compass-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Payment setup failed. Please try again.');
+    }
+  } catch {
+    alert('Something went wrong. Please try again.');
+  }
+}
+
+/* ── HANDLE COMPASS STRIPE RETURN ───────────────── */
+async function handleCompassReturn() {
+  const params    = new URLSearchParams(window.location.search);
+  const sessionId = params.get('compass_session');
+  if (!sessionId) return;
+
+  window.history.replaceState({}, '', window.location.pathname);
+
+  try {
+    const res  = await fetch('/.netlify/functions/compass-verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId }),
+    });
+    const data = await res.json();
+
+    if (data.valid) {
+      compass.email      = data.email;
+      compass.accessCode = data.access_code;
+      // Pre-fill the page and send to access
+      document.getElementById('compass-email-input').value = data.email;
+      showPage('compass-access');
+    } else {
+      alert('Payment could not be verified. Please contact andy@changingtribes.com.');
+    }
+  } catch {
+    alert('Payment verification failed. Please contact andy@changingtribes.com.');
+  }
+}
+
+/* ── SUBMIT COMPASS ─────────────────────────────── */
+async function submitCompass() {
+  const direction = document.getElementById('compass-direction-input').value.trim();
+  if (!direction) { alert('Please enter a sentence or two about where you want to go.'); return; }
+
+  const email = document.getElementById('compass-email-input').value.trim();
+  if (!email) { alert('Please enter your email address.'); return; }
+
+  compass.direction = direction;
+  compass.email     = email;
+
+  showPage('compass-loading');
+
+  const messages = [
+    'Mapping your direction to your Blueprint profile…',
+    'Identifying your most AI-resistant strengths…',
+    'Projecting your 10-year career arcs…',
+    'Building your business models…',
+    'Crafting your 90-day action plan…',
+  ];
+  let idx = 0;
+  const el    = document.getElementById('compass-loading-msg');
+  const timer = setInterval(() => {
+    idx = (idx + 1) % messages.length;
+    el.textContent = messages[idx];
+  }, 3500);
+
+  // Local test bypass
+  if (compass.testMode) {
+    setTimeout(() => {
+      clearInterval(timer);
+      displayCompassResults(TEST_COMPASS_RESULTS);
+    }, 5000);
+    return;
+  }
+
+  try {
+    const res  = await fetch('/.netlify/functions/compass-results', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email:       compass.email,
+        access_code: compass.accessCode,
+        direction:   compass.direction,
+      }),
+    });
+    clearInterval(timer);
+    const data = await res.json();
+
+    if (data.results) {
+      displayCompassResults(data.results);
+    } else {
+      alert('Could not generate results. Please try again.');
+      showPage('compass-access');
+    }
+  } catch {
+    clearInterval(timer);
+    alert('Something went wrong generating your Compass. Please try again.');
+    showPage('compass-access');
+  }
+}
+
+/* ── DISPLAY COMPASS RESULTS ────────────────────── */
+function displayCompassResults(r) {
+  document.getElementById('compass-results-title').textContent = r.compass_title || 'Your Direction Profile';
+  document.getElementById('compass-direction-tag').textContent  = '"' + compass.direction + '"';
+  document.getElementById('compass-intro').textContent          = r.compass_intro || '';
+
+  // Career paths with 10-year arcs
+  document.getElementById('compass-careers-content').innerHTML =
+    (r.career_paths || []).map(c => `
+      <div class="compass-career-card">
+        <h3>→ ${c.title}</h3>
+        <p class="fit-text">${c.why_it_fits}</p>
+        <span class="ai-badge">🛡️ AI-Resistant: ${c.ai_resistance}</span>
+        <div class="arc-grid">
+          <div class="arc-phase"><div class="arc-label">Years 1–3</div><p>${c.years_1_3}</p></div>
+          <div class="arc-phase"><div class="arc-label">Years 4–7</div><p>${c.years_4_7}</p></div>
+          <div class="arc-phase"><div class="arc-label">Years 8–10</div><p>${c.years_8_10}</p></div>
+        </div>
+      </div>`).join('');
+
+  // Business models
+  document.getElementById('compass-business-content').innerHTML =
+    (r.business_models || []).map(b => `
+      <div class="compass-business-card">
+        <h3>→ ${b.name}</h3>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.65;margin-bottom:0.75rem;">${b.description}</p>
+        <div class="biz-meta">
+          <span>💰 ${b.revenue_model}</span>
+          <span>⏱️ ${b.time_to_income}</span>
+        </div>
+        <p style="color:var(--green);font-size:0.82rem;font-style:italic;margin:0.5rem 0 0;">🛡️ ${b.ai_resistance}</p>
+      </div>`).join('');
+
+  // 90-day action plan
+  document.getElementById('compass-action-content').innerHTML =
+    (r.action_plan || []).map(a => `
+      <div class="action-card">
+        <div class="action-period">${a.period}</div>
+        <h4>${a.title}</h4>
+        <p>${a.action}</p>
+      </div>`).join('');
+
+  showPage('compass-results');
+}
+
+/* ── COMPASS TEST DATA ───────────────────────────── */
+const TEST_COMPASS_RESULTS = {
+  compass_title: 'The Animal Welfare Advocate',
+  compass_intro: 'Your Blueprint profile — a natural facilitator with deep people skills, operational experience, and a preference for meaningful in-person impact — maps beautifully onto the animal welfare and care sector. People who do this work well combine emotional attunement, relationship trust, and hands-on presence: three things AI cannot replicate.',
+  career_paths: [
+    {
+      title: 'Animal-Assisted Therapy Coordinator',
+      why_it_fits: 'Your coaching background and deep people skills are exactly what this role demands — you work with both animals and the humans in their care. It combines your operational strengths with the meaningful one-on-one impact you thrive on.',
+      ai_resistance: 'This role depends entirely on human presence, emotional regulation, and trust-based relationships — all categories where AI has no foothold.',
+      years_1_3: 'Certification in animal-assisted interventions, entry-level coordinator roles in hospitals, schools, or rehab centers. Salary range $38K–$52K.',
+      years_4_7: 'Senior coordinator or program director, possibly running your own therapy animal program within a facility. Growing reputation in the field.',
+      years_8_10: 'Consulting for healthcare systems or schools, speaking at conferences, or founding your own AAT nonprofit or practice. Top practitioners earn $80K–$120K+.',
+    },
+    {
+      title: 'Veterinary Practice Manager',
+      why_it_fits: 'Your operations and leadership experience transfers directly into running the business side of a veterinary practice. You bring the organizational skills the clinical team lacks while staying close to animals every day.',
+      ai_resistance: 'Managing teams, navigating emotional client conversations around pet health, and running a physical facility all require irreplaceable human judgment and presence.',
+      years_1_3: 'Office or practice management role in a vet clinic, learning the industry. Salary $42K–$60K. Many practices actively hire from outside the industry for operational talent.',
+      years_4_7: 'Practice Manager or Operations Director at a larger multi-vet practice or specialty clinic. Revenue management, team leadership, client experience.',
+      years_8_10: 'Regional manager for a vet group, consultant to independent practices, or co-owner of your own clinic. Compensation $90K–$140K+.',
+    },
+    {
+      title: 'Animal Welfare Advocate & Trainer',
+      why_it_fits: 'Your facilitation and teaching background combined with your passion for animals makes professional animal training or humane education a natural fit — you already know how to change human behavior, which is what most animal work actually requires.',
+      ai_resistance: 'Animal behavior work requires physical presence, read-the-room judgment, and trust relationships built over time — completely immune to AI displacement.',
+      years_1_3: 'Certification (CPDT-KA or similar), building a client base, working alongside shelters or rescue organizations. $30K–$50K building up.',
+      years_4_7: 'Established private practice with recurring clients, staff or associate trainers, specialty niche (reactivity, shelter dogs, service animals).',
+      years_8_10: 'Master trainer, online course creator, shelter consultant, or author. Strong practitioners regularly earn $80K–$150K and build real businesses.',
+    },
+  ],
+  business_models: [
+    {
+      name: 'Pet Behavior & Training Practice',
+      description: 'A private dog or animal training business serving pet owners in your community, specializing in a niche such as reactivity, puppies, or service animal prep. Your facilitation and people skills make you exceptional with the human side of training.',
+      revenue_model: '$85–$150/hr for private sessions, $45–$75/person for group classes, $800–$2,500 for training packages.',
+      time_to_income: '2–4 months after certification',
+      ai_resistance: 'Physical presence and hands-on skill are the entire product. AI can explain training theory; only a skilled human can actually teach it.',
+    },
+    {
+      name: 'Animal Welfare Consulting for Organizations',
+      description: 'Consulting to animal shelters, humane societies, and rescue organizations on operations, staff training, and community engagement programs. Your ops and coaching background is rare in the nonprofit animal sector.',
+      revenue_model: '$75–$150/hr consulting, or retainer arrangements of $2,000–$5,000/month for ongoing work.',
+      time_to_income: '3–6 months to first contract',
+      ai_resistance: 'Organizational culture change, staff development, and community relationship building all depend on trusted human consultants, not software.',
+    },
+    {
+      name: 'Animal-Assisted Wellness Retreats',
+      description: 'Weekend or multi-day retreats that combine animals (horses, dogs, or farm animals) with personal development, mindfulness, or team-building for corporate groups or individuals. A premium experience in a fast-growing wellness category.',
+      revenue_model: '$300–$800/person for day experiences, $1,500–$3,500 for multi-day retreats, corporate group packages $5,000–$20,000.',
+      time_to_income: '6–12 months to first retreat',
+      ai_resistance: 'Live animal experiences, human facilitation, and the emotional impact of being in nature with animals are impossible to digitize or automate.',
+    },
+  ],
+  action_plan: [
+    { period: 'Week 1–2', title: 'Get Clear on Your Lane', action: 'Identify which of the 3 career paths or business models feels most aligned. Talk to 3 people already working in that space — not to ask for a job, but to understand the reality of the work. Ask: what does a typical week look like, what skills matter most, and what would they do differently if starting over?' },
+    { period: 'Week 3–4', title: 'Get Your Credential Roadmap', action: 'Research the 1–2 certifications that open doors in your chosen path. Register for or enroll in the most accessible entry certification. Many have online components you can start immediately.' },
+    { period: 'Week 5–6', title: 'Get Visible in the Field', action: 'Volunteer at a local shelter, rescue, or veterinary practice for even 4 hours a week. This builds real-world experience, relationships, and credibility faster than any course. Update your LinkedIn to reflect your direction.' },
+    { period: 'Week 7–8', title: 'Build Your First Asset', action: 'Create one tangible asset: a one-page bio or simple website, a LinkedIn article about your transition, or a simple service description for your first clients. Done and imperfect beats perfect and invisible.' },
+    { period: 'Week 9–10', title: 'Make Your First Direct Ask', action: 'Reach out to 5 organizations or potential clients with a specific, humble offer: an informational interview, a free consultation, or a small pilot project. Your goal is one "yes" that gives you real experience and a testimonial.' },
+    { period: 'Week 11–12', title: 'Review, Refine, Recommit', action: 'Assess what you learned in the first 90 days. What surprised you? What excited you most? Adjust your direction if needed, then set your next 90-day goal with one specific milestone: a certification completed, a first paying client, or a job application submitted.' },
+  ],
+};
+
 /* ── INIT ────────────────────────────────────────── */
-window.addEventListener('load', handleStripeReturn);
+window.addEventListener('load', () => {
+  // Check for Tribes Compass domain — show Compass landing directly
+  if (window.location.hostname.includes('tribescompass')) {
+    showCompassAccess();
+    return;
+  }
+  // Check for Compass Stripe return
+  handleCompassReturn();
+  // Check for Blueprint Stripe return
+  handleStripeReturn();
+});
 </script>
 </body>
 </html>
