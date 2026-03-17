@@ -169,7 +169,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
   try {
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 2048,
+      max_tokens: 1500,
       messages: [{ role: 'user', content: prompt }],
     });
 
@@ -356,11 +356,14 @@ async function pushToZoho(email, results, answers) {
   const datacenter = process.env.ZOHO_DATACENTER || 'com'; // com | eu | in | com.au
 
   // Step 1: exchange refresh token for access token
+  const tokenController = new AbortController();
+  const tokenTimeout = setTimeout(() => tokenController.abort(), 8000);
   const tokenRes = await fetch(
     `https://accounts.zoho.${datacenter}/oauth/v2/token`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      signal: tokenController.signal,
       body: new URLSearchParams({
         grant_type:    'refresh_token',
         client_id:     process.env.ZOHO_CLIENT_ID,
@@ -369,6 +372,7 @@ async function pushToZoho(email, results, answers) {
       }),
     }
   );
+  clearTimeout(tokenTimeout);
 
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
@@ -454,6 +458,8 @@ async function pushToZoho(email, results, answers) {
   };
 
   // Step 4: upsert the Contact
+  const contactController = new AbortController();
+  const contactTimeout = setTimeout(() => contactController.abort(), 8000);
   const contactRes = await fetch(
     `https://www.zohoapis.${datacenter}/crm/v2/Contacts/upsert`,
     {
@@ -462,9 +468,11 @@ async function pushToZoho(email, results, answers) {
         Authorization:  `Zoho-oauthtoken ${accessToken}`,
         'Content-Type': 'application/json',
       },
+      signal: contactController.signal,
       body: JSON.stringify(payload),
     }
   );
+  clearTimeout(contactTimeout);
 
   const contactData = await contactRes.json();
 
