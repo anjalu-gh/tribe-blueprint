@@ -138,6 +138,8 @@ IMPORTANT GUIDANCE FOR EACH CATEGORY:
 
 Based on all 40 scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
 
+CRITICAL: Keep every description field to a MAXIMUM of 2 sentences. Be punchy and specific, not verbose. The entire JSON response must be under 1800 tokens.
+
 Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object — with this exact structure:
 
 {
@@ -169,7 +171,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
   try {
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 1500,
+      max_tokens: 3000,
       messages: [{ role: 'user', content: prompt }],
     });
 
