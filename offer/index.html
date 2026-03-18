@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribes Blueprint — Find Your Next Chapter | Changing Tribes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown:   #3D1F0D;
+      --orange:  #C85C2D;
+      --gold:    #D4A853;
+      --amber:   #E8943A;
+      --cream:   #FDF6ED;
+      --muted:   #6B4C3B;
+      --light:   #FFF8F0;
+      --white:   #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid #F0DFC8;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-logo span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-cta {
+      background: var(--orange);
+      color: var(--white);
+      padding: 0.55rem 1.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #FFF3E0 0%, #FFE4B5 50%, #FDDBA0 100%);
+      color: var(--brown);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      border-bottom: 2px solid #F0C87A;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.2;
+      max-width: 760px;
+      margin: 0 auto 1.5rem;
+      color: var(--brown);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 1rem 2.2rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(200, 92, 45, 0.3);
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .hero-note {
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── WHO IT'S FOR ── */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1040px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .section .lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .pain-card {
+      background: var(--white);
+      border: 1px solid #E8D5C0;
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    .pain-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .pain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pain-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: var(--light); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .step {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      border: 1px solid #E8D5C0;
+    }
+    .step-number {
+      position: absolute;
+      top: -16px;
+      left: 2rem;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      letter-spacing: 0.05em;
+    }
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin: 0.75rem 0 0.75rem;
+    }
+    .step p { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .step ul { list-style: none; padding: 0; }
+    .step ul li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 0.3rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .step ul li::before {
+      content: '✓';
+      color: var(--orange);
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .step-price {
+      display: inline-block;
+      background: var(--cream);
+      color: var(--brown);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      margin-top: 1.25rem;
+      border: 1px solid #E8D5C0;
+    }
+    .step-cta {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 0.75rem 1.6rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      margin-top: 1.25rem;
+      transition: opacity 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+    .step-cta:hover { opacity: 0.88; }
+    .step-cta.gold {
+      background: linear-gradient(135deg, var(--gold) 0%, #b8882e 100%);
+    }
+    .step-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--orange);
+      padding-top: 1.5rem;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .benefit {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid #E8D5C0;
+    }
+    .benefit .ico { font-size: 2.2rem; margin-bottom: 0.75rem; }
+    .benefit h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+    .benefit p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-section { background: linear-gradient(160deg, var(--orange) 0%, #D4661A 100%); color: var(--white); }
+    .proof-section .section-label { color: #FFE4B5; }
+    .proof-section h2 { color: var(--white); }
+    .proof-section .lead { color: rgba(255,255,255,0.85); }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #FFE4B5;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 0.4rem; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: linear-gradient(160deg, #3D1F0D 0%, #6B2F0A 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1rem;
+    }
+    .final-cta p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-white {
+      background: var(--white);
+      color: var(--orange);
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .final-cta .sub-note {
+      margin-top: 1.2rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── COMPASS CALLOUT ── */
+    .compass-callout {
+      background: var(--cream);
+      border-top: 1px solid #E8D5C0;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .compass-callout p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+    .compass-callout a {
+      color: var(--orange);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-size: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: #b09070;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.82rem;
+    }
+    footer a { color: #E8D5C0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .section { padding: 3.5rem 1.25rem; }
+      .step-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div style="background: var(--orange); color: #fff; text-align: center; padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;">
+  🎉 Limited time: Use your coupon code at checkout for <strong>free access</strong> — normally $19
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://blueprint.changingtribes.com" class="nav-logo">
+    Tribes Blueprint
+    <span>by Changing Tribes</span>
+  </a>
+  <a href="https://blueprint.changingtribes.com" class="nav-cta">Get Free Access →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✦ Career &amp; Life Transition Assessment</div>
+  <h1>You Know It's Time for a Change.<br><em>But What's Next?</em></h1>
+  <p>Most career assessments tell you what you already know. Tribes Blueprint goes deeper — combining your personality, transferable skills, and real-world context to show you the careers and businesses you were actually built for.</p>
+  <div class="hero-cta-group">
+    <a href="https://blueprint.changingtribes.com" class="btn-primary">Start My Blueprint — Free with Coupon →</a>
+  </div>
+  <p class="hero-note">40 questions · 15 minutes · Results in under 60 seconds · Normally $19 — free with your coupon code</p>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">✦ Who This Is For</div>
+    <h2>Sound Like You?</h2>
+    <p class="lead">Tribes Blueprint was built for people at a genuine crossroads — not career-hoppers, but people who've built real skills and experience and are ready to put them to work differently.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="icon">😮‍💨</div>
+        <h3>You're burned out — but not done</h3>
+        <p>You've given everything to a career that no longer fits. You're not lazy — you're misaligned. There's a version of your working life that actually energizes you.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">📦</div>
+        <h3>You were made redundant</h3>
+        <p>The job is gone. The question is: do you rebuild the same thing, or use this moment to finally move toward something that actually fits who you are now?</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🔍</div>
+        <h3>You have skills but no clear direction</h3>
+        <p>You've done a lot. Sold things, managed people, built systems, solved hard problems. But you can't quite see how to turn those skills into something new and exciting.</p>
+      </div>
+      <div class="pain-card">
+        <div class="icon">🤖</div>
+        <h3>You're worried about AI</h3>
+        <p>You've seen what's happening. You want to know which career paths are genuinely AI-resistant — and how to position yourself for a world where human skills matter more, not less.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section">
+  <div class="section-inner">
+    <div class="section-label">✦ How It Works</div>
+    <h2>Two Steps to Clarity</h2>
+    <p class="lead">Start with your Blueprint to understand who you are. Then use Tribes Compass to map exactly where to go — and how to get there over the next 10 years.</p>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">Step 1</div>
+        <h3>🗺️ Tribes Blueprint</h3>
+        <p>A 40-question assessment that reveals your working personality, your transferable skills, your AI-resistant strengths, and the practical context that shapes your next move.</p>
+        <ul>
+          <li>Your personal tribe archetype</li>
+          <li>3 matched career paths</li>
+          <li>3 business ideas built for you</li>
+          <li>A personalised transition roadmap</li>
+          <li>Full results emailed instantly</li>
+        </ul>
+        <div class="step-price"><span style="text-decoration:line-through; opacity:0.5; font-weight:400;">$19</span> &nbsp;<span style="color:var(--orange);">FREE with coupon</span></div>
+        <a href="https://blueprint.changingtribes.com" class="step-cta">Get Free Access →</a>
+      </div>
+
+      <div class="step-arrow">→</div>
+
+      <div class="step">
+        <div class="step-number">Step 2</div>
+        <h3>🧭 Tribes Compass</h3>
+        <p>Takes your Blueprint results and your direction — and maps out a detailed 10-year career arc, AI-resistant business models, and a 90-day action plan to get moving immediately.</p>
+        <ul>
+          <li>3 AI-resistant 10-year career paths</li>
+          <li>Year 1–3, 4–7, 8–10 milestones</li>
+          <li>3 business models matched to your skills</li>
+          <li>90-day step-by-step action plan</li>
+          <li>Full report emailed instantly</li>
+        </ul>
+        <div class="step-price">$79 one-time</div>
+        <a href="https://tribescompass.com" class="step-cta gold">Unlock Tribes Compass →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">✦ What Makes This Different</div>
+    <h2>Not Another Generic Career Test</h2>
+    <p class="lead">Most assessments tell you your personality type and leave you to figure out the rest. Tribes Blueprint connects your past, your personality, and your future — in one place.</p>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="ico">🔁</div>
+        <h4>Built on your real experience</h4>
+        <p>We assess what you've actually done — not just who you think you are.</p>
+      </div>
+      <div class="benefit">
+        <div class="ico">🤖</div>
+        <h4>AI-resistance built in</h4>
+        <p>Every recommendation factors in what AI can't replace — your human edge.</p>
+      </div>
+      <div class="benefit">
+        <div class="ico">⚡</div>
+        <h4>Results in under 60 seconds</h4>
+        <p>No waiting days for a report. Your personalised results appear instantly.</p>
+      </div>
+      <div class="benefit">
+        <div class="ico">🎯</div>
+        <h4>Specific, not generic</h4>
+        <p>Actual job titles, business types, and concrete action steps — not vague advice.</p>
+      </div>
+      <div class="benefit">
+        <div class="ico">📧</div>
+        <h4>Emailed to you instantly</h4>
+        <p>Your full results are emailed so you can revisit and share them anytime.</p>
+      </div>
+      <div class="benefit">
+        <div class="ico">💡</div>
+        <h4>No qualifications required</h4>
+        <p>We connect your transferable skills to new paths — you don't need to start over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section proof-section">
+  <div class="section-inner">
+    <div class="section-label">✦ The Reality</div>
+    <h2>The World of Work Has Changed</h2>
+    <p class="lead">The old rules don't apply anymore. The people who thrive in the next decade will be the ones who understand their human edge — and build careers that AI simply cannot replace.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">85M</div>
+        <div class="stat-label">jobs displaced by automation by 2025 (WEF)</div>
+      </div>
+      <div>
+        <div class="stat-num">40%</div>
+        <div class="stat-label">of workers considering a career change</div>
+      </div>
+      <div>
+        <div class="stat-num">15 mins</div>
+        <div class="stat-label">is all it takes to get your Blueprint</div>
+      </div>
+      <div>
+        <div class="stat-num">FREE</div>
+        <div class="stat-label">with your limited-time coupon code</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Your Next Chapter Starts With One Question</h2>
+  <p>40 questions. 15 minutes. A clear picture of the careers and businesses you were actually built for — built from who you are and what you've already done.</p>
+  <a href="https://blueprint.changingtribes.com" class="btn-white">Get Free Access with Your Coupon →</a>
+  <p class="sub-note">Enter your coupon at checkout · Normally $19 · No subscription · Results emailed instantly</p>
+</section>
+
+<!-- COMPASS CALLOUT -->
+<div class="compass-callout">
+  <p>Already took the Tribes Blueprint assessment and ready to map your future?</p>
+  <a href="https://tribescompass.com">Unlock Your Tribes Compass — 10-Year Career Map →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
+  <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
+</footer>
+
+</body>
+</html>
