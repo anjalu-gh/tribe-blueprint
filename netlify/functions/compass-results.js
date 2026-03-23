@@ -255,14 +255,18 @@ CRITICAL: Return ONLY valid, complete JSON. No markdown fences, no explanation. 
       messages:   [{ role: 'user', content: prompt }],
     });
 
-    const raw = message.content[0].text.trim()
+    console.log('Compass stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
+    const rawText = message.content[0].text.trim();
+    console.log('Compass raw (first 300):', rawText.slice(0, 300));
+
+    const raw = rawText
       .replace(/^```json\s*/i, '')
       .replace(/\s*```$/i, '');
 
     results = JSON.parse(raw);
     console.log('Compass Step 3 done: Claude responded OK');
   } catch (aiErr) {
-    console.error('Compass AI / parse error:', aiErr.message);
+    console.error('Compass AI / parse error:', aiErr.constructor.name, aiErr.message);
     return { statusCode: 500, body: JSON.stringify({ error: 'Failed to generate results. Please try again.' }) };
   }
 
