@@ -153,122 +153,96 @@ THEIR TRIBES BLUEPRINT PROFILE (40-question assessment scores):
 ${scoreSummary}
 
 YOUR TASK:
-Generate an expansive, deeply personal Tribes Compass report — the equivalent of 7–10 pages from a professional career coach who has studied this person carefully. Every section must feel like it was written specifically for this individual, not templated. The intersection of WHO THEY ARE and WHERE THEY WANT TO GO must be evident in every paragraph.
+Generate a rich, deeply personal Tribes Compass report from a world-class career coach. Every section must feel written specifically for this individual — not templated. Reference their actual scores and direction throughout. Be specific: name real industries, platforms, income numbers, and communities.
 
-REQUIREMENTS BY SECTION:
+TONE: Warm, direct, expert. Speak as "you". Avoid generic advice. Make this feel like it cost $500.
 
-1. PROFILE SNAPSHOT — Write a rich 3–4 sentence archetype headline and a detailed working style narrative (4–5 sentences). Include their 5 core strengths as specific, named capabilities — not generic traits. Identify their single biggest risk to success based on their scores, and explain their AI-resistance level with specifics from their Human Edge scores (q31–q35).
-
-2. CAREER PATHS — Provide 5 to 6 specific career paths. For each: explain in 3–4 sentences why it fits at the exact intersection of their profile and direction; give a vivid one-paragraph "day in the life" description; provide realistic income ranges for entry/mid/senior levels; give a detailed 10-year arc in three phases; explain specifically how to break in from where they are now; name 2–3 pitfalls they specifically (based on their scores) need to watch for.
-
-3. CAREERS TO AVOID — Name 3 career types that would drain or frustrate this specific person, with a 2–3 sentence explanation grounded in their scores for each.
-
-4. BUSINESS MODELS — Provide 5 to 6 business ideas. For each: describe the concept clearly; explain in 3–4 sentences why it fits their exact profile and direction; give realistic startup cost range; explain exactly how to get the first paying client; give Year 1 and Year 3 revenue expectations; and explain in 2 sentences why this is AI-resistant based on their Human Edge.
-
-5. IDEAL WORK ENVIRONMENT — Write 3–4 sentences on their ideal physical and cultural setup, 2–3 sentences on the type of team they thrive in, 3–5 specific red flags to avoid in employers or partners, and their natural management or leadership style.
-
-6. 90-DAY ACTION PLAN — 6 fortnightly periods. Each action step must be specific, concrete, and calibrated to their income timeline (q37) and practical context. Not general advice — real actions with named platforms, real outreach language, real first steps.
-
-7. RESOURCES — Recommend 3 books, 3 communities or networks, and 3 tools or platforms that are specifically relevant to their direction and profile. Brief explanation of why each one is right for them.
-
-8. CLOSING MESSAGE — A warm, personal 2–3 paragraph closing note that speaks to the fear of change, acknowledges the courage it takes to be here, and sends them forward with specific encouragement tied to their unique profile.
-
-TONE: Warm, direct, expert. Speak as "you" throughout. Be specific — name real industries, real platforms, real income numbers, real communities. Avoid generic career advice language. Make this feel like it cost $500 to produce.
-
-Return ONLY valid JSON — no markdown fences, no explanation — with this exact structure:
+CRITICAL: Return ONLY valid, complete JSON. No markdown fences, no explanation. Every string value must be concise — 1–3 sentences max per field — so the JSON completes fully within the token limit.
 
 {
-  "compass_title": "A short evocative title for their specific direction (e.g. 'The Animal Welfare Advocate' or 'The Healthcare Connector')",
-  "compass_intro": "3–4 sentences bridging their Blueprint archetype with their stated direction — what makes this combination uniquely powerful and what it means for their future.",
+  "compass_title": "A short evocative title for their direction (e.g. 'The Animal Welfare Advocate')",
+  "compass_intro": "2–3 sentences: what makes this person's profile + direction combination uniquely powerful.",
 
   "profile_snapshot": {
-    "archetype_headline": "3–4 rich sentences describing their unique professional archetype — what makes them stand out and why this combination of traits is rare and valuable.",
-    "core_strengths": ["Specific named strength 1", "Specific named strength 2", "Specific named strength 3", "Specific named strength 4", "Specific named strength 5"],
-    "working_style": "4–5 sentences on how they work best, what environments energize them, and what drains them — grounded in their specific scores.",
-    "ai_resistance": "2–3 sentences on their AI-resistance level, specifically which of their Human Edge scores (q31–q35) make them hard to automate and why.",
-    "biggest_risk": "2 sentences identifying their single greatest risk to success based on their scores, and what to do about it."
+    "archetype_headline": "2–3 sentences: their unique professional archetype and what makes it rare and valuable.",
+    "core_strengths": ["Named strength 1", "Named strength 2", "Named strength 3", "Named strength 4", "Named strength 5"],
+    "working_style": "2–3 sentences: how they work best and what drains them — grounded in their scores.",
+    "ai_resistance": "1–2 sentences: which Human Edge scores (q31–q35) make them hard to automate and why.",
+    "biggest_risk": "1–2 sentences: their single greatest risk to success and what to do about it."
   },
 
   "career_paths": [
     {
-      "title": "Specific Career Title",
-      "why_it_fits": "3–4 sentences on why this career sits exactly at the intersection of their profile and direction — reference specific scores.",
-      "day_in_the_life": "A vivid one-paragraph description of a typical day in this career for someone at mid-level — make it feel real and specific.",
-      "income_reality": "Entry level: $X–$Y. Mid-level: $X–$Y. Senior/independent: $X–$Y. Include notes on what drives income variation in this field.",
-      "ai_resistance": "2 sentences on why this career is resilient to AI — what human qualities make it irreplaceable.",
-      "years_1_3": "Detailed description of years 1–3: entry point, typical first roles, key skills to build, realistic income, what success looks like.",
-      "years_4_7": "Detailed description of years 4–7: progression path, specialization options, leadership or autonomy opportunities, income growth.",
-      "years_8_10": "Detailed description of years 8–10: where the best practitioners land, income ceiling, what legacy or impact looks like.",
-      "how_to_break_in": "3–4 specific, actionable steps to enter this career from where they are now — name real platforms, certifications, or communities.",
-      "watch_out_for": "2–3 specific pitfalls this person (based on their exact scores) needs to watch for in this career."
+      "title": "Career Title",
+      "why_it_fits": "2–3 sentences on why this career suits their exact profile and direction — reference specific scores.",
+      "day_in_the_life": "2–3 sentences: a vivid, specific snapshot of a typical day at mid-level.",
+      "income_reality": "Entry: $X–$Y. Mid: $X–$Y. Senior: $X–$Y. One sentence on what drives variation.",
+      "ten_year_arc": "3 sentences: years 1–3 entry path, years 4–7 growth, years 8–10 peak — include income trajectory.",
+      "how_to_break_in": "2–3 specific actionable steps from where they are now — name real platforms or certifications.",
+      "watch_out_for": "1–2 specific pitfalls for this person based on their scores."
     },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." }
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." }
   ],
 
   "careers_to_avoid": [
-    { "title": "Career Type to Avoid", "reason": "2–3 sentences on why this would drain or frustrate this specific person based on their scores." },
+    { "title": "Career to Avoid", "reason": "2 sentences: why this would drain this specific person based on their scores." },
     { "title": "...", "reason": "..." },
     { "title": "...", "reason": "..." }
   ],
 
   "business_models": [
     {
-      "name": "Specific Business Name or Type",
-      "concept": "2 sentences describing what the business is in plain language.",
-      "why_it_fits": "3–4 sentences on why this idea suits their proven skills, profile, and direction — be specific.",
-      "startup_cost": "Realistic low-end to high-end cost to start this business.",
-      "first_client_path": "3–4 specific steps to land the first paying client — name real platforms, outreach tactics, or communities.",
-      "year_1_target": "Realistic revenue expectation for Year 1 with context on what drives it.",
-      "year_3_potential": "Where this business could realistically be in 3 years — revenue, team size, model evolution.",
-      "ai_resistance": "2 sentences on why this business depends on human skills that AI cannot replicate.",
-      "ideal_partner": "1–2 sentences on what type of person or skill set would complement them if they wanted a co-founder or partner."
+      "name": "Business Name or Type",
+      "concept": "1–2 sentences: what the business is in plain language.",
+      "why_it_fits": "2–3 sentences: why it suits their skills, profile, and direction.",
+      "startup_cost": "Low–high cost range to start.",
+      "first_client_path": "2–3 specific steps to land the first paying client — name real platforms or tactics.",
+      "year_1_target": "Realistic Year 1 revenue and what drives it.",
+      "year_3_potential": "Where this business realistically lands in 3 years.",
+      "ai_resistance": "1–2 sentences: why this depends on human skills AI cannot replicate."
     },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." }
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." }
   ],
 
   "work_environment": {
-    "ideal_setup": "3–4 sentences on their ideal physical environment, schedule structure, and remote vs in-person balance based on their scores.",
-    "ideal_team": "2–3 sentences on the type of people and team culture where they will do their best work.",
-    "red_flags": ["Specific red flag to avoid in employers or partners", "Red flag 2", "Red flag 3", "Red flag 4", "Red flag 5"],
-    "leadership_style": "2–3 sentences on their natural management or leadership approach and how to lean into it."
+    "ideal_setup": "2–3 sentences: ideal physical environment, schedule, and remote vs in-person balance.",
+    "ideal_team": "1–2 sentences: the type of people and culture where they do their best work.",
+    "red_flags": ["Red flag 1", "Red flag 2", "Red flag 3", "Red flag 4"],
+    "leadership_style": "1–2 sentences: their natural leadership approach and how to lean into it."
   },
 
   "action_plan": [
-    { "period": "Week 1–2", "title": "Action Step Title", "action": "Specific, detailed actions for this fortnight — name real platforms, resources, or people to contact. At least 3–4 distinct actions." },
-    { "period": "Week 3–4", "title": "Action Step Title", "action": "Specific detailed actions." },
-    { "period": "Week 5–6", "title": "Action Step Title", "action": "Specific detailed actions." },
-    { "period": "Week 7–8", "title": "Action Step Title", "action": "Specific detailed actions." },
-    { "period": "Week 9–10", "title": "Action Step Title", "action": "Specific detailed actions." },
-    { "period": "Week 11–12", "title": "Action Step Title", "action": "Specific detailed actions — by end of week 12, what should they have to show for the last 90 days?" }
+    { "period": "Week 1–2", "title": "Step Title", "action": "2–3 specific actions — name real platforms, resources, or contacts." },
+    { "period": "Week 3–4", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 5–6", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 7–8", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 9–10", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 11–12", "title": "Step Title", "action": "2–3 specific actions — what should they have to show after 90 days?" }
   ],
 
   "resources": {
     "books": [
-      { "title": "Book Title by Author", "why": "1–2 sentences on why this book is specifically relevant to their profile and direction." },
+      { "title": "Book Title by Author", "why": "1 sentence: why this is relevant to their profile and direction." },
       { "title": "...", "why": "..." },
       { "title": "...", "why": "..." }
     ],
     "communities": [
-      { "name": "Community or Network Name", "why": "1–2 sentences on why this community fits their direction and how to engage with it." },
+      { "name": "Community Name", "why": "1 sentence: why this fits their direction." },
       { "name": "...", "why": "..." },
       { "name": "...", "why": "..." }
     ],
     "tools": [
-      { "name": "Tool or Platform Name", "why": "1–2 sentences on how this tool supports their specific next steps." },
+      { "name": "Tool Name", "why": "1 sentence: how this supports their next steps." },
       { "name": "...", "why": "..." },
       { "name": "...", "why": "..." }
     ]
   },
 
-  "closing_message": "2–3 warm, personal paragraphs that acknowledge the courage it takes to be at this crossroads, speak directly to the fears and excitement that come with this kind of change, and send them forward with specific encouragement tied to their unique profile and direction. This should feel like the final words of a coach who truly sees them."
+  "closing_message": "2 short paragraphs: acknowledge the courage it takes to be at this crossroads, and send them forward with specific encouragement tied to their unique profile. Warm and personal — like the final words of a coach who truly sees them."
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -277,7 +251,7 @@ Return ONLY valid JSON — no markdown fences, no explanation — with this exac
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 6000,
+      max_tokens: 5000,
       messages:   [{ role: 'user', content: prompt }],
     });
 
