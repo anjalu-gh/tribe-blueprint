@@ -142,7 +142,7 @@ exports.handler = async (event) => {
     ? `Their Tribes Blueprint archetype is: "${blueprintTribeName}".`
     : '';
 
-  const prompt = `You are a deeply insightful career strategist and business advisor working with Changing Tribes — a platform that helps people navigate major professional transitions.
+  const prompt = `You are a world-class career strategist, business advisor, and executive coach working with Changing Tribes — a platform that helps people navigate major professional transitions with clarity and confidence.
 
 A person has completed the Tribes Blueprint 40-question assessment and is now using Tribes Compass to map their specific direction. ${blueprintContext}
 
@@ -153,52 +153,122 @@ THEIR TRIBES BLUEPRINT PROFILE (40-question assessment scores):
 ${scoreSummary}
 
 YOUR TASK:
-Generate a rich, specific Tribes Compass report that sits at the intersection of WHO THEY ARE (their Blueprint profile) and WHERE THEY WANT TO GO (their direction statement). Every recommendation must reflect both dimensions — not just their personality, and not just their stated direction, but the precise overlap.
+Generate an expansive, deeply personal Tribes Compass report — the equivalent of 7–10 pages from a professional career coach who has studied this person carefully. Every section must feel like it was written specifically for this individual, not templated. The intersection of WHO THEY ARE and WHERE THEY WANT TO GO must be evident in every paragraph.
 
-CRITICAL REQUIREMENTS:
-1. CAREER PATHS must be at the intersection of their profile AND their direction. For each career, provide a 10-year arc in three phases.
-2. BUSINESS MODELS must be at the intersection of their proven skills AND their direction. Each must be AI-resistant — explain specifically why human presence, judgment, or relationships make it hard to automate.
-3. ACTION PLAN must be a 90-day biweekly plan with concrete, specific actions — not general advice.
-4. Reference their Human Edge scores (q31–q35) when explaining AI-resistance.
-5. Reference their World & Context scores (q36–q40) to calibrate urgency, scale, and B2B vs B2C.
-6. Speak directly to the person as "you" — warm, specific, and encouraging.
+REQUIREMENTS BY SECTION:
+
+1. PROFILE SNAPSHOT — Write a rich 3–4 sentence archetype headline and a detailed working style narrative (4–5 sentences). Include their 5 core strengths as specific, named capabilities — not generic traits. Identify their single biggest risk to success based on their scores, and explain their AI-resistance level with specifics from their Human Edge scores (q31–q35).
+
+2. CAREER PATHS — Provide 5 to 6 specific career paths. For each: explain in 3–4 sentences why it fits at the exact intersection of their profile and direction; give a vivid one-paragraph "day in the life" description; provide realistic income ranges for entry/mid/senior levels; give a detailed 10-year arc in three phases; explain specifically how to break in from where they are now; name 2–3 pitfalls they specifically (based on their scores) need to watch for.
+
+3. CAREERS TO AVOID — Name 3 career types that would drain or frustrate this specific person, with a 2–3 sentence explanation grounded in their scores for each.
+
+4. BUSINESS MODELS — Provide 5 to 6 business ideas. For each: describe the concept clearly; explain in 3–4 sentences why it fits their exact profile and direction; give realistic startup cost range; explain exactly how to get the first paying client; give Year 1 and Year 3 revenue expectations; and explain in 2 sentences why this is AI-resistant based on their Human Edge.
+
+5. IDEAL WORK ENVIRONMENT — Write 3–4 sentences on their ideal physical and cultural setup, 2–3 sentences on the type of team they thrive in, 3–5 specific red flags to avoid in employers or partners, and their natural management or leadership style.
+
+6. 90-DAY ACTION PLAN — 6 fortnightly periods. Each action step must be specific, concrete, and calibrated to their income timeline (q37) and practical context. Not general advice — real actions with named platforms, real outreach language, real first steps.
+
+7. RESOURCES — Recommend 3 books, 3 communities or networks, and 3 tools or platforms that are specifically relevant to their direction and profile. Brief explanation of why each one is right for them.
+
+8. CLOSING MESSAGE — A warm, personal 2–3 paragraph closing note that speaks to the fear of change, acknowledges the courage it takes to be here, and sends them forward with specific encouragement tied to their unique profile.
+
+TONE: Warm, direct, expert. Speak as "you" throughout. Be specific — name real industries, real platforms, real income numbers, real communities. Avoid generic career advice language. Make this feel like it cost $500 to produce.
 
 Return ONLY valid JSON — no markdown fences, no explanation — with this exact structure:
 
 {
   "compass_title": "A short evocative title for their specific direction (e.g. 'The Animal Welfare Advocate' or 'The Healthcare Connector')",
-  "compass_intro": "2–3 sentences bridging their Blueprint archetype with their stated direction — what makes this combination uniquely powerful.",
+  "compass_intro": "3–4 sentences bridging their Blueprint archetype with their stated direction — what makes this combination uniquely powerful and what it means for their future.",
+
+  "profile_snapshot": {
+    "archetype_headline": "3–4 rich sentences describing their unique professional archetype — what makes them stand out and why this combination of traits is rare and valuable.",
+    "core_strengths": ["Specific named strength 1", "Specific named strength 2", "Specific named strength 3", "Specific named strength 4", "Specific named strength 5"],
+    "working_style": "4–5 sentences on how they work best, what environments energize them, and what drains them — grounded in their specific scores.",
+    "ai_resistance": "2–3 sentences on their AI-resistance level, specifically which of their Human Edge scores (q31–q35) make them hard to automate and why.",
+    "biggest_risk": "2 sentences identifying their single greatest risk to success based on their scores, and what to do about it."
+  },
+
   "career_paths": [
     {
       "title": "Specific Career Title",
-      "why_it_fits": "2 sentences on why this career sits exactly at the intersection of their profile and direction.",
-      "ai_resistance": "1–2 sentences on why this career is resilient to AI — what human qualities make it irreplaceable.",
-      "years_1_3": "What this career looks like in years 1–3: entry point, typical roles, income range, key skills to build.",
-      "years_4_7": "What this career looks like in years 4–7: progression, specialization, leadership or autonomy.",
-      "years_8_10": "What this career looks like in years 8–10: where the best practitioners land, income ceiling, legacy."
+      "why_it_fits": "3–4 sentences on why this career sits exactly at the intersection of their profile and direction — reference specific scores.",
+      "day_in_the_life": "A vivid one-paragraph description of a typical day in this career for someone at mid-level — make it feel real and specific.",
+      "income_reality": "Entry level: $X–$Y. Mid-level: $X–$Y. Senior/independent: $X–$Y. Include notes on what drives income variation in this field.",
+      "ai_resistance": "2 sentences on why this career is resilient to AI — what human qualities make it irreplaceable.",
+      "years_1_3": "Detailed description of years 1–3: entry point, typical first roles, key skills to build, realistic income, what success looks like.",
+      "years_4_7": "Detailed description of years 4–7: progression path, specialization options, leadership or autonomy opportunities, income growth.",
+      "years_8_10": "Detailed description of years 8–10: where the best practitioners land, income ceiling, what legacy or impact looks like.",
+      "how_to_break_in": "3–4 specific, actionable steps to enter this career from where they are now — name real platforms, certifications, or communities.",
+      "watch_out_for": "2–3 specific pitfalls this person (based on their exact scores) needs to watch for in this career."
     },
-    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." },
-    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." }
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "..." }
   ],
+
+  "careers_to_avoid": [
+    { "title": "Career Type to Avoid", "reason": "2–3 sentences on why this would drain or frustrate this specific person based on their scores." },
+    { "title": "...", "reason": "..." },
+    { "title": "...", "reason": "..." }
+  ],
+
   "business_models": [
     {
       "name": "Specific Business Name or Type",
-      "description": "2 sentences on what the business is and why it fits their profile and direction.",
-      "revenue_model": "How it makes money — specific pricing model, typical rates or revenue range.",
-      "time_to_income": "Realistic time from starting to first paying client or revenue.",
-      "ai_resistance": "1–2 sentences on why this business depends on human skills AI cannot replicate."
+      "concept": "2 sentences describing what the business is in plain language.",
+      "why_it_fits": "3–4 sentences on why this idea suits their proven skills, profile, and direction — be specific.",
+      "startup_cost": "Realistic low-end to high-end cost to start this business.",
+      "first_client_path": "3–4 specific steps to land the first paying client — name real platforms, outreach tactics, or communities.",
+      "year_1_target": "Realistic revenue expectation for Year 1 with context on what drives it.",
+      "year_3_potential": "Where this business could realistically be in 3 years — revenue, team size, model evolution.",
+      "ai_resistance": "2 sentences on why this business depends on human skills that AI cannot replicate.",
+      "ideal_partner": "1–2 sentences on what type of person or skill set would complement them if they wanted a co-founder or partner."
     },
-    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." },
-    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." }
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "...", "ideal_partner": "..." }
   ],
+
+  "work_environment": {
+    "ideal_setup": "3–4 sentences on their ideal physical environment, schedule structure, and remote vs in-person balance based on their scores.",
+    "ideal_team": "2–3 sentences on the type of people and team culture where they will do their best work.",
+    "red_flags": ["Specific red flag to avoid in employers or partners", "Red flag 2", "Red flag 3", "Red flag 4", "Red flag 5"],
+    "leadership_style": "2–3 sentences on their natural management or leadership approach and how to lean into it."
+  },
+
   "action_plan": [
-    { "period": "Week 1–2", "title": "Action Step Title", "action": "Specific, concrete actions for this fortnight." },
-    { "period": "Week 3–4", "title": "Action Step Title", "action": "Specific actions." },
-    { "period": "Week 5–6", "title": "Action Step Title", "action": "Specific actions." },
-    { "period": "Week 7–8", "title": "Action Step Title", "action": "Specific actions." },
-    { "period": "Week 9–10", "title": "Action Step Title", "action": "Specific actions." },
-    { "period": "Week 11–12", "title": "Action Step Title", "action": "Specific actions." }
-  ]
+    { "period": "Week 1–2", "title": "Action Step Title", "action": "Specific, detailed actions for this fortnight — name real platforms, resources, or people to contact. At least 3–4 distinct actions." },
+    { "period": "Week 3–4", "title": "Action Step Title", "action": "Specific detailed actions." },
+    { "period": "Week 5–6", "title": "Action Step Title", "action": "Specific detailed actions." },
+    { "period": "Week 7–8", "title": "Action Step Title", "action": "Specific detailed actions." },
+    { "period": "Week 9–10", "title": "Action Step Title", "action": "Specific detailed actions." },
+    { "period": "Week 11–12", "title": "Action Step Title", "action": "Specific detailed actions — by end of week 12, what should they have to show for the last 90 days?" }
+  ],
+
+  "resources": {
+    "books": [
+      { "title": "Book Title by Author", "why": "1–2 sentences on why this book is specifically relevant to their profile and direction." },
+      { "title": "...", "why": "..." },
+      { "title": "...", "why": "..." }
+    ],
+    "communities": [
+      { "name": "Community or Network Name", "why": "1–2 sentences on why this community fits their direction and how to engage with it." },
+      { "name": "...", "why": "..." },
+      { "name": "...", "why": "..." }
+    ],
+    "tools": [
+      { "name": "Tool or Platform Name", "why": "1–2 sentences on how this tool supports their specific next steps." },
+      { "name": "...", "why": "..." },
+      { "name": "...", "why": "..." }
+    ]
+  },
+
+  "closing_message": "2–3 warm, personal paragraphs that acknowledge the courage it takes to be at this crossroads, speak directly to the fears and excitement that come with this kind of change, and send them forward with specific encouragement tied to their unique profile and direction. This should feel like the final words of a coach who truly sees them."
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -206,8 +276,8 @@ Return ONLY valid JSON — no markdown fences, no explanation — with this exac
   let results;
   try {
     const message = await anthropic.messages.create({
-      model:      'claude-haiku-4-5-20251001',
-      max_tokens: 3000,
+      model:      'claude-sonnet-4-6',
+      max_tokens: 8000,
       messages:   [{ role: 'user', content: prompt }],
     });
 
@@ -290,12 +360,17 @@ async function updateZohoWithCompass(email, direction, results) {
   const { access_token: accessToken } = await tokenRes.json();
   if (!accessToken) throw new Error('Zoho token error');
 
+  const snap2 = results.profile_snapshot || {};
   const careerSummary = (results.career_paths || [])
-    .map(c => `• ${c.title}\n  ${c.why_it_fits}\n  10-year arc: ${c.years_1_3} → ${c.years_4_7} → ${c.years_8_10}`)
+    .map(c => `• ${c.title}\n  ${c.why_it_fits}\n  Income: ${c.income_reality}\n  Arc: ${c.years_1_3} → ${c.years_4_7} → ${c.years_8_10}\n  Break in: ${c.how_to_break_in}`)
+    .join('\n\n');
+
+  const avoidSummary = (results.careers_to_avoid || [])
+    .map(a => `• ${a.title}: ${a.reason}`)
     .join('\n\n');
 
   const bizSummary = (results.business_models || [])
-    .map(b => `• ${b.name}\n  ${b.description}\n  Revenue: ${b.revenue_model} | Time to income: ${b.time_to_income}`)
+    .map(b => `• ${b.name}\n  ${b.concept}\n  ${b.why_it_fits}\n  Startup cost: ${b.startup_cost} | Y1: ${b.year_1_target} | Y3: ${b.year_3_potential}\n  First client: ${b.first_client_path}`)
     .join('\n\n');
 
   const actionSummary = (results.action_plan || [])
@@ -307,7 +382,13 @@ async function updateZohoWithCompass(email, direction, results) {
     `Direction: "${direction}"\n` +
     `Profile: ${results.compass_title || ''}\n\n` +
     `${results.compass_intro || ''}\n\n` +
+    `━━━ PROFILE SNAPSHOT ━━━\n` +
+    `${snap2.archetype_headline || ''}\n` +
+    `Strengths: ${(snap2.core_strengths || []).join(', ')}\n` +
+    `AI-Resistance: ${snap2.ai_resistance || ''}\n` +
+    `Biggest Risk: ${snap2.biggest_risk || ''}\n\n` +
     `━━━ CAREER PATHS (10-YEAR ARCS) ━━━\n${careerSummary}\n\n` +
+    `━━━ CAREERS TO AVOID ━━━\n${avoidSummary}\n\n` +
     `━━━ BUSINESS MODELS ━━━\n${bizSummary}\n\n` +
     `━━━ 90-DAY ACTION PLAN ━━━\n${actionSummary}`;
 
@@ -334,43 +415,156 @@ async function updateZohoWithCompass(email, direction, results) {
 async function sendCompassEmail(email, direction, results) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const careerPathsHtml = (results.career_paths || []).map(c => `
+  // ── Profile Snapshot ──
+  const snap = results.profile_snapshot || {};
+  const strengthsHtml = (snap.core_strengths || []).map(s =>
+    `<span style="display:inline-block;background:#FDF6ED;border:1px solid #E8D5C0;border-radius:20px;padding:4px 12px;margin:3px 4px 3px 0;font-size:13px;color:#3D1F0D;font-weight:600;">${s}</span>`
+  ).join('');
+
+  // ── Career Paths ──
+  const careerPathsHtml = (results.career_paths || []).map((c, i) => `
     <tr>
-      <td style="padding:20px 0;border-bottom:1px solid #E8D5C0;">
-        <strong style="color:#3D1F0D;font-size:15px;">→ ${c.title}</strong>
-        <p style="margin:6px 0 4px;color:#6B4C3B;font-size:14px;line-height:1.6;">${c.why_it_fits}</p>
-        <p style="margin:4px 0 2px;color:#2D5016;font-size:13px;font-style:italic;">🛡️ ${c.ai_resistance}</p>
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+      <td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
+        <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Career Path ${i + 1}</p>
+        <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:10px;">→ ${c.title}</strong>
+        <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${c.why_it_fits}</p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
           <tr>
-            <td style="background:#FDF6ED;border-radius:8px;padding:10px 14px;font-size:13px;color:#6B4C3B;">
-              <strong style="color:#3D1F0D;">Years 1–3:</strong> ${c.years_1_3}<br>
-              <strong style="color:#3D1F0D;">Years 4–7:</strong> ${c.years_4_7}<br>
-              <strong style="color:#3D1F0D;">Years 8–10:</strong> ${c.years_8_10}
+            <td style="background:#FFF8F0;border-left:3px solid #E8943A;border-radius:0 8px 8px 0;padding:12px 16px;">
+              <p style="margin:0 0 4px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">A Day in the Life</p>
+              <p style="margin:0;color:#6B4C3B;font-size:13px;line-height:1.65;font-style:italic;">${c.day_in_the_life}</p>
             </td>
           </tr>
         </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+          <tr>
+            <td style="background:#F0F7F0;border-left:3px solid #4A7C59;border-radius:0 8px 8px 0;padding:10px 14px;">
+              <p style="margin:0 0 2px;color:#2D5016;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">💰 Income Reality</p>
+              <p style="margin:0;color:#3D5030;font-size:13px;line-height:1.6;">${c.income_reality}</p>
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+          <tr>
+            <td style="background:#FDF6ED;padding:12px 14px;border-bottom:1px solid #E8D5C0;">
+              <strong style="color:#3D1F0D;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">📅 Your 10-Year Arc</strong>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+              <strong style="color:#C85C2D;font-size:12px;">Years 1–3 · Getting In</strong>
+              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_1_3}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+              <strong style="color:#C85C2D;font-size:12px;">Years 4–7 · Building Authority</strong>
+              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_4_7}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;">
+              <strong style="color:#C85C2D;font-size:12px;">Years 8–10 · Legacy & Leadership</strong>
+              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_8_10}</p>
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
+          <tr>
+            <td style="background:#EEF3FF;border-left:3px solid #4466CC;border-radius:0 8px 8px 0;padding:10px 14px;">
+              <p style="margin:0 0 2px;color:#2244AA;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">🚪 How to Break In</p>
+              <p style="margin:0;color:#334488;font-size:13px;line-height:1.6;">${c.how_to_break_in}</p>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:8px 0 0;color:#9A6B5A;font-size:12px;font-style:italic;">⚠️ Watch out for: ${c.watch_out_for}</p>
+        <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${c.ai_resistance}</p>
       </td>
     </tr>`).join('');
 
-  const businessHtml = (results.business_models || []).map(b => `
+  // ── Careers to Avoid ──
+  const avoidHtml = (results.careers_to_avoid || []).map(a => `
     <tr>
-      <td style="padding:20px 0;border-bottom:1px solid #E8D5C0;">
-        <strong style="color:#3D1F0D;font-size:15px;">→ ${b.name}</strong>
-        <p style="margin:6px 0 4px;color:#6B4C3B;font-size:14px;line-height:1.6;">${b.description}</p>
-        <p style="margin:4px 0 2px;color:#6B4C3B;font-size:13px;">💰 <strong>Revenue:</strong> ${b.revenue_model}</p>
-        <p style="margin:4px 0 2px;color:#6B4C3B;font-size:13px;">⏱️ <strong>Time to income:</strong> ${b.time_to_income}</p>
-        <p style="margin:4px 0;color:#2D5016;font-size:13px;font-style:italic;">🛡️ ${b.ai_resistance}</p>
+      <td style="padding:12px 0;border-bottom:1px solid #F5E0E0;">
+        <strong style="color:#8B2020;font-size:14px;">✗ ${a.title}</strong>
+        <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${a.reason}</p>
       </td>
     </tr>`).join('');
 
+  // ── Business Models ──
+  const businessHtml = (results.business_models || []).map((b, i) => `
+    <tr>
+      <td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
+        <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Business Idea ${i + 1}</p>
+        <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:6px;">→ ${b.name}</strong>
+        <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.concept}</p>
+        <p style="margin:0 0 12px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.why_it_fits}</p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+          <tr>
+            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+              <strong style="color:#3D1F0D;font-size:12px;">💸 Startup Cost:</strong>
+              <span style="color:#6B4C3B;font-size:13px;"> ${b.startup_cost}</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+              <strong style="color:#3D1F0D;font-size:12px;">🎯 Year 1 Target:</strong>
+              <span style="color:#6B4C3B;font-size:13px;"> ${b.year_1_target}</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;">
+              <strong style="color:#3D1F0D;font-size:12px;">📈 Year 3 Potential:</strong>
+              <span style="color:#6B4C3B;font-size:13px;"> ${b.year_3_potential}</span>
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
+          <tr>
+            <td style="background:#EEF3FF;border-left:3px solid #4466CC;border-radius:0 8px 8px 0;padding:10px 14px;">
+              <p style="margin:0 0 2px;color:#2244AA;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">🤝 How to Get Your First Client</p>
+              <p style="margin:0;color:#334488;font-size:13px;line-height:1.6;">${b.first_client_path}</p>
+            </td>
+          </tr>
+        </table>
+        <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${b.ai_resistance}</p>
+        <p style="margin:6px 0 0;color:#6B4C3B;font-size:12px;font-style:italic;">🤝 Ideal partner: ${b.ideal_partner}</p>
+      </td>
+    </tr>`).join('');
+
+  // ── Work Environment ──
+  const env = results.work_environment || {};
+  const redFlagsHtml = (env.red_flags || []).map(f =>
+    `<li style="margin-bottom:6px;color:#8B2020;font-size:13px;">${f}</li>`
+  ).join('');
+
+  // ── Action Plan ──
   const actionHtml = (results.action_plan || []).map(a => `
     <tr>
-      <td style="padding:14px 0;border-bottom:1px solid #E8D5C0;">
-        <strong style="color:#C85C2D;font-size:13px;text-transform:uppercase;letter-spacing:0.05em;">${a.period}</strong>
-        <strong style="display:block;color:#3D1F0D;font-size:15px;margin:4px 0;">${a.title}</strong>
-        <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.6;">${a.action}</p>
+      <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
+        <strong style="color:#C85C2D;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">${a.period}</strong>
+        <strong style="display:block;color:#3D1F0D;font-size:15px;margin:4px 0 8px;">${a.title}</strong>
+        <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.7;">${a.action}</p>
       </td>
     </tr>`).join('');
+
+  // ── Resources ──
+  const res = results.resources || {};
+  const booksHtml = (res.books || []).map(b =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">📖 ${b.title}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${b.why}</p></td></tr>`
+  ).join('');
+  const communitiesHtml = (res.communities || []).map(c =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🌐 ${c.name}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${c.why}</p></td></tr>`
+  ).join('');
+  const toolsHtml = (res.tools || []).map(t =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🛠️ ${t.name}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${t.why}</p></td></tr>`
+  ).join('');
 
   const html = `
 <!DOCTYPE html>
@@ -379,63 +573,147 @@ async function sendCompassEmail(email, direction, results) {
 <body style="margin:0;padding:0;background:#FDF6ED;font-family:'Helvetica Neue',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#FDF6ED;padding:40px 20px;">
     <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+      <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
 
         <!-- HEADER -->
         <tr>
-          <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
-            <p style="margin:0 0 4px;color:#E8D5C0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Changing Tribes</p>
-            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Tribes Compass</h1>
+          <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
+            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
+            <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Tribes Compass</h1>
+            <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
           </td>
         </tr>
 
         <!-- COMPASS TITLE -->
         <tr>
-          <td style="background:#C85C2D;padding:24px 32px;text-align:center;">
-            <p style="margin:0 0 4px;color:#FDF6ED;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Your Direction Profile</p>
-            <h2 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;">${results.compass_title || ''}</h2>
+          <td style="background:linear-gradient(135deg,#C85C2D,#E8943A);padding:24px 32px;text-align:center;">
+            <p style="margin:0 0 6px;color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Your Direction Profile</p>
+            <h2 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">${results.compass_title || ''}</h2>
           </td>
         </tr>
 
         <!-- DIRECTION + INTRO -->
         <tr>
           <td style="background:#ffffff;padding:28px 32px;border-left:1px solid #E8D5C0;border-right:1px solid #E8D5C0;">
-            <p style="margin:0 0 12px;color:#C85C2D;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Your Direction</p>
-            <p style="margin:0 0 16px;color:#3D1F0D;font-size:16px;font-style:italic;line-height:1.6;">"${direction}"</p>
-            <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.75;">${results.compass_intro || ''}</p>
+            <p style="margin:0 0 8px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Your Direction</p>
+            <p style="margin:0 0 18px;color:#3D1F0D;font-size:16px;font-style:italic;line-height:1.65;border-left:3px solid #E8943A;padding-left:14px;">"${direction}"</p>
+            <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.8;">${results.compass_intro || ''}</p>
+          </td>
+        </tr>
+
+        <!-- PROFILE SNAPSHOT -->
+        <tr>
+          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">🧬 Your Profile Snapshot</h3>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${snap.archetype_headline || ''}</p>
+
+            <p style="margin:0 0 8px;color:#3D1F0D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Core Strengths</p>
+            <div style="margin-bottom:16px;">${strengthsHtml}</div>
+
+            <p style="margin:0 0 8px;color:#3D1F0D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">How You Work Best</p>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${snap.working_style || ''}</p>
+
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="background:#F0F7F0;border-radius:8px;padding:14px 16px;border-left:3px solid #4A7C59;margin-bottom:10px;display:block;">
+                  <p style="margin:0 0 4px;color:#2D5016;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">🛡️ Your AI-Resistance Profile</p>
+                  <p style="margin:0;color:#3D5030;font-size:13px;line-height:1.6;">${snap.ai_resistance || ''}</p>
+                </td>
+              </tr>
+            </table>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:10px;">
+              <tr>
+                <td style="background:#FFF3F3;border-radius:8px;padding:14px 16px;border-left:3px solid #CC4444;">
+                  <p style="margin:0 0 4px;color:#8B2020;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">⚠️ Your Biggest Risk to Watch</p>
+                  <p style="margin:0;color:#5A1A1A;font-size:13px;line-height:1.6;">${snap.biggest_risk || ''}</p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 
         <!-- CAREER PATHS -->
         <tr>
-          <td style="background:#FDF6ED;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🧭 Your Career Paths — 10-Year View</h3>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🧭 Your Career Paths — Full 10-Year View</h3>
+            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Five to six paths matched to who you are and where you want to go.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
+          </td>
+        </tr>
+
+        <!-- CAREERS TO AVOID -->
+        <tr>
+          <td style="background:#FFF8F8;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#8B2020;font-size:17px;font-weight:700;">⛔ Careers to Avoid</h3>
+            <p style="margin:0 0 16px;color:#9A7A6A;font-size:13px;">These paths would drain you — here's why, based on your specific profile.</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${avoidHtml}</table>
           </td>
         </tr>
 
         <!-- BUSINESS MODELS -->
         <tr>
-          <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🚀 Business Models For You</h3>
+          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🚀 Business Models Built for You</h3>
+            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Five to six business ideas tailored to your skills, direction, and practical context.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${businessHtml}</table>
           </td>
         </tr>
 
-        <!-- ACTION PLAN -->
+        <!-- WORK ENVIRONMENT -->
         <tr>
-          <td style="background:#FDF6ED;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🗺️ Your 90-Day Action Plan</h3>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">🏡 Your Ideal Work Environment</h3>
+
+            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Where You Thrive</p>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_setup || ''}</p>
+
+            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Ideal Team</p>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_team || ''}</p>
+
+            <p style="margin:0 0 8px;color:#8B2020;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Red Flags — Walk Away From These</p>
+            <ul style="margin:0 0 16px;padding-left:18px;">${redFlagsHtml}</ul>
+
+            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Leadership Style</p>
+            <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.leadership_style || ''}</p>
+          </td>
+        </tr>
+
+        <!-- 90-DAY ACTION PLAN -->
+        <tr>
+          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🗺️ Your 90-Day Action Plan</h3>
+            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Fortnightly steps — specific, concrete, and calibrated to your timeline.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${actionHtml}</table>
+          </td>
+        </tr>
+
+        <!-- RESOURCES -->
+        <tr>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">📚 Resources Matched to You</h3>
+            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Books</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${booksHtml}</table>
+            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Communities & Networks</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${communitiesHtml}</table>
+            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Tools & Platforms</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${toolsHtml}</table>
+          </td>
+        </tr>
+
+        <!-- CLOSING MESSAGE -->
+        <tr>
+          <td style="background:linear-gradient(160deg,#FFF3E0,#FFE4B5);padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">✉️ A Note for the Road</h3>
+            <p style="margin:0;color:#5A3A2A;font-size:15px;line-height:1.85;white-space:pre-line;">${results.closing_message || ''}</p>
           </td>
         </tr>
 
         <!-- CTA -->
         <tr>
-          <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
-            <p style="margin:0 0 16px;color:#E8D5C0;font-size:14px;line-height:1.6;">Ready to take action? Connect with the Changing Tribes community.</p>
-            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2025 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+          <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
+            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Connect with the Changing Tribes community and share your compass results.</p>
+            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2025 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
           </td>
         </tr>
 
