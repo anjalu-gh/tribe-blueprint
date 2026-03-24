@@ -159,31 +159,38 @@ CRITICAL FORMATTING RULE: Your response MUST start with the character { and end 
 
 {
   "compass_title": "Short evocative title for their direction",
-  "compass_intro": "2 sentences on what makes their profile + direction uniquely powerful.",
-  "profile_snapshot": {
-    "archetype_headline": "2 sentences describing their professional archetype.",
-    "core_strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4", "Strength 5"],
-    "working_style": "2 sentences on how they work best and what drains them.",
-    "ai_resistance": "1 sentence on why they are hard to automate.",
-    "biggest_risk": "1 sentence on their greatest risk to success."
-  },
+  "compass_intro": "2 sentences on what makes their profile and direction uniquely powerful.",
   "career_paths": [
-    { "title": "Career Title", "why_it_fits": "2 sentences why it fits.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps to enter this field." },
-    { "title": "Career Title", "why_it_fits": "2 sentences.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps." },
-    { "title": "Career Title", "why_it_fits": "2 sentences.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps." }
+    {
+      "title": "Specific Career Title",
+      "why_it_fits": "2 sentences grounded in their exact scores and direction.",
+      "ai_resistance": "1 sentence on why this career is hard to automate.",
+      "years_1_3": "Entry point, first roles, realistic income $X–$Y.",
+      "years_4_7": "Progression path, specialisation options, income growth to $X–$Y.",
+      "years_8_10": "Where top practitioners land, income ceiling, legacy impact."
+    },
+    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." },
+    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." }
   ],
   "business_models": [
-    { "name": "Business Name", "concept": "1 sentence what it is.", "why_it_fits": "2 sentences why it suits them.", "startup_cost": "$X–$Y", "year_1_target": "Realistic Year 1 revenue." },
-    { "name": "Business Name", "concept": "1 sentence.", "why_it_fits": "2 sentences.", "startup_cost": "$X–$Y", "year_1_target": "Year 1 revenue." },
-    { "name": "Business Name", "concept": "1 sentence.", "why_it_fits": "2 sentences.", "startup_cost": "$X–$Y", "year_1_target": "Year 1 revenue." }
+    {
+      "name": "Specific Business Name",
+      "description": "1 sentence: what the business is in plain language.",
+      "revenue_model": "Specific pricing: e.g. $X/hr consulting, $Y/month retainer.",
+      "time_to_income": "Realistic time to first paying client.",
+      "ai_resistance": "1 sentence on why this depends on irreplaceable human skills."
+    },
+    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." },
+    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." }
   ],
   "action_plan": [
-    { "period": "Week 1–2", "title": "Step title", "action": "2 concrete actions with real platform names." },
-    { "period": "Week 3–4", "title": "Step title", "action": "2 concrete actions." },
-    { "period": "Week 5–8", "title": "Step title", "action": "2 concrete actions." },
-    { "period": "Week 9–12", "title": "Step title", "action": "2 concrete actions and what to have to show for it." }
-  ],
-  "closing_message": "2 sentences of warm, personal encouragement tied to their specific profile and direction."
+    { "period": "Week 1–2", "title": "Step Title", "action": "2–3 specific actions naming real platforms, communities, or people to contact." },
+    { "period": "Week 3–4", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 5–6", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 7–8", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 9–10", "title": "Step Title", "action": "2–3 specific actions." },
+    { "period": "Week 11–12", "title": "Step Title", "action": "2–3 specific actions — what should they have to show after 90 days?" }
+  ]
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -193,7 +200,7 @@ CRITICAL FORMATTING RULE: Your response MUST start with the character { and end 
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
       max_tokens: 2000,
-      system:     'You generate JSON career reports. Every single text field must be ONE sentence only — 20 words maximum. No exceptions. If you write more than one sentence in any field, you have failed. Be ruthlessly brief.',
+      system:     'You generate JSON career reports. Keep every text field to 1–2 sentences maximum. Be specific — name real industries, real income numbers, real platforms. Never use generic advice. The JSON must complete fully within the token limit.',
       messages:   [{ role: 'user', content: prompt }],
     });
 
