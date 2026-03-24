@@ -251,7 +251,7 @@ CRITICAL: Return ONLY valid, complete JSON. No markdown fences, no explanation. 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 5000,
+      max_tokens: 1500,
       messages:   [{ role: 'user', content: prompt }],
     });
 
