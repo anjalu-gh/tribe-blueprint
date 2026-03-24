@@ -199,8 +199,8 @@ CRITICAL FORMATTING RULE: Your response MUST start with the character { and end 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 2000,
-      system:     'You generate JSON career reports. Keep every text field to 1–2 sentences maximum. Be specific — name real industries, real income numbers, real platforms. Never use generic advice. The JSON must complete fully within the token limit.',
+      max_tokens: 2500,
+      system:     'You output raw JSON only. Your very first character must be { and your last character must be }. Never use markdown. Never use backticks. Never write ```json. Just the JSON object, nothing else. Keep every text field to 1–2 sentences. Be specific with real numbers and platforms.',
       messages:   [{ role: 'user', content: prompt }],
     });
 
