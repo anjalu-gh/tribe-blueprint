@@ -153,96 +153,37 @@ THEIR TRIBES BLUEPRINT PROFILE (40-question assessment scores):
 ${scoreSummary}
 
 YOUR TASK:
-Generate a rich, deeply personal Tribes Compass report from a world-class career coach. Every section must feel written specifically for this individual — not templated. Reference their actual scores and direction throughout. Be specific: name real industries, platforms, income numbers, and communities.
+Generate a personal Tribes Compass report. Be specific to this person — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers.
 
-TONE: Warm, direct, expert. Speak as "you". Avoid generic advice. Make this feel like it cost $500.
-
-CRITICAL: Return ONLY valid, complete JSON. No markdown fences, no explanation. Every string value must be concise — 1–3 sentences max per field — so the JSON completes fully within the token limit.
+CRITICAL FORMATTING RULE: Your response MUST start with the character { and end with the character }. Do NOT write backticks. Do NOT write the word json. Do NOT add any text before or after the JSON object. Raw JSON only. Keep every value SHORT (1–2 sentences max) so the JSON completes fully within the token limit.
 
 {
-  "compass_title": "A short evocative title for their direction (e.g. 'The Animal Welfare Advocate')",
-  "compass_intro": "2–3 sentences: what makes this person's profile + direction combination uniquely powerful.",
-
+  "compass_title": "Short evocative title for their direction",
+  "compass_intro": "2 sentences on what makes their profile + direction uniquely powerful.",
   "profile_snapshot": {
-    "archetype_headline": "2–3 sentences: their unique professional archetype and what makes it rare and valuable.",
-    "core_strengths": ["Named strength 1", "Named strength 2", "Named strength 3", "Named strength 4", "Named strength 5"],
-    "working_style": "2–3 sentences: how they work best and what drains them — grounded in their scores.",
-    "ai_resistance": "1–2 sentences: which Human Edge scores (q31–q35) make them hard to automate and why.",
-    "biggest_risk": "1–2 sentences: their single greatest risk to success and what to do about it."
+    "archetype_headline": "2 sentences describing their professional archetype.",
+    "core_strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4", "Strength 5"],
+    "working_style": "2 sentences on how they work best and what drains them.",
+    "ai_resistance": "1 sentence on why they are hard to automate.",
+    "biggest_risk": "1 sentence on their greatest risk to success."
   },
-
   "career_paths": [
-    {
-      "title": "Career Title",
-      "why_it_fits": "2–3 sentences on why this career suits their exact profile and direction — reference specific scores.",
-      "day_in_the_life": "2–3 sentences: a vivid, specific snapshot of a typical day at mid-level.",
-      "income_reality": "Entry: $X–$Y. Mid: $X–$Y. Senior: $X–$Y. One sentence on what drives variation.",
-      "ten_year_arc": "3 sentences: years 1–3 entry path, years 4–7 growth, years 8–10 peak — include income trajectory.",
-      "how_to_break_in": "2–3 specific actionable steps from where they are now — name real platforms or certifications.",
-      "watch_out_for": "1–2 specific pitfalls for this person based on their scores."
-    },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." },
-    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "ten_year_arc": "...", "how_to_break_in": "...", "watch_out_for": "..." }
+    { "title": "Career Title", "why_it_fits": "2 sentences why it fits.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps to enter this field." },
+    { "title": "Career Title", "why_it_fits": "2 sentences.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps." },
+    { "title": "Career Title", "why_it_fits": "2 sentences.", "income_reality": "Entry: $X. Mid: $X. Senior: $X.", "how_to_break_in": "2 specific steps." }
   ],
-
-  "careers_to_avoid": [
-    { "title": "Career to Avoid", "reason": "2 sentences: why this would drain this specific person based on their scores." },
-    { "title": "...", "reason": "..." },
-    { "title": "...", "reason": "..." }
-  ],
-
   "business_models": [
-    {
-      "name": "Business Name or Type",
-      "concept": "1–2 sentences: what the business is in plain language.",
-      "why_it_fits": "2–3 sentences: why it suits their skills, profile, and direction.",
-      "startup_cost": "Low–high cost range to start.",
-      "first_client_path": "2–3 specific steps to land the first paying client — name real platforms or tactics.",
-      "year_1_target": "Realistic Year 1 revenue and what drives it.",
-      "year_3_potential": "Where this business realistically lands in 3 years.",
-      "ai_resistance": "1–2 sentences: why this depends on human skills AI cannot replicate."
-    },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "first_client_path": "...", "year_1_target": "...", "year_3_potential": "...", "ai_resistance": "..." }
+    { "name": "Business Name", "concept": "1 sentence what it is.", "why_it_fits": "2 sentences why it suits them.", "startup_cost": "$X–$Y", "year_1_target": "Realistic Year 1 revenue." },
+    { "name": "Business Name", "concept": "1 sentence.", "why_it_fits": "2 sentences.", "startup_cost": "$X–$Y", "year_1_target": "Year 1 revenue." },
+    { "name": "Business Name", "concept": "1 sentence.", "why_it_fits": "2 sentences.", "startup_cost": "$X–$Y", "year_1_target": "Year 1 revenue." }
   ],
-
-  "work_environment": {
-    "ideal_setup": "2–3 sentences: ideal physical environment, schedule, and remote vs in-person balance.",
-    "ideal_team": "1–2 sentences: the type of people and culture where they do their best work.",
-    "red_flags": ["Red flag 1", "Red flag 2", "Red flag 3", "Red flag 4"],
-    "leadership_style": "1–2 sentences: their natural leadership approach and how to lean into it."
-  },
-
   "action_plan": [
-    { "period": "Week 1–2", "title": "Step Title", "action": "2–3 specific actions — name real platforms, resources, or contacts." },
-    { "period": "Week 3–4", "title": "Step Title", "action": "2–3 specific actions." },
-    { "period": "Week 5–6", "title": "Step Title", "action": "2–3 specific actions." },
-    { "period": "Week 7–8", "title": "Step Title", "action": "2–3 specific actions." },
-    { "period": "Week 9–10", "title": "Step Title", "action": "2–3 specific actions." },
-    { "period": "Week 11–12", "title": "Step Title", "action": "2–3 specific actions — what should they have to show after 90 days?" }
+    { "period": "Week 1–2", "title": "Step title", "action": "2 concrete actions with real platform names." },
+    { "period": "Week 3–4", "title": "Step title", "action": "2 concrete actions." },
+    { "period": "Week 5–8", "title": "Step title", "action": "2 concrete actions." },
+    { "period": "Week 9–12", "title": "Step title", "action": "2 concrete actions and what to have to show for it." }
   ],
-
-  "resources": {
-    "books": [
-      { "title": "Book Title by Author", "why": "1 sentence: why this is relevant to their profile and direction." },
-      { "title": "...", "why": "..." },
-      { "title": "...", "why": "..." }
-    ],
-    "communities": [
-      { "name": "Community Name", "why": "1 sentence: why this fits their direction." },
-      { "name": "...", "why": "..." },
-      { "name": "...", "why": "..." }
-    ],
-    "tools": [
-      { "name": "Tool Name", "why": "1 sentence: how this supports their next steps." },
-      { "name": "...", "why": "..." },
-      { "name": "...", "why": "..." }
-    ]
-  },
-
-  "closing_message": "2 short paragraphs: acknowledge the courage it takes to be at this crossroads, and send them forward with specific encouragement tied to their unique profile. Warm and personal — like the final words of a coach who truly sees them."
+  "closing_message": "2 sentences of warm, personal encouragement tied to their specific profile and direction."
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -251,7 +192,7 @@ CRITICAL: Return ONLY valid, complete JSON. No markdown fences, no explanation. 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 1500,
+      max_tokens: 2000,
       messages:   [{ role: 'user', content: prompt }],
     });
 
