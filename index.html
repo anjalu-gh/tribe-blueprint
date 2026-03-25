@@ -1632,11 +1632,14 @@ function displayCompassResults(r) {
     (r.business_models || []).map(b => `
       <div class="compass-business-card">
         <h3>→ ${b.name}</h3>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.65;margin-bottom:0.75rem;">${b.description}</p>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.65;margin-bottom:0.4rem;">${b.concept || b.description || ''}</p>
+        <p style="color:var(--muted);font-size:0.9rem;line-height:1.65;margin-bottom:0.75rem;">${b.why_it_fits || ''}</p>
         <div class="biz-meta">
-          <span>💰 ${b.revenue_model}</span>
-          <span>⏱️ ${b.time_to_income}</span>
+          <span>💸 ${b.startup_cost || b.revenue_model || ''}</span>
+          <span>🎯 Year 1: ${b.year_1_target || b.time_to_income || ''}</span>
+          <span>📈 Year 3: ${b.year_3_potential || ''}</span>
         </div>
+        <p style="color:var(--muted);font-size:0.85rem;margin:0.5rem 0 0;">🤝 First client: ${b.first_client_path || ''}</p>
         <p style="color:var(--green);font-size:0.82rem;font-style:italic;margin:0.5rem 0 0;">🛡️ ${b.ai_resistance}</p>
       </div>`).join('');
 

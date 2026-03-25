@@ -164,14 +164,17 @@ INSTRUCTIONS: Replace every placeholder value with real, specific content tailor
     {
       "title": "Replace with real career title",
       "why_it_fits": "Replace — 15 words max referencing their scores.",
+      "day_in_the_life": "Replace — one vivid sentence of a typical workday.",
       "income_reality": "$70–100k years 1–3, $150–220k by year 7.",
       "years_1_3": "Replace — entry roles and first income milestone.",
       "years_4_7": "Replace — specialisation and income growth path.",
       "years_8_10": "Replace — senior level, income ceiling, legacy.",
+      "how_to_break_in": "Replace — one specific platform or action to start.",
+      "watch_out_for": "Replace — one key risk or pitfall.",
       "ai_resistance": "Replace — why humans are essential here."
     },
-    { "title": "Replace", "why_it_fits": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "ai_resistance": "Replace" },
-    { "title": "Replace", "why_it_fits": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "ai_resistance": "Replace" }
+    { "title": "Replace", "why_it_fits": "Replace", "day_in_the_life": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "how_to_break_in": "Replace", "watch_out_for": "Replace", "ai_resistance": "Replace" },
+    { "title": "Replace", "why_it_fits": "Replace", "day_in_the_life": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "how_to_break_in": "Replace", "watch_out_for": "Replace", "ai_resistance": "Replace" }
   ],
   "business_models": [
     {
@@ -203,7 +206,7 @@ INSTRUCTIONS: Replace every placeholder value with real, specific content tailor
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 2800,
+      max_tokens: 3000,
       system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder value with real, specific content tailored to the person. Keep values short — match the length of the examples shown.',
       messages:   [
         { role: 'user',      content: prompt },
