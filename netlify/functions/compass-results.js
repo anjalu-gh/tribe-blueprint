@@ -235,20 +235,19 @@ CRITICAL FORMATTING RULE: Your response MUST start with { and end with }. No bac
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 3500,
-      system:     'You output raw JSON only. Your very first character must be { and your last character must be }. Never use markdown. Never use backticks. Never write ```json. Just the JSON object, nothing else. Every string value must be exactly 1 sentence — be specific and name real industries, income numbers, and platforms, but keep it to one sentence per field so the JSON completes fully.',
-      messages:   [{ role: 'user', content: prompt }],
+      max_tokens: 4000,
+      system:     'You output raw JSON only. Never use markdown. Never use backticks. Every string value must be exactly 1 sentence — be specific and name real industries, income numbers, and platforms, but keep it to one sentence per field so the JSON completes fully.',
+      messages:   [
+        { role: 'user',      content: prompt },
+        { role: 'assistant', content: '{'   },
+      ],
     });
 
     console.log('Compass stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
-    const rawText = message.content[0].text.trim();
+    const rawText = '{' + message.content[0].text;
     console.log('Compass raw (first 300):', rawText.slice(0, 300));
 
-    const raw = rawText
-      .replace(/^```json\s*/i, '')
-      .replace(/\s*```$/i, '');
-
-    results = JSON.parse(raw);
+    results = JSON.parse(rawText);
     console.log('Compass Step 3 done: Claude responded OK');
   } catch (aiErr) {
     console.error('Compass AI / parse error:', aiErr.constructor.name, aiErr.message);
