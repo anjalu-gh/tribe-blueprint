@@ -996,7 +996,7 @@
     <div style="background:#FFF8F0;border:1px solid #E8D5C0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
       <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
       <p id="compass-success-email" style="font-size:1rem;color:var(--accent);font-weight:700;margin-bottom:1rem;"></p>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalised resources — all tailored to your Blueprint profile.</p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalized resources — all tailored to your Blueprint profile.</p>
     </div>
     <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
     <a href="https://changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
@@ -1683,7 +1683,7 @@ function displayCompassResults(r) {
 function showCompassSuccess(r) {
   document.getElementById('compass-success-title').textContent = 'Your Compass Report Is Being Prepared';
   document.getElementById('compass-success-intro').textContent =
-    'We\'re generating your personalised Tribes Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.';
+    'We\'re generating your personalized Tribes Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.';
   document.getElementById('compass-success-email').textContent = (r && r.email) || compass.email || '';
   showPage('compass-success');
 }
