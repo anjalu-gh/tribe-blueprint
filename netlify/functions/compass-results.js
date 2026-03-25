@@ -155,78 +155,29 @@ ${scoreSummary}
 YOUR TASK:
 Generate a personal Tribes Compass report. Be specific to this person — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers.
 
-CRITICAL FORMATTING RULE: Your response MUST start with { and end with }. No backticks, no markdown, no text before or after the JSON. Every string value must be 1 sentence only — no exceptions. The JSON must complete fully within the token limit.
+OUTPUT RULES: Return only the JSON object below, fully completed. Be specific — use real job titles, real platforms, real income figures. Keep each value to 2 sentences maximum.
 
 {
-  "compass_title": "Short evocative title",
-  "compass_intro": "1 sentence on what makes their profile and direction uniquely powerful.",
-  "profile_snapshot": {
-    "archetype_headline": "1 punchy sentence capturing who this person is professionally.",
-    "core_strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4"],
-    "ai_resistance": "1 sentence: what makes this person hard to replace with AI.",
-    "biggest_risk": "1 sentence: the one blind spot to watch out for."
-  },
+  "compass_title": "...",
+  "compass_intro": "...",
   "career_paths": [
-    {
-      "title": "Specific Career Title",
-      "why_it_fits": "1 sentence grounded in their scores and direction.",
-      "income_reality": "Real income range e.g. $60–90k years 1–3, $120–180k by year 7.",
-      "years_1_3": "1 sentence: entry point, first roles, realistic income.",
-      "years_4_7": "1 sentence: progression path and income growth.",
-      "years_8_10": "1 sentence: where top practitioners land and income ceiling.",
-      "ai_resistance": "1 sentence on why this is hard to automate."
-    },
+    { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." },
     { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." },
     { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." }
   ],
-  "careers_to_avoid": [
-    { "title": "Career to Avoid", "reason": "1 sentence: why this conflicts with their profile." },
-    { "title": "Career to Avoid", "reason": "1 sentence." }
-  ],
   "business_models": [
-    {
-      "name": "Specific Business Name",
-      "concept": "1 sentence: what this business does.",
-      "why_it_fits": "1 sentence: why this matches their skills.",
-      "startup_cost": "e.g. $500–$2,000",
-      "year_1_target": "e.g. $40,000–$70,000",
-      "year_3_potential": "e.g. $120,000–$180,000",
-      "first_client_path": "1 sentence: specific first step to land a paying client.",
-      "ai_resistance": "1 sentence on why this needs irreplaceable human skills."
-    },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." },
     { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." },
     { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." }
   ],
-  "work_environment": {
-    "ideal_setup": "1 sentence: the work setup where this person thrives.",
-    "ideal_culture": "1 sentence: the culture that brings out their best.",
-    "red_flags": ["Red flag role/environment 1", "Red flag role/environment 2", "Red flag role/environment 3"]
-  },
   "action_plan": [
-    { "period": "Week 1–2", "title": "Step Title", "action": "1–2 specific actions naming real platforms or communities." },
-    { "period": "Week 3–4", "title": "Step Title", "action": "1–2 specific actions." },
-    { "period": "Week 5–6", "title": "Step Title", "action": "1–2 specific actions." },
-    { "period": "Week 7–8", "title": "Step Title", "action": "1–2 specific actions." },
-    { "period": "Week 9–10", "title": "Step Title", "action": "1–2 specific actions." },
-    { "period": "Week 11–12", "title": "Step Title", "action": "1–2 specific actions — what do they have to show after 90 days?" }
-  ],
-  "resources": {
-    "books": [
-      { "title": "Book Title by Author", "why": "1 sentence." },
-      { "title": "Book Title by Author", "why": "1 sentence." },
-      { "title": "Book Title by Author", "why": "1 sentence." }
-    ],
-    "communities": [
-      { "name": "Community Name", "why": "1 sentence." },
-      { "name": "Community Name", "why": "1 sentence." },
-      { "name": "Community Name", "why": "1 sentence." }
-    ],
-    "tools": [
-      { "name": "Tool Name", "why": "1 sentence." },
-      { "name": "Tool Name", "why": "1 sentence." },
-      { "name": "Tool Name", "why": "1 sentence." }
-    ]
-  }
+    { "period": "Week 1–2", "title": "...", "action": "..." },
+    { "period": "Week 3–4", "title": "...", "action": "..." },
+    { "period": "Week 5–6", "title": "...", "action": "..." },
+    { "period": "Week 7–8", "title": "...", "action": "..." },
+    { "period": "Week 9–10", "title": "...", "action": "..." },
+    { "period": "Week 11–12", "title": "...", "action": "..." }
+  ]
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -235,8 +186,8 @@ CRITICAL FORMATTING RULE: Your response MUST start with { and end with }. No bac
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 4000,
-      system:     'You output raw JSON only. Never use markdown. Never use backticks. Every string value must be exactly 1 sentence — be specific and name real industries, income numbers, and platforms, but keep it to one sentence per field so the JSON completes fully.',
+      max_tokens: 2800,
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Fill every "..." placeholder with real, specific content — real job titles, real platforms, real dollar figures. Maximum 2 sentences per value.',
       messages:   [
         { role: 'user',      content: prompt },
         { role: 'assistant', content: '{'   },
