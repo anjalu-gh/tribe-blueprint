@@ -155,48 +155,48 @@ ${scoreSummary}
 YOUR TASK:
 Generate a personal Tribes Compass report. Be specific to this person — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers.
 
-INSTRUCTIONS: Replace every placeholder with real, specific content tailored to this person's scores and direction. Match the depth and style of the example values — 2 to 3 sentences per field, naming real platforms, real income numbers, and specific next steps. Return only valid JSON, nothing else.
+INSTRUCTIONS: Replace every placeholder with real, specific content for this person. Each value must be exactly ONE sentence — specific, direct, naming real companies, platforms, or dollar figures. Return only valid JSON.
 
 {
-  "compass_title": "The Neurotech Founder & Systems Architect",
-  "compass_intro": "Your rare combination of 10/10 autonomy drive, big-picture vision, and instinctive people-reading means you are built to lead at the frontier — not follow someone else's roadmap into it.",
+  "compass_title": "The AI Product Strategist & Neurotech Pioneer",
+  "compass_intro": "Your 10/10 autonomy drive combined with big-picture vision and people instinct makes you rare — someone who can lead at the frontier of AI without losing the human thread.",
   "career_paths": [
     {
-      "title": "AI Product Strategist — B2B SaaS or Deep Tech",
-      "why_it_fits": "Your 9/10 big-picture thinking and 10/10 autonomy score point directly at product strategy roles where you set direction rather than execute someone else's plan. Companies like Scale AI, Cohere, or enterprise AI startups pay heavily for people who can synthesise technical possibility with market reality.",
-      "day_in_the_life": "You spend mornings in customer discovery calls and competitive analysis, afternoons in product reviews and roadmap sessions with engineering, and evenings reading research papers or writing strategy memos that shape the next quarter.",
-      "income_reality": "Entry-level AI product roles pay $130–180k total comp; senior PMs at Series B+ companies reach $220–350k; VP of Product at an AI company can exceed $500k with equity.",
-      "years_1_3": "Join a seed or Series A AI startup as a founding PM or product lead — target companies on Wellfound or LinkedIn with 10–50 employees raising their first product hire. Expect $120–160k base with meaningful equity.",
-      "years_4_7": "Move to a VP or Head of Product role at a Series B/C company, or jump to a larger firm like Palantir, Salesforce AI, or Microsoft Copilot as a Senior PM — $200–280k total comp with accelerating equity.",
-      "years_8_10": "Chief Product Officer at a scale-up, or found your own AI product studio; top practitioners in this lane earn $400k–$1M+ with carried interest and advisory stakes.",
-      "how_to_break_in": "Build a public AI product teardown on LinkedIn or Substack — pick a product like Perplexity or Notion AI, write a 1,000-word strategic analysis, and tag the founders. This gets you noticed faster than any application.",
-      "watch_out_for": "Early-stage AI startups can pivot sharply — make sure equity vesting and role clarity are locked in before you join, or you risk being a generalist with no clear ownership.",
-      "ai_resistance": "Product strategy requires trust, organisational politics, stakeholder alignment, and reading ambiguous human signals — capabilities that AI tools augment but cannot replace."
+      "title": "AI Product Lead — Deep Tech or B2B SaaS",
+      "why_it_fits": "Your 9/10 big-picture score and 10/10 autonomy preference point at product leadership roles at companies like Cohere, Scale AI, or Palantir where direction-setting is the job.",
+      "day_in_the_life": "Mornings in customer discovery and competitive research, afternoons in roadmap reviews with engineering, evenings writing strategy memos that shape next quarter's bets.",
+      "income_reality": "$130–180k total comp at entry level, $220–350k at senior PM, $400k–$1M+ as VP/CPO with equity at a Series B+ company.",
+      "years_1_3": "Join a 10–50 person AI startup as founding PM via Wellfound or LinkedIn, targeting $120–150k base plus meaningful equity.",
+      "years_4_7": "Move to VP of Product at a Series B/C company or Senior PM at Salesforce AI or Microsoft Copilot, reaching $200–280k total comp.",
+      "years_8_10": "CPO at a scale-up or founder of your own AI product studio, with top practitioners earning $500k–$1M+ via equity and advisory roles.",
+      "how_to_break_in": "Publish a 1,000-word AI product teardown on LinkedIn — analyse a product like Perplexity or Notion AI and tag the founders — this outperforms any cold application.",
+      "watch_out_for": "Early AI startups pivot fast, so lock in equity vesting schedules and clear ownership scope before signing.",
+      "ai_resistance": "Product strategy requires human judgment, stakeholder trust, and organisational navigation that AI tools assist but cannot perform."
     },
-    { "title": "Replace with real title", "why_it_fits": "Replace with 2 sentences referencing their actual scores.", "day_in_the_life": "Replace with a vivid 1–2 sentence day description.", "income_reality": "Replace with real income range across career arc.", "years_1_3": "Replace with specific entry path and income.", "years_4_7": "Replace with progression and income growth.", "years_8_10": "Replace with senior level outcome and ceiling.", "how_to_break_in": "Replace with one specific, actionable first step.", "watch_out_for": "Replace with the real risk in this path.", "ai_resistance": "Replace with why this needs a human." },
-    { "title": "Replace with real title", "why_it_fits": "Replace with 2 sentences referencing their actual scores.", "day_in_the_life": "Replace with a vivid 1–2 sentence day description.", "income_reality": "Replace with real income range across career arc.", "years_1_3": "Replace with specific entry path and income.", "years_4_7": "Replace with progression and income growth.", "years_8_10": "Replace with senior level outcome and ceiling.", "how_to_break_in": "Replace with one specific, actionable first step.", "watch_out_for": "Replace with the real risk in this path.", "ai_resistance": "Replace with why this needs a human." }
+    { "title": "Replace", "why_it_fits": "Replace — 1 sentence referencing their actual scores.", "day_in_the_life": "Replace — 1 vivid sentence.", "income_reality": "Replace — real income range across the arc.", "years_1_3": "Replace — specific entry path and income.", "years_4_7": "Replace — progression and income growth.", "years_8_10": "Replace — senior outcome and ceiling.", "how_to_break_in": "Replace — one specific first step.", "watch_out_for": "Replace — one real risk.", "ai_resistance": "Replace — why this needs a human." },
+    { "title": "Replace", "why_it_fits": "Replace — 1 sentence.", "day_in_the_life": "Replace — 1 vivid sentence.", "income_reality": "Replace — real income range.", "years_1_3": "Replace — entry path.", "years_4_7": "Replace — progression.", "years_8_10": "Replace — ceiling.", "how_to_break_in": "Replace — first step.", "watch_out_for": "Replace — one risk.", "ai_resistance": "Replace — why human." }
   ],
   "business_models": [
     {
-      "name": "AI Strategy & Implementation Consultancy",
-      "concept": "A boutique consultancy helping mid-market companies ($10M–$500M revenue) develop and execute their AI adoption strategy — from identifying high-ROI use cases to selecting vendors and managing implementation.",
-      "why_it_fits": "Your 10/10 autonomy drive and systems thinking make you exceptional at diagnosing complex organisations and designing solutions; your instinct for people means clients trust you, which is the entire business model.",
-      "startup_cost": "$1,000–$3,000 (LLC formation, website, basic tools — Notion, Calendly, Loom)",
-      "year_1_target": "$80,000–$140,000 (3–5 retainer clients at $3,000–$6,000/month)",
-      "year_3_potential": "$250,000–$500,000 (team of 2–3, productised offers, speaking revenue)",
-      "first_client_path": "Message 20 former colleagues or contacts on LinkedIn with a specific offer — a free 45-minute AI audit — then convert the best fit into a paid 3-month engagement at $4,500/month.",
-      "ai_resistance": "Clients hire consultants for judgment, accountability, and the ability to navigate internal politics — not information retrieval, which AI handles fine on its own."
+      "name": "AI Strategy Consultancy",
+      "concept": "Help mid-market companies ($20M–$200M) identify and implement their highest-ROI AI use cases, from vendor selection to deployment.",
+      "why_it_fits": "Your systems thinking and people instinct let you diagnose complex organisations fast and build the trust that makes clients act on your recommendations.",
+      "startup_cost": "$1,500–$3,000 (LLC, website, Notion, Calendly, Loom)",
+      "year_1_target": "$80,000–$140,000 via 3–5 retainer clients at $3,000–$5,000/month",
+      "year_3_potential": "$250,000–$450,000 with a small team and productised offers",
+      "first_client_path": "DM 20 former colleagues on LinkedIn offering a free AI audit call, then convert the best fit to a paid 3-month retainer at $4,500/month.",
+      "ai_resistance": "Clients pay for judgment, accountability, and the ability to navigate internal politics — not information that AI can surface alone."
     },
-    { "name": "Replace with real business name", "concept": "Replace with 2 sentences on what the business does.", "why_it_fits": "Replace with 2 sentences on why it fits their profile.", "startup_cost": "Replace with realistic range.", "year_1_target": "Replace with realistic year 1 income.", "year_3_potential": "Replace with year 3 upside.", "first_client_path": "Replace with one specific tactic.", "ai_resistance": "Replace with why humans are irreplaceable here." },
-    { "name": "Replace with real business name", "concept": "Replace with 2 sentences on what the business does.", "why_it_fits": "Replace with 2 sentences on why it fits their profile.", "startup_cost": "Replace with realistic range.", "year_1_target": "Replace with realistic year 1 income.", "year_3_potential": "Replace with year 3 upside.", "first_client_path": "Replace with one specific tactic.", "ai_resistance": "Replace with why humans are irreplaceable here." }
+    { "name": "Replace", "concept": "Replace — 1 sentence on what it does.", "why_it_fits": "Replace — 1 sentence on fit.", "startup_cost": "Replace", "year_1_target": "Replace", "year_3_potential": "Replace", "first_client_path": "Replace — 1 specific tactic.", "ai_resistance": "Replace — 1 sentence." },
+    { "name": "Replace", "concept": "Replace — 1 sentence.", "why_it_fits": "Replace — 1 sentence.", "startup_cost": "Replace", "year_1_target": "Replace", "year_3_potential": "Replace", "first_client_path": "Replace — 1 specific tactic.", "ai_resistance": "Replace — 1 sentence." }
   ],
   "action_plan": [
-    { "period": "Week 1–2", "title": "Map Your Landscape", "action": "Identify 10 companies in your target sector hiring for roles that match your direction — use LinkedIn, Wellfound, and Crunchbase. Write a one-page personal positioning statement: who you are, what problem you solve, who you serve." },
-    { "period": "Week 3–4", "title": "Replace with real step title", "action": "Replace with 2 specific actions naming real platforms or communities." },
-    { "period": "Week 5–6", "title": "Replace with real step title", "action": "Replace with 2 specific actions naming real platforms or communities." },
-    { "period": "Week 7–8", "title": "Replace with real step title", "action": "Replace with 2 specific actions naming real platforms or communities." },
-    { "period": "Week 9–10", "title": "Replace with real step title", "action": "Replace with 2 specific actions naming real platforms or communities." },
-    { "period": "Week 11–12", "title": "Replace with real step title", "action": "Replace — what concrete deliverable do they have after 90 days, and what is the next milestone after that?" }
+    { "period": "Week 1–2", "title": "Map Your Landscape", "action": "List 10 target companies on Wellfound and LinkedIn, and write a one-paragraph positioning statement defining who you serve, what problem you solve, and what makes you different." },
+    { "period": "Week 3–4", "title": "Replace", "action": "Replace — 1 specific action naming a real platform." },
+    { "period": "Week 5–6", "title": "Replace", "action": "Replace — 1 specific action." },
+    { "period": "Week 7–8", "title": "Replace", "action": "Replace — 1 specific action." },
+    { "period": "Week 9–10", "title": "Replace", "action": "Replace — 1 specific action." },
+    { "period": "Week 11–12", "title": "Replace", "action": "Replace — what is the one concrete deliverable they have after 90 days?" }
   ]
 }`;
 
@@ -207,7 +207,7 @@ INSTRUCTIONS: Replace every placeholder with real, specific content tailored to 
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
       max_tokens: 4500,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder value with real, specific content tailored to this person. Match the depth and detail of the example values — 2 to 3 sentences per field, with real platform names, real income numbers, and specific actionable steps.',
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific content for this person. Each value must be ONE sentence — specific and direct, naming real companies, platforms, and dollar figures. Do not write more than one sentence per field.',
       messages:   [
         { role: 'user',      content: prompt },
         { role: 'assistant', content: '{'   },
