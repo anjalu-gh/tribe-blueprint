@@ -986,6 +986,28 @@
 </div>
 
 <!-- ══════════════════════════════════════════════ -->
+<!--  PAGE: COMPASS SUCCESS                         -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="page-compass-success" class="page">
+  <div class="compass-results-wrap" style="max-width:640px;text-align:center;padding:60px 24px;">
+    <div class="badge" style="margin-bottom:1.5rem;">✦ Your Tribes Compass Is Ready</div>
+    <h2 id="compass-success-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--brown);margin-bottom:1rem;"></h2>
+    <p id="compass-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;"></p>
+    <div style="background:#FFF8F0;border:1px solid #E8D5C0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
+      <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report has been sent to:</p>
+      <p id="compass-success-email" style="font-size:1rem;color:var(--accent);font-weight:700;margin-bottom:1rem;"></p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalised resources — all tailored to your Blueprint profile.</p>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
+    <a href="https://changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
+  </div>
+  <footer>
+    <p>© 2025 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
+    <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
 <!--  JAVASCRIPT                                    -->
 <!-- ══════════════════════════════════════════════ -->
 <script>
@@ -1595,13 +1617,7 @@ async function submitCompass() {
     const data = await res.json();
 
     if (data.results) {
-      try {
-        displayCompassResults(data.results);
-      } catch (renderErr) {
-        console.error('displayCompassResults error:', renderErr);
-        alert('Display error: ' + renderErr.message);
-        showPage('compass-access');
-      }
+      showCompassSuccess(data.results);
     } else {
       alert('Could not generate results: ' + (data.error || 'unknown error'));
       showPage('compass-access');
@@ -1660,6 +1676,16 @@ function displayCompassResults(r) {
       </div>`).join('');
 
   showPage('compass-results');
+}
+
+/* ── COMPASS SUCCESS (email delivery) ───────────────── */
+function showCompassSuccess(r) {
+  const title = r.compass_title || 'Your Tribes Compass';
+  const intro = r.compass_intro || '';
+  document.getElementById('compass-success-title').textContent = title;
+  document.getElementById('compass-success-intro').textContent = intro;
+  document.getElementById('compass-success-email').textContent = compass.email || '';
+  showPage('compass-success');
 }
 
 /* ── COMPASS TEST DATA ───────────────────────────── */
