@@ -990,11 +990,11 @@
 <!-- ══════════════════════════════════════════════ -->
 <div id="page-compass-success" class="page">
   <div class="compass-results-wrap" style="max-width:640px;text-align:center;padding:60px 24px;">
-    <div class="badge" style="margin-bottom:1.5rem;">✦ Your Tribes Compass Is Ready</div>
+    <div class="badge" style="margin-bottom:1.5rem;">✦ Your Tribes Compass Is On Its Way</div>
     <h2 id="compass-success-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--brown);margin-bottom:1rem;"></h2>
     <p id="compass-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;"></p>
     <div style="background:#FFF8F0;border:1px solid #E8D5C0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
-      <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report has been sent to:</p>
+      <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
       <p id="compass-success-email" style="font-size:1rem;color:var(--accent);font-weight:700;margin-bottom:1rem;"></p>
       <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalised resources — all tailored to your Blueprint profile.</p>
     </div>
@@ -1604,7 +1604,7 @@ async function submitCompass() {
   }
 
   try {
-    const res  = await fetch('/.netlify/functions/compass-results', {
+    const res = await fetch('/.netlify/functions/compass-results-background', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1614,11 +1614,12 @@ async function submitCompass() {
       }),
     });
     clearInterval(timer);
-    const data = await res.json();
 
-    if (data.results) {
-      showCompassSuccess(data.results);
+    // Background function returns 202 immediately — show success page right away
+    if (res.status === 202 || res.ok) {
+      showCompassSuccess({ email: compass.email, direction: compass.direction });
     } else {
+      const data = await res.json().catch(() => ({}));
       alert('Could not generate results: ' + (data.error || 'unknown error'));
       showPage('compass-access');
     }
@@ -1680,11 +1681,10 @@ function displayCompassResults(r) {
 
 /* ── COMPASS SUCCESS (email delivery) ───────────────── */
 function showCompassSuccess(r) {
-  const title = r.compass_title || 'Your Tribes Compass';
-  const intro = r.compass_intro || '';
-  document.getElementById('compass-success-title').textContent = title;
-  document.getElementById('compass-success-intro').textContent = intro;
-  document.getElementById('compass-success-email').textContent = compass.email || '';
+  document.getElementById('compass-success-title').textContent = 'Your Compass Report Is Being Prepared';
+  document.getElementById('compass-success-intro').textContent =
+    'We\'re generating your personalised Tribes Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.';
+  document.getElementById('compass-success-email').textContent = (r && r.email) || compass.email || '';
   showPage('compass-success');
 }
 
