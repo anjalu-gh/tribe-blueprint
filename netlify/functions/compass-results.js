@@ -155,34 +155,57 @@ ${scoreSummary}
 YOUR TASK:
 Generate a personal Tribes Compass report. Be specific to this person — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers.
 
-CRITICAL FORMATTING RULE: Your response MUST start with the character { and end with the character }. Do NOT write backticks. Do NOT write the word json. Do NOT add any text before or after the JSON object. Raw JSON only. Keep every value SHORT (1–2 sentences max) so the JSON completes fully within the token limit.
+CRITICAL FORMATTING RULE: Your response MUST start with the character { and end with the character }. Do NOT write backticks. Do NOT write the word json. Do NOT add any text before or after the JSON object. Raw JSON only. Keep every value to 1–2 sentences so the JSON completes within the token limit.
 
 {
   "compass_title": "Short evocative title for their direction",
   "compass_intro": "2 sentences on what makes their profile and direction uniquely powerful.",
+  "profile_snapshot": {
+    "archetype_headline": "One punchy sentence capturing who this person is professionally.",
+    "core_strengths": ["Strength 1", "Strength 2", "Strength 3", "Strength 4"],
+    "ai_resistance": "1 sentence: what makes this person hard to replace with AI.",
+    "biggest_risk": "1 sentence: the one blind spot or trap to watch out for."
+  },
   "career_paths": [
     {
       "title": "Specific Career Title",
       "why_it_fits": "2 sentences grounded in their exact scores and direction.",
-      "ai_resistance": "1 sentence on why this career is hard to automate.",
-      "years_1_3": "Entry point, first roles, realistic income $X–$Y.",
-      "years_4_7": "Progression path, specialisation options, income growth to $X–$Y.",
-      "years_8_10": "Where top practitioners land, income ceiling, legacy impact."
+      "day_in_the_life": "1–2 sentences painting a vivid picture of a typical day.",
+      "income_reality": "Real income range: e.g. $60–90k in years 1–3, $120–180k by year 7.",
+      "years_1_3": "Entry point, first roles, certifications or steps to get started.",
+      "years_4_7": "Progression path, specialisation options, income growth.",
+      "years_8_10": "Where top practitioners land, income ceiling, legacy impact.",
+      "how_to_break_in": "2 specific first steps naming real platforms, orgs, or contacts.",
+      "watch_out_for": "1 sentence: the key pitfall or challenge in this path.",
+      "ai_resistance": "1 sentence on why this career is hard to automate."
     },
-    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." },
-    { "title": "...", "why_it_fits": "...", "ai_resistance": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "..." }
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "...", "ai_resistance": "..." },
+    { "title": "...", "why_it_fits": "...", "day_in_the_life": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "how_to_break_in": "...", "watch_out_for": "...", "ai_resistance": "..." }
+  ],
+  "careers_to_avoid": [
+    { "title": "Career to Avoid", "reason": "1–2 sentences explaining why this conflicts with their profile." },
+    { "title": "Career to Avoid", "reason": "1–2 sentences." }
   ],
   "business_models": [
     {
       "name": "Specific Business Name",
-      "description": "1 sentence: what the business is in plain language.",
-      "revenue_model": "Specific pricing: e.g. $X/hr consulting, $Y/month retainer.",
-      "time_to_income": "Realistic time to first paying client.",
-      "ai_resistance": "1 sentence on why this depends on irreplaceable human skills."
+      "concept": "1 sentence: what this business does in plain language.",
+      "why_it_fits": "1–2 sentences: why this matches their skills and direction.",
+      "startup_cost": "Realistic startup cost range, e.g. $500–$2,000.",
+      "year_1_target": "Realistic year 1 income target, e.g. $40,000–$70,000.",
+      "year_3_potential": "Year 3 income potential if things go well, e.g. $120,000–$180,000.",
+      "first_client_path": "2 specific steps to land the first paying client, naming real platforms or tactics.",
+      "ai_resistance": "1 sentence on why this depends on irreplaceable human skills.",
+      "ideal_partner": "1 sentence: what kind of collaborator or co-founder would complement them."
     },
-    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." },
-    { "name": "...", "description": "...", "revenue_model": "...", "time_to_income": "...", "ai_resistance": "..." }
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "...", "ideal_partner": "..." },
+    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "...", "ideal_partner": "..." }
   ],
+  "work_environment": {
+    "ideal_setup": "1–2 sentences describing the work setup where this person will thrive.",
+    "ideal_culture": "1–2 sentences on the team or company culture that brings out their best.",
+    "red_flags": ["Red flag environment or role type 1", "Red flag environment or role type 2", "Red flag environment or role type 3"]
+  },
   "action_plan": [
     { "period": "Week 1–2", "title": "Step Title", "action": "2–3 specific actions naming real platforms, communities, or people to contact." },
     { "period": "Week 3–4", "title": "Step Title", "action": "2–3 specific actions." },
@@ -190,7 +213,24 @@ CRITICAL FORMATTING RULE: Your response MUST start with the character { and end 
     { "period": "Week 7–8", "title": "Step Title", "action": "2–3 specific actions." },
     { "period": "Week 9–10", "title": "Step Title", "action": "2–3 specific actions." },
     { "period": "Week 11–12", "title": "Step Title", "action": "2–3 specific actions — what should they have to show after 90 days?" }
-  ]
+  ],
+  "resources": {
+    "books": [
+      { "title": "Book Title by Author", "why": "1 sentence on why this book is relevant to their path." },
+      { "title": "Book Title by Author", "why": "1 sentence." },
+      { "title": "Book Title by Author", "why": "1 sentence." }
+    ],
+    "communities": [
+      { "name": "Community or Network Name", "why": "1 sentence on why to join and what to do there." },
+      { "name": "Community or Network Name", "why": "1 sentence." },
+      { "name": "Community or Network Name", "why": "1 sentence." }
+    ],
+    "tools": [
+      { "name": "Tool or Platform Name", "why": "1 sentence on why this tool matters for their path." },
+      { "name": "Tool or Platform Name", "why": "1 sentence." },
+      { "name": "Tool or Platform Name", "why": "1 sentence." }
+    ]
+  }
 }`;
 
   // ── Call Claude ─────────────────────────────────
@@ -199,7 +239,7 @@ CRITICAL FORMATTING RULE: Your response MUST start with the character { and end 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 6000,
+      max_tokens: 4500,
       system:     'You output raw JSON only. Your very first character must be { and your last character must be }. Never use markdown. Never use backticks. Never write ```json. Just the JSON object, nothing else. Be expansive, specific, and deeply personal — name real industries, real income numbers, real platforms, real communities. Write 3–4 sentences per field.',
       messages:   [{ role: 'user', content: prompt }],
     });
