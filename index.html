@@ -1595,13 +1595,20 @@ async function submitCompass() {
     const data = await res.json();
 
     if (data.results) {
-      displayCompassResults(data.results);
+      try {
+        displayCompassResults(data.results);
+      } catch (renderErr) {
+        console.error('displayCompassResults error:', renderErr);
+        alert('Display error: ' + renderErr.message);
+        showPage('compass-access');
+      }
     } else {
-      alert('Could not generate results. Please try again.');
+      alert('Could not generate results: ' + (data.error || 'unknown error'));
       showPage('compass-access');
     }
-  } catch {
+  } catch (fetchErr) {
     clearInterval(timer);
+    console.error('Compass fetch error:', fetchErr);
     alert('Something went wrong generating your Compass. Please try again.');
     showPage('compass-access');
   }
