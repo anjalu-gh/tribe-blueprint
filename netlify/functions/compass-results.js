@@ -155,28 +155,45 @@ ${scoreSummary}
 YOUR TASK:
 Generate a personal Tribes Compass report. Be specific to this person — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers.
 
-OUTPUT RULES: Return only the JSON object below, fully completed. Be specific — use real job titles, real platforms, real income figures. Keep each value to 2 sentences maximum.
+INSTRUCTIONS: Replace every placeholder value with real, specific content tailored to this person. Match the length and style of the example values shown — short and punchy, never more than 20 words per value. Return only valid JSON, nothing else.
 
 {
-  "compass_title": "...",
-  "compass_intro": "...",
+  "compass_title": "The AI Ethics Strategist",
+  "compass_intro": "Your rare blend of autonomy, systems thinking, and people instinct positions you at the frontier of human-AI collaboration.",
   "career_paths": [
-    { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." },
-    { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." },
-    { "title": "...", "why_it_fits": "...", "income_reality": "...", "years_1_3": "...", "years_4_7": "...", "years_8_10": "...", "ai_resistance": "..." }
+    {
+      "title": "Replace with real career title",
+      "why_it_fits": "Replace — 15 words max referencing their scores.",
+      "income_reality": "$70–100k years 1–3, $150–220k by year 7.",
+      "years_1_3": "Replace — entry roles and first income milestone.",
+      "years_4_7": "Replace — specialisation and income growth path.",
+      "years_8_10": "Replace — senior level, income ceiling, legacy.",
+      "ai_resistance": "Replace — why humans are essential here."
+    },
+    { "title": "Replace", "why_it_fits": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "ai_resistance": "Replace" },
+    { "title": "Replace", "why_it_fits": "Replace", "income_reality": "Replace", "years_1_3": "Replace", "years_4_7": "Replace", "years_8_10": "Replace", "ai_resistance": "Replace" }
   ],
   "business_models": [
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." },
-    { "name": "...", "concept": "...", "why_it_fits": "...", "startup_cost": "...", "year_1_target": "...", "year_3_potential": "...", "first_client_path": "...", "ai_resistance": "..." }
+    {
+      "name": "Replace with real business name",
+      "concept": "Replace — what it does in 10 words.",
+      "why_it_fits": "Replace — why it suits this person.",
+      "startup_cost": "$500–$2,000",
+      "year_1_target": "$45,000–$70,000",
+      "year_3_potential": "$120,000–$180,000",
+      "first_client_path": "Replace — one specific tactic to land first client.",
+      "ai_resistance": "Replace — why this requires irreplaceable human skill."
+    },
+    { "name": "Replace", "concept": "Replace", "why_it_fits": "Replace", "startup_cost": "Replace", "year_1_target": "Replace", "year_3_potential": "Replace", "first_client_path": "Replace", "ai_resistance": "Replace" },
+    { "name": "Replace", "concept": "Replace", "why_it_fits": "Replace", "startup_cost": "Replace", "year_1_target": "Replace", "year_3_potential": "Replace", "first_client_path": "Replace", "ai_resistance": "Replace" }
   ],
   "action_plan": [
-    { "period": "Week 1–2", "title": "...", "action": "..." },
-    { "period": "Week 3–4", "title": "...", "action": "..." },
-    { "period": "Week 5–6", "title": "...", "action": "..." },
-    { "period": "Week 7–8", "title": "...", "action": "..." },
-    { "period": "Week 9–10", "title": "...", "action": "..." },
-    { "period": "Week 11–12", "title": "...", "action": "..." }
+    { "period": "Week 1–2", "title": "Replace", "action": "Replace — one specific action with a real platform." },
+    { "period": "Week 3–4", "title": "Replace", "action": "Replace" },
+    { "period": "Week 5–6", "title": "Replace", "action": "Replace" },
+    { "period": "Week 7–8", "title": "Replace", "action": "Replace" },
+    { "period": "Week 9–10", "title": "Replace", "action": "Replace" },
+    { "period": "Week 11–12", "title": "Replace", "action": "Replace — what do they have to show after 90 days?" }
   ]
 }`;
 
@@ -187,7 +204,7 @@ OUTPUT RULES: Return only the JSON object below, fully completed. Be specific �
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
       max_tokens: 2800,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Fill every "..." placeholder with real, specific content — real job titles, real platforms, real dollar figures. Maximum 2 sentences per value.',
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder value with real, specific content tailored to the person. Keep values short — match the length of the examples shown.',
       messages:   [
         { role: 'user',      content: prompt },
         { role: 'assistant', content: '{'   },
