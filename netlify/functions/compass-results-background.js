@@ -1,10 +1,11 @@
 // netlify/functions/compass-results-background.js
 // Background function — Netlify returns 202 immediately, this runs asynchronously.
-// No HTTP timeout pressure. Verifies access code, calls Claude, sends results email.
+// No HTTP timeout pressure. Verifies access code, calls Claude, sends results email + PDF.
 
 const Anthropic        = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const { Resend }       = require('resend');
+const PDFDocument      = require('pdfkit');
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -276,7 +277,7 @@ INSTRUCTIONS: Replace every placeholder with real, specific content tailored to 
     }
   }
 
-  // ── Send Results Email ───────────────────────────
+  // ── Send Results Email + PDF ─────────────────────
   if (resolvedEmail && process.env.RESEND_API_KEY) {
     console.log('BG Step 5: Sending results email...');
     try {
@@ -287,3 +288,610 @@ INSTRUCTIONS: Replace every placeholder with real, specific content tailored to 
     }
   }
 };
+
+// ── PDF GENERATION ────────────────────────────────────────────
+function generateCompassPDF(email, direction, results) {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ margin: 50, size: 'LETTER', bufferPages: true });
+    const chunks = [];
+    doc.on('data', c => chunks.push(c));
+    doc.on('end',  () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
+
+    // ── Brand colors (RGB) ──
+    const ORANGE  = '#C85C2D';
+    const BROWN   = '#3D1F0D';
+    const MUTED   = '#6B4C3B';
+    const CREAM   = '#FDF6ED';
+    const GREEN   = '#2D5016';
+    const BORDER  = '#E8D5C0';
+    const LBLUE   = '#4466CC';
+    const W = 612, H = 792, M = 50, CW = W - M * 2;
+
+    const safe = v => (v || '').toString().replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
+
+    function y() { return doc.y; }
+
+    function checkBreak(needed = 80) {
+      if (doc.y + needed > H - 70) doc.addPage();
+    }
+
+    function hRule(color = BORDER) {
+      doc.moveDown(0.3)
+         .strokeColor(color).lineWidth(0.5)
+         .moveTo(M, doc.y).lineTo(W - M, doc.y).stroke()
+         .moveDown(0.5);
+    }
+
+    function sectionHeader(title, icon = '') {
+      checkBreak(60);
+      doc.moveDown(0.6);
+      doc.rect(M, doc.y, CW, 28).fill(BROWN);
+      doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(11)
+         .text((icon ? icon + '  ' : '') + title.toUpperCase(), M + 12, doc.y - 22, { width: CW - 20, lineBreak: false });
+      doc.moveDown(1.1);
+    }
+
+    function subHeader(title, color = ORANGE) {
+      checkBreak(50);
+      doc.moveDown(0.5)
+         .fillColor(color).font('Helvetica-Bold').fontSize(10)
+         .text(title.toUpperCase(), M, doc.y, { characterSpacing: 0.5 })
+         .moveDown(0.2);
+    }
+
+    function bodyText(text, opts = {}) {
+      checkBreak(opts.needed || 40);
+      doc.fillColor(opts.color || MUTED).font(opts.bold ? 'Helvetica-Bold' : 'Helvetica')
+         .fontSize(opts.size || 10.5)
+         .text(safe(text), M + (opts.indent || 0), doc.y, { width: CW - (opts.indent || 0), lineGap: 2 })
+         .moveDown(0.4);
+    }
+
+    function labelValue(label, value, labelColor = ORANGE) {
+      checkBreak(35);
+      const startY = doc.y;
+      doc.fillColor(labelColor).font('Helvetica-Bold').fontSize(9.5)
+         .text(label + ':', M, startY, { continued: true, width: CW });
+      doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+         .text('  ' + safe(value), { width: CW });
+      doc.moveDown(0.3);
+    }
+
+    function infoBox(label, value, bgColor, borderColor) {
+      checkBreak(50);
+      doc.moveDown(0.3);
+      const bx = M, bw = CW;
+      const tempY = doc.y;
+      // measure text height
+      const textH = doc.heightOfString(safe(value), { width: bw - 24, fontSize: 10 }) + 30;
+      doc.rect(bx, tempY, bw, textH).fill(bgColor).strokeColor(borderColor).lineWidth(1).stroke();
+      doc.rect(bx, tempY, 3, textH).fill(borderColor);
+      doc.fillColor(borderColor).font('Helvetica-Bold').fontSize(8.5)
+         .text(label.toUpperCase(), bx + 10, tempY + 8, { width: bw - 20, characterSpacing: 0.4 });
+      doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+         .text(safe(value), bx + 10, tempY + 22, { width: bw - 20, lineGap: 1.5 });
+      doc.y = tempY + textH + 4;
+      doc.moveDown(0.3);
+    }
+
+    // ══════════════════════════════════════════════
+    // COVER PAGE
+    // ══════════════════════════════════════════════
+    doc.rect(0, 0, W, 220).fill(BROWN);
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
+       .text('CHANGING TRIBES', M, 50, { align: 'center', width: CW, characterSpacing: 2 });
+    doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(30)
+       .text('TRIBES COMPASS', M, 75, { align: 'center', width: CW });
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(12)
+       .text('Your Personalized Career & Business Report', M, 118, { align: 'center', width: CW });
+
+    doc.rect(0, 220, W, 60).fill(ORANGE);
+    const titleText = safe(results.compass_title || 'Your Direction Profile');
+    doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(18)
+       .text(titleText, M, 238, { align: 'center', width: CW });
+
+    doc.y = 310;
+    doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
+       .text('YOUR DIRECTION', M, doc.y, { align: 'center', width: CW, characterSpacing: 1 });
+    doc.moveDown(0.4);
+    doc.fillColor(MUTED).font('Helvetica-Oblique').fontSize(12)
+       .text('"' + safe(direction) + '"', M + 30, doc.y, { align: 'center', width: CW - 60, lineGap: 3 });
+
+    doc.moveDown(1.2);
+    hRule(BORDER);
+
+    doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+       .text(safe(results.compass_intro || ''), M + 20, doc.y, { width: CW - 40, align: 'center', lineGap: 3 });
+
+    // Footer on cover
+    doc.fillColor(BORDER).font('Helvetica').fontSize(8)
+       .text('Prepared by Changing Tribes  ·  changingtribes.com  ·  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+             M, H - 40, { align: 'center', width: CW });
+
+    // ══════════════════════════════════════════════
+    // CAREER PATHS
+    // ══════════════════════════════════════════════
+    doc.addPage();
+    sectionHeader('Your Career Paths — Full 10-Year View', '🧭');
+    doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+       .text('Three paths matched to who you are and where you want to go.', M, doc.y, { width: CW })
+       .moveDown(0.6);
+
+    (results.career_paths || []).forEach((c, i) => {
+      checkBreak(120);
+      // Path header bar
+      doc.rect(M, doc.y, CW, 24).fill(i % 2 === 0 ? '#FFF3E8' : '#F5EFE8');
+      doc.strokeColor(ORANGE).lineWidth(0.5)
+         .rect(M, doc.y, CW, 24).stroke();
+      doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(8)
+         .text(`CAREER PATH ${i + 1}`, M + 10, doc.y + 4, { continued: true });
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(11)
+         .text(`   ${safe(c.title)}`, { lineBreak: false });
+      doc.y += 24;
+      doc.moveDown(0.5);
+
+      bodyText(c.why_it_fits, { color: BROWN });
+      infoBox('A Day in the Life', c.day_in_the_life, '#FFF8F0', ORANGE);
+      infoBox('Income Reality', c.income_reality, '#F0F7F0', GREEN);
+
+      // 10-year arc
+      checkBreak(80);
+      doc.moveDown(0.3)
+         .fillColor(BROWN).font('Helvetica-Bold').fontSize(9)
+         .text('YOUR 10-YEAR ARC', M, doc.y, { characterSpacing: 0.5 })
+         .moveDown(0.3);
+
+      const arcW = (CW - 8) / 3;
+      const arcY = doc.y;
+      const arcLabels = ['Years 1–3  ·  Getting In', 'Years 4–7  ·  Building', 'Years 8–10  ·  Legacy'];
+      const arcVals   = [c.years_1_3, c.years_4_7, c.years_8_10];
+      const maxH = Math.max(...arcVals.map(v =>
+        doc.heightOfString(safe(v || ''), { width: arcW - 16, fontSize: 9.5 }) + 40
+      ));
+
+      arcLabels.forEach((lbl, j) => {
+        const ax = M + j * (arcW + 4);
+        doc.rect(ax, arcY, arcW, maxH).fill('#FDF6ED').strokeColor(BORDER).lineWidth(0.5).stroke();
+        doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(8)
+           .text(lbl, ax + 8, arcY + 8, { width: arcW - 16 });
+        doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+           .text(safe(arcVals[j] || ''), ax + 8, arcY + 22, { width: arcW - 16, lineGap: 1.5 });
+      });
+      doc.y = arcY + maxH + 6;
+      doc.moveDown(0.4);
+
+      infoBox('How to Break In', c.how_to_break_in, '#EEF3FF', LBLUE);
+      labelValue('⚠️ Watch Out For', c.watch_out_for, '#8B3030');
+      labelValue('🛡️ AI-Resistant Because', c.ai_resistance, GREEN);
+      doc.moveDown(0.4);
+      hRule();
+    });
+
+    // ══════════════════════════════════════════════
+    // BUSINESS MODELS
+    // ══════════════════════════════════════════════
+    doc.addPage();
+    sectionHeader('Business Models Built for You', '🚀');
+    doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+       .text('Three business ideas tailored to your skills, direction, and context.', M, doc.y, { width: CW })
+       .moveDown(0.6);
+
+    (results.business_models || []).forEach((b, i) => {
+      checkBreak(100);
+      doc.rect(M, doc.y, CW, 24).fill('#FDF6ED');
+      doc.strokeColor(ORANGE).lineWidth(0.5).rect(M, doc.y, CW, 24).stroke();
+      doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(8)
+         .text(`BUSINESS IDEA ${i + 1}`, M + 10, doc.y + 4, { continued: true });
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(11)
+         .text(`   ${safe(b.name)}`, { lineBreak: false });
+      doc.y += 24;
+      doc.moveDown(0.5);
+
+      bodyText(b.concept,    { color: BROWN });
+      bodyText(b.why_it_fits, { color: MUTED });
+
+      // Financials row
+      checkBreak(50);
+      const fW = (CW - 8) / 3;
+      const fY = doc.y;
+      const fItems = [
+        { label: 'Startup Cost', val: b.startup_cost },
+        { label: 'Year 1 Target', val: b.year_1_target },
+        { label: 'Year 3 Potential', val: b.year_3_potential },
+      ];
+      const fMaxH = Math.max(...fItems.map(f =>
+        doc.heightOfString(safe(f.val || ''), { width: fW - 16, fontSize: 9.5 }) + 36
+      ));
+      fItems.forEach((f, j) => {
+        const fx = M + j * (fW + 4);
+        doc.rect(fx, fY, fW, fMaxH).fill('#F0F7F0').strokeColor(GREEN).lineWidth(0.5).stroke();
+        doc.fillColor(GREEN).font('Helvetica-Bold').fontSize(8)
+           .text(f.label.toUpperCase(), fx + 8, fY + 8, { width: fW - 16 });
+        doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(9.5)
+           .text(safe(f.val || ''), fx + 8, fY + 22, { width: fW - 16, lineGap: 1.5 });
+      });
+      doc.y = fY + fMaxH + 6;
+      doc.moveDown(0.4);
+
+      infoBox('How to Get Your First Client', b.first_client_path, '#EEF3FF', LBLUE);
+      labelValue('🛡️ AI-Resistant Because', b.ai_resistance, GREEN);
+      labelValue('🤝 Ideal Partner / Co-Founder', b.ideal_partner, LBLUE);
+      doc.moveDown(0.4);
+      hRule();
+    });
+
+    // ══════════════════════════════════════════════
+    // WORK ENVIRONMENT
+    // ══════════════════════════════════════════════
+    checkBreak(120);
+    sectionHeader('Your Ideal Work Environment', '🏡');
+    const env = results.work_environment || {};
+    subHeader('Where You Thrive');
+    bodyText(env.ideal_setup);
+    subHeader('Your Ideal Culture');
+    bodyText(env.ideal_culture);
+    subHeader('Red Flags — Walk Away From These', '#8B3030');
+    (env.red_flags || []).forEach(flag => {
+      checkBreak(30);
+      doc.fillColor('#8B3030').font('Helvetica').fontSize(10)
+         .text('✗  ' + safe(flag), M + 10, doc.y, { width: CW - 10, lineGap: 1.5 })
+         .moveDown(0.3);
+    });
+
+    // ══════════════════════════════════════════════
+    // 90-DAY ACTION PLAN
+    // ══════════════════════════════════════════════
+    doc.addPage();
+    sectionHeader('Your 90-Day Action Plan', '🗺️');
+    doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+       .text('Fortnightly steps — specific, concrete, and calibrated to your situation.', M, doc.y, { width: CW })
+       .moveDown(0.6);
+
+    (results.action_plan || []).forEach((a, i) => {
+      checkBreak(70);
+      const aY = doc.y;
+      const aH = doc.heightOfString(safe(a.action || ''), { width: CW - 110, fontSize: 10.5 }) + 50;
+      doc.rect(M, aY, CW, aH).fill(i % 2 === 0 ? '#FFF8F0' : '#FDF6ED')
+         .strokeColor(BORDER).lineWidth(0.5).stroke();
+      doc.rect(M, aY, 90, aH).fill(ORANGE);
+      doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(8.5)
+         .text(safe(a.period), M + 6, aY + 10, { width: 78, align: 'center' });
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10.5)
+         .text(safe(a.title), M + 100, aY + 8, { width: CW - 110 });
+      doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+         .text(safe(a.action), M + 100, aY + 26, { width: CW - 110, lineGap: 1.5 });
+      doc.y = aY + aH + 4;
+      doc.moveDown(0.2);
+    });
+
+    // ══════════════════════════════════════════════
+    // RESOURCES
+    // ══════════════════════════════════════════════
+    checkBreak(120);
+    sectionHeader('Resources Matched to You', '📚');
+    const res = results.resources || {};
+
+    subHeader('Books to Read');
+    (res.books || []).forEach(b => {
+      checkBreak(45);
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
+         .text('📖  ' + safe(b.title), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+      doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+         .text(safe(b.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
+    });
+
+    subHeader('Communities & Networks to Join');
+    (res.communities || []).forEach(c => {
+      checkBreak(45);
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
+         .text('🌐  ' + safe(c.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+      doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+         .text(safe(c.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
+    });
+
+    subHeader('Tools & Platforms');
+    (res.tools || []).forEach(t => {
+      checkBreak(45);
+      doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
+         .text('🛠️  ' + safe(t.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+      doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+         .text(safe(t.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
+    });
+
+    // ══════════════════════════════════════════════
+    // CLOSING PAGE
+    // ══════════════════════════════════════════════
+    doc.addPage();
+    doc.rect(0, 0, W, H).fill(BROWN);
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
+       .text('CHANGING TRIBES', M, 80, { align: 'center', width: CW, characterSpacing: 2 });
+    doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(22)
+       .text('Your next chapter starts now.', M, 110, { align: 'center', width: CW });
+    doc.moveDown(1.5);
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(11)
+       .text('This report was generated specifically for you based on your Tribes Blueprint\nprofile and direction statement. Keep it, share it, and return to it\nas your journey unfolds.', M + 40, doc.y, { align: 'center', width: CW - 80, lineGap: 4 });
+    doc.moveDown(2);
+    doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(12)
+       .text('changingtribes.com', M, doc.y, { align: 'center', width: CW });
+    doc.moveDown(0.5);
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
+       .text('© ' + new Date().getFullYear() + ' Changing Tribes. All rights reserved.', M, doc.y, { align: 'center', width: CW });
+
+    // ── Page numbers on interior pages ──
+    const range = doc.bufferedPageRange();
+    for (let i = 1; i < range.count - 1; i++) {
+      doc.switchToPage(range.start + i);
+      doc.fillColor(BORDER).font('Helvetica').fontSize(8)
+         .text(`Tribes Compass Report  ·  ${safe(results.compass_title || '')}  ·  Page ${i + 1}`,
+               M, H - 28, { align: 'center', width: CW });
+    }
+
+    doc.end();
+  });
+}
+
+// ── ZOHO UPDATE ───────────────────────────────────────────────
+async function updateZohoWithCompass(email, direction, results) {
+  const datacenter = process.env.ZOHO_DATACENTER || 'com';
+  const tokenRes = await fetch(
+    `https://accounts.zoho.${datacenter}/oauth/v2/token`,
+    {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type:    'refresh_token',
+        client_id:     process.env.ZOHO_CLIENT_ID,
+        client_secret: process.env.ZOHO_CLIENT_SECRET,
+        refresh_token: process.env.ZOHO_REFRESH_TOKEN,
+      }),
+    }
+  );
+  const { access_token: accessToken } = await tokenRes.json();
+  if (!accessToken) throw new Error('Zoho token error');
+
+  const careerSummary = (results.career_paths || [])
+    .map(c => `• ${c.title}\n  ${c.why_it_fits}\n  Income: ${c.income_reality}\n  Arc: ${c.years_1_3} → ${c.years_4_7} → ${c.years_8_10}\n  Break in: ${c.how_to_break_in}`)
+    .join('\n\n');
+  const bizSummary = (results.business_models || [])
+    .map(b => `• ${b.name}\n  ${b.concept}\n  Startup: ${b.startup_cost} | Y1: ${b.year_1_target} | Y3: ${b.year_3_potential}\n  First client: ${b.first_client_path}`)
+    .join('\n\n');
+  const actionSummary = (results.action_plan || [])
+    .map(a => `${a.period} — ${a.title}: ${a.action}`)
+    .join('\n');
+
+  const compassNote =
+    `\n\n━━━ TRIBES COMPASS RESULTS ━━━\n` +
+    `Direction: "${direction}"\nProfile: ${results.compass_title || ''}\n\n` +
+    `${results.compass_intro || ''}\n\n` +
+    `━━━ CAREER PATHS ━━━\n${careerSummary}\n\n` +
+    `━━━ BUSINESS MODELS ━━━\n${bizSummary}\n\n` +
+    `━━━ 90-DAY ACTION PLAN ━━━\n${actionSummary}`;
+
+  const namePart = email.split('@')[0].replace(/[._-]+/g, ' ');
+  const lastName  = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+
+  await fetch(
+    `https://www.zohoapis.${datacenter}/crm/v2/Contacts/upsert`,
+    {
+      method:  'POST',
+      headers: { Authorization: `Zoho-oauthtoken ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: [{ Last_Name: lastName, Email: email, Description: compassNote }],
+        duplicate_check_fields: ['Email'],
+      }),
+    }
+  );
+}
+
+// ── EMAIL (HTML + PDF attachment) ────────────────────────────
+async function sendCompassEmail(email, direction, results) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  // Generate PDF
+  let pdfBuffer = null;
+  try {
+    pdfBuffer = await generateCompassPDF(email, direction, results);
+    console.log('BG PDF generated:', Math.round(pdfBuffer.length / 1024), 'KB');
+  } catch (pdfErr) {
+    console.error('BG PDF generation error (non-fatal):', pdfErr.message);
+  }
+
+  // ── Career paths HTML ──
+  const careerPathsHtml = (results.career_paths || []).map((c, i) => `
+    <tr><td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
+      <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Career Path ${i + 1}</p>
+      <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:10px;">→ ${c.title || ''}</strong>
+      <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${c.why_it_fits || ''}</p>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+        <tr><td style="background:#FFF8F0;border-left:3px solid #E8943A;border-radius:0 8px 8px 0;padding:12px 16px;">
+          <p style="margin:0 0 4px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">A Day in the Life</p>
+          <p style="margin:0;color:#6B4C3B;font-size:13px;line-height:1.65;font-style:italic;">${c.day_in_the_life || ''}</p>
+        </td></tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+        <tr><td style="background:#F0F7F0;border-left:3px solid #2D5016;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <p style="margin:0 0 2px;color:#2D5016;font-size:12px;font-weight:700;text-transform:uppercase;">💰 Income Reality</p>
+          <p style="margin:0;color:#3D5030;font-size:13px;line-height:1.6;">${c.income_reality || ''}</p>
+        </td></tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+        <tr><td style="background:#FDF6ED;padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+          <strong style="color:#3D1F0D;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">📅 Your 10-Year Arc</strong>
+        </td></tr>
+        <tr><td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+          <strong style="color:#C85C2D;font-size:12px;">Years 1–3 · Getting In</strong>
+          <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_1_3 || ''}</p>
+        </td></tr>
+        <tr><td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+          <strong style="color:#C85C2D;font-size:12px;">Years 4–7 · Building Authority</strong>
+          <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_4_7 || ''}</p>
+        </td></tr>
+        <tr><td style="padding:10px 14px;">
+          <strong style="color:#C85C2D;font-size:12px;">Years 8–10 · Legacy & Leadership</strong>
+          <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_8_10 || ''}</p>
+        </td></tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
+        <tr><td style="background:#EEF3FF;border-left:3px solid #4466CC;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <p style="margin:0 0 2px;color:#2244AA;font-size:12px;font-weight:700;text-transform:uppercase;">🚪 How to Break In</p>
+          <p style="margin:0;color:#334488;font-size:13px;line-height:1.6;">${c.how_to_break_in || ''}</p>
+        </td></tr>
+      </table>
+      <p style="margin:8px 0 0;color:#8B3030;font-size:12px;font-style:italic;">⚠️ Watch out for: ${c.watch_out_for || ''}</p>
+      <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${c.ai_resistance || ''}</p>
+    </td></tr>`).join('');
+
+  // ── Business models HTML ──
+  const businessHtml = (results.business_models || []).map((b, i) => `
+    <tr><td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
+      <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Business Idea ${i + 1}</p>
+      <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:6px;">→ ${b.name || ''}</strong>
+      <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.concept || ''}</p>
+      <p style="margin:0 0 12px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.why_it_fits || ''}</p>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+        <tr><td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+          <strong style="color:#3D1F0D;font-size:12px;">💸 Startup Cost:</strong>
+          <span style="color:#6B4C3B;font-size:13px;"> ${b.startup_cost || ''}</span>
+        </td></tr>
+        <tr><td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
+          <strong style="color:#3D1F0D;font-size:12px;">🎯 Year 1 Target:</strong>
+          <span style="color:#6B4C3B;font-size:13px;"> ${b.year_1_target || ''}</span>
+        </td></tr>
+        <tr><td style="padding:10px 14px;">
+          <strong style="color:#3D1F0D;font-size:12px;">📈 Year 3 Potential:</strong>
+          <span style="color:#6B4C3B;font-size:13px;"> ${b.year_3_potential || ''}</span>
+        </td></tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
+        <tr><td style="background:#EEF3FF;border-left:3px solid #4466CC;border-radius:0 8px 8px 0;padding:10px 14px;">
+          <p style="margin:0 0 2px;color:#2244AA;font-size:12px;font-weight:700;text-transform:uppercase;">🤝 How to Get Your First Client</p>
+          <p style="margin:0;color:#334488;font-size:13px;line-height:1.6;">${b.first_client_path || ''}</p>
+        </td></tr>
+      </table>
+      <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${b.ai_resistance || ''}</p>
+      <p style="margin:6px 0 0;color:#6B4C3B;font-size:12px;font-style:italic;">🤝 Ideal partner: ${b.ideal_partner || ''}</p>
+    </td></tr>`).join('');
+
+  // ── Work environment HTML ──
+  const env = results.work_environment || {};
+  const redFlagsHtml = (env.red_flags || []).map(f =>
+    `<li style="margin-bottom:6px;color:#8B3030;font-size:13px;">${f}</li>`).join('');
+
+  // ── Action plan HTML ──
+  const actionHtml = (results.action_plan || []).map(a => `
+    <tr><td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
+      <strong style="color:#C85C2D;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">${a.period || ''}</strong>
+      <strong style="display:block;color:#3D1F0D;font-size:15px;margin:4px 0 8px;">${a.title || ''}</strong>
+      <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.7;">${a.action || ''}</p>
+    </td></tr>`).join('');
+
+  // ── Resources HTML ──
+  const resSec = results.resources || {};
+  const booksHtml = (resSec.books || []).map(b =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">📖 ${b.title || ''}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${b.why || ''}</p></td></tr>`).join('');
+  const commHtml = (resSec.communities || []).map(c =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🌐 ${c.name || ''}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${c.why || ''}</p></td></tr>`).join('');
+  const toolsHtml = (resSec.tools || []).map(t =>
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🛠️ ${t.name || ''}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${t.why || ''}</p></td></tr>`).join('');
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#FDF6ED;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#FDF6ED;padding:40px 20px;">
+<tr><td align="center"><table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
+
+  <!-- HEADER -->
+  <tr><td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
+    <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
+    <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Tribes Compass</h1>
+    <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
+  </td></tr>
+
+  <!-- TITLE BAND -->
+  <tr><td style="background:linear-gradient(135deg,#C85C2D,#E8943A);padding:24px 32px;text-align:center;">
+    <p style="margin:0 0 6px;color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Your Direction Profile</p>
+    <h2 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">${results.compass_title || ''}</h2>
+  </td></tr>
+
+  <!-- DIRECTION + INTRO -->
+  <tr><td style="background:#ffffff;padding:28px 32px;border-left:1px solid #E8D5C0;border-right:1px solid #E8D5C0;">
+    <p style="margin:0 0 8px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Your Direction</p>
+    <p style="margin:0 0 18px;color:#3D1F0D;font-size:16px;font-style:italic;line-height:1.65;border-left:3px solid #E8943A;padding-left:14px;">"${direction}"</p>
+    <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.8;">${results.compass_intro || ''}</p>
+  </td></tr>
+
+  <!-- PDF CALLOUT -->
+  <tr><td style="background:#FFF3E0;padding:20px 32px;border:1px solid #E8D5C0;border-top:none;text-align:center;">
+    <p style="margin:0;color:#3D1F0D;font-size:14px;line-height:1.6;">📎 <strong>Your full Compass Report is attached as a PDF</strong> — save it, print it, or share it. It includes your complete career paths, business models, 90-day action plan, and resources.</p>
+  </td></tr>
+
+  <!-- CAREER PATHS -->
+  <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+    <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🧭 Your Career Paths — Full 10-Year View</h3>
+    <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Three paths matched to who you are and where you want to go.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
+  </td></tr>
+
+  <!-- BUSINESS MODELS -->
+  <tr><td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+    <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🚀 Business Models Built for You</h3>
+    <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Three business ideas tailored to your skills, direction, and context.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${businessHtml}</table>
+  </td></tr>
+
+  <!-- WORK ENVIRONMENT -->
+  <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+    <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">🏡 Your Ideal Work Environment</h3>
+    <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Where You Thrive</p>
+    <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_setup || ''}</p>
+    <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Ideal Culture</p>
+    <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_culture || ''}</p>
+    <p style="margin:0 0 8px;color:#8B3030;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Red Flags — Walk Away From These</p>
+    <ul style="margin:0;padding-left:18px;">${redFlagsHtml}</ul>
+  </td></tr>
+
+  <!-- ACTION PLAN -->
+  <tr><td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+    <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🗺️ Your 90-Day Action Plan</h3>
+    <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Fortnightly steps — specific, concrete, and calibrated to your timeline.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${actionHtml}</table>
+  </td></tr>
+
+  <!-- RESOURCES -->
+  <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
+    <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">📚 Resources Matched to You</h3>
+    <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Books</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${booksHtml}</table>
+    <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Communities & Networks</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${commHtml}</table>
+    <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Tools & Platforms</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${toolsHtml}</table>
+  </td></tr>
+
+  <!-- FOOTER CTA -->
+  <tr><td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
+    <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Connect with the Changing Tribes community and share your compass results.</p>
+    <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+    <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© ${new Date().getFullYear()} Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+  </td></tr>
+
+</table></td></tr>
+</table></body></html>`;
+
+  const emailPayload = {
+    from:    'Tribes Compass <blueprint@changingtribes.com>',
+    to:      email,
+    subject: `Your Tribes Compass: ${results.compass_title || 'Results Inside'}`,
+    html,
+  };
+
+  if (pdfBuffer) {
+    emailPayload.attachments = [{
+      filename: 'Your-Tribes-Compass-Report.pdf',
+      content:  pdfBuffer.toString('base64'),
+    }];
+  }
+
+  await resend.emails.send(emailPayload);
+}
