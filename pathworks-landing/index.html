@@ -39,22 +39,23 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #C85C2D 0%, #E8943A 60%, #F5B870 100%);
-      color: var(--white); text-align: center; padding: 80px 24px 90px;
+      background: linear-gradient(170deg, #FDF6ED 0%, #F5E6D0 60%, #EDD5B0 100%);
+      color: var(--brown); text-align: center; padding: 80px 24px 90px;
+      border-bottom: 1px solid var(--border);
     }
     .hero-eyebrow {
-      display: inline-block; background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4); color: #ffffff;
+      display: inline-block; background: rgba(200,92,45,0.1);
+      border: 1px solid rgba(200,92,45,0.3); color: var(--orange);
       padding: 6px 18px; border-radius: 20px; font-size: 0.8rem;
       letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px;
     }
     .hero h1 {
       font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4rem);
-      line-height: 1.15; margin-bottom: 18px; color: var(--white);
+      line-height: 1.15; margin-bottom: 18px; color: var(--brown);
     }
-    .hero h1 em { color: var(--brown); font-style: normal; }
+    .hero h1 em { color: var(--orange); font-style: normal; }
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem); color: rgba(255,255,255,0.92);
+      font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--muted);
       max-width: 640px; margin: 0 auto 40px; line-height: 1.75;
     }
     .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -65,13 +66,13 @@
     }
     .btn-primary:hover { background: #A34923; }
     .btn-secondary {
-      background: rgba(255,255,255,0.15); color: var(--white);
-      border: 2px solid rgba(255,255,255,0.6); padding: 16px 34px;
+      background: transparent; color: var(--brown);
+      border: 2px solid var(--border); padding: 16px 34px;
       border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.05rem;
       display: inline-block; transition: border-color 0.2s;
     }
-    .btn-secondary:hover { border-color: rgba(255,255,255,0.8); }
-    .hero-note { margin-top: 20px; font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+    .btn-secondary:hover { border-color: var(--muted); }
+    .hero-note { margin-top: 20px; font-size: 0.82rem; color: var(--muted); opacity: 0.7; }
 
     /* ── SECTION WRAPPER ── */
     section { padding: 72px 24px; }
