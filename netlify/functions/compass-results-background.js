@@ -380,9 +380,9 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     doc.rect(0, 0, W, 220).fill(BROWN);
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
-       .text('CHANGING TRIBES', M, 50, { align: 'center', width: CW, characterSpacing: 2 });
+       .text('PATHWORKS PROJECT  ·  A CHANGING TRIBES COMPANY', M, 50, { align: 'center', width: CW, characterSpacing: 1 });
     doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(30)
-       .text('TRIBES COMPASS', M, 75, { align: 'center', width: CW });
+       .text('PATHWORKS COMPASS', M, 75, { align: 'center', width: CW });
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(12)
        .text('Your Personalized Career & Business Report', M, 118, { align: 'center', width: CW });
 
@@ -406,7 +406,7 @@ function generateCompassPDF(email, direction, results) {
 
     // Footer on cover
     doc.fillColor(BORDER).font('Helvetica').fontSize(8)
-       .text('Prepared by Changing Tribes  ·  changingtribes.com  ·  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+       .text('Pathworks Project  ·  A Changing Tribes Company  ·  pathworksproject.com  ·  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
              M, H - 40, { align: 'center', width: CW });
 
     // ══════════════════════════════════════════════
@@ -605,7 +605,7 @@ function generateCompassPDF(email, direction, results) {
     doc.addPage();
     doc.rect(0, 0, W, H).fill(BROWN);
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
-       .text('CHANGING TRIBES', M, 80, { align: 'center', width: CW, characterSpacing: 2 });
+       .text('PATHWORKS PROJECT  ·  A CHANGING TRIBES COMPANY', M, 80, { align: 'center', width: CW, characterSpacing: 1 });
     doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(22)
        .text('Your next chapter starts now.', M, 110, { align: 'center', width: CW });
     doc.moveDown(1.5);
@@ -613,17 +613,17 @@ function generateCompassPDF(email, direction, results) {
        .text('This report was generated specifically for you based on your Tribes Blueprint\nprofile and direction statement. Keep it, share it, and return to it\nas your journey unfolds.', M + 40, doc.y, { align: 'center', width: CW - 80, lineGap: 4 });
     doc.moveDown(2);
     doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(12)
-       .text('changingtribes.com', M, doc.y, { align: 'center', width: CW });
+       .text('pathworksproject.com', M, doc.y, { align: 'center', width: CW });
     doc.moveDown(0.5);
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
-       .text('© ' + new Date().getFullYear() + ' Changing Tribes. All rights reserved.', M, doc.y, { align: 'center', width: CW });
+       .text('© ' + new Date().getFullYear() + ' Pathworks Project · A Changing Tribes Company. All rights reserved.', M, doc.y, { align: 'center', width: CW });
 
     // ── Page numbers on interior pages ──
     const range = doc.bufferedPageRange();
     for (let i = 1; i < range.count - 1; i++) {
       doc.switchToPage(range.start + i);
       doc.fillColor(BORDER).font('Helvetica').fontSize(8)
-         .text(`Tribes Compass Report  ·  ${safe(results.compass_title || '')}  ·  Page ${i + 1}`,
+         .text(`Pathworks Compass Report  ·  ${safe(results.compass_title || '')}  ·  Page ${i + 1}`,
                M, H - 28, { align: 'center', width: CW });
     }
 
@@ -803,8 +803,8 @@ async function sendCompassEmail(email, direction, results) {
 
   <!-- HEADER -->
   <tr><td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
-    <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
-    <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Tribes Compass</h1>
+    <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Pathworks Project · A Changing Tribes Company</p>
+    <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Pathworks Compass</h1>
     <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
   </td></tr>
 
@@ -873,16 +873,16 @@ async function sendCompassEmail(email, direction, results) {
   <tr><td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
     <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Connect with the Changing Tribes community and share your compass results.</p>
     <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-    <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© ${new Date().getFullYear()} Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+    <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© ${new Date().getFullYear()} Pathworks Project · A Changing Tribes Company · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
   </td></tr>
 
 </table></td></tr>
 </table></body></html>`;
 
   const emailPayload = {
-    from:    'Tribes Compass <blueprint@changingtribes.com>',
+    from:    'Pathworks Compass <blueprint@changingtribes.com>',
     to:      email,
-    subject: `Your Tribes Compass: ${results.compass_title || 'Results Inside'}`,
+    subject: `Your Pathworks Compass: ${results.compass_title || 'Results Inside'}`,
     html,
   };
 
