@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pathworks Project — Your AI-Resistant Career & Business Plan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange:      #C85C2D;
+      --orange-light:#E8943A;
+      --brown:       #3D1F0D;
+      --cream:       #FDF6ED;
+      --cream-dark:  #F5EBD8;
+      --green:       #2D5016;
+      --muted:       #6B4C3B;
+      --border:      #E8D5C0;
+      --white:       #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--brown); }
+
+    /* ── NAV ── */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; background: var(--white);
+      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand { display: flex; flex-direction: column; }
+    .nav-brand strong { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--orange); }
+    .nav-brand span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+    .nav-cta {
+      background: var(--orange); color: var(--white); padding: 0.6rem 1.4rem;
+      border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #A34923; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--brown) 0%, #5A2E10 100%);
+      color: var(--white); text-align: center; padding: 80px 24px 90px;
+    }
+    .hero-eyebrow {
+      display: inline-block; background: rgba(200, 92, 45, 0.25);
+      border: 1px solid rgba(200, 92, 45, 0.5); color: #F5C49A;
+      padding: 6px 18px; border-radius: 20px; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.15; margin-bottom: 18px; color: var(--white);
+    }
+    .hero h1 em { color: var(--orange-light); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem); color: #E8D5C0;
+      max-width: 640px; margin: 0 auto 40px; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange); color: var(--white); padding: 16px 34px;
+      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
+      display: inline-block; transition: background 0.2s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #A34923; }
+    .btn-secondary {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.4); padding: 16px 34px;
+      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.05rem;
+      display: inline-block; transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.8); }
+    .hero-note { margin-top: 20px; font-size: 0.82rem; color: rgba(232,213,192,0.7); }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 72px 24px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--brown); line-height: 1.25; margin-bottom: 18px;
+    }
+    .section-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 640px; }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--cream); }
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .problem-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px 24px;
+    }
+    .problem-card .icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+    .problem-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
+    .problem-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--white); }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 52px; }
+    .step {
+      display: grid; grid-template-columns: 80px 1fr; gap: 28px;
+      align-items: flex-start; padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--brown); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; flex-shrink: 0;
+    }
+    .step-content {}
+    .step-tag {
+      display: inline-block; background: #FFF3E8; color: var(--orange);
+      border: 1px solid #F5C49A; border-radius: 20px; padding: 3px 12px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .step-content h3 { font-size: 1.25rem; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
+    .step-content p { font-size: 0.98rem; color: var(--muted); line-height: 1.75; }
+    .step-price {
+      display: inline-block; margin-top: 12px;
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 6px; padding: 6px 14px;
+      font-size: 0.85rem; font-weight: 600; color: var(--brown);
+    }
+    .step-deliverable {
+      margin-top: 16px; background: #F0F7F0;
+      border-left: 3px solid var(--green); border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+    }
+    .step-deliverable p { font-size: 0.9rem; color: var(--green); line-height: 1.6; }
+
+    /* ── SCIENCE ── */
+    .science { background: var(--brown); color: var(--white); }
+    .science .section-label { color: #F5C49A; }
+    .science .section-title { color: var(--white); }
+    .science .section-sub { color: #E8D5C0; }
+    .science-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .science-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 28px 24px;
+    }
+    .science-card h3 { font-size: 1rem; font-weight: 700; color: #F5C49A; margin-bottom: 10px; }
+    .science-card p { font-size: 0.92rem; color: #E8D5C0; line-height: 1.75; }
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px; margin-top: 40px;
+    }
+    .cat-pill {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .cat-pill .num { font-size: 0.75rem; color: var(--orange-light); font-weight: 700; margin-bottom: 4px; }
+    .cat-pill .name { font-size: 0.9rem; color: var(--white); font-weight: 600; }
+    .cat-pill .desc { font-size: 0.8rem; color: #C8A898; margin-top: 4px; line-height: 1.5; }
+
+    /* ── AI SECTION ── */
+    .ai-resistant { background: var(--cream); }
+    .ai-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;
+    }
+    @media (max-width: 680px) { .ai-grid { grid-template-columns: 1fr; } }
+    .ai-card {
+      border-radius: 12px; padding: 28px 24px; border: 1px solid var(--border);
+    }
+    .ai-card.bad { background: #FFF5F5; border-color: #F5C0C0; }
+    .ai-card.good { background: #F0F7F0; border-color: #A8D0A8; }
+    .ai-card h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .ai-card.bad h3 { color: #8B2020; }
+    .ai-card.good h3 { color: var(--green); }
+    .ai-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── DELIVERABLES ── */
+    .deliverables { background: var(--white); }
+    .del-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 52px;
+    }
+    @media (max-width: 680px) { .del-grid { grid-template-columns: 1fr; } }
+    .del-card {
+      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    }
+    .del-header { padding: 22px 24px; }
+    .del-header.blueprint { background: var(--brown); }
+    .del-header.compass { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
+    .del-header h3 { color: var(--white); font-size: 1.1rem; font-weight: 700; }
+    .del-header p { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-top: 4px; }
+    .del-header .price { color: var(--white); font-size: 1.6rem; font-weight: 700; margin-top: 10px; }
+    .del-body { padding: 24px; }
+    .del-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+    .del-item .check { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .del-btn {
+      display: block; text-align: center; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem; padding: 14px;
+      border-radius: 8px; margin: 0 24px 24px; transition: background 0.2s;
+    }
+    .del-btn.blueprint { background: var(--brown); color: var(--white); }
+    .del-btn.blueprint:hover { background: #5A2E10; }
+    .del-btn.compass { background: var(--orange); color: var(--white); }
+    .del-btn.compass:hover { background: #A34923; }
+
+    /* ── TESTIMONIAL / TRUST ── */
+    .trust { background: var(--cream-dark); text-align: center; }
+    .trust-inner { max-width: 680px; margin: 0 auto; }
+    .trust blockquote {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--brown); line-height: 1.65; font-style: italic; margin-bottom: 20px;
+    }
+    .trust-name { font-weight: 600; color: var(--muted); font-size: 0.9rem; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: linear-gradient(160deg, var(--orange) 0%, #8B3010 100%);
+      color: var(--white); text-align: center; padding: 80px 24px;
+    }
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white); margin-bottom: 18px;
+    }
+    .final-cta p { color: rgba(255,255,255,0.85); font-size: 1.05rem; max-width: 560px; margin: 0 auto 36px; line-height: 1.75; }
+    .final-cta .btn-white {
+      background: var(--white); color: var(--orange); padding: 16px 40px;
+      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
+      display: inline-block; transition: opacity 0.2s;
+    }
+    .final-cta .btn-white:hover { opacity: 0.9; }
+    .final-cta .sub { margin-top: 16px; font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown); color: #E8D5C0; text-align: center;
+      padding: 32px 24px; font-size: 0.85rem; line-height: 1.75;
+    }
+    footer a { color: var(--orange-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 1rem; }
+      .step { grid-template-columns: 50px 1fr; gap: 16px; }
+      .step-num { width: 44px; height: 44px; font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <strong>Pathworks Project</strong>
+    <span>A Changing Tribes Company</span>
+  </div>
+  <a href="https://pathworksblueprint.com" class="nav-cta">Start My Blueprint →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">AI Is Reshaping Every Career</div>
+  <h1>What are you<br>gonna do <em>next?</em></h1>
+  <p class="hero-sub">
+    Pathworks gives you a data-driven answer — a personalized Blueprint of who you are professionally, and a Compass that maps exactly where to go next, with AI-resistant careers and businesses built specifically for you.
+  </p>
+  <div class="hero-btns">
+    <a href="https://pathworksblueprint.com" class="btn-primary">Start My Blueprint — $19</a>
+    <a href="#how-it-works" class="btn-secondary">See How It Works ↓</a>
+  </div>
+  <p class="hero-note">15-minute assessment · Instant results · Used by career changers and entrepreneurs</p>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <p class="section-label">The Challenge</p>
+    <h2 class="section-title">Most career advice ignores what's actually happening</h2>
+    <p class="section-sub">AI is reshaping entire industries. The roles people trained for are changing — and most tools built to help don't account for any of it.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="icon">🤖</span>
+        <h3>AI Is Replacing Jobs Faster Than Expected</h3>
+        <p>Roles built around routine analysis, data processing, writing, and scheduling are disappearing. Knowing which direction is safe — and which isn't — matters more than it ever has.</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🗺️</span>
+        <h3>Most Assessments Tell You Who You Are, Not What to Do</h3>
+        <p>Generic personality tests give you a label. What you actually need is a specific, actionable plan — real careers, real businesses, real income projections — built around your exact profile.</p>
+      </div>
+      <div class="problem-card">
+        <span class="icon">🔁</span>
+        <h3>Transferable Skills Are Your Greatest Asset</h3>
+        <p>Everything you've built and done across your career is more valuable than you think. The key is knowing how to translate it into what comes next — before someone else makes that decision for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how-it-works">
+  <div class="container">
+    <p class="section-label">Your Path Forward</p>
+    <h2 class="section-title">Two steps to a clear, confident plan</h2>
+    <p class="section-sub">Pathworks is built around two connected tools. Take them in sequence for the full picture — or start with the Blueprint and decide from there.</p>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <span class="step-tag">Pathworks Blueprint</span>
+          <h3>Discover who you are professionally — in 15 minutes</h3>
+          <p>The Blueprint is a 40-question assessment that builds a complete picture of how you work, what energizes you, what you've actually built and done, how AI-resistant your natural strengths are, and what context you're operating in right now. It draws from established career science — Holland's RIASEC model, the Big Five personality framework, StrengthsFinder, and the Values in Action inventory — but applies it specifically to the world of work in the AI era.</p>
+          <p style="margin-top:12px;">You'll receive a full Tribe Profile — your professional archetype — plus career path recommendations, business ideas, and a 5-step action roadmap. All delivered instantly.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center;">
+            <span class="step-price">$19 one-time</span>
+            <a href="https://pathworksblueprint.com" class="btn-primary" style="font-size:0.9rem;padding:10px 20px;">Take the Blueprint →</a>
+          </div>
+          <div class="step-deliverable">
+            <p>✓ Your Tribe Profile archetype &nbsp;·&nbsp; ✓ 3 matched career paths &nbsp;·&nbsp; ✓ 3 business ideas &nbsp;·&nbsp; ✓ 5-step action roadmap &nbsp;·&nbsp; ✓ Results emailed instantly</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <span class="step-tag">Pathworks Compass</span>
+          <h3>Get your 10-year plan — built around where you want to go</h3>
+          <p>The Compass takes your full Blueprint profile and adds one thing: where you want to go. You type one or two sentences about the career or business direction you're drawn to — "I want to work with animals," "I want to consult in healthcare," "I want to build something online" — and the Compass combines that with your 40-question profile to generate a deeply personalized plan.</p>
+          <p style="margin-top:12px;">You receive a 7–10 page personalized report (delivered as a beautiful PDF in your inbox) covering three AI-resistant career paths with full 10-year arcs, three tailored business models with realistic financial projections, your ideal work environment, a 90-day action plan, and a hand-picked resource list.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center;">
+            <span class="step-price">$79 one-time</span>
+            <a href="https://pathworkscompass.com" class="btn-primary" style="font-size:0.9rem;padding:10px 20px;">Take the Compass →</a>
+          </div>
+          <div class="step-deliverable">
+            <p>✓ 3 AI-resistant career paths with 10-year income arcs &nbsp;·&nbsp; ✓ 3 custom business models with financials &nbsp;·&nbsp; ✓ 90-day action plan &nbsp;·&nbsp; ✓ 7–10 page branded PDF report emailed to you</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE SCIENCE -->
+<section class="science">
+  <div class="container">
+    <p class="section-label">The Science Behind It</p>
+    <h2 class="section-title">Built on proven frameworks — updated for the AI era</h2>
+    <p class="section-sub">Pathworks isn't guesswork. The assessment draws from the most validated career science frameworks available, and adds the one dimension most assessments completely ignore: AI resistance.</p>
+
+    <div class="science-grid">
+      <div class="science-card">
+        <h3>Holland's RIASEC Model</h3>
+        <p>The foundation of virtually every serious career assessment. RIASEC maps people across six work-style dimensions — Realistic, Investigative, Artistic, Social, Enterprising, and Conventional — to identify genuine career fit. Pathworks uses this as its core architecture.</p>
+      </div>
+      <div class="science-card">
+        <h3>Big Five Personality Applied to Work</h3>
+        <p>The Big Five (OCEAN) is the most rigorously validated personality framework in psychological research. Rather than just labeling you, Pathworks applies it specifically to how you work — autonomy vs. collaboration, structure vs. flexibility, stability vs. change.</p>
+      </div>
+      <div class="science-card">
+        <h3>Transferable Skills Inventory</h3>
+        <p>Inspired by StrengthsFinder and the Values in Action inventory, Pathworks adds a dimension most career tests miss: what you've actually built and done. Not just what you prefer — what you've proven. Sales, systems, coaching, creative work, leadership, technical expertise.</p>
+      </div>
+      <div class="science-card">
+        <h3>AI-Resistance Framework</h3>
+        <p>Unique to Pathworks. A dedicated set of questions maps the five dimensions that AI genuinely cannot replace: physical presence, emotional attunement, high-trust relationship building, situational judgment in ambiguous human contexts, and deep community-level impact. This is what future-proofs your plan.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <p style="color:#E8D5C0;font-size:0.9rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">The 8 Assessment Categories — 40 Questions Total</p>
+      <div class="categories-grid">
+        <div class="cat-pill">
+          <div class="num">Q1–5</div>
+          <div class="name">How You Work</div>
+          <div class="desc">Independence, structure, direction, visibility, environment</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q6–10</div>
+          <div class="name">What Energizes You</div>
+          <div class="desc">Analytical vs. creative, stability vs. growth, scale vs. depth</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q11–15</div>
+          <div class="name">Your Skills & Strengths</div>
+          <div class="desc">Specialist vs. generalist, detail vs. vision, strategy vs. execution</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q16–20</div>
+          <div class="name">Risk & Change</div>
+          <div class="desc">Income certainty, organizational type, decision-making, risk appetite</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q21–25</div>
+          <div class="name">Your Values & Vision</div>
+          <div class="desc">Security vs. purpose, balance, impact scale, independence, legacy</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q26–30</div>
+          <div class="name">What You've Built & Done</div>
+          <div class="desc">Proven transferable skills — what you've actually done, not just preferred</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q31–35</div>
+          <div class="name">Your Human Edge</div>
+          <div class="desc">AI-resistance profile — the five dimensions AI cannot replicate</div>
+        </div>
+        <div class="cat-pill">
+          <div class="num">Q36–40</div>
+          <div class="name">Your World & Context</div>
+          <div class="desc">Local vs. global, timeline, team size, who you serve, digital vs. physical</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI RESISTANT -->
+<section class="ai-resistant">
+  <div class="container">
+    <p class="section-label">Future-Proof Your Career</p>
+    <h2 class="section-title">Not all careers are created equal right now</h2>
+    <p class="section-sub">The Compass doesn't just match you to careers you'd be good at — it explicitly steers you toward paths that AI will augment, not eliminate. Here's what that distinction looks like in practice.</p>
+
+    <div class="ai-grid">
+      <div class="ai-card bad">
+        <h3>⚠️ Higher AI Displacement Risk</h3>
+        <div class="ai-item">✗ <span>Roles built around routine data analysis or reporting</span></div>
+        <div class="ai-item">✗ <span>Writing, editing, and content production at scale</span></div>
+        <div class="ai-item">✗ <span>Scheduling, coordination, and administrative processing</span></div>
+        <div class="ai-item">✗ <span>Basic customer service and tier-1 support</span></div>
+        <div class="ai-item">✗ <span>Standard legal research, bookkeeping, and data entry</span></div>
+      </div>
+      <div class="ai-card good">
+        <h3>✅ Strong AI Resistance</h3>
+        <div class="ai-item">✓ <span>Roles requiring physical presence and hands-on judgment</span></div>
+        <div class="ai-item">✓ <span>High-trust relationship and therapeutic work</span></div>
+        <div class="ai-item">✓ <span>Complex human leadership and organizational navigation</span></div>
+        <div class="ai-item">✓ <span>Community-embedded, place-based professional roles</span></div>
+        <div class="ai-item">✓ <span>Entrepreneurial and creative work at the human frontier</span></div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:0.9rem;color:var(--muted);text-align:center;">The Compass maps your specific Human Edge scores against this framework — so you get recommendations matched to your unique AI-resistance profile, not generic advice.</p>
+  </div>
+</section>
+
+<!-- DELIVERABLES / PRICING -->
+<section class="deliverables">
+  <div class="container">
+    <p class="section-label">What You Get</p>
+    <h2 class="section-title">Two tools. One clear path forward.</h2>
+    <p class="section-sub">Start with the Blueprint. Add the Compass when you're ready to go deeper. Both are yours permanently — no subscription, no recurring fees.</p>
+
+    <div class="del-grid">
+      <div class="del-card">
+        <div class="del-header blueprint">
+          <h3>Pathworks Blueprint</h3>
+          <p>Your professional profile & starting roadmap</p>
+          <div class="price">$19</div>
+        </div>
+        <div class="del-body">
+          <div class="del-item"><span class="check">✓</span><span>40-question assessment across 8 professional dimensions</span></div>
+          <div class="del-item"><span class="check">✓</span><span>Your Tribe Profile — a full professional archetype with detailed description</span></div>
+          <div class="del-item"><span class="check">✓</span><span>3 matched career paths based on your profile</span></div>
+          <div class="del-item"><span class="check">✓</span><span>3 business ideas suited to your skills and working style</span></div>
+          <div class="del-item"><span class="check">✓</span><span>5-step action roadmap to get moving immediately</span></div>
+          <div class="del-item"><span class="check">✓</span><span>Full results emailed instantly — keep them forever</span></div>
+        </div>
+        <a href="https://pathworksblueprint.com" class="del-btn blueprint">Start My Blueprint →</a>
+      </div>
+
+      <div class="del-card">
+        <div class="del-header compass">
+          <h3>Pathworks Compass</h3>
+          <p>Your personalized 10-year plan & PDF report</p>
+          <div class="price">$79</div>
+        </div>
+        <div class="del-body">
+          <div class="del-item"><span class="check">✓</span><span>3 AI-resistant career paths with full 10-year income arcs (Years 1–3, 4–7, 8–10)</span></div>
+          <div class="del-item"><span class="check">✓</span><span>3 custom business models with startup costs, Year 1 & Year 3 revenue targets</span></div>
+          <div class="del-item"><span class="check">✓</span><span>Your ideal work environment and culture fit</span></div>
+          <div class="del-item"><span class="check">✓</span><span>12-week (90-day) action plan — fortnightly steps, specific and concrete</span></div>
+          <div class="del-item"><span class="check">✓</span><span>Hand-picked books, communities, and tools matched to your direction</span></div>
+          <div class="del-item"><span class="check">✓</span><span>7–10 page branded PDF report emailed to you — save, print, or share it</span></div>
+        </div>
+        <a href="https://pathworkscompass.com" class="del-btn compass">Get My Compass →</a>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:28px;font-size:0.88rem;color:var(--muted);">
+      Already completed the Blueprint? You can go straight to the <a href="https://pathworkscompass.com" style="color:var(--orange);font-weight:600;">Pathworks Compass →</a>
+    </p>
+  </div>
+</section>
+
+<!-- READY TO GO DEEPER -->
+<section style="background:var(--cream);padding:60px 24px;text-align:center;">
+  <div class="container" style="max-width:700px;">
+    <p class="section-label">Want to Go Further?</p>
+    <h2 class="section-title">Work Directly With Andy</h2>
+    <p style="font-size:1.05rem;color:var(--muted);line-height:1.8;margin-bottom:28px;">
+      Pathworks gives you the tools. <strong style="color:var(--brown);">Changing Tribes</strong> gives you the person. If you want hands-on coaching, a deeper conversation about your results, or support building out your next business or career move — connect directly.
+    </p>
+    <a href="https://changingtribes.com" target="_blank" class="btn-primary">Visit Changing Tribes →</a>
+    <p style="margin-top:14px;font-size:0.82rem;color:var(--muted);">One-on-one coaching · Business building support · Career transition guidance</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>Your next chapter starts with clarity.</h2>
+  <p>Take 15 minutes. Answer 40 honest questions. Walk away knowing exactly who you are professionally, where to go next, and which path AI won't take from you.</p>
+  <a href="https://pathworksblueprint.com" class="btn-white">Start My Blueprint — $19</a>
+  <p class="sub">One-time fee · No subscription · Instant results emailed to you</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <a href="https://pathworksblueprint.com">Pathworks Blueprint</a> &nbsp;·&nbsp;
+    <a href="https://pathworkscompass.com">Pathworks Compass</a> &nbsp;·&nbsp;
+    <a href="https://changingtribes.com">Changing Tribes</a>
+  </p>
+  <p style="margin-top:8px;">© 2026 Pathworks Project · A Changing Tribes Company</p>
+  <p style="margin-top:6px;font-size:0.78rem;opacity:0.6;">Results are AI-generated and for informational purposes only.</p>
+</footer>
+
+</body>
+</html>
