@@ -220,7 +220,11 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
     console.log('BG stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
     const rawText = '{' + message.content[0].text;
 
-    results = JSON.parse(rawText);
+    // Trim to just the JSON object — Claude sometimes adds trailing text after the closing brace
+    const jsonEnd = rawText.lastIndexOf('}');
+    const jsonText = jsonEnd !== -1 ? rawText.substring(0, jsonEnd + 1) : rawText;
+
+    results = JSON.parse(jsonText);
     console.log('BG Step 3 done: Claude responded OK');
   } catch (aiErr) {
     console.error('BG Claude/parse error:', aiErr.constructor.name, aiErr.message);
