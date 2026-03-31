@@ -286,7 +286,7 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
 // ── PDF GENERATION ────────────────────────────────────────────
 function generateCompassPDF(email, direction, results) {
   return new Promise((resolve, reject) => {
-    const doc = new PDFDocument({ margin: 50, size: 'LETTER', bufferPages: true });
+    const doc = new PDFDocument({ margin: 50, size: 'LETTER' });
     const chunks = [];
     doc.on('data', c => chunks.push(c));
     doc.on('end',  () => resolve(Buffer.concat(chunks)));
@@ -421,9 +421,9 @@ function generateCompassPDF(email, direction, results) {
     // CAREER PATHS
     // ══════════════════════════════════════════════
     newPage();
-    sectionHeader('Your Career Paths — Full 10-Year View');
+    sectionHeader('Track 1: AI-Resistant Career & Job Paths');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-       .text('Three paths matched to who you are and where you want to go.', M, doc.y, { width: CW })
+       .text('Three AI-resistant career and job paths matched to your profile — with a full 10-year roadmap for each.', M, doc.y, { width: CW })
        .moveDown(0.6);
 
     (results.career_paths || []).forEach((c, i) => {
@@ -480,9 +480,9 @@ function generateCompassPDF(email, direction, results) {
     // BUSINESS MODELS
     // ══════════════════════════════════════════════
     newPage();
-    sectionHeader('Business Models Built for You');
+    sectionHeader('Track 2: Business & Entrepreneurship Paths');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-       .text('Three business ideas tailored to your skills, direction, and context.', M, doc.y, { width: CW })
+       .text('Three business and entrepreneurship ideas tailored to your skills — with startup costs, revenue targets, and first-client strategy.', M, doc.y, { width: CW })
        .moveDown(0.6);
 
     (results.business_models || []).forEach((b, i) => {
@@ -625,15 +625,6 @@ function generateCompassPDF(email, direction, results) {
     doc.moveDown(0.5);
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(9)
        .text('© ' + new Date().getFullYear() + ' Pathworks Project · A Changing Tribes Company. All rights reserved.', M, doc.y, { align: 'center', width: CW });
-
-    // ── Page numbers on interior pages ──
-    const range = doc.bufferedPageRange();
-    for (let i = 1; i < range.count - 1; i++) {
-      doc.switchToPage(range.start + i);
-      doc.fillColor(BORDER).font('Helvetica').fontSize(8)
-         .text(`Pathworks Compass Report  ·  ${safe(results.compass_title || '')}  ·  Page ${i + 1}`,
-               M, H - 28, { align: 'center', width: CW });
-    }
 
     doc.end();
   });
