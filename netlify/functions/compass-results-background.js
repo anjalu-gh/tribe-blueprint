@@ -302,12 +302,23 @@ function generateCompassPDF(email, direction, results) {
     const LBLUE   = '#4466CC';
     const W = 612, H = 792, M = 50, CW = W - M * 2;
 
-    const safe = v => (v || '').toString().replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
+    // Strip control chars AND emoji (Helvetica can't render them — outputs garbage)
+    const safe = v => (v || '').toString()
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
+      .replace(/[\u{1F000}-\u{1FFFF}]/gu, '')
+      .replace(/[\u2600-\u27BF\u2B50-\u2B55\u231A-\u231B\u25AA-\u25FE\u2614-\u2615]/g, '')
+      .replace(/[\uD800-\uDFFF]/g, '')
+      .trim();
 
     function y() { return doc.y; }
 
     function checkBreak(needed = 80) {
       if (doc.y + needed > H - 70) doc.addPage();
+    }
+
+    // Smart page break — only adds a page if not already near the top
+    function newPage() {
+      if (doc.y > 160) doc.addPage();
     }
 
     function hRule(color = BORDER) {
@@ -406,8 +417,8 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     // CAREER PATHS
     // ══════════════════════════════════════════════
-    doc.addPage();
-    sectionHeader('Your Career Paths — Full 10-Year View', '🧭');
+    newPage();
+    sectionHeader('Your Career Paths — Full 10-Year View');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
        .text('Three paths matched to who you are and where you want to go.', M, doc.y, { width: CW })
        .moveDown(0.6);
@@ -456,8 +467,8 @@ function generateCompassPDF(email, direction, results) {
       doc.moveDown(0.4);
 
       infoBox('How to Break In', c.how_to_break_in, '#EEF3FF', LBLUE);
-      labelValue('⚠️ Watch Out For', c.watch_out_for, '#8B3030');
-      labelValue('🛡️ AI-Resistant Because', c.ai_resistance, GREEN);
+      labelValue('Watch Out For', c.watch_out_for, '#8B3030');
+      labelValue('AI-Resistant Because', c.ai_resistance, GREEN);
       doc.moveDown(0.4);
       hRule();
     });
@@ -465,8 +476,8 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     // BUSINESS MODELS
     // ══════════════════════════════════════════════
-    doc.addPage();
-    sectionHeader('Business Models Built for You', '🚀');
+    newPage();
+    sectionHeader('Business Models Built for You');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
        .text('Three business ideas tailored to your skills, direction, and context.', M, doc.y, { width: CW })
        .moveDown(0.6);
@@ -509,8 +520,8 @@ function generateCompassPDF(email, direction, results) {
       doc.moveDown(0.4);
 
       infoBox('How to Get Your First Client', b.first_client_path, '#EEF3FF', LBLUE);
-      labelValue('🛡️ AI-Resistant Because', b.ai_resistance, GREEN);
-      labelValue('🤝 Ideal Partner / Co-Founder', b.ideal_partner, LBLUE);
+      labelValue('AI-Resistant Because', b.ai_resistance, GREEN);
+      labelValue('Ideal Partner / Co-Founder', b.ideal_partner, LBLUE);
       doc.moveDown(0.4);
       hRule();
     });
@@ -518,8 +529,8 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     // WORK ENVIRONMENT
     // ══════════════════════════════════════════════
-    checkBreak(120);
-    sectionHeader('Your Ideal Work Environment', '🏡');
+    newPage();
+    sectionHeader('Your Ideal Work Environment');
     const env = results.work_environment || {};
     subHeader('Where You Thrive');
     bodyText(env.ideal_setup);
@@ -529,15 +540,15 @@ function generateCompassPDF(email, direction, results) {
     (env.red_flags || []).forEach(flag => {
       checkBreak(30);
       doc.fillColor('#8B3030').font('Helvetica').fontSize(10)
-         .text('✗  ' + safe(flag), M + 10, doc.y, { width: CW - 10, lineGap: 1.5 })
+         .text('–  ' + safe(flag), M + 10, doc.y, { width: CW - 10, lineGap: 1.5 })
          .moveDown(0.3);
     });
 
     // ══════════════════════════════════════════════
     // 90-DAY ACTION PLAN
     // ══════════════════════════════════════════════
-    doc.addPage();
-    sectionHeader('Your 90-Day Action Plan', '🗺️');
+    newPage();
+    sectionHeader('Your 90-Day Action Plan');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
        .text('Fortnightly steps — specific, concrete, and calibrated to your situation.', M, doc.y, { width: CW })
        .moveDown(0.6);
@@ -562,15 +573,15 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     // RESOURCES
     // ══════════════════════════════════════════════
-    checkBreak(120);
-    sectionHeader('Resources Matched to You', '📚');
+    newPage();
+    sectionHeader('Resources Matched to You');
     const res = results.resources || {};
 
     subHeader('Books to Read');
     (res.books || []).forEach(b => {
       checkBreak(45);
       doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
-         .text('📖  ' + safe(b.title), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+         .text(safe(b.title), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
       doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
          .text(safe(b.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
     });
@@ -579,7 +590,7 @@ function generateCompassPDF(email, direction, results) {
     (res.communities || []).forEach(c => {
       checkBreak(45);
       doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
-         .text('🌐  ' + safe(c.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+         .text(safe(c.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
       doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
          .text(safe(c.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
     });
@@ -588,7 +599,7 @@ function generateCompassPDF(email, direction, results) {
     (res.tools || []).forEach(t => {
       checkBreak(45);
       doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10)
-         .text('🛠️  ' + safe(t.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
+         .text(safe(t.name), M + 6, doc.y, { width: CW - 6 }).moveDown(0.1);
       doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
          .text(safe(t.why), M + 20, doc.y, { width: CW - 20, lineGap: 1.5 }).moveDown(0.4);
     });
