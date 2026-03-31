@@ -366,13 +366,13 @@ function generateCompassPDF(email, direction, results) {
     }
 
     function infoBox(label, value, bgColor, borderColor) {
-      checkBreak(50);
       doc.moveDown(0.3);
       const bx = M, bw = CW;
-      const tempY = doc.y;
-      const innerW = bw - 28; // tighter right margin so text never bleeds
-      // Extra 20px bottom padding to guarantee text stays inside the box
+      const innerW = bw - 28;
+      // Measure FULL box height first, then check if it fits before drawing
       const textH = doc.heightOfString(safe(value), { width: innerW, fontSize: 10 }) + 48;
+      checkBreak(textH + 12); // ensure the whole box fits on this page
+      const tempY = doc.y;
       doc.rect(bx, tempY, bw, textH).fill(bgColor).strokeColor(borderColor).lineWidth(1).stroke();
       doc.rect(bx, tempY, 3, textH).fill(borderColor);
       doc.fillColor(borderColor).font('Helvetica-Bold').fontSize(8.5)
@@ -451,12 +451,13 @@ function generateCompassPDF(email, direction, results) {
          .moveDown(0.3);
 
       const arcW = (CW - 8) / 3;
-      const arcY = doc.y;
       const arcLabels = ['Years 1–3  ·  Getting In', 'Years 4–7  ·  Building', 'Years 8–10  ·  Legacy'];
       const arcVals   = [c.years_1_3, c.years_4_7, c.years_8_10];
       const maxH = Math.max(...arcVals.map(v =>
         doc.heightOfString(safe(v || ''), { width: arcW - 24, fontSize: 9.5 }) + 52
       ));
+      checkBreak(maxH + 12);
+      const arcY = doc.y;
 
       arcLabels.forEach((lbl, j) => {
         const ax = M + j * (arcW + 4);
@@ -511,6 +512,7 @@ function generateCompassPDF(email, direction, results) {
       const fMaxH = Math.max(...fItems.map(f =>
         doc.heightOfString(safe(f.val || ''), { width: fW - 24, fontSize: 9.5 }) + 52
       ));
+      checkBreak(fMaxH + 12);
       fItems.forEach((f, j) => {
         const fx = M + j * (fW + 4);
         doc.rect(fx, fY, fW, fMaxH).fill('#F0F7F0').strokeColor(GREEN).lineWidth(0.5).stroke();
@@ -557,9 +559,9 @@ function generateCompassPDF(email, direction, results) {
        .moveDown(0.6);
 
     (results.action_plan || []).forEach((a, i) => {
-      checkBreak(70);
-      const aY = doc.y;
       const aH = doc.heightOfString(safe(a.action || ''), { width: CW - 118, fontSize: 10.5 }) + 62;
+      checkBreak(aH + 8);
+      const aY = doc.y;
       doc.rect(M, aY, CW, aH).fill(i % 2 === 0 ? '#FFF8F0' : '#FDF6ED')
          .strokeColor(BORDER).lineWidth(0.5).stroke();
       doc.rect(M, aY, 90, aH).fill(ORANGE);
