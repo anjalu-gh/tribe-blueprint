@@ -5,6 +5,7 @@
 
 [functions]
   node_bundler = "esbuild"
+  external_node_modules = ["pdfkit"]
 
 # Redirect all paths to index.html (SPA fallback)
 [[redirects]]
