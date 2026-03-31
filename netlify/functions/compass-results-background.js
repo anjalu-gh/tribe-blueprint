@@ -328,13 +328,15 @@ function generateCompassPDF(email, direction, results) {
          .moveDown(0.5);
     }
 
-    function sectionHeader(title, icon = '') {
+    function sectionHeader(title) {
       checkBreak(60);
       doc.moveDown(0.6);
-      doc.rect(M, doc.y, CW, 28).fill(BROWN);
+      const headerY = doc.y;
+      doc.rect(M, headerY, CW, 30).fill(BROWN);
       doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(11)
-         .text((icon ? icon + '  ' : '') + title.toUpperCase(), M + 12, doc.y - 22, { width: CW - 20, lineBreak: false });
-      doc.moveDown(1.1);
+         .text(title.toUpperCase(), M + 12, headerY + 9, { width: CW - 24, lineBreak: false, characterSpacing: 0.3 });
+      doc.y = headerY + 30;
+      doc.moveDown(0.6);
     }
 
     function subHeader(title, color = ORANGE) {
@@ -368,15 +370,16 @@ function generateCompassPDF(email, direction, results) {
       doc.moveDown(0.3);
       const bx = M, bw = CW;
       const tempY = doc.y;
-      // measure text height
-      const textH = doc.heightOfString(safe(value), { width: bw - 24, fontSize: 10 }) + 30;
+      const innerW = bw - 28; // tighter right margin so text never bleeds
+      // Extra 20px bottom padding to guarantee text stays inside the box
+      const textH = doc.heightOfString(safe(value), { width: innerW, fontSize: 10 }) + 48;
       doc.rect(bx, tempY, bw, textH).fill(bgColor).strokeColor(borderColor).lineWidth(1).stroke();
       doc.rect(bx, tempY, 3, textH).fill(borderColor);
       doc.fillColor(borderColor).font('Helvetica-Bold').fontSize(8.5)
-         .text(label.toUpperCase(), bx + 10, tempY + 8, { width: bw - 20, characterSpacing: 0.4 });
+         .text(label.toUpperCase(), bx + 10, tempY + 9, { width: innerW, characterSpacing: 0.4 });
       doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-         .text(safe(value), bx + 10, tempY + 22, { width: bw - 20, lineGap: 1.5 });
-      doc.y = tempY + textH + 4;
+         .text(safe(value), bx + 10, tempY + 23, { width: innerW, lineGap: 2 });
+      doc.y = tempY + textH + 5;
       doc.moveDown(0.3);
     }
 
@@ -452,7 +455,7 @@ function generateCompassPDF(email, direction, results) {
       const arcLabels = ['Years 1–3  ·  Getting In', 'Years 4–7  ·  Building', 'Years 8–10  ·  Legacy'];
       const arcVals   = [c.years_1_3, c.years_4_7, c.years_8_10];
       const maxH = Math.max(...arcVals.map(v =>
-        doc.heightOfString(safe(v || ''), { width: arcW - 16, fontSize: 9.5 }) + 40
+        doc.heightOfString(safe(v || ''), { width: arcW - 24, fontSize: 9.5 }) + 52
       ));
 
       arcLabels.forEach((lbl, j) => {
@@ -461,7 +464,7 @@ function generateCompassPDF(email, direction, results) {
         doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(8)
            .text(lbl, ax + 8, arcY + 8, { width: arcW - 16 });
         doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
-           .text(safe(arcVals[j] || ''), ax + 8, arcY + 22, { width: arcW - 16, lineGap: 1.5 });
+           .text(safe(arcVals[j] || ''), ax + 8, arcY + 22, { width: arcW - 24, lineGap: 1.5 });
       });
       doc.y = arcY + maxH + 6;
       doc.moveDown(0.4);
@@ -506,15 +509,15 @@ function generateCompassPDF(email, direction, results) {
         { label: 'Year 3 Potential', val: b.year_3_potential },
       ];
       const fMaxH = Math.max(...fItems.map(f =>
-        doc.heightOfString(safe(f.val || ''), { width: fW - 16, fontSize: 9.5 }) + 36
+        doc.heightOfString(safe(f.val || ''), { width: fW - 24, fontSize: 9.5 }) + 52
       ));
       fItems.forEach((f, j) => {
         const fx = M + j * (fW + 4);
         doc.rect(fx, fY, fW, fMaxH).fill('#F0F7F0').strokeColor(GREEN).lineWidth(0.5).stroke();
         doc.fillColor(GREEN).font('Helvetica-Bold').fontSize(8)
-           .text(f.label.toUpperCase(), fx + 8, fY + 8, { width: fW - 16 });
+           .text(f.label.toUpperCase(), fx + 8, fY + 8, { width: fW - 24 });
         doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(9.5)
-           .text(safe(f.val || ''), fx + 8, fY + 22, { width: fW - 16, lineGap: 1.5 });
+           .text(safe(f.val || ''), fx + 8, fY + 22, { width: fW - 24, lineGap: 1.5 });
       });
       doc.y = fY + fMaxH + 6;
       doc.moveDown(0.4);
@@ -556,7 +559,7 @@ function generateCompassPDF(email, direction, results) {
     (results.action_plan || []).forEach((a, i) => {
       checkBreak(70);
       const aY = doc.y;
-      const aH = doc.heightOfString(safe(a.action || ''), { width: CW - 110, fontSize: 10.5 }) + 50;
+      const aH = doc.heightOfString(safe(a.action || ''), { width: CW - 118, fontSize: 10.5 }) + 62;
       doc.rect(M, aY, CW, aH).fill(i % 2 === 0 ? '#FFF8F0' : '#FDF6ED')
          .strokeColor(BORDER).lineWidth(0.5).stroke();
       doc.rect(M, aY, 90, aH).fill(ORANGE);
@@ -565,7 +568,7 @@ function generateCompassPDF(email, direction, results) {
       doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10.5)
          .text(safe(a.title), M + 100, aY + 8, { width: CW - 110 });
       doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-         .text(safe(a.action), M + 100, aY + 26, { width: CW - 110, lineGap: 1.5 });
+         .text(safe(a.action), M + 100, aY + 26, { width: CW - 118, lineGap: 1.5 });
       doc.y = aY + aH + 4;
       doc.moveDown(0.2);
     });
