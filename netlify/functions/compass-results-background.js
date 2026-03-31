@@ -220,9 +220,21 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
     console.log('BG stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
     const rawText = '{' + message.content[0].text;
 
-    // Trim to just the JSON object — Claude sometimes adds trailing text after the closing brace
-    const jsonEnd = rawText.lastIndexOf('}');
-    const jsonText = jsonEnd !== -1 ? rawText.substring(0, jsonEnd + 1) : rawText;
+    // Extract just the root JSON object using brace counting — handles trailing text robustly
+    function extractRootJSON(str) {
+      let depth = 0, inStr = false, esc = false;
+      for (let i = 0; i < str.length; i++) {
+        const c = str[i];
+        if (esc)            { esc = false; continue; }
+        if (c === '\\' && inStr) { esc = true;  continue; }
+        if (c === '"')      { inStr = !inStr; continue; }
+        if (inStr)          continue;
+        if (c === '{')      depth++;
+        if (c === '}')      { depth--; if (depth === 0) return str.substring(0, i + 1); }
+      }
+      return str;
+    }
+    const jsonText = extractRootJSON(rawText);
 
     results = JSON.parse(jsonText);
     console.log('BG Step 3 done: Claude responded OK');
