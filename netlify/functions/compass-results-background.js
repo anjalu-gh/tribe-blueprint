@@ -5,7 +5,10 @@
 const Anthropic        = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const { Resend }       = require('resend');
-const PDFDocument      = require('pdfkit');
+
+// Load pdfkit safely — email still sends without PDF if unavailable
+let PDFDocument = null;
+try { PDFDocument = require('pdfkit'); } catch (e) { console.error('pdfkit not available:', e.message); }
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -688,13 +691,15 @@ async function updateZohoWithCompass(email, direction, results) {
 async function sendCompassEmail(email, direction, results) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  // Generate PDF
+  // Generate PDF (only if pdfkit loaded successfully)
   let pdfBuffer = null;
-  try {
-    pdfBuffer = await generateCompassPDF(email, direction, results);
-    console.log('BG PDF generated:', Math.round(pdfBuffer.length / 1024), 'KB');
-  } catch (pdfErr) {
-    console.error('BG PDF generation error (non-fatal):', pdfErr.message);
+  if (PDFDocument) {
+    try {
+      pdfBuffer = await generateCompassPDF(email, direction, results);
+      console.log('BG PDF generated:', Math.round(pdfBuffer.length / 1024), 'KB');
+    } catch (pdfErr) {
+      console.error('BG PDF generation error (non-fatal):', pdfErr.message);
+    }
   }
 
   // ── Career paths HTML ──
