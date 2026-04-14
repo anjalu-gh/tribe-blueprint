@@ -440,6 +440,36 @@
     .result-list li::before { content: "→"; color: var(--orange); font-weight: 700; flex-shrink: 0; margin-top: 0.12em; }
     .result-list li strong { color: var(--brown); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
 
+    .companies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    @media (max-width: 600px) {
+      .companies-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .company-chip {
+      background: var(--cream);
+      border: 1px solid #E8D5C0;
+      border-radius: 10px;
+      padding: 0.75rem 0.6rem;
+      text-align: center;
+    }
+    .company-chip strong {
+      color: var(--brown);
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+    .company-chip span {
+      color: var(--orange);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
     .cta-footer {
       text-align: center;
       margin: 2rem 0 1rem;
@@ -857,6 +887,12 @@
       <ul class="result-list" id="roadmap-content"></ul>
     </div>
 
+    <div class="result-card">
+      <h3>🏢 Companies Where You Can Thrive</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant organizations matched to your tribe profile — places where human judgment, relationships, and your specific skills drive the value.</p>
+      <div class="companies-grid" id="companies-content"></div>
+    </div>
+
     <!-- TRIBES COMPASS UPSELL -->
     <div class="compass-upsell">
       <div class="badge">✦ Take It Further</div>
@@ -1255,6 +1291,35 @@ const TEST_RESULTS   = {
         'Make a direct, simple offer to 3–5 warm contacts. Be specific about what they get, the price, and the time commitment. Your first "yes" will unlock your confidence more than any training or planning ever could.',
     },
   ],
+  target_companies: [
+    { name: 'Korn Ferry', sector: 'Leadership Consulting' },
+    { name: 'Deloitte', sector: 'Strategy & Advisory' },
+    { name: 'McKinsey & Co.', sector: 'Management Consulting' },
+    { name: 'BetterUp', sector: 'Coaching / HR Tech' },
+    { name: 'Gallup', sector: 'Org. Development' },
+    { name: 'YPO', sector: 'Executive Community' },
+    { name: 'Vistage', sector: 'CEO Coaching' },
+    { name: 'EY Parthenon', sector: 'Strategy Consulting' },
+    { name: 'Accenture', sector: 'Business Transformation' },
+    { name: 'The Bridgespan Group', sector: 'Nonprofit Strategy' },
+    { name: 'Edelman', sector: 'Communications' },
+    { name: 'Teach For America', sector: 'Education / Leadership' },
+    { name: 'Omidyar Network', sector: 'Social Impact' },
+    { name: 'IDEO', sector: 'Design & Innovation' },
+    { name: 'Bain & Company', sector: 'Management Consulting' },
+    { name: 'LinkedIn Learning', sector: 'Professional Development' },
+    { name: 'Aspen Institute', sector: 'Leadership & Policy' },
+    { name: 'Civic Consulting Alliance', sector: 'Public Sector Advisory' },
+    { name: 'Envisio', sector: 'Strategy Execution' },
+    { name: 'CoachHub', sector: 'Digital Coaching' },
+    { name: 'SHRM', sector: 'HR & Workforce' },
+    { name: 'HubSpot', sector: 'Marketing / Growth' },
+    { name: 'Patagonia', sector: 'Mission-Driven Business' },
+    { name: 'Salesforce', sector: 'CRM / Partnerships' },
+    { name: 'NFTE', sector: 'Entrepreneurship Ed.' },
+    { name: 'Idealist', sector: 'Social Impact Careers' },
+    { name: 'Conscious Capitalism', sector: 'Business Community' },
+  ],
 };
 
 /* ── COUPON / ACCESS ────────────────────────────── */
@@ -1434,6 +1499,11 @@ function displayResults(r) {
   document.getElementById('roadmap-content').innerHTML =
     (r.roadmap || []).map((s, i) =>
       `<li><div><strong>Step ${i + 1}: ${s.title}</strong>${s.action}</div></li>`
+    ).join('');
+
+  document.getElementById('companies-content').innerHTML =
+    (r.target_companies || []).map(c =>
+      `<div class="company-chip"><strong>${c.name}</strong><span>${c.sector}</span></div>`
     ).join('');
 
   showPage('results');

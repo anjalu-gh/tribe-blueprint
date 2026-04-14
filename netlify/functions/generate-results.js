@@ -138,7 +138,7 @@ IMPORTANT GUIDANCE FOR EACH CATEGORY:
 
 Based on all 40 scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
 
-CRITICAL: Keep every description field to a MAXIMUM of 2 sentences. Be punchy and specific, not verbose. The entire JSON response must be under 1800 tokens.
+CRITICAL: Keep every description field to a MAXIMUM of 2 sentences. Be punchy and specific, not verbose. The entire JSON response must be under 3000 tokens.
 
 Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object — with this exact structure:
 
@@ -162,8 +162,14 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
     { "title": "Action Step Title", "action": "Specific action." },
     { "title": "Action Step Title", "action": "Specific action." },
     { "title": "Action Step Title", "action": "Specific action." }
+  ],
+  "target_companies": [
+    { "name": "Company Name", "sector": "Industry / Role Type" },
+    ... (provide exactly 27 entries total)
   ]
-}`;
+}
+
+For target_companies: List exactly 27 real, named companies where this person could realistically apply or partner with. These must be AI-resistant organizations — companies where human judgment, relationships, physical presence, creative direction, or complex problem-solving are central to the value delivered. Match the companies to this person's specific tribe archetype, career paths, proven skills, and practical context (local vs. global, B2C vs. B2B). Include a mix of: well-known employers, mid-size growth companies, mission-driven organizations, and industry-specific firms. Use real company names only.`;
 
   // ── Call Claude ─────────────────────────────────
   console.log('Step 2: Calling Claude API...');
@@ -171,7 +177,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
   try {
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 3000,
+      max_tokens: 5000,
       messages: [{ role: 'user', content: prompt }],
     });
 
@@ -263,6 +269,24 @@ async function sendResultsEmail(email, results) {
       </td>
     </tr>`).join('');
 
+  // Build companies grid — 3 per row
+  const companies = results.target_companies || [];
+  const companyRows = [];
+  for (let i = 0; i < companies.length; i += 3) {
+    const row = companies.slice(i, i + 3);
+    const cells = row.map(c => `
+      <td width="33%" style="padding:10px 8px;vertical-align:top;">
+        <div style="background:#ffffff;border:1px solid #E8D5C0;border-radius:8px;padding:12px 10px;text-align:center;">
+          <strong style="color:#3D1F0D;font-size:13px;display:block;margin-bottom:4px;">${c.name}</strong>
+          <span style="color:#C85C2D;font-size:11px;">${c.sector}</span>
+        </div>
+      </td>`).join('');
+    // Pad last row if needed
+    const empties = row.length < 3 ? Array(3 - row.length).fill('<td width="33%"></td>').join('') : '';
+    companyRows.push(`<tr>${cells}${empties}</tr>`);
+  }
+  const companiesHtml = companyRows.join('');
+
   const html = `
 <!DOCTYPE html>
 <html>
@@ -324,6 +348,15 @@ async function sendResultsEmail(email, results) {
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
             <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🗺️ Your Transition Roadmap</h3>
             <table width="100%" cellpadding="0" cellspacing="0">${roadmapHtml}</table>
+          </td>
+        </tr>
+
+        <!-- TARGET COMPANIES -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;">🏢 Companies Where You Can Thrive</h3>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:13px;line-height:1.5;">AI-resistant organizations matched to your tribe profile and skills — places where human judgment and relationships drive the value.</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${companiesHtml}</table>
           </td>
         </tr>
 
@@ -432,6 +465,11 @@ async function pushToZoho(email, results, answers) {
     .map((s, i) => `Step ${i + 1}: ${s.title}\n  ${s.action}`)
     .join('\n\n');
 
+  // ── Target companies ──
+  const companiesFull = (results.target_companies || [])
+    .map(c => `• ${c.name} (${c.sector})`)
+    .join('\n');
+
   const description =
     `━━━ TRIBES BLUEPRINT ASSESSMENT ━━━\n` +
     `Tribe Profile: ${results.tribe_name || ''}\n` +
@@ -445,7 +483,9 @@ async function pushToZoho(email, results, answers) {
     `━━━ BUSINESS IDEAS ━━━\n` +
     `${bizFull}\n\n` +
     `━━━ TRANSITION ROADMAP ━━━\n` +
-    `${roadmapFull}`;
+    `${roadmapFull}\n\n` +
+    `━━━ TARGET COMPANIES (AI-RESISTANT) ━━━\n` +
+    `${companiesFull}`;
 
   const payload = {
     data: [
