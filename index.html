@@ -883,6 +883,12 @@
     </div>
 
     <div class="result-card">
+      <h3>💡 20 Businesses You Could Start</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant business types matched to your tribe profile and proven skills — each one built on human strengths that automation cannot replace.</p>
+      <div class="companies-grid" id="startup-content"></div>
+    </div>
+
+    <div class="result-card">
       <h3>🗺️ Your Transition Roadmap</h3>
       <ul class="result-list" id="roadmap-content"></ul>
     </div>
@@ -1264,6 +1270,28 @@ const TEST_RESULTS   = {
         'Organizations spend heavily on leadership development, change management, and team culture. You could package your expertise into half-day or full-day workshops and sell them to HR teams, leadership retreats, and conferences — high-margin and scalable.',
     },
   ],
+  startup_ideas: [
+    { name: 'Executive Coaching Practice', benefit: 'Helps leaders navigate high-stakes decisions with human wisdom' },
+    { name: 'Career Transition Consultancy', benefit: 'Guides professionals through career pivots with personalized strategy' },
+    { name: 'Leadership Development Workshops', benefit: 'Builds human leadership capabilities teams cannot get from software' },
+    { name: 'Fractional COO Service', benefit: 'Delivers senior operations expertise small companies can afford' },
+    { name: 'Organizational Culture Firm', benefit: 'Transforms company culture through human-centered facilitation' },
+    { name: 'Team Conflict Mediation Practice', benefit: 'Resolves workplace conflict through skilled human dialogue' },
+    { name: 'Community-Based Coworking Space', benefit: 'Creates human connection and belonging for remote workers' },
+    { name: 'Corporate Training & Facilitation', benefit: 'Delivers experiential learning that requires a live human presence' },
+    { name: 'Mental Health & Wellness Consulting', benefit: 'Supports employee wellbeing with empathetic human guidance' },
+    { name: 'Peer Advisory Board (Like Vistage)', benefit: 'Brings CEOs together for collective wisdom and accountability' },
+    { name: 'Strategic Communications Agency', benefit: 'Crafts authentic brand narratives that build real human trust' },
+    { name: 'Boutique Recruiting / Talent Advisory', benefit: 'Matches people and culture fit in ways algorithms miss' },
+    { name: 'Community Health Navigator Service', benefit: 'Connects patients to resources through trusted human advocacy' },
+    { name: 'Family Office / Wealth Transitions Advisor', benefit: 'Guides families through complex financial and emotional decisions' },
+    { name: 'Nonprofit Capacity Building Consultancy', benefit: 'Strengthens mission-driven organizations with strategic expertise' },
+    { name: 'Educational Tutoring & Mentorship Business', benefit: 'Builds student confidence through meaningful human relationships' },
+    { name: 'Events & Experiential Marketing Agency', benefit: 'Creates memorable in-person brand experiences AI cannot design' },
+    { name: 'Trades & Services Franchise', benefit: 'Delivers hands-on work that requires a skilled physical presence' },
+    { name: 'Holistic Wellness Studio', benefit: 'Provides body-centered healing through trained human practitioners' },
+    { name: 'Restorative Justice / Mediation Firm', benefit: 'Facilitates healing and resolution through empathetic human process' },
+  ],
   roadmap: [
     {
       title: 'Clarify Your Niche',
@@ -1499,6 +1527,11 @@ function displayResults(r) {
   document.getElementById('roadmap-content').innerHTML =
     (r.roadmap || []).map((s, i) =>
       `<li><div><strong>Step ${i + 1}: ${s.title}</strong>${s.action}</div></li>`
+    ).join('');
+
+  document.getElementById('startup-content').innerHTML =
+    (r.startup_ideas || []).map(s =>
+      `<div class="company-chip"><strong>${s.name}</strong><span>${s.benefit}</span></div>`
     ).join('');
 
   document.getElementById('companies-content').innerHTML =

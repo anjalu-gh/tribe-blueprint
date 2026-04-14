@@ -163,11 +163,17 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
     { "title": "Action Step Title", "action": "Specific action." },
     { "title": "Action Step Title", "action": "Specific action." }
   ],
+  "startup_ideas": [
+    { "name": "Business Type or Concept", "benefit": "Core benefit or value this business delivers to customers" },
+    ... (provide exactly 20 entries total)
+  ],
   "target_companies": [
     { "name": "Company Name", "sector": "Industry / Role Type" },
     ... (provide exactly 27 entries total)
   ]
 }
+
+For startup_ideas: List exactly 20 types of businesses this person could realistically start or run. Every idea must be AI-resistant — built on human judgment, physical presence, trust, emotional intelligence, creativity, or complex relationship-driven value that AI cannot easily replicate. For each entry provide: the business name/type and the core customer benefit (what problem it solves or value it delivers). Match the mix to their proven skills, archetype, and practical context (local/global, B2C/B2B, income timeline). Include a variety of models: service businesses, consulting practices, community businesses, physical/local businesses, creative ventures, and mission-driven organizations.
 
 For target_companies: List exactly 27 real, named companies where this person could realistically apply or partner with. These must be AI-resistant organizations — companies where human judgment, relationships, physical presence, creative direction, or complex problem-solving are central to the value delivered. Match the companies to this person's specific tribe archetype, career paths, proven skills, and practical context (local vs. global, B2C vs. B2B). Include a mix of: well-known employers, mid-size growth companies, mission-driven organizations, and industry-specific firms. Use real company names only.`;
 
@@ -261,6 +267,23 @@ async function sendResultsEmail(email, results) {
       </td>
     </tr>`).join('');
 
+  // Startup ideas grid — 3 per row
+  const startups = results.startup_ideas || [];
+  const startupRows = [];
+  for (let i = 0; i < startups.length; i += 3) {
+    const row = startups.slice(i, i + 3);
+    const cells = row.map(s => `
+      <td width="33%" style="padding:10px 8px;vertical-align:top;">
+        <div style="background:#ffffff;border:1px solid #E8D5C0;border-radius:8px;padding:12px 10px;text-align:center;">
+          <strong style="color:#3D1F0D;font-size:13px;display:block;margin-bottom:4px;">${s.name}</strong>
+          <span style="color:#C85C2D;font-size:11px;line-height:1.4;display:block;">${s.benefit}</span>
+        </div>
+      </td>`).join('');
+    const empties = row.length < 3 ? Array(3 - row.length).fill('<td width="33%"></td>').join('') : '';
+    startupRows.push(`<tr>${cells}${empties}</tr>`);
+  }
+  const startupIdeasHtml = startupRows.join('');
+
   const roadmapHtml = (results.roadmap || []).map((s, i) => `
     <tr>
       <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
@@ -340,6 +363,15 @@ async function sendResultsEmail(email, results) {
           <td style="background:#FDF6ED;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
             <h3 style="margin:0 0 4px;color:#3D1F0D;font-size:18px;">🚀 Business Ideas For You</h3>
             <table width="100%" cellpadding="0" cellspacing="0">${businessIdeasHtml}</table>
+          </td>
+        </tr>
+
+        <!-- STARTUP IDEAS -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;">💡 20 Businesses You Could Start</h3>
+            <p style="margin:0 0 16px;color:#6B4C3B;font-size:13px;line-height:1.5;">AI-resistant business types matched to your skills and tribe profile — each one built on human strengths that automation cannot replace.</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${startupIdeasHtml}</table>
           </td>
         </tr>
 
@@ -460,6 +492,11 @@ async function pushToZoho(email, results, answers) {
     .map(b => `• ${b.name}\n  ${b.description}`)
     .join('\n\n');
 
+  // ── Startup ideas (20 AI-resistant business types) ──
+  const startupFull = (results.startup_ideas || [])
+    .map(s => `• ${s.name} — ${s.benefit}`)
+    .join('\n');
+
   // ── Full roadmap ──
   const roadmapFull = (results.roadmap || [])
     .map((s, i) => `Step ${i + 1}: ${s.title}\n  ${s.action}`)
@@ -482,6 +519,8 @@ async function pushToZoho(email, results, answers) {
     `${careerFull}\n\n` +
     `━━━ BUSINESS IDEAS ━━━\n` +
     `${bizFull}\n\n` +
+    `━━━ STARTUP IDEAS (20 AI-RESISTANT BUSINESS TYPES) ━━━\n` +
+    `${startupFull}\n\n` +
     `━━━ TRANSITION ROADMAP ━━━\n` +
     `${roadmapFull}\n\n` +
     `━━━ TARGET COMPANIES (AI-RESISTANT) ━━━\n` +
