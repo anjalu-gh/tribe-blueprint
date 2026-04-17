@@ -4,6 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pathworks Blueprint — Find Your Next Chapter | A Changing Tribes Company</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="A 15-minute AI-powered assessment that reveals what your work history says about you, which careers you're built for, and the exact steps to get there." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blueprint.changingtribes.com" />
+  <meta property="og:title" content="Pathworks Blueprint — Find Your Next Chapter" />
+  <meta property="og:description" content="Discover your career tribe, get matched to your next role or business idea, and unlock a step-by-step transition roadmap — powered by AI." />
+  <meta property="og:image" content="https://blueprint.changingtribes.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pathworks Blueprint — Find Your Next Chapter" />
+  <meta name="twitter:description" content="Discover your career tribe, get matched to your next role or business idea, and unlock a step-by-step transition roadmap — powered by AI." />
+  <meta name="twitter:image" content="https://blueprint.changingtribes.com/og-image.png" />
+
+  <!-- Analytics (Plausible — privacy-friendly, no cookies) -->
+  <script defer data-domain="blueprint.changingtribes.com" src="https://plausible.io/js/script.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ===== RESET & BASE ===== */
@@ -711,6 +728,96 @@
     }
 
     /* ===== RESPONSIVE ===== */
+    /* ===== FAQ ===== */
+    .faq-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    .faq-wrap h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: var(--brown);
+    }
+    .faq-sub {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      background: var(--white);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--brown);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-q:hover { background: var(--cream); }
+    .faq-q .faq-arrow { transition: transform 0.25s; font-size: 1rem; color: var(--orange); flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      display: none;
+      padding: 0 1.4rem 1.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ===== LANDING FOOTER ===== */
+    .landing-footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .landing-footer a { color: var(--orange); text-decoration: none; }
+
+    /* ===== SHARE BUTTONS ===== */
+    .share-section {
+      text-align: center;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+    .share-section p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .share-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-share:hover { opacity: 0.85; }
+    .btn-share-li { background: #0A66C2; color: #fff; }
+    .btn-share-x  { background: #000; color: #fff; }
+    .btn-share-copy { background: var(--cream); color: var(--brown); border: 1px solid var(--border); }
+
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.5rem 2rem; }
       .features, .pricing-wrap { padding: 0 1.25rem; }
@@ -783,6 +890,57 @@
     </div>
   </div>
 
+  <!-- FAQ SECTION -->
+  <div class="faq-wrap">
+    <h2>Common Questions</h2>
+    <p class="faq-sub">Everything you need to know before you start</p>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Who is this assessment for?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Pathworks Blueprint is built for professionals at a crossroads — whether you're burned out in your current role, considering a career pivot, thinking about starting a business, or simply wondering what "the next chapter" looks like. If you have a work history and feel like something needs to change, this is for you.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How is this different from a free quiz online?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Free quizzes give you a label. Pathworks Blueprint gives you a personalized analysis — based on your specific responses — with career paths, business ideas, and a step-by-step roadmap tailored to you. It's powered by the same AI that professionals use for deep research and strategic thinking, not a simple multiple-choice formula.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is my data safe?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Yes. Your responses are used solely to generate your personal report. We do not sell your data or share it with third parties for marketing purposes. Payment is handled securely by Stripe — we never see your card details. See our <a href="privacy.html" target="_blank">Privacy Policy</a> for full details.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How long does it take?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Most people complete the 40-question assessment in 10–15 minutes. Your AI-generated results appear on screen within about 30–60 seconds of submitting, and are also emailed to you so you can revisit them anytime.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What if I'm not happy with my results?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <div class="faq-a">Because results are generated instantly by AI and delivered immediately, we're unable to offer refunds. However, if you experience a technical issue or your results didn't generate correctly, reach out to us at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a> and we'll make it right.</div>
+    </div>
+  </div>
+
+  <div class="landing-footer">
+    <p>© 2026 Pathworks Project · A Changing Tribes Company · <a href="https://changingtribes.com" target="_blank">changingtribes.com</a> · <a href="privacy.html" target="_blank">Privacy Policy</a> · <a href="mailto:hello@changingtribes.com">Contact</a></p>
+    <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
+  </div>
+
 </div>
 
 <!-- ══════════════════════════════════════════════ -->
@@ -817,7 +975,7 @@
     <button class="btn-primary" onclick="startCheckout()" style="width:100%;background:var(--brown);">
       💳&nbsp;&nbsp;Pay $19 &amp; Begin Assessment
     </button>
-    <p class="security-note">Secure payment via Stripe. Results sent to your email address.</p>
+    <p class="security-note">Secure payment via Stripe. Results sent to your email address. By purchasing you agree to our <a href="privacy.html" target="_blank" style="color:var(--orange);">Privacy Policy</a>.</p>
   </div>
 </div>
 
@@ -897,6 +1055,24 @@
       <h3>🏢 Companies Where You Can Thrive</h3>
       <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant organizations matched to your tribe profile — places where human judgment, relationships, and your specific skills drive the value.</p>
       <div class="companies-grid" id="companies-content"></div>
+    </div>
+
+    <!-- SOCIAL SHARING -->
+    <div class="share-section">
+      <p>🎉 Share your Tribe Profile with your network</p>
+      <div class="share-btns">
+        <a id="share-li" class="btn-share btn-share-li" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Share on LinkedIn
+        </a>
+        <a id="share-x" class="btn-share btn-share-x" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Post on X
+        </a>
+        <button id="share-copy" class="btn-share btn-share-copy" onclick="copyShareLink()">
+          🔗 Copy Link
+        </button>
+      </div>
     </div>
 
     <!-- TRIBES COMPASS UPSELL -->
@@ -1539,7 +1715,36 @@ function displayResults(r) {
       `<div class="company-chip"><strong>${c.name}</strong><span>${c.sector}</span></div>`
     ).join('');
 
+  // Wire up social sharing buttons with tribe name
+  const tribeName = r.tribe_name || 'my Tribe Profile';
+  const shareUrl  = 'https://blueprint.changingtribes.com';
+  const shareText = `I just discovered I'm "${tribeName}" — a career & life assessment by Changing Tribes. Find out yours:`;
+  document.getElementById('share-li').href =
+    `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent('Pathworks Blueprint — ' + tribeName)}&summary=${encodeURIComponent(shareText)}`;
+  document.getElementById('share-x').href =
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+
   showPage('results');
+}
+
+/* ── FAQ TOGGLE ─────────────────────────────────── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+/* ── COPY SHARE LINK ────────────────────────────── */
+function copyShareLink() {
+  const url = 'https://blueprint.changingtribes.com';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('share-copy');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { btn.textContent = '🔗 Copy Link'; }, 2500);
+    });
+  } else {
+    prompt('Copy this link:', url);
+  }
 }
 
 /* ══════════════════════════════════════════════════
