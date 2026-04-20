@@ -845,8 +845,8 @@
     <h1>Discover Where Your<br><em>Next Tribe Awaits</em></h1>
     <p>A powerful 15-minute assessment that reveals what your past work experience and strengths say about you, what career or business you were built for — and the exact steps to get there.</p>
     <div class="hero-cta">
-      <button class="btn-primary" onclick="showPage('access')">Start My Assessment — $19</button>
-      <button class="btn-secondary" onclick="showPage('access')">I Have a Coupon</button>
+      <button class="btn-primary" onclick="showPage('access')">Start My Free Assessment →</button>
+      <p style="margin-top:0.85rem;font-size:0.85rem;color:var(--muted);">Free · No payment required · Results in under 60 seconds</p>
     </div>
   </div>
 
@@ -873,22 +873,39 @@
     </div>
   </div>
 
-  <div class="pricing-wrap">
-    <div class="pricing-card">
-      <span class="top-badge">One-Time Access</span>
-      <div class="price-big"><sup>$</sup>19</div>
-      <p class="price-note">Complete career &amp; life assessment</p>
+  <div class="pricing-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:760px;margin:0 auto;padding:0 2rem 2rem;">
+    <!-- FREE: Blueprint -->
+    <div class="pricing-card" style="border:2px solid var(--orange);">
+      <span class="top-badge" style="background:var(--green);">✦ Free — Always</span>
+      <div class="price-big"><sup style="font-size:1.8rem;top:-1rem;">$</sup>0</div>
+      <p class="price-note">Tribes Blueprint Assessment</p>
       <ul class="includes-list">
         <li>40-question sliding-scale assessment</li>
         <li>Your personal Tribe Profile &amp; archetype</li>
-        <li>3 matched career paths with explanations</li>
-        <li>3 tailored business ideas suited to you</li>
-        <li>5-step personalized transition roadmap</li>
-        <li>Instant on-screen AI-powered results</li>
+        <li>3 matched career paths</li>
+        <li>3 tailored business ideas</li>
+        <li>5-step transition roadmap</li>
+        <li>Results emailed to you instantly</li>
       </ul>
-      <button class="btn-primary" onclick="showPage('access')" style="width:100%">Begin My Journey →</button>
+      <button class="btn-primary" onclick="showPage('access')" style="width:100%;background:var(--green);">Start Free →</button>
+    </div>
+    <!-- PAID: Compass -->
+    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#3D1F0D 0%,#5a2e10 100%);color:#FDF6ED;">
+      <span class="top-badge" style="background:var(--gold);color:var(--brown);">✦ Upgrade — One-Time</span>
+      <div class="price-big" style="color:var(--gold);"><sup style="font-size:1.8rem;top:-1rem;color:var(--gold);">$</sup>39</div>
+      <p class="price-note" style="color:#E8D5C0;">Tribes Compass — Your 10-Year Map</p>
+      <ul class="includes-list" style="color:#E8D5C0;">
+        <li style="border-color:#5a3a20;">Everything in Blueprint, plus:</li>
+        <li style="border-color:#5a3a20;">3 AI-resistant career paths mapped to <em>your</em> direction</li>
+        <li style="border-color:#5a3a20;">10-year arc for each career (Years 1–3, 4–7, 8–10)</li>
+        <li style="border-color:#5a3a20;">3 business models with financial targets</li>
+        <li style="border-color:#5a3a20;">90-day action plan to start immediately</li>
+        <li style="border-color:#5a3a20;">Full Compass report emailed to you</li>
+      </ul>
+      <button class="btn-compass" onclick="showPage('access')" style="width:100%;">Get Compass after Blueprint →</button>
     </div>
   </div>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-bottom:3rem;">Start free. Upgrade to Compass from your results page.</p>
 
   <!-- FAQ SECTION -->
   <div class="faq-wrap">
@@ -905,10 +922,10 @@
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">
-        How is this different from a free quiz online?
+        It's really free? What's the catch?
         <span class="faq-arrow">▼</span>
       </button>
-      <div class="faq-a">Free quizzes give you a label. Pathworks Blueprint gives you a personalized analysis — based on your specific responses — with career paths, business ideas, and a step-by-step roadmap tailored to you. It's powered by the same AI that professionals use for deep research and strategic thinking, not a simple multiple-choice formula.</div>
+      <div class="faq-a">Yes, the Tribes Blueprint is completely free — no credit card, no trial period. We believe you should see the value before you spend a dollar. Once you've seen your results, you can choose to upgrade to the Tribes Compass ($39 one-time) for a deeper, direction-specific 10-year career map. But the Blueprint itself is yours, free, always.</div>
     </div>
 
     <div class="faq-item">
@@ -929,10 +946,10 @@
 
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">
-        What if I'm not happy with my results?
+        What's included in the free Blueprint vs. the $39 Compass?
         <span class="faq-arrow">▼</span>
       </button>
-      <div class="faq-a">Because results are generated instantly by AI and delivered immediately, we're unable to offer refunds. However, if you experience a technical issue or your results didn't generate correctly, reach out to us at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a> and we'll make it right.</div>
+      <div class="faq-a">The free Blueprint gives you your Tribe Profile, 3 career paths, 3 business ideas, 20 AI-resistant business types, target companies, and a 5-step transition roadmap — all based on your 40-question assessment. The Compass ($39) takes your Blueprint results and your chosen direction, then maps out your specific 10-year career arc, detailed business models with financial projections, and a 90-day action plan tailored to exactly where you want to go. If you upgrade to Compass and have a technical issue, reach out at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a>.</div>
     </div>
   </div>
 
@@ -948,34 +965,18 @@
 <!-- ══════════════════════════════════════════════ -->
 <div id="page-access" class="page">
   <div class="access-wrap">
-    <h2>Get Started</h2>
-    <p class="sub">Enter your email to receive your results, then choose how you'd like to access the assessment.</p>
+    <h2>Let's Get Started</h2>
+    <p class="sub">Enter your email address to receive your results, then complete the 40-question assessment. It's free — no payment required.</p>
 
     <div class="form-group">
       <label for="email-input">Your Email Address</label>
       <input type="email" id="email-input" placeholder="you@example.com" />
     </div>
 
-    <div class="form-group">
-      <label for="coupon-input">Have a Coupon Code?</label>
-      <div class="inline-row">
-        <input type="text" id="coupon-input" placeholder="e.g. CHANGINGTRIBES" />
-        <button class="btn-secondary" onclick="applyCoupon()">Apply</button>
-      </div>
-      <div id="coupon-error" class="msg error">That coupon code isn't valid or has expired.</div>
-      <div id="coupon-success" class="msg success">✓ Coupon applied! Click below to start.</div>
-    </div>
-
-    <button id="start-free-btn" class="btn-primary" onclick="startAssessment()" style="width:100%;display:none;margin-top:0.5rem;">
-      Start My Assessment →
+    <button class="btn-primary" onclick="startAssessment()" style="width:100%;margin-top:0.5rem;">
+      Begin My Free Assessment →
     </button>
-
-    <div class="divider">or pay to access</div>
-
-    <button class="btn-primary" onclick="startCheckout()" style="width:100%;background:var(--brown);">
-      💳&nbsp;&nbsp;Pay $19 &amp; Begin Assessment
-    </button>
-    <p class="security-note">Secure payment via Stripe. Results sent to your email address. By purchasing you agree to our <a href="privacy.html" target="_blank" style="color:var(--orange);">Privacy Policy</a>.</p>
+    <p class="security-note">Your email is used only to send your results. We never sell or share it. See our <a href="privacy.html" target="_blank" style="color:var(--orange);">Privacy Policy</a>.</p>
   </div>
 </div>
 
@@ -1403,10 +1404,8 @@ function updateProgress() {
 }
 
 /* ── TEST / DEMO MODE ───────────────────────────── */
-// The coupon TESTDRIVE bypasses all backend calls so you can
-// preview the full flow locally before deploying.
-const TEST_COUPON    = 'TESTDRIVE';
-const TEST_RESULTS   = {
+// Add ?test=1 to the URL to use mock results without calling the backend.
+const TEST_RESULTS = {
   tribe_name: 'The Pathfinder',
   tribe_description:
     'You are a rare blend of strategic thinker and connector — someone who instinctively sees where things are heading before others do. You thrive when you can shape direction rather than just execute it, and you bring people along on the journey with natural warmth and credibility.',
@@ -1526,106 +1525,20 @@ const TEST_RESULTS   = {
   ],
 };
 
-/* ── COUPON / ACCESS ────────────────────────────── */
-async function applyCoupon() {
-  const email  = document.getElementById('email-input').value.trim();
-  const coupon = document.getElementById('coupon-input').value.trim().toUpperCase();
-  const errEl  = document.getElementById('coupon-error');
-  const okEl   = document.getElementById('coupon-success');
-
-  if (!email)  { alert('Please enter your email address first.'); return; }
-  if (!coupon) { alert('Please enter a coupon code.'); return; }
-
-  errEl.style.display = 'none';
-  okEl.style.display  = 'none';
-
-  // ── LOCAL TEST BYPASS ──
-  if (coupon === TEST_COUPON) {
-    state.email      = email;
-    state.accessCode = 'TEST-LOCAL';
-    state.testMode   = true;
-    okEl.textContent = '✓ Test coupon applied! Click below to start.';
-    okEl.style.display  = 'block';
-    document.getElementById('start-free-btn').style.display = 'block';
-    return;
-  }
-
-  try {
-    const res  = await fetch('/.netlify/functions/verify-coupon', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, coupon }),
-    });
-    const data = await res.json();
-
-    if (data.valid) {
-      state.email      = email;
-      state.accessCode = data.access_code;
-      okEl.textContent = '✓ Coupon applied! Click below to start.';
-      okEl.style.display  = 'block';
-      document.getElementById('start-free-btn').style.display = 'block';
-    } else {
-      errEl.style.display = 'block';
-    }
-  } catch {
-    errEl.style.display = 'block';
-  }
-}
-
+/* ── START ASSESSMENT (free — email only) ───────── */
 function startAssessment() {
-  buildAssessment();
-  showPage('assessment');
-}
-
-async function startCheckout() {
   const email = document.getElementById('email-input').value.trim();
-  if (!email) { alert('Please enter your email address first.'); return; }
+  if (!email) { alert('Please enter your email address to receive your results.'); return; }
   state.email = email;
 
-  try {
-    const res  = await fetch('/.netlify/functions/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert('Payment setup failed. Please try again.');
-    }
-  } catch {
-    alert('Something went wrong. Please try again.');
+  // Local dev test mode: set ?test=1 in URL to use mock results
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('test') === '1') {
+    state.testMode = true;
   }
-}
 
-/* ── HANDLE STRIPE RETURN ───────────────────────── */
-async function handleStripeReturn() {
-  const params    = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id');
-  if (!sessionId) return;
-
-  window.history.replaceState({}, '', window.location.pathname);
-
-  try {
-    const res  = await fetch('/.netlify/functions/verify-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: sessionId }),
-    });
-    const data = await res.json();
-
-    if (data.valid) {
-      state.email      = data.email;
-      state.accessCode = data.access_code;
-      buildAssessment();
-      showPage('assessment');
-    } else {
-      alert('Payment could not be verified. Please contact andy@changingtribes.com.');
-    }
-  } catch {
-    alert('Payment verification failed. Please contact andy@changingtribes.com.');
-  }
+  buildAssessment();
+  showPage('assessment');
 }
 
 /* ── SUBMIT ASSESSMENT ──────────────────────────── */
@@ -1660,9 +1573,8 @@ async function submitAssessment() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email:       state.email,
-        access_code: state.accessCode,
-        answers:     state.answers,
+        email:   state.email,
+        answers: state.answers,
       }),
     });
     clearInterval(timer);
@@ -2072,8 +1984,6 @@ window.addEventListener('load', () => {
   }
   // Check for Compass Stripe return
   handleCompassReturn();
-  // Check for Blueprint Stripe return
-  handleStripeReturn();
 });
 </script>
 </body>

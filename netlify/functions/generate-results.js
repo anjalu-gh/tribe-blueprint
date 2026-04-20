@@ -94,28 +94,20 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  let email, access_code, answers;
+  let email, answers;
   try {
-    ({ email, access_code, answers } = JSON.parse(event.body));
+    ({ email, answers } = JSON.parse(event.body));
   } catch {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
 
-  // ── Verify access code ──────────────────────────
-  console.log('Step 1: Verifying access code...');
-  const { data: accessData, error: accessErr } = await supabase
-    .from('access_codes')
-    .select('*')
-    .eq('code', access_code)
-    .single();
-
-  if (accessErr || !accessData) {
-    console.log('Access code invalid:', accessErr?.message);
-    return { statusCode: 403, body: JSON.stringify({ error: 'Invalid or expired access code' }) };
+  if (!email) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Email is required' }) };
   }
-  console.log('Step 1 done: access code valid');
 
-  const resolvedEmail = email || accessData.email || '';
+  // Blueprint is free — no access code required
+  console.log('Step 1: Blueprint request received for', email);
+  const resolvedEmail = email.trim();
 
   // ── Build Claude prompt ─────────────────────────
   const scoreSummary = buildScoreSummary(answers || {});
@@ -201,16 +193,10 @@ For target_companies: List exactly 27 real, named companies where this person co
   // ── Persist to Supabase ─────────────────────────
   try {
     await supabase.from('assessments').insert({
-      access_code,
       email: resolvedEmail,
       answers,
       results,
     });
-
-    await supabase
-      .from('access_codes')
-      .update({ assessment_completed: true })
-      .eq('code', access_code);
   } catch (dbErr) {
     // Non-fatal — results already generated, just log
     console.error('Supabase persist error:', dbErr.message);
