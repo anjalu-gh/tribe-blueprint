@@ -32,8 +32,8 @@ exports.handler = async (event) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Tribe Blueprint Assessment',
-              description: 'Complete career & life transition assessment — by Changing Tribes',
+              name: 'Pathworks Blueprint by Changing Tribes',
+              description: 'Complete career & life transition assessment',
               images: [],
             },
             unit_amount: priceAmount,
