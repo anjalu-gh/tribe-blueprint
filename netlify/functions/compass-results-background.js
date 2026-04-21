@@ -891,7 +891,7 @@ async function sendCompassEmail(email, direction, results) {
 
   if (pdfBuffer) {
     emailPayload.attachments = [{
-      filename: 'Your-Tribes-Compass-Report.pdf',
+      filename: 'Your-Pathworks-Compass-Report.pdf',
       content:  pdfBuffer.toString('base64'),
     }];
   }
