@@ -1,5 +1,5 @@
 // netlify/functions/create-checkout.js
-// Creates a Stripe Checkout session for the $19 assessment payment.
+// Creates a Stripe Checkout session for the $39 assessment payment.
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
