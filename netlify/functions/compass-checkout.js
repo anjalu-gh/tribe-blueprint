@@ -19,7 +19,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Email is required' }) };
   }
 
-  const appUrl     = process.env.APP_URL || 'https://blueprint.changingtribes.com';
+  const appUrl     = process.env.APP_URL || 'https://www.pathworksblueprint.com';
   const priceCents = parseInt(process.env.COMPASS_PRICE_CENTS || '7900', 10);
 
   try {

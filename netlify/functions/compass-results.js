@@ -142,9 +142,9 @@ exports.handler = async (event) => {
     ? `Their Tribes Blueprint archetype is: "${blueprintTribeName}".`
     : '';
 
-  const prompt = `You are a world-class career strategist, business advisor, and executive coach working with Changing Tribes — a platform that helps people navigate major professional transitions with clarity and confidence.
+  const prompt = `You are a world-class career strategist, business advisor, and executive coach working with Pathworks Project — a platform that helps people navigate major professional transitions with clarity and confidence.
 
-A person has completed the Tribes Blueprint 40-question assessment and is now using Tribes Compass to map their specific direction. ${blueprintContext}
+A person has completed the Pathworks Blueprint 40-question assessment and is now using Pathworks Compass to map their specific direction. ${blueprintContext}
 
 THEIR DIRECTION STATEMENT (what they want to do next):
 "${direction || 'Not specified'}"
@@ -511,8 +511,8 @@ async function sendCompassEmail(email, direction, results) {
         <!-- HEADER -->
         <tr>
           <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
-            <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Tribes Compass</h1>
+            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Pathworks Project</p>
+            <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Pathworks Compass</h1>
             <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
           </td>
         </tr>
@@ -644,9 +644,9 @@ async function sendCompassEmail(email, direction, results) {
         <!-- CTA -->
         <tr>
           <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Connect with the Changing Tribes community and share your compass results.</p>
-            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2025 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Explore more resources and tools at Pathworks Project.</p>
+            <a href="https://pathworksproject.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Pathworks Project →</a>
+            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#E8D5C0;">pathworksproject.com</a></p>
           </td>
         </tr>
 
@@ -657,9 +657,9 @@ async function sendCompassEmail(email, direction, results) {
 </html>`;
 
   await resend.emails.send({
-    from:    'Tribes Compass <blueprint@changingtribes.com>',
+    from:    'Pathworks Compass <blueprint@changingtribes.com>',
     to:      email,
-    subject: `Your Tribes Compass: ${results.compass_title || 'Results Inside'}`,
+    subject: `Your Pathworks Compass: ${results.compass_title || 'Results Inside'}`,
     html,
   });
 }

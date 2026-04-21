@@ -385,8 +385,8 @@ async function sendResultsEmail(email, results) {
             <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.6;">Your Blueprint shows you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> maps exactly where to go next — 3 career paths, 3 businesses to start, and your 10-year arc.</p>
             <a href="https://www.pathworkscompass.com" style="background:#D4A017;color:#3D1F0D;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
             <p style="margin:0 0 20px;color:#6B4C3B;font-size:12px;">or</p>
-            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+            <a href="https://pathworksproject.com" style="background:#C85C2D;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Pathworks Project →</a>
+            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#E8D5C0;">pathworksproject.com</a></p>
           </td>
         </tr>
 
@@ -397,7 +397,7 @@ async function sendResultsEmail(email, results) {
 </html>`;
 
   await resend.emails.send({
-    from: 'Pathworks Blueprint <blueprint@changingtribes.com>',
+    from: 'Tribe Blueprint <hello@changingtribes.com>',
     to: email,
     subject: `Your Pathworks Blueprint: ${results.tribe_name || 'Results Inside'}`,
     html,

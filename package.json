@@ -1,7 +1,7 @@
 {
-  "name": "tribe-blueprint",
+  "name": "pathworks-blueprint",
   "version": "1.0.0",
-  "description": "Tribe Blueprint — Career & Life Transition Assessment by Changing Tribes",
+  "description": "Pathworks Blueprint — Career & Life Transition Assessment",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "@supabase/supabase-js": "^2.39.0",

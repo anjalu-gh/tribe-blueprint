@@ -1219,7 +1219,7 @@
       <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalized resources — all tailored to your Blueprint profile.</p>
     </div>
     <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
-    <a href="https://changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
+    <a href="https://pathworksproject.com" class="btn-primary" target="_blank">Visit Pathworks Project →</a>
   </div>
   <footer>
     <p>© 2026 Pathworks Project · <a href="https://pathworksproject.com">pathworksproject.com</a></p>
@@ -1781,10 +1781,10 @@ async function handleCompassReturn() {
       document.getElementById('compass-email-input').value = data.email;
       showPage('compass-access');
     } else {
-      alert('Payment could not be verified. Please contact andy@changingtribes.com.');
+      alert('Payment could not be verified. Please contact hello@pathworksproject.com.');
     }
   } catch {
-    alert('Payment verification failed. Please contact andy@changingtribes.com.');
+    alert('Payment verification failed. Please contact hello@pathworksproject.com.');
   }
 }
 
@@ -1977,9 +1977,9 @@ window.addEventListener('load', () => {
   // Check for Compass domain — show Compass landing directly
   const host = window.location.hostname;
   if (host.includes('tribescompass') || host.includes('pathworkscompass')) {
-    document.title = 'Pathworks Compass by Changing Tribes — Your 10-Year Career Map';
+    document.title = 'Pathworks Compass — Your 10-Year Career Map';
     const navLogo = document.getElementById('nav-logo-text');
-    if (navLogo) navLogo.innerHTML = 'Pathworks Compass by Changing Tribes';
+    if (navLogo) navLogo.innerHTML = 'Pathworks Compass';
     showCompassAccess();
     return;
   }
