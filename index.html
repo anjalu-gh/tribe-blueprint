@@ -26,14 +26,15 @@
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:  #C85C2D;
-      --orange-dark: #A34923;
-      --brown:   #3D1F0D;
-      --cream:   #FDF6ED;
+      --orange:  #1A6B72;
+      --orange-dark: #145A60;
+      --brown:   #0F3D45;
+      --cream:   #F0F8FA;
+      --cream-dark: #D8ECF0;
       --green:   #2D5016;
-      --gold:    #D4A017;
-      --muted:   #6B4C3B;
-      --border:  #E8D5C0;
+      --gold:    #E8920A;
+      --muted:   #4A6670;
+      --border:  #B8D4DA;
       --white:   #ffffff;
     }
     html { scroll-behavior: smooth; }
@@ -105,7 +106,7 @@
     .btn-primary:hover {
       background: var(--orange-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(200,92,45,0.28);
+      box-shadow: 0 8px 20px rgba(26,107,114,0.28);
     }
     .btn-secondary {
       background: transparent;
@@ -345,7 +346,7 @@
       border-radius: 50%;
       background: var(--orange);
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(200,92,45,0.35);
+      box-shadow: 0 2px 6px rgba(26,107,114,0.35);
     }
     input[type="range"]::-moz-range-thumb {
       width: 22px;
@@ -354,7 +355,7 @@
       background: var(--orange);
       cursor: pointer;
       border: none;
-      box-shadow: 0 2px 6px rgba(200,92,45,0.35);
+      box-shadow: 0 2px 6px rgba(26,107,114,0.35);
     }
     .slider-wrap {
       position: relative;
@@ -558,7 +559,7 @@
       transition: all 0.2s;
       font-family: 'Inter', sans-serif;
     }
-    .btn-compass:hover { background: #e6b420; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,160,23,0.35); }
+    .btn-compass:hover { background: #d4820a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,146,10,0.35); }
 
     /* Compass access page */
     .compass-access-wrap {
@@ -891,7 +892,7 @@
       <button class="btn-primary" onclick="showPage('access')" style="width:100%;background:var(--green);">Start Free →</button>
     </div>
     <!-- PAID: Compass -->
-    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#1A2E38 0%,#2A4A5C 100%);color:#FDF6ED;">
+    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#1A2E38 0%,#2A4A5C 100%);color:#F0F8FA;">
       <span class="top-badge" style="background:var(--gold);color:var(--brown);">✦ Upgrade — One-Time</span>
       <div class="price-big" style="color:var(--gold);"><sup style="font-size:1.8rem;top:-1rem;color:var(--gold);">$</sup>39</div>
       <p class="price-note" style="color:#E8F4FA;">Pathworks Compass — Your 10-Year Map</p>
