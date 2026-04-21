@@ -7,9 +7,17 @@
   <script>
     (function(){
       var h = location.hostname;
-      if(h.indexOf('pathworkscompass') !== -1) document.title = 'Pathworks Compass | by Changing Tribes';
-      else if(h.indexOf('pathworksproject') !== -1) document.title = 'Pathworks Project | by Changing Tribes';
-      else document.title = 'Pathworks Blueprint | by Changing Tribes';
+      if(h.indexOf('pathworkscompass') !== -1) {
+        document.title = 'Pathworks Compass | by Changing Tribes';
+        document.addEventListener('DOMContentLoaded', function(){
+          var el = document.getElementById('nav-wordmark-text');
+          if(el) el.innerHTML = 'Pathworks Compass<span>by Changing Tribes</span>';
+        });
+      } else if(h.indexOf('pathworksproject') !== -1) {
+        document.title = 'Pathworks Project | by Changing Tribes';
+      } else {
+        document.title = 'Pathworks Blueprint | by Changing Tribes';
+      }
     })();
   </script>
   <meta name="description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
@@ -429,7 +437,7 @@
       <text x="27" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" opacity="0.5">E</text>
       <text x="9" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" opacity="0.5">W</text>
     </svg>
-    <div class="nav-wordmark">
+    <div class="nav-wordmark" id="nav-wordmark-text">
       Pathworks Blueprint
       <span>by Changing Tribes</span>
     </div>
