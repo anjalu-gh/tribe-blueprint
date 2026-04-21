@@ -381,9 +381,12 @@ async function sendResultsEmail(email, results) {
         <!-- CTA -->
         <tr>
           <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
-            <p style="margin:0 0 16px;color:#E8D5C0;font-size:14px;line-height:1.6;">Ready to take the next step? Connect with the Changing Tribes community.</p>
-            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2024 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+            <p style="margin:0 0 8px;color:#D4A017;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Ready to Go Deeper?</p>
+            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.6;">Your Blueprint shows you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> maps exactly where to go next — 3 career paths, 3 businesses to start, and your 10-year arc.</p>
+            <a href="https://www.pathworkscompass.com" style="background:#D4A017;color:#3D1F0D;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
+            <p style="margin:0 0 20px;color:#6B4C3B;font-size:12px;">or</p>
+            <a href="https://changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Changing Tribes →</a>
+            <p style="margin:24px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Changing Tribes · <a href="https://changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
           </td>
         </tr>
 
