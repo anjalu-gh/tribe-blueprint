@@ -19,7 +19,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Email is required' }) };
   }
 
-  const appUrl = process.env.APP_URL || 'https://your-site.netlify.app';
+  const appUrl = process.env.APP_URL || 'https://www.pathworksblueprint.com';
   const priceAmount = parseInt(process.env.PRICE_CENTS || '1900', 10); // default $19.00
 
   try {
