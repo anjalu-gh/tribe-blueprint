@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pathworks Blueprint — Find Your Next Chapter</title>
-
-  <!-- SEO & Open Graph -->
   <meta name="description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
@@ -17,974 +15,688 @@
   <meta name="twitter:title" content="Pathworks Blueprint — Find Your Next Chapter" />
   <meta name="twitter:description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
   <meta name="twitter:image" content="https://pathworksblueprint.com/og-image.png" />
-
-  <!-- Analytics (Plausible — privacy-friendly, no cookies) -->
   <script defer data-domain="pathworksblueprint.com" src="https://plausible.io/js/script.js"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:  #1A6B72;
+      --forest:      #0F3D45;
+      --slate:       #1A6B72;
+      --gold:        #E8920A;
+      --gold-lt:     #F5A93A;
+      --cream:       #F0F8FA;
+      --paper:       #D8ECF0;
+      --ink:         #111111;
+      --mist:        #4A6670;
+      --white:       #FFFFFF;
+      --green:       #2D6A26;
+      --border:      #B8D4DA;
+      /* Aliases kept for inner-page CSS compatibility */
+      --orange:      #1A6B72;
       --orange-dark: #145A60;
-      --brown:   #0F3D45;
-      --cream:   #F0F8FA;
-      --cream-dark: #D8ECF0;
-      --green:   #2D5016;
-      --gold:    #E8920A;
-      --muted:   #4A6670;
-      --border:  #B8D4DA;
-      --white:   #ffffff;
+      --brown:       #0F3D45;
+      --cream-dark:  #D8ECF0;
+      --muted:       #4A6670;
     }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--brown);
-      min-height: 100vh;
-    }
+    body { font-family: 'Public Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
 
-    /* ===== NAV ===== */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--orange);
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav-logo span {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: var(--muted);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-    }
-
-    /* ===== PAGE SYSTEM ===== */
+    /* ══════════════ PAGE SYSTEM ══════════════ */
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ===== SHARED ELEMENTS ===== */
+    /* ══════════════ NAV ══════════════ */
+    .site-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem; background: var(--white);
+      border-bottom: 2px solid var(--forest); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; cursor: pointer; }
+    .nav-logo svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .nav-wordmark { font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--forest); line-height: 1; }
+    .nav-wordmark span { display: block; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-weight: 500; font-size: 0.9rem; color: var(--forest); text-decoration: none; letter-spacing: 0.03em; cursor: pointer; }
+    .nav-cta { background: var(--forest); color: var(--cream) !important; padding: 0.55rem 1.4rem; }
+
+    /* ══════════════ LANDING: HERO ══════════════ */
+    .hero-split {
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 88vh; overflow: hidden;
+    }
+    .hero-left {
+      background: var(--forest); display: flex; flex-direction: column;
+      justify-content: center; padding: 5rem 4.5rem; position: relative; overflow: hidden;
+    }
+    .hero-left::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      border: 2px solid rgba(232,146,10,0.25); pointer-events: none;
+    }
+    .hero-left::after {
+      content: ''; position: absolute; bottom: -60px; left: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      border: 1px solid rgba(232,146,10,0.15); pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-weight: 500; font-size: 0.78rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold-lt); margin-bottom: 1.2rem; position: relative; z-index: 1;
+    }
+    .hero-h1 {
+      font-weight: 600; font-size: clamp(2.6rem, 4.5vw, 4.2rem); line-height: 1.0;
+      color: var(--white); margin-bottom: 1.5rem; position: relative; z-index: 1;
+    }
+    .hero-h1 em { font-style: normal; color: var(--gold-lt); }
+    .hero-body {
+      font-family: 'Merriweather', serif; font-weight: 300; font-size: 1.05rem;
+      line-height: 1.78; color: rgba(240,248,250,0.85); max-width: 440px;
+      margin-bottom: 2.5rem; position: relative; z-index: 1;
+    }
+    .hero-cta-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .hero-sub-note { font-size: 0.8rem; color: rgba(240,248,250,0.55); margin-top: 1.2rem; position: relative; z-index: 1; }
+    .btn-gold {
+      background: var(--gold-lt); color: var(--ink); font-family: 'Public Sans', sans-serif;
+      font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; padding: 1rem 2.4rem;
+      border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold); }
+    .btn-ghost {
+      font-family: 'Public Sans', sans-serif; font-weight: 500; font-size: 0.9rem;
+      color: var(--gold-lt); text-decoration: none; border-bottom: 1px solid rgba(245,169,58,0.4); padding-bottom: 2px; cursor: pointer;
+    }
+    .hero-right {
+      background: var(--paper); display: flex; align-items: center; justify-content: center;
+      padding: 3rem; position: relative; overflow: hidden;
+    }
+    .hero-right::before {
+      content: ''; position: absolute; width: 110%; height: 110%; top: -5%; left: -5%;
+      border-radius: 50%; border: 1px dashed rgba(15,61,69,0.12); pointer-events: none;
+    }
+    .compass-visual {
+      width: min(380px, 80%); aspect-ratio: 1; position: relative; z-index: 2;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.12));
+    }
+
+    /* ══════════════ FEATURES STRIP ══════════════ */
+    .features-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--forest); }
+    .feature-cell { padding: 2.5rem 2rem; border-right: 1px solid rgba(15,61,69,0.15); background: var(--white); }
+    .feature-cell:last-child { border-right: none; }
+    .feature-icon { font-size: 1.8rem; display: block; margin-bottom: 0.8rem; }
+    .feature-title { font-weight: 600; font-size: 1rem; color: var(--forest); margin-bottom: 0.5rem; }
+    .feature-desc { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.82rem; line-height: 1.65; color: #4A4A4A; }
+
+    /* ══════════════ HOW IT WORKS ══════════════ */
+    .how-section { background: var(--paper); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 5rem 3rem; }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .how-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 3rem; }
+    .how-header h2 { font-weight: 600; font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--ink); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 2px solid var(--ink); }
+    .step { padding: 2.5rem 2rem; border-right: 2px solid var(--ink); position: relative; background: var(--white); }
+    .step:last-child { border-right: none; }
+    .step-num { font-weight: 700; font-size: 4rem; color: var(--gold-lt); line-height: 1; margin-bottom: 1rem; }
+    .step-title { font-weight: 600; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.6rem; }
+    .step-desc { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.85rem; line-height: 1.7; color: #4A4A4A; }
+    .step-arrow {
+      position: absolute; right: -18px; top: 50%; transform: translateY(-50%);
+      background: var(--gold-lt); width: 32px; height: 32px; display: flex;
+      align-items: center; justify-content: center; font-size: 1rem; z-index: 2; border: 2px solid var(--ink);
+    }
+    .step:last-child .step-arrow { display: none; }
+
+    /* ══════════════ WHAT YOU GET ══════════════ */
+    .what-section { background: var(--forest); padding: 5rem 3rem; }
+    .what-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .what-text h2 { font-weight: 600; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+    .what-text h2 em { font-style: normal; color: var(--gold-lt); }
+    .what-text p { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.98rem; line-height: 1.8; color: rgba(240,248,250,0.8); margin-bottom: 2.5rem; }
+    .what-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .what-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.4rem 1.6rem; background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); }
+    .what-item-num { font-weight: 700; font-size: 2rem; color: var(--gold-lt); line-height: 1; flex-shrink: 0; min-width: 2.5rem; }
+    .what-item-body h3 { font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.3rem; }
+    .what-item-body p { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.82rem; line-height: 1.6; color: rgba(240,248,250,0.7); margin: 0; }
+
+    /* ══════════════ PRICING ══════════════ */
+    .pricing-section { padding: 6rem 3rem; background: var(--cream); }
+    .pricing-inner { max-width: 900px; margin: 0 auto; }
+    .pricing-header { text-align: center; margin-bottom: 3rem; }
+    .pricing-header h2 { font-weight: 600; font-size: clamp(2rem, 3vw, 2.8rem); color: var(--ink); margin-bottom: 0.75rem; }
+    .pricing-header p { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.98rem; color: var(--mist); line-height: 1.7; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .price-card { border: 2px solid var(--ink); background: var(--white); padding: 3rem 2.5rem; position: relative; }
+    .price-card-dark { background: var(--forest); border-color: var(--forest); }
+    .price-badge {
+      display: inline-block; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.35rem 0.9rem; margin-bottom: 1.5rem; background: var(--ink); color: var(--cream);
+    }
+    .price-badge-green { background: var(--green); color: var(--white); }
+    .price-badge-gold { background: var(--gold-lt); color: var(--ink); }
+    .price-amount { font-weight: 700; font-size: 4rem; line-height: 1; color: var(--ink); margin-bottom: 0.4rem; }
+    .price-amount sup { font-size: 1.8rem; vertical-align: super; }
+    .price-amount-light { color: var(--gold-lt); }
+    .price-name { font-family: 'Merriweather', serif; font-style: italic; font-weight: 300; font-size: 0.95rem; color: var(--mist); margin-bottom: 2rem; }
+    .price-name-light { color: rgba(240,248,250,0.65); }
+    .price-divider { height: 2px; background: var(--ink); margin-bottom: 1.8rem; opacity: 0.15; }
+    .price-divider-light { background: rgba(255,255,255,0.2); opacity: 1; }
+    .price-list { list-style: none; margin-bottom: 2.5rem; }
+    .price-list li { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.07); font-size: 0.9rem; color: var(--ink); line-height: 1.5; }
+    .price-list-light li { border-color: rgba(255,255,255,0.1); color: rgba(240,248,250,0.85); }
+    .price-list li:last-child { border-bottom: none; }
+    .price-list li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .price-list-light li::before { color: var(--gold-lt); }
+    .btn-dark {
+      background: var(--ink); color: var(--cream); font-family: 'Public Sans', sans-serif;
+      font-weight: 600; font-size: 0.95rem; padding: 1rem 2.2rem; border: none; cursor: pointer;
+      text-decoration: none; display: block; text-align: center; letter-spacing: 0.03em; transition: background 0.2s; width: 100%;
+    }
+    .btn-dark:hover { background: #2A2A2A; }
+    .btn-gold-solid {
+      background: var(--gold-lt); color: var(--ink); font-family: 'Public Sans', sans-serif;
+      font-weight: 600; font-size: 0.95rem; padding: 1rem 2.2rem; border: none; cursor: pointer;
+      text-decoration: none; display: block; text-align: center; letter-spacing: 0.03em; transition: background 0.2s; width: 100%;
+    }
+    .btn-gold-solid:hover { background: var(--gold); }
+    .pricing-note { text-align: center; margin-top: 1.5rem; font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.85rem; color: var(--mist); }
+
+    /* ══════════════ FAQ (landing) ══════════════ */
+    .faq-landing { background: var(--paper); border-top: 2px solid var(--ink); padding: 5rem 3rem; }
+    .faq-landing-inner { max-width: 740px; margin: 0 auto; }
+    .faq-landing h2 { font-weight: 600; font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--ink); margin-bottom: 0.5rem; }
+    .faq-landing .faq-sub { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.92rem; color: var(--mist); margin-bottom: 2.5rem; }
+    .faq-item { border: 2px solid var(--ink); margin-bottom: -2px; background: var(--white); }
+    .faq-q {
+      width: 100%; background: none; border: none; padding: 1.2rem 1.6rem;
+      text-align: left; font-family: 'Public Sans', sans-serif; font-size: 0.97rem; font-weight: 600;
+      color: var(--ink); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .faq-q:hover { background: var(--cream); }
+    .faq-arrow { font-size: 0.9rem; color: var(--gold); transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 1.6rem 1.2rem; font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.9rem; line-height: 1.75; color: #3A3A3A; border-top: 1px solid rgba(0,0,0,0.08); }
+    .faq-item.open .faq-a { display: block; }
+    .faq-a a { color: var(--slate); }
+
+    /* ══════════════ LANDING FOOTER ══════════════ */
+    .site-footer {
+      background: var(--forest); padding: 3rem; display: flex;
+      justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .footer-logo { font-weight: 600; font-size: 1rem; color: var(--cream); }
+    .footer-logo span { display: block; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,248,250,0.5); margin-top: 3px; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .footer-links a { font-size: 0.85rem; color: rgba(240,248,250,0.6); text-decoration: none; }
+    .footer-links a:hover { color: var(--gold-lt); }
+    .footer-note { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.75rem; color: rgba(240,248,250,0.4); line-height: 1.6; text-align: right; }
+
+    /* ══════════════ SHARED INNER PAGE ELEMENTS ══════════════ */
     .badge {
-      display: inline-block;
-      background: var(--orange);
-      color: var(--white);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.4rem;
+      display: inline-block; background: var(--slate); color: var(--white);
+      padding: 0.4rem 1rem; font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.05em; margin-bottom: 1.4rem;
     }
     .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-      padding: 0.95rem 2.4rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      display: inline-block;
-      text-decoration: none;
-      font-family: 'Inter', sans-serif;
+      background: var(--slate); color: var(--white); padding: 0.95rem 2.4rem; border: none;
+      font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+      display: inline-block; text-decoration: none; font-family: 'Public Sans', sans-serif;
     }
-    .btn-primary:hover {
-      background: var(--orange-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(26,107,114,0.28);
-    }
+    .btn-primary:hover { background: var(--forest); }
     .btn-secondary {
-      background: transparent;
-      color: var(--orange);
-      padding: 0.85rem 1.8rem;
-      border: 2px solid var(--orange);
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
+      background: transparent; color: var(--slate); padding: 0.85rem 1.8rem;
+      border: 2px solid var(--slate); font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; font-family: 'Public Sans', sans-serif;
     }
-    .btn-secondary:hover { background: var(--orange); color: var(--white); }
+    .btn-secondary:hover { background: var(--slate); color: var(--white); }
 
-    /* ===== LANDING PAGE ===== */
-    .hero {
-      text-align: center;
-      padding: 5rem 2rem 2rem;
-      max-width: 820px;
-      margin: 0 auto;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.2;
-      color: var(--brown);
-      margin-bottom: 1.4rem;
-    }
-    .hero h1 em { color: var(--orange); font-style: normal; }
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-    }
-    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.4rem;
-      max-width: 1020px;
-      margin: 3.5rem auto;
-      padding: 0 2rem;
-    }
-    .feature-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      text-align: center;
-    }
-    .feature-icon { font-size: 2.4rem; margin-bottom: 0.9rem; }
-    .feature-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      margin-bottom: 0.6rem;
-      color: var(--brown);
-    }
-    .feature-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
-
-    .pricing-wrap {
-      max-width: 480px;
-      margin: 0 auto 5rem;
-      padding: 0 2rem;
-    }
-    .pricing-card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 3rem 2.2rem;
-      border: 2px solid var(--orange);
-      position: relative;
-      text-align: center;
-    }
-    .pricing-card .top-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--orange);
-      color: var(--white);
-      padding: 0.3rem 1.3rem;
-      border-radius: 50px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .price-big {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: var(--brown);
-      margin: 1rem 0 0.4rem;
-    }
-    .price-big sup { font-size: 1.4rem; vertical-align: super; }
-    .price-note { color: var(--muted); margin-bottom: 0.5rem; font-size: 0.9rem; }
-    .includes-list {
-      list-style: none;
-      text-align: left;
-      margin: 1.5rem 0 2rem;
-    }
-    .includes-list li {
-      padding: 0.5rem 0;
-      color: var(--brown);
-      font-size: 0.9rem;
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-      border-bottom: 1px solid var(--border);
-    }
-    .includes-list li:last-child { border-bottom: none; }
-    .includes-list li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
-
-    /* ===== ACCESS PAGE ===== */
-    .access-wrap {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-    .access-wrap h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
+    /* ══════════════ ACCESS PAGE ══════════════ */
+    .access-wrap { max-width: 480px; margin: 0 auto; padding: 4rem 2rem; }
+    .access-wrap h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 2rem; margin-bottom: 0.5rem; color: var(--forest); }
     .access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
     .form-group { margin-bottom: 1.2rem; }
-    label {
-      display: block;
-      margin-bottom: 0.35rem;
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: var(--brown);
+    label { display: block; margin-bottom: 0.35rem; font-weight: 600; font-size: 0.875rem; color: var(--forest); }
+    input[type="email"], input[type="text"] {
+      width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border);
+      font-size: 1rem; font-family: 'Public Sans', sans-serif; background: var(--white);
+      color: var(--forest); transition: border-color 0.2s;
     }
-    input[type="email"],
-    input[type="text"] {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--brown);
-      transition: border-color 0.2s;
-    }
-    input:focus { outline: none; border-color: var(--orange); }
+    input:focus { outline: none; border-color: var(--slate); }
     .inline-row { display: flex; gap: 0.75rem; }
     .inline-row input { flex: 1; }
     .msg { font-size: 0.85rem; margin-top: 0.45rem; display: none; }
     .msg.error { color: #DC2626; }
     .msg.success { color: var(--green); }
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-      color: var(--muted);
-      font-size: 0.875rem;
-    }
-    .divider::before, .divider::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .security-note {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      line-height: 1.5;
-    }
+    .divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; color: var(--muted); font-size: 0.875rem; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .security-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 1rem; line-height: 1.5; }
 
-    /* ===== ASSESSMENT PAGE ===== */
-    .assess-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
+    /* ══════════════ ASSESSMENT PAGE ══════════════ */
+    .assess-wrap { max-width: 720px; margin: 0 auto; padding: 2rem; }
     .assess-header { text-align: center; margin-bottom: 2rem; }
-    .assess-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      margin-bottom: 0.4rem;
-    }
+    .assess-header h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.9rem; margin-bottom: 0.4rem; color: var(--forest); }
     .assess-header p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
-    .prog-wrap { background: var(--border); border-radius: 50px; height: 8px; overflow: hidden; margin-bottom: 0.4rem; }
-    .prog-fill { height: 100%; background: var(--orange); border-radius: 50px; transition: width 0.4s ease; width: 0%; }
+    .prog-wrap { background: var(--border); height: 8px; overflow: hidden; margin-bottom: 0.4rem; }
+    .prog-fill { height: 100%; background: var(--slate); transition: width 0.4s ease; width: 0%; }
     .prog-label { font-size: 0.8rem; color: var(--muted); text-align: right; }
-
-    .cat-header {
-      background: var(--brown);
-      color: var(--white);
-      padding: 1rem 1.5rem;
-      border-radius: 12px 12px 0 0;
-      margin-top: 2.5rem;
-    }
+    .cat-header { background: var(--forest); color: var(--white); padding: 1rem 1.5rem; margin-top: 2.5rem; }
     .cat-header:first-of-type { margin-top: 0.5rem; }
-    .cat-header h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+    .cat-header h3 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.1rem; }
     .cat-header p { font-size: 0.8rem; opacity: 0.72; margin-top: 0.2rem; }
-
-    .q-card {
-      background: var(--white);
-      padding: 1.6rem 1.75rem;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .q-card.last { border-radius: 0 0 12px 12px; }
+    .q-card { background: var(--white); padding: 1.6rem 1.75rem; border-left: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .q-num { font-size: 0.78rem; color: var(--muted); font-weight: 600; margin-bottom: 0.25rem; letter-spacing: 0.04em; }
-    .slider-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.6rem;
-    }
-    .slider-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      max-width: 44%;
-      line-height: 1.35;
-    }
+    .slider-labels { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
+    .slider-label { font-size: 0.8rem; color: var(--muted); max-width: 44%; line-height: 1.35; }
     .slider-label.right { text-align: right; }
-    input[type="range"] {
-      width: 100%;
-      -webkit-appearance: none;
-      height: 6px;
-      border-radius: 3px;
-      background: var(--border);
-      outline: none;
-      cursor: pointer;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--orange);
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(26,107,114,0.35);
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--orange);
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 2px 6px rgba(26,107,114,0.35);
-    }
-    .slider-wrap {
-      position: relative;
-      padding-bottom: 1.2rem;
-    }
-    .slider-center-tick {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.72rem;
-      color: var(--muted);
-      opacity: 0.6;
-      pointer-events: none;
-      white-space: nowrap;
-    }
+    input[type="range"] { width: 100%; -webkit-appearance: none; height: 6px; background: var(--border); outline: none; cursor: pointer; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--slate); cursor: pointer; box-shadow: 0 2px 6px rgba(26,107,114,0.35); }
+    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--slate); cursor: pointer; border: none; box-shadow: 0 2px 6px rgba(26,107,114,0.35); }
+    .slider-wrap { position: relative; padding-bottom: 1.2rem; }
+    .slider-center-tick { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: var(--muted); opacity: 0.6; pointer-events: none; white-space: nowrap; }
     .submit-wrap { margin-top: 3rem; text-align: center; }
     .submit-wrap p { margin-top: 0.9rem; font-size: 0.82rem; color: var(--muted); }
 
-    /* ===== LOADING PAGE ===== */
-    .loading-wrap {
-      text-align: center;
-      padding: 6rem 2rem;
-    }
-    .spinner {
-      width: 56px;
-      height: 56px;
-      border: 4px solid var(--border);
-      border-top: 4px solid var(--orange);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 2rem;
-    }
+    /* ══════════════ LOADING PAGE ══════════════ */
+    .loading-wrap { text-align: center; padding: 6rem 2rem; }
+    .spinner { width: 56px; height: 56px; border: 4px solid var(--border); border-top: 4px solid var(--slate); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 2rem; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-wrap h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--brown);
-      margin-bottom: 0.75rem;
-    }
+    .loading-wrap h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.8rem; color: var(--forest); margin-bottom: 0.75rem; }
     .loading-wrap p { color: var(--muted); font-size: 1rem; }
 
-    /* ===== RESULTS PAGE ===== */
-    .results-wrap {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .results-top {
-      text-align: center;
-      padding: 2.5rem 0 3rem;
-    }
-    .results-top h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      color: var(--brown);
-      margin: 0.75rem 0 0.5rem;
-    }
-    .profile-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      color: var(--orange);
-      margin: 0.75rem 0 1.25rem;
-    }
+    /* ══════════════ RESULTS PAGE ══════════════ */
+    .results-wrap { max-width: 800px; margin: 0 auto; padding: 2rem; }
+    .results-top { text-align: center; padding: 2.5rem 0 3rem; }
+    .results-top h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 2.2rem; color: var(--forest); margin: 0.75rem 0 0.5rem; }
+    .profile-name { font-family: 'Merriweather', serif; font-weight: 400; font-style: italic; font-size: 1.35rem; color: var(--slate); margin: 0.75rem 0 1.25rem; }
     .results-top .intro { color: var(--muted); line-height: 1.75; font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
-
-    .result-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.4rem;
-      border: 1px solid var(--border);
-    }
-    .result-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      color: var(--brown);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .result-card p {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.93rem;
-    }
+    .result-card { background: var(--white); padding: 2rem; margin-bottom: 1.4rem; border: 1px solid var(--border); border-left: 4px solid var(--slate); }
+    .result-card h3 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.25rem; color: var(--forest); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+    .result-card p { color: var(--muted); line-height: 1.75; font-size: 0.93rem; }
     .result-list { list-style: none; padding: 0; }
-    .result-list li {
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
+    .result-list li { padding: 0.85rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
     .result-list li:last-child { border-bottom: none; }
-    .result-list li::before { content: "→"; color: var(--orange); font-weight: 700; flex-shrink: 0; margin-top: 0.12em; }
-    .result-list li strong { color: var(--brown); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
-
-    .companies-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-    }
-    @media (max-width: 600px) {
-      .companies-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    .company-chip {
-      background: var(--cream);
-      border: 1px solid #C0D5E0;
-      border-radius: 10px;
-      padding: 0.75rem 0.6rem;
-      text-align: center;
-    }
-    .company-chip strong {
-      color: var(--brown);
-      font-size: 0.85rem;
-      display: block;
-      margin-bottom: 0.2rem;
-      line-height: 1.3;
-    }
-    .company-chip span {
-      color: var(--orange);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .cta-footer {
-      text-align: center;
-      margin: 2rem 0 1rem;
-    }
+    .result-list li::before { content: "→"; color: var(--slate); font-weight: 700; flex-shrink: 0; margin-top: 0.12em; }
+    .result-list li strong { color: var(--forest); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
+    .companies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    @media (max-width: 600px) { .companies-grid { grid-template-columns: repeat(2, 1fr); } }
+    .company-chip { background: var(--cream); border: 1px solid #C0D5E0; padding: 0.75rem 0.6rem; text-align: center; }
+    .company-chip strong { color: var(--forest); font-size: 0.85rem; display: block; margin-bottom: 0.2rem; line-height: 1.3; }
+    .company-chip span { color: var(--slate); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .cta-footer { text-align: center; margin: 2rem 0 1rem; }
     .cta-footer p { color: var(--muted); margin-bottom: 1.4rem; font-size: 0.93rem; }
+    footer { text-align: center; padding: 2.5rem 2rem; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 3rem; }
+    footer a { color: var(--slate); text-decoration: none; }
 
-    footer {
-      text-align: center;
-      padding: 2.5rem 2rem;
-      color: var(--muted);
-      font-size: 0.82rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    footer a { color: var(--orange); text-decoration: none; }
+    /* ══════════════ COMPASS UPSELL ══════════════ */
+    .compass-upsell { background: linear-gradient(135deg, var(--forest) 0%, #2A4A5C 100%); padding: 3rem 2.5rem; margin: 2rem 0 1rem; text-align: center; color: var(--white); }
+    .compass-upsell .badge { background: var(--gold); color: var(--forest); margin-bottom: 1.2rem; }
+    .compass-upsell h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.8rem; color: var(--white); margin-bottom: 0.75rem; }
+    .compass-upsell p { color: #C0D5E0; line-height: 1.75; font-size: 0.95rem; max-width: 560px; margin: 0 auto 1.5rem; }
+    .compass-upsell-features { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2rem; }
+    .compass-upsell-features li { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 1rem; font-size: 0.82rem; color: #C0D5E0; }
+    .btn-compass { background: var(--gold); color: var(--forest); padding: 1rem 2.8rem; border: none; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'Public Sans', sans-serif; }
+    .btn-compass:hover { background: #d4820a; }
 
-    /* ===== PATHWORKS COMPASS ===== */
-    .compass-upsell {
-      background: linear-gradient(135deg, var(--brown) 0%, #2A4A5C 100%);
-      border-radius: 20px;
-      padding: 3rem 2.5rem;
-      margin: 2rem 0 1rem;
-      text-align: center;
-      color: var(--white);
-    }
-    .compass-upsell .badge {
-      background: var(--gold);
-      color: var(--brown);
-      margin-bottom: 1.2rem;
-    }
-    .compass-upsell h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-    }
-    .compass-upsell p {
-      color: #C0D5E0;
-      line-height: 1.75;
-      font-size: 0.95rem;
-      max-width: 560px;
-      margin: 0 auto 1.5rem;
-    }
-    .compass-upsell-features {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    .compass-upsell-features li {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 50px;
-      padding: 0.4rem 1rem;
-      font-size: 0.82rem;
-      color: #C0D5E0;
-    }
-    .btn-compass {
-      background: var(--gold);
-      color: var(--brown);
-      padding: 1rem 2.8rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-compass:hover { background: #d4820a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,146,10,0.35); }
-
-    /* Compass access page */
-    .compass-access-wrap {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-    .compass-access-wrap h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
+    /* ══════════════ COMPASS ACCESS ══════════════ */
+    .compass-access-wrap { max-width: 540px; margin: 0 auto; padding: 4rem 2rem; }
+    .compass-access-wrap h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 2rem; margin-bottom: 0.5rem; color: var(--forest); }
     .compass-access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
-    .compass-context {
-      background: var(--brown);
-      color: #C0D5E0;
-      border-radius: 10px;
-      padding: 1rem 1.4rem;
-      font-size: 0.88rem;
-      margin-bottom: 1.8rem;
-      line-height: 1.6;
-    }
+    .compass-context { background: var(--forest); color: #C0D5E0; padding: 1rem 1.4rem; font-size: 0.88rem; margin-bottom: 1.8rem; line-height: 1.6; }
     .compass-context strong { color: var(--white); }
-    textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--brown);
-      resize: vertical;
-      min-height: 90px;
-      transition: border-color 0.2s;
-    }
-    textarea:focus { outline: none; border-color: var(--orange); }
+    textarea { width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); font-size: 1rem; font-family: 'Public Sans', sans-serif; background: var(--white); color: var(--forest); resize: vertical; min-height: 90px; transition: border-color 0.2s; }
+    textarea:focus { outline: none; border-color: var(--slate); }
 
-    /* Compass results */
-    .compass-results-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    .compass-results-top {
-      text-align: center;
-      padding: 2.5rem 0 2rem;
-    }
-    .compass-results-top h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
-      color: var(--brown);
-      margin: 0.75rem 0 0.5rem;
-    }
-    .compass-direction-tag {
-      display: inline-block;
-      background: var(--brown);
-      color: #C0D5E0;
-      padding: 0.5rem 1.4rem;
-      border-radius: 50px;
-      font-size: 0.88rem;
-      font-style: italic;
-      margin: 0.75rem 0 1.25rem;
-    }
+    /* ══════════════ COMPASS RESULTS ══════════════ */
+    .compass-results-wrap { max-width: 820px; margin: 0 auto; padding: 2rem; }
+    .compass-results-top { text-align: center; padding: 2.5rem 0 2rem; }
+    .compass-results-top h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 2.1rem; color: var(--forest); margin: 0.75rem 0 0.5rem; }
+    .compass-direction-tag { display: inline-block; background: var(--forest); color: #C0D5E0; padding: 0.5rem 1.4rem; font-size: 0.88rem; font-style: italic; margin: 0.75rem 0 1.25rem; }
     .compass-intro { color: var(--muted); line-height: 1.75; font-size: 0.95rem; max-width: 640px; margin: 0 auto; }
-    .compass-career-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.4rem;
-      border: 1px solid var(--border);
-    }
-    .compass-career-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: var(--brown);
-      margin-bottom: 0.6rem;
-    }
+    .compass-career-card { background: var(--white); padding: 2rem; margin-bottom: 1.4rem; border: 1px solid var(--border); border-left: 4px solid var(--slate); }
+    .compass-career-card h3 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.25rem; color: var(--forest); margin-bottom: 0.6rem; }
     .compass-career-card .fit-text { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.5rem; }
-    .compass-career-card .ai-badge {
-      display: inline-block;
-      background: #EDF7ED;
-      color: var(--green);
-      border-radius: 6px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    .arc-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 0.75rem;
-    }
-    .arc-phase {
-      background: var(--cream);
-      border-radius: 10px;
-      padding: 0.9rem 1rem;
-      border: 1px solid var(--border);
-    }
-    .arc-phase .arc-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--orange);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.35rem;
-    }
+    .compass-career-card .ai-badge { display: inline-block; background: #EDF7ED; color: var(--green); padding: 0.3rem 0.75rem; font-size: 0.8rem; margin-bottom: 1rem; line-height: 1.5; }
+    .arc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem; }
+    .arc-phase { background: var(--cream); padding: 0.9rem 1rem; border: 1px solid var(--border); }
+    .arc-phase .arc-label { font-size: 0.72rem; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
     .arc-phase p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin: 0; }
-    .compass-business-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 1.4rem;
-      border: 1px solid var(--border);
-    }
-    .compass-business-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--brown);
-      margin-bottom: 0.5rem;
-    }
-    .biz-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.75rem 0;
-    }
-    .biz-meta span {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.3rem 0.7rem;
-      font-size: 0.8rem;
-      color: var(--brown);
-    }
-    .action-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 1.4rem 1.6rem;
-      margin-bottom: 0.75rem;
-      border-left: 4px solid var(--orange);
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .action-period {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--orange);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: 0.2rem;
-    }
-    .action-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--brown);
-      margin-bottom: 0.4rem;
-    }
+    .compass-business-card { background: var(--white); padding: 2rem; margin-bottom: 1.4rem; border: 1px solid var(--border); border-left: 4px solid var(--gold); }
+    .compass-business-card h3 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.2rem; color: var(--forest); margin-bottom: 0.5rem; }
+    .biz-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0; }
+    .biz-meta span { background: var(--cream); border: 1px solid var(--border); padding: 0.3rem 0.7rem; font-size: 0.8rem; color: var(--forest); }
+    .action-card { background: var(--white); padding: 1.4rem 1.6rem; margin-bottom: 0.75rem; border-left: 4px solid var(--gold); border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .action-period { font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.2rem; }
+    .action-card h4 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.05rem; color: var(--forest); margin-bottom: 0.4rem; }
     .action-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; margin: 0; }
 
-    @media (max-width: 600px) {
-      .arc-grid { grid-template-columns: 1fr; }
-      .compass-upsell { padding: 2rem 1.5rem; }
-    }
-
-    /* ===== RESPONSIVE ===== */
-    /* ===== FAQ ===== */
-    .faq-wrap {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-    .faq-wrap h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: var(--brown);
-    }
-    .faq-sub {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-    }
-    .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      margin-bottom: 0.75rem;
-      background: var(--white);
-      overflow: hidden;
-    }
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      padding: 1.1rem 1.4rem;
-      text-align: left;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.97rem;
-      font-weight: 600;
-      color: var(--brown);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-    .faq-q:hover { background: var(--cream); }
-    .faq-q .faq-arrow { transition: transform 0.25s; font-size: 1rem; color: var(--orange); flex-shrink: 0; }
-    .faq-item.open .faq-arrow { transform: rotate(180deg); }
-    .faq-a {
-      display: none;
-      padding: 0 1.4rem 1.1rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.7;
-    }
-    .faq-item.open .faq-a { display: block; }
-
-    /* ===== LANDING FOOTER ===== */
-    .landing-footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-    .landing-footer a { color: var(--orange); text-decoration: none; }
-
-    /* ===== SHARE BUTTONS ===== */
-    .share-section {
-      text-align: center;
-      padding: 1.5rem;
-      margin: 1rem 0;
-    }
+    /* ══════════════ SHARE BUTTONS ══════════════ */
+    .share-section { text-align: center; padding: 1.5rem; margin: 1rem 0; }
     .share-section p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; }
     .share-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-    .btn-share {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
+    .btn-share { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; font-size: 0.88rem; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: opacity 0.2s; }
     .btn-share:hover { opacity: 0.85; }
     .btn-share-li { background: #0A66C2; color: #fff; }
     .btn-share-x  { background: #000; color: #fff; }
-    .btn-share-copy { background: var(--cream); color: var(--brown); border: 1px solid var(--border); }
+    .btn-share-copy { background: var(--cream); color: var(--forest); border: 1px solid var(--border); }
 
+    /* ══════════════ RESPONSIVE ══════════════ */
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { min-height: 340px; }
+      .features-strip { grid-template-columns: repeat(2, 1fr); }
+      .feature-cell:nth-child(2) { border-right: none; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 2px solid var(--ink); }
+      .step:last-child { border-bottom: none; }
+      .step-arrow { display: none !important; }
+      .what-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .site-nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-left { padding: 4rem 2rem; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+      .footer-note { text-align: left; }
+      .arc-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 600px) {
-      .hero { padding: 3rem 1.5rem 2rem; }
-      .features, .pricing-wrap { padding: 0 1.25rem; }
+      .features-strip { grid-template-columns: 1fr; }
+      .feature-cell { border-right: none; border-bottom: 1px solid rgba(15,61,69,0.15); }
+      .how-section, .what-section, .pricing-section, .faq-landing { padding: 3.5rem 1.5rem; }
       .assess-wrap, .results-wrap { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo" id="nav-logo-text" onclick="showPage('landing')">
-    Pathworks Blueprint
-    <span>by Pathworks Project</span>
+<!-- ════════════════════════════════════════════
+     NAV (always visible)
+════════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="nav-logo" onclick="showPage('landing')">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#0F3D45" stroke-width="1.5" fill="none"/>
+      <circle cx="18" cy="18" r="12" stroke="#0F3D45" stroke-width="0.75" fill="none" stroke-dasharray="2 3"/>
+      <polygon points="18,4 20,18 18,22 16,18" fill="#0F3D45"/>
+      <polygon points="18,32 20,18 18,14 16,18" fill="#0F3D45" opacity="0.35"/>
+      <polygon points="32,18 18,20 14,18 18,16" fill="#0F3D45" opacity="0.35"/>
+      <polygon points="4,18 18,20 22,18 18,16" fill="#0F3D45" opacity="0.2"/>
+      <circle cx="18" cy="18" r="2.5" fill="#E8920A"/>
+      <text x="18" y="10.5" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" font-weight="bold">N</text>
+      <text x="18" y="29" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" opacity="0.5">S</text>
+      <text x="27" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" opacity="0.5">E</text>
+      <text x="9" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F3D45" opacity="0.5">W</text>
+    </svg>
+    <div class="nav-wordmark">
+      Pathworks Blueprint
+      <span>by Changing Tribes</span>
+    </div>
   </div>
+  <ul class="nav-links">
+    <li><a onclick="navTo('#how')">How It Works</a></li>
+    <li><a onclick="navTo('#pricing')">Pricing</a></li>
+    <li><a onclick="navTo('#faq')">FAQ</a></li>
+    <li><a onclick="showPage('access')" class="nav-cta">Start Free →</a></li>
+  </ul>
 </nav>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: LANDING                                 -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: LANDING
+════════════════════════════════════════════ -->
 <div id="page-landing" class="page active">
 
-  <div class="hero">
-    <div class="badge">✦ Career &amp; Life Transition Assessment</div>
-    <h1>Turn What You Know<br><em>Into What Comes Next</em></h1>
-    <p>Discover the AI-resistant career paths and business ideas that fit who you actually are — then get a clear plan for exactly what to do next.</p>
-    <p style="margin-top:0.5rem;font-size:1rem;color:var(--muted);line-height:1.8;text-align:center;">Get your <strong style="color:var(--brown);">Custom Blueprint</strong> — free in 7 minutes.<br>Then unlock your <strong style="color:var(--brown);">Compass Roadmap</strong>: 20+ careers, 20+ businesses to start,<br>all built from your <strong style="color:var(--brown);">Blueprint</strong> for just <strong style="color:var(--brown);">$39</strong>.</p>
-    <div class="hero-cta">
-      <p style="margin:0;font-size:0.85rem;color:var(--muted);">Free · 7 minutes · No payment required</p>
-      <button class="btn-primary" onclick="showPage('access')">Start My Free Assessment →</button>
+  <!-- HERO -->
+  <section class="hero-split">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Career &amp; Life Transition Assessment</div>
+      <h1 class="hero-h1">Turn What<br>You Know<br><em>Into What<br>Comes Next</em></h1>
+      <p class="hero-body">Discover the AI-resistant career paths and business ideas that fit who you actually are — then get a clear plan for exactly what to do next.</p>
+      <div class="hero-cta-row">
+        <button class="btn-gold" onclick="showPage('access')">Start My Free Blueprint →</button>
+        <a class="btn-ghost" onclick="navTo('#how')">See how it works</a>
+      </div>
+      <p class="hero-sub-note">Free · 7 minutes · No payment required</p>
+    </div>
+    <div class="hero-right">
+      <div class="compass-visual">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="190" stroke="#0F3D45" stroke-width="2" fill="none"/>
+          <circle cx="200" cy="200" r="175" stroke="#0F3D45" stroke-width="0.5" fill="none" stroke-dasharray="1 8"/>
+          <circle cx="200" cy="200" r="145" stroke="#0F3D45" stroke-width="1.5" fill="none"/>
+          <circle cx="200" cy="200" r="143" fill="#EDF5F8"/>
+          <line x1="200" y1="57" x2="200" y2="343" stroke="#0F3D45" stroke-width="0.5" opacity="0.2"/>
+          <line x1="57" y1="200" x2="343" y2="200" stroke="#0F3D45" stroke-width="0.5" opacity="0.2"/>
+          <line x1="98" y1="98" x2="302" y2="302" stroke="#0F3D45" stroke-width="0.5" opacity="0.15"/>
+          <line x1="302" y1="98" x2="98" y2="302" stroke="#0F3D45" stroke-width="0.5" opacity="0.15"/>
+          <polygon points="200,62 210,196 200,218 190,196" fill="#0F3D45"/>
+          <polygon points="200,62 210,196 200,218 190,196" fill="#E8920A" clip-path="url(#northHalf)"/>
+          <clipPath id="northHalf"><rect x="190" y="62" width="20" height="80"/></clipPath>
+          <polygon points="200,338 210,204 200,182 190,204" fill="#0F3D45" opacity="0.3"/>
+          <polygon points="338,200 204,210 182,200 204,190" fill="#0F3D45" opacity="0.3"/>
+          <polygon points="62,200 196,210 218,200 196,190" fill="#0F3D45" opacity="0.2"/>
+          <text x="200" y="47" text-anchor="middle" font-size="14" font-family="'Public Sans',sans-serif" fill="#0F3D45" font-weight="700" letter-spacing="2">N</text>
+          <text x="200" y="365" text-anchor="middle" font-size="11" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.45">S</text>
+          <text x="362" y="205" text-anchor="middle" font-size="11" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.45">E</text>
+          <text x="38" y="205" text-anchor="middle" font-size="11" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.45">W</text>
+          <text x="305" y="107" text-anchor="middle" font-size="9" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.4">NE</text>
+          <text x="95" y="107" text-anchor="middle" font-size="9" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.4">NW</text>
+          <text x="305" y="303" text-anchor="middle" font-size="9" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.4">SE</text>
+          <text x="95" y="303" text-anchor="middle" font-size="9" font-family="'Public Sans',sans-serif" fill="#0F3D45" opacity="0.4">SW</text>
+          <circle cx="200" cy="200" r="14" fill="white" stroke="#0F3D45" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="8" fill="#E8920A"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES STRIP -->
+  <div class="features-strip">
+    <div class="feature-cell">
+      <span class="feature-icon">🔍</span>
+      <div class="feature-title">Understand Your Past</div>
+      <p class="feature-desc">See the hidden patterns in your work history and why you've thrived — or struggled — in the roles you've had.</p>
+    </div>
+    <div class="feature-cell">
+      <span class="feature-icon">🧭</span>
+      <div class="feature-title">Find Your Next Career</div>
+      <p class="feature-desc">Get specific career paths matched to your unique blend of skills, values, and working style.</p>
+    </div>
+    <div class="feature-cell">
+      <span class="feature-icon">🚀</span>
+      <div class="feature-title">Discover Your Business</div>
+      <p class="feature-desc">Uncover business ideas that fit your natural strengths — with realistic paths to actually start them.</p>
+    </div>
+    <div class="feature-cell">
+      <span class="feature-icon">🗺️</span>
+      <div class="feature-title">Your Transition Roadmap</div>
+      <p class="feature-desc">A clear, personalized action plan for making your next big move — step by concrete step.</p>
     </div>
   </div>
 
-  <div class="features">
-    <div class="feature-card">
-      <div class="feature-icon">🔍</div>
-      <h3>Understand Your Past</h3>
-      <p>See the hidden patterns in your work history and why you've thrived — or struggled — in the roles you've had.</p>
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="how-inner">
+      <div class="how-header">
+        <h2>How It Works</h2>
+        <span style="font-size:2.5rem;transform:rotate(-15deg);display:inline-block;">👇</span>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Take Your Free Blueprint</div>
+          <p class="step-desc">Answer 40 sliding-scale questions about how you work, what energizes you, and what you've built over your career. No writing, no essays — done in 7 minutes.</p>
+          <div class="step-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Get Your AI-Generated Profile</div>
+          <p class="step-desc">Your Blueprint results appear on screen in under 60 seconds and are emailed to you instantly. You'll see your profile, 3 career paths, 3 business ideas, 20 business types, target companies, and a 5-step roadmap.</p>
+          <div class="step-arrow">→</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Unlock Your Compass (Optional)</div>
+          <p class="step-desc">Upgrade to the Pathworks Compass for $39 — a deeper 10-year direction map built from your Blueprint: 20+ specific career paths, 20+ businesses, and a 90-day action plan tailored to exactly where you want to go.</p>
+        </div>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">🧭</div>
-      <h3>Find Your Next Career</h3>
-      <p>Get 3 specific career paths matched to your unique blend of skills, values, and working style.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🚀</div>
-      <h3>Discover Your Business</h3>
-      <p>Uncover business ideas that fit your natural strengths — with realistic paths to actually start them.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🗺️</div>
-      <h3>Your Transition Roadmap</h3>
-      <p>A clear, personalized action plan for making your next big move — step by concrete step.</p>
-    </div>
-  </div>
+  </section>
 
-  <div class="pricing-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:760px;margin:0 auto;padding:0 2rem 2rem;">
-    <!-- FREE: Blueprint -->
-    <div class="pricing-card" style="border:2px solid var(--orange);">
-      <span class="top-badge" style="background:var(--green);">✦ Free — Always</span>
-      <div class="price-big"><sup style="font-size:1.8rem;top:-1rem;">$</sup>0</div>
-      <p class="price-note">Pathworks Blueprint Assessment</p>
-      <ul class="includes-list">
-        <li>Sliding-scale assessment — done in 7 minutes</li>
-        <li>Your personal Profile &amp; archetype</li>
-        <li>3 matched career paths</li>
-        <li>3 tailored business ideas</li>
-        <li>5-step transition roadmap</li>
-        <li>Results emailed to you instantly</li>
-      </ul>
-      <button class="btn-primary" onclick="showPage('access')" style="width:100%;background:var(--green);">Start Free →</button>
+  <!-- WHAT YOU GET -->
+  <section class="what-section">
+    <div class="what-inner">
+      <div class="what-text">
+        <h2>Your Blueprint<br>includes <em>everything</em><br>you need to start</h2>
+        <p>Most career assessments tell you what personality type you are. Pathworks Blueprint tells you what to actually do — and gives you the roadmap to do it. For free.</p>
+        <button class="btn-gold" onclick="showPage('access')">Start My Free Assessment →</button>
+      </div>
+      <div class="what-items">
+        <div class="what-item">
+          <div class="what-item-num">1</div>
+          <div class="what-item-body">
+            <h3>Your Personal Profile &amp; Archetype</h3>
+            <p>A named profile built from your answers — explains how you work best and why you've ended up where you are.</p>
+          </div>
+        </div>
+        <div class="what-item">
+          <div class="what-item-num">2</div>
+          <div class="what-item-body">
+            <h3>3 Matched Career Paths</h3>
+            <p>Specific, AI-resistant careers tailored to your skills, values, and working style — with context on why each one fits you.</p>
+          </div>
+        </div>
+        <div class="what-item">
+          <div class="what-item-num">3</div>
+          <div class="what-item-body">
+            <h3>3 Tailored Business Ideas</h3>
+            <p>Businesses you could realistically build, matched to your proven experience and natural strengths.</p>
+          </div>
+        </div>
+        <div class="what-item">
+          <div class="what-item-num">4</div>
+          <div class="what-item-body">
+            <h3>20 AI-Resistant Business Types</h3>
+            <p>A curated grid of businesses that thrive on human skills — each one built on what automation cannot replace.</p>
+          </div>
+        </div>
+        <div class="what-item">
+          <div class="what-item-num">5</div>
+          <div class="what-item-body">
+            <h3>5-Step Transition Roadmap</h3>
+            <p>Concrete, sequenced actions you can start this week — no vague advice, no "network more" platitudes.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- PAID: Compass -->
-    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#1A2E38 0%,#2A4A5C 100%);color:#F0F8FA;">
-      <span class="top-badge" style="background:var(--gold);color:var(--brown);">✦ Upgrade — One-Time</span>
-      <div class="price-big" style="color:var(--gold);"><sup style="font-size:1.8rem;top:-1rem;color:var(--gold);">$</sup>39</div>
-      <p class="price-note" style="color:#E8F4FA;">Pathworks Compass — Your 10-Year Map</p>
-      <ul class="includes-list" style="color:#F0F8FF;">
-        <li style="border-color:#4A7080;">Everything in Blueprint, plus:</li>
-        <li style="border-color:#4A7080;">20+ career paths built from your Blueprint</li>
-        <li style="border-color:#4A7080;">20+ businesses you could start, matched to your strengths</li>
-        <li style="border-color:#4A7080;">10-year arc for your chosen direction</li>
-        <li style="border-color:#4A7080;">90-day action plan to start immediately</li>
-        <li style="border-color:#4A7080;">Full Compass report emailed to you</li>
-      </ul>
-      <button class="btn-compass" onclick="showPage('access')" style="width:100%;">Get Compass after Blueprint →</button>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-inner">
+      <div class="pricing-header">
+        <h2>Start Free. Go Deeper When You're Ready.</h2>
+        <p>Your Blueprint is free — always. Upgrade to the Compass once you've seen your results and want to go further.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-badge price-badge-green">✦ Free — Always</div>
+          <div class="price-amount"><sup>$</sup>0</div>
+          <div class="price-name">Pathworks Blueprint Assessment</div>
+          <div class="price-divider"></div>
+          <ul class="price-list">
+            <li>Sliding-scale assessment — done in 7 minutes</li>
+            <li>Your personal Profile &amp; archetype</li>
+            <li>3 matched career paths</li>
+            <li>3 tailored business ideas</li>
+            <li>20 AI-resistant business types</li>
+            <li>Target companies matched to your profile</li>
+            <li>5-step transition roadmap</li>
+            <li>Results emailed to you instantly</li>
+          </ul>
+          <button class="btn-dark" onclick="showPage('access')">Start Free →</button>
+        </div>
+        <div class="price-card price-card-dark">
+          <div class="price-badge price-badge-gold">✦ Upgrade — One-Time</div>
+          <div class="price-amount price-amount-light"><sup>$</sup>39</div>
+          <div class="price-name price-name-light">Pathworks Compass — Your 10-Year Map</div>
+          <div class="price-divider price-divider-light"></div>
+          <ul class="price-list price-list-light">
+            <li>Everything in Blueprint, plus:</li>
+            <li>20+ career paths built from your Blueprint</li>
+            <li>20+ businesses you could start, matched to your strengths</li>
+            <li>10-year arc for your chosen direction (Years 1–3, 4–7, 8–10)</li>
+            <li>90-day action plan to start immediately</li>
+            <li>Full Compass report emailed to you</li>
+          </ul>
+          <button class="btn-gold-solid" onclick="showPage('access')">Get Compass After Blueprint →</button>
+        </div>
+      </div>
+      <p class="pricing-note">Start free. Upgrade to Compass from your results page — no pressure, no upsell during the assessment.</p>
     </div>
-  </div>
-  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-bottom:3rem;">Start free. Upgrade to Compass from your results page.</p>
+  </section>
 
-  <!-- FAQ SECTION -->
-  <div class="faq-wrap">
-    <h2>Common Questions</h2>
-    <p class="faq-sub">Everything you need to know before you start</p>
+  <!-- FAQ -->
+  <section class="faq-landing" id="faq">
+    <div class="faq-landing-inner">
+      <h2>Common Questions</h2>
+      <p class="faq-sub">Everything you need to know before you start</p>
 
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Who is this assessment for?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-a">Pathworks Blueprint is built for professionals at a crossroads — whether you're burned out in your current role, considering a career pivot, thinking about starting a business, or simply wondering what "the next chapter" looks like. If you have a work history and feel like something needs to change, this is for you.</div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Who is this assessment for?<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Pathworks Blueprint is built for professionals at a crossroads — whether you're burned out in your current role, considering a career pivot, thinking about starting a business, or simply wondering what "the next chapter" looks like. If you have a work history and feel like something needs to change, this is for you.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">It's really free? What's the catch?<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Yes, the Pathworks Blueprint is completely free — no credit card, no trial period. We believe you should see the value before you spend a dollar. Once you've seen your results, you can choose to upgrade to the Pathworks Compass ($39 one-time) for a deeper, direction-specific 10-year career map. But the Blueprint itself is yours, free, always.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does it take?<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Most people complete the assessment in 5–7 minutes. Your AI-generated results appear on screen within about 30–60 seconds of submitting, and are also emailed to you so you can revisit them anytime.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's included in the free Blueprint vs. the $39 Compass?<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">The free Blueprint gives you your Profile, 3 career paths, 3 business ideas, 20 AI-resistant business types, target companies, and a 5-step transition roadmap — completed in about 7 minutes. The Compass ($39) takes your Blueprint results and your chosen direction, then maps out 20+ specific career paths, 20+ businesses you could start, your specific 10-year career arc, detailed business models with financial projections, and a 90-day action plan tailored to exactly where you want to go. If you upgrade to Compass and have a technical issue, reach out at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a>.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my data safe?<span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Yes. Your responses are used solely to generate your personal report. We do not sell your data or share it with third parties for marketing purposes. Payment is handled securely by Stripe — we never see your card details. See our <a href="privacy.html" target="_blank">Privacy Policy</a> for full details.</div>
+      </div>
     </div>
+  </section>
 
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        It's really free? What's the catch?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-a">Yes, the Pathworks Blueprint is completely free — no credit card, no trial period. We believe you should see the value before you spend a dollar. Once you've seen your results, you can choose to upgrade to the Pathworks Compass ($39 one-time) for a deeper, direction-specific 10-year career map. But the Blueprint itself is yours, free, always.</div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-logo">
+      Pathworks Blueprint
+      <span>by Changing Tribes</span>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        Is my data safe?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-a">Yes. Your responses are used solely to generate your personal report. We do not sell your data or share it with third parties for marketing purposes. Payment is handled securely by Stripe — we never see your card details. See our <a href="privacy.html" target="_blank">Privacy Policy</a> for full details.</div>
+    <ul class="footer-links">
+      <li><a href="#">Blueprint</a></li>
+      <li><a href="https://www.pathworkscompass.com" target="_blank">Compass</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:hello@changingtribes.com">Contact</a></li>
+    </ul>
+    <div class="footer-note">
+      © 2026 Changing Tribes · <a href="https://changingtribes.com" target="_blank" style="color:rgba(240,248,250,0.6);">changingtribes.com</a><br>
+      Results are AI-generated and for informational purposes only.
     </div>
+  </footer>
 
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        How long does it take?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-a">Most people complete the assessment in 5–7 minutes. Your AI-generated results appear on screen within about 30–60 seconds of submitting, and are also emailed to you so you can revisit them anytime.</div>
-    </div>
+</div><!-- /page-landing -->
 
-    <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        What's included in the free Blueprint vs. the $39 Compass?
-        <span class="faq-arrow">▼</span>
-      </button>
-      <div class="faq-a">The free Blueprint gives you your Profile, 3 career paths, 3 business ideas, 20 AI-resistant business types, target companies, and a 5-step transition roadmap — completed in about 7 minutes. The Compass ($39) takes your Blueprint results and your chosen direction, then maps out 20+ specific career paths, 20+ businesses you could start, your specific 10-year career arc, detailed business models with financial projections, and a 90-day action plan tailored to exactly where you want to go. If you upgrade to Compass and have a technical issue, reach out at <a href="mailto:hello@pathworksproject.com">hello@pathworksproject.com</a>.</div>
-    </div>
-  </div>
-
-  <div class="landing-footer">
-    <p>© 2026 Pathworks Project · <a href="https://pathworksproject.com" target="_blank">pathworksproject.com</a> · <a href="privacy.html" target="_blank">Privacy Policy</a> · <a href="mailto:hello@pathworksproject.com">Contact</a></p>
-    <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
-  </div>
-
-</div>
-
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: ACCESS                                  -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: ACCESS
+════════════════════════════════════════════ -->
 <div id="page-access" class="page">
   <div class="access-wrap">
     <h2>Let's Get Started</h2>
     <p class="sub">Enter your email address to receive your results, then complete the assessment. It's free — takes about 7 minutes.</p>
-
     <div class="form-group">
       <label for="email-input">Your Email Address</label>
       <input type="email" id="email-input" placeholder="you@example.com" />
     </div>
-
-    <button class="btn-primary" onclick="startAssessment()" style="width:100%;margin-top:0.5rem;">
-      Begin My Free Assessment →
-    </button>
-    <p class="security-note">Your email is used only to send your results. We never sell or share it. See our <a href="privacy.html" target="_blank" style="color:var(--orange);">Privacy Policy</a>.</p>
+    <button class="btn-primary" onclick="startAssessment()" style="width:100%;margin-top:0.5rem;">Begin My Free Assessment →</button>
+    <p class="security-note">Your email is used only to send your results. We never sell or share it. See our <a href="privacy.html" target="_blank" style="color:var(--slate);">Privacy Policy</a>.</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: ASSESSMENT                              -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: ASSESSMENT
+════════════════════════════════════════════ -->
 <div id="page-assessment" class="page">
   <div class="assess-wrap">
     <div class="assess-header">
@@ -993,21 +705,17 @@
       <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
       <div class="prog-label" id="prog-label">0 of 40 rated</div>
     </div>
-
     <div id="questions-container"></div>
-
     <div class="submit-wrap">
-      <button class="btn-primary" onclick="submitAssessment()" style="font-size:1.05rem;padding:1.1rem 3rem;">
-        Reveal My Results →
-      </button>
+      <button class="btn-primary" onclick="submitAssessment()" style="font-size:1.05rem;padding:1.1rem 3rem;">Reveal My Results →</button>
       <p>Takes about 30 seconds to generate your personalized report</p>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: LOADING                                 -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: LOADING
+════════════════════════════════════════════ -->
 <div id="page-loading" class="page">
   <div class="loading-wrap">
     <div class="spinner"></div>
@@ -1016,9 +724,9 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: RESULTS                                 -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: RESULTS
+════════════════════════════════════════════ -->
 <div id="page-results" class="page">
   <div class="results-wrap">
     <div class="results-top">
@@ -1027,40 +735,32 @@
       <div class="profile-name" id="profile-name"></div>
       <p class="intro" id="results-intro"></p>
     </div>
-
     <div class="result-card">
       <h3>🔍 Understanding Your Past</h3>
       <div id="past-content"></div>
     </div>
-
     <div class="result-card">
       <h3>🧭 Your Next Career Paths</h3>
       <ul class="result-list" id="careers-content"></ul>
     </div>
-
     <div class="result-card">
       <h3>🚀 Business Ideas For You</h3>
       <ul class="result-list" id="business-content"></ul>
     </div>
-
     <div class="result-card">
       <h3>💡 20 Businesses You Could Start</h3>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant business types matched to your profile and proven skills — each one built on human strengths that automation cannot replace.</p>
+      <p style="color:var(--muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant business types matched to your profile and proven skills — each one built on human strengths that automation cannot replace.</p>
       <div class="companies-grid" id="startup-content"></div>
     </div>
-
     <div class="result-card">
       <h3>🗺️ Your Transition Roadmap</h3>
       <ul class="result-list" id="roadmap-content"></ul>
     </div>
-
     <div class="result-card">
       <h3>🏢 Companies Where You Can Thrive</h3>
-      <p style="color:var(--text-muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant organizations matched to your profile — places where human judgment, relationships, and your specific skills drive the value.</p>
+      <p style="color:var(--muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant organizations matched to your profile — places where human judgment, relationships, and your specific skills drive the value.</p>
       <div class="companies-grid" id="companies-content"></div>
     </div>
-
-    <!-- SOCIAL SHARING -->
     <div class="share-section">
       <p>🎉 Share your Profile with your network</p>
       <div class="share-btns">
@@ -1072,13 +772,9 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           Post on X
         </a>
-        <button id="share-copy" class="btn-share btn-share-copy" onclick="copyShareLink()">
-          🔗 Copy Link
-        </button>
+        <button id="share-copy" class="btn-share btn-share-copy" onclick="copyShareLink()">🔗 Copy Link</button>
       </div>
     </div>
-
-    <!-- PATHWORKS COMPASS UPSELL -->
     <div class="compass-upsell">
       <div class="badge">✦ Take It Further</div>
       <h2>Ready for Your Pathworks Compass?</h2>
@@ -1090,73 +786,58 @@
         <li>🗺️ 90-day action plan to get moving immediately</li>
         <li>📧 Full report emailed to you instantly</li>
       </ul>
-      <a href="https://www.pathworkscompass.com" target="_blank" class="btn-compass" style="display:inline-block;text-decoration:none;">
-        Continue to Pathworks Compass →
-      </a>
+      <a href="https://www.pathworkscompass.com" target="_blank" class="btn-compass" style="display:inline-block;text-decoration:none;">Continue to Pathworks Compass →</a>
       <p style="margin-top:1rem;font-size:0.8rem;opacity:0.65;">One-time access · Powered by AI · Results in under 60 seconds</p>
     </div>
-
     <div class="cta-footer">
       <p>Want to go deeper? Visit the Pathworks Project community.</p>
       <a href="https://pathworksproject.com" class="btn-primary" target="_blank">Visit Pathworks Project →</a>
     </div>
   </div>
-
   <footer>
-    <p>© 2026 Pathworks Project · <a href="https://pathworksproject.com">pathworksproject.com</a></p>
+    <p>© 2026 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
     <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: COMPASS ACCESS                          -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: COMPASS ACCESS
+════════════════════════════════════════════ -->
 <div id="page-compass-access" class="page">
   <div class="compass-access-wrap">
     <h2>🧭 Pathworks Compass</h2>
     <p class="sub">We'll connect your transferable skills with new paths forward — no need to be "qualified" in the traditional sense. Tell us what career or business excites you and we'll map out your next 10 years.</p>
-
     <div id="compass-context-box" class="compass-context" style="display:none;">
       <strong>Your Pathworks Blueprint Profile:</strong>
       <span id="compass-profile-display"></span>
     </div>
-
     <div class="form-group">
       <label for="compass-email-input">Your Email Address</label>
       <input type="email" id="compass-email-input" placeholder="you@example.com" />
     </div>
-
     <div class="form-group">
       <label for="compass-direction-input">What Career or Business would you like to pursue? <span style="font-weight:400;color:var(--muted)">(1–2 sentences)</span></label>
       <textarea id="compass-direction-input" placeholder="e.g. I want to work with animals… or I want to move into healthcare… or I want to build something online that gives me freedom…"></textarea>
     </div>
-
     <div class="form-group">
       <label for="compass-coupon-input">Have a Coupon Code?</label>
       <div class="inline-row">
         <input type="text" id="compass-coupon-input" placeholder="Enter coupon code" />
         <button class="btn-secondary" onclick="applyCompassCoupon()">Apply</button>
       </div>
-      <div id="compass-coupon-error"   class="msg error">That coupon code is not valid or has expired.</div>
+      <div id="compass-coupon-error" class="msg error">That coupon code is not valid or has expired.</div>
       <div id="compass-coupon-success" class="msg success">✓ Coupon applied! Click below to generate your Compass.</div>
     </div>
-
-    <button id="compass-free-btn" class="btn-primary" onclick="submitCompass()" style="width:100%;display:none;margin-top:0.5rem;">
-      Generate My Pathworks Compass →
-    </button>
-
+    <button id="compass-free-btn" class="btn-primary" onclick="submitCompass()" style="width:100%;display:none;margin-top:0.5rem;">Generate My Pathworks Compass →</button>
     <div class="divider">or pay to access</div>
-
-    <button class="btn-compass" onclick="startCompassCheckout()" style="width:100%;">
-      💳&nbsp;&nbsp;Pay $39 &amp; Unlock Pathworks Compass
-    </button>
+    <button class="btn-compass" onclick="startCompassCheckout()" style="width:100%;">💳&nbsp;&nbsp;Pay $39 &amp; Unlock Pathworks Compass</button>
     <p class="security-note">Secure payment via Stripe · Results emailed instantly</p>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: COMPASS LOADING                         -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: COMPASS LOADING
+════════════════════════════════════════════ -->
 <div id="page-compass-loading" class="page">
   <div class="loading-wrap">
     <div class="spinner"></div>
@@ -1165,9 +846,9 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: COMPASS RESULTS                         -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: COMPASS RESULTS
+════════════════════════════════════════════ -->
 <div id="page-compass-results" class="page">
   <div class="compass-results-wrap">
     <div class="compass-results-top">
@@ -1176,68 +857,59 @@
       <div class="compass-direction-tag" id="compass-direction-tag"></div>
       <p class="compass-intro" id="compass-intro"></p>
     </div>
-
     <div id="compass-careers-section">
       <div class="result-card" style="margin-bottom:0.5rem;">
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🧭 Your Career Paths — 10-Year View</h3>
+        <h3>🧭 Your Career Paths — 10-Year View</h3>
         <div id="compass-careers-content"></div>
       </div>
     </div>
-
     <div class="result-card" style="margin-top:1.4rem;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🚀 Business Models For You</h3>
+      <h3>🚀 Business Models For You</h3>
       <div id="compass-business-content"></div>
     </div>
-
     <div class="result-card" style="margin-top:1.4rem;">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown);margin-bottom:1rem;">🗺️ Your 90-Day Action Plan</h3>
+      <h3>🗺️ Your 90-Day Action Plan</h3>
       <div id="compass-action-content"></div>
     </div>
-
     <div class="cta-footer">
       <p>Ready to take the next step? Visit the Pathworks Project community.</p>
       <a href="https://pathworksproject.com" class="btn-primary" target="_blank">Visit Pathworks Project →</a>
     </div>
   </div>
-
   <footer>
-    <p>© 2026 Pathworks Project · <a href="https://pathworksproject.com">pathworksproject.com</a></p>
+    <p>© 2026 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
     <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  PAGE: COMPASS SUCCESS                         -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     PAGE: COMPASS SUCCESS
+════════════════════════════════════════════ -->
 <div id="page-compass-success" class="page">
   <div class="compass-results-wrap" style="max-width:640px;text-align:center;padding:60px 24px;">
     <div class="badge" style="margin-bottom:1.5rem;">✦ Your Pathworks Compass Is On Its Way</div>
-    <h2 id="compass-success-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--brown);margin-bottom:1rem;"></h2>
+    <h2 id="compass-success-title" style="font-family:'Merriweather',serif;font-size:2rem;color:var(--forest);margin-bottom:1rem;"></h2>
     <p id="compass-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;"></p>
-    <div style="background:#EDF4F8;border:1px solid #C0D5E0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
-      <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
-      <p id="compass-success-email" style="font-size:1rem;color:var(--accent);font-weight:700;margin-bottom:1rem;"></p>
+    <div style="background:#EDF4F8;border:1px solid #C0D5E0;padding:28px 32px;margin-bottom:2rem;">
+      <p style="font-size:1.1rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
+      <p id="compass-success-email" style="font-size:1rem;color:var(--slate);font-weight:700;margin-bottom:1rem;"></p>
       <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalized resources — all tailored to your Blueprint profile.</p>
     </div>
     <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
     <a href="https://pathworksproject.com" class="btn-primary" target="_blank">Visit Pathworks Project →</a>
   </div>
   <footer>
-    <p>© 2026 Pathworks Project · <a href="https://pathworksproject.com">pathworksproject.com</a></p>
+    <p>© 2026 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
     <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
   </footer>
 </div>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  JAVASCRIPT                                    -->
-<!-- ══════════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
 <script>
 /* ── STATE ──────────────────────────────────────── */
-const state = {
-  email: '',
-  accessCode: '',
-  answers: {},
-};
+const state = { email: '', accessCode: '', answers: {} };
 
 /* ── QUESTIONS ──────────────────────────────────── */
 const categories = [
@@ -1297,14 +969,14 @@ const categories = [
     ],
   },
   {
-    title: 'What You\'ve Built & Done',
+    title: "What You've Built & Done",
     desc: 'Where your real-world experience and proven skills actually sit',
     questions: [
-      { id: 'q26', left: 'I\'ve built or managed systems, processes, and operations',   right: 'I\'ve sold, pitched, or persuaded people to buy or act' },
-      { id: 'q27', left: 'I\'ve coached, taught, or developed other people\'s abilities', right: 'I\'ve created original content, products, or creative work' },
-      { id: 'q28', left: 'I\'ve led or managed teams and organizations',                right: 'I\'ve built deep technical skills or specialized expertise' },
+      { id: 'q26', left: "I've built or managed systems, processes, and operations",   right: "I've sold, pitched, or persuaded people to buy or act" },
+      { id: 'q27', left: "I've coached, taught, or developed other people's abilities", right: "I've created original content, products, or creative work" },
+      { id: 'q28', left: "I've led or managed teams and organizations",                right: "I've built deep technical skills or specialized expertise" },
       { id: 'q29', left: 'My strongest experience is in large, established organizations', right: 'My strongest experience is in small teams, startups, or self-directed work' },
-      { id: 'q30', left: 'I\'ve worked primarily within one industry or field',         right: 'I\'ve worked across multiple industries and worn many different hats' },
+      { id: 'q30', left: "I've worked primarily within one industry or field",         right: "I've worked across multiple industries and worn many different hats" },
     ],
   },
   {
@@ -1312,21 +984,21 @@ const categories = [
     desc: 'The strengths that technology cannot replace — your most future-proof assets',
     questions: [
       { id: 'q31', left: 'I work best through screens and digital communication',       right: 'I work best in person — physical presence and place matter to me' },
-      { id: 'q32', left: 'I\'m most effective working with information, data, or content', right: 'I\'m most effective working with people\'s emotions, relationships, or wellbeing' },
+      { id: 'q32', left: "I'm most effective working with information, data, or content", right: "I'm most effective working with people's emotions, relationships, or wellbeing" },
       { id: 'q33', left: 'I rely on proven frameworks, rules, and best practices',      right: 'I rely on gut instinct and reading complex human situations in real time' },
       { id: 'q34', left: 'I prefer clearly defined problems that have known solutions', right: 'I thrive on messy, human, ambiguous situations others find hard to navigate' },
-      { id: 'q35', left: 'I\'m energized by efficiency, scale, and systems',            right: 'I\'m energized by deep, meaningful impact on specific people or communities' },
+      { id: 'q35', left: "I'm energized by efficiency, scale, and systems",            right: "I'm energized by deep, meaningful impact on specific people or communities" },
     ],
   },
   {
     title: 'Your World & Context',
     desc: 'The practical reality of your life and where you want to go',
     questions: [
-      { id: 'q36', left: 'I want to work locally and be embedded in my community',     right: 'I want to work nationally or globally — location doesn\'t limit me' },
+      { id: 'q36', left: 'I want to work locally and be embedded in my community',     right: "I want to work nationally or globally — location doesn't limit me" },
       { id: 'q37', left: 'I need income from my next move within about 6 months',      right: 'I have a year or more before I need income from something new' },
       { id: 'q38', left: 'I want to work alone or with a very small, tight team',      right: 'I want to build a team and organization around me' },
       { id: 'q39', left: 'I want to serve individual people directly (clients, students, consumers)', right: 'I want to serve businesses or organizations (B2B)' },
-      { id: 'q40', left: 'I\'m drawn to the physical world — products, places, bodies, nature, food', right: 'I\'m drawn to the digital and ideas world — online, knowledge, content, software' },
+      { id: 'q40', left: "I'm drawn to the physical world — products, places, bodies, nature, food", right: "I'm drawn to the digital and ideas world — online, knowledge, content, software" },
     ],
   },
 ];
@@ -1336,6 +1008,14 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function navTo(hash) {
+  showPage('landing');
+  setTimeout(() => {
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 50);
 }
 
 /* ── BUILD ASSESSMENT ───────────────────────────── */
@@ -1374,28 +1054,25 @@ function buildAssessment() {
     });
   });
 
-  // Initialise track fills for all sliders
   categories.forEach(cat => cat.questions.forEach(q => initSliderTrack(q.id)));
   updateProgress();
 }
 
 function onSlide(id, val) {
   state.answers[id] = parseInt(val, 10);
-  // Color the track: orange from left up to thumb, light gray beyond
   const pct = ((val - 1) / 9) * 100;
   const slider = document.getElementById(id);
   slider.style.background =
-    `linear-gradient(to right, var(--orange) 0%, var(--orange) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+    `linear-gradient(to right, var(--slate) 0%, var(--slate) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
   updateProgress();
 }
 
 function initSliderTrack(id) {
-  // Set initial track fill at midpoint (value 5 = ~44%)
   const pct = ((5 - 1) / 9) * 100;
   const slider = document.getElementById(id);
   if (slider) {
     slider.style.background =
-      `linear-gradient(to right, var(--orange) 0%, var(--orange) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
+      `linear-gradient(to right, var(--slate) 0%, var(--slate) ${pct}%, var(--border) ${pct}%, var(--border) 100%)`;
   }
 }
 
@@ -1406,46 +1083,20 @@ function updateProgress() {
 }
 
 /* ── TEST / DEMO MODE ───────────────────────────── */
-// Add ?test=1 to the URL to use mock results without calling the backend.
+const TEST_COUPON = 'TESTDRIVE';
 const TEST_RESULTS = {
   tribe_name: 'The Pathfinder',
-  tribe_description:
-    'You are a rare blend of strategic thinker and connector — someone who instinctively sees where things are heading before others do. You thrive when you can shape direction rather than just execute it, and you bring people along on the journey with natural warmth and credibility.',
-  past_analysis:
-    'Your past roles have likely spanned a few different industries or functions — not because you lacked focus, but because you outgrew each environment and sought new challenges. You may have been the person who quietly became the go-to advisor, the one colleagues brought their hardest problems to. Traditional org structures have probably felt a little constraining.',
+  tribe_description: 'You are a rare blend of strategic thinker and connector — someone who instinctively sees where things are heading before others do. You thrive when you can shape direction rather than just execute it, and you bring people along on the journey with natural warmth and credibility.',
+  past_analysis: 'Your past roles have likely spanned a few different industries or functions — not because you lacked focus, but because you outgrew each environment and sought new challenges. You may have been the person who quietly became the go-to advisor, the one colleagues brought their hardest problems to. Traditional org structures have probably felt a little constraining.',
   career_paths: [
-    {
-      title: 'Business Coach / Consultant',
-      description:
-        'Your combination of strategic thinking, people skills, and broad experience makes you a natural advisor. Businesses will pay well for someone who can walk in, diagnose problems fast, and guide them forward — and you have the range to do it across sectors.',
-    },
-    {
-      title: 'Community or Organization Builder',
-      description:
-        "Whether it's building a professional association, a mastermind group, or an online community, you have the vision and relational intelligence to attract and hold people together around a shared purpose. This is a growing and well-compensated field.",
-    },
-    {
-      title: 'Fractional Executive (COO / Chief of Staff)',
-      description:
-        "Many growing companies need experienced leadership but can't afford a full-time C-suite hire. As a fractional executive you work with 2–4 companies at once, bringing strategic leadership where it matters most — with full flexibility over your schedule.",
-    },
+    { title: 'Business Coach / Consultant', description: 'Your combination of strategic thinking, people skills, and broad experience makes you a natural advisor. Businesses will pay well for someone who can walk in, diagnose problems fast, and guide them forward — and you have the range to do it across sectors.' },
+    { title: 'Community or Organization Builder', description: "Whether it's building a professional association, a mastermind group, or an online community, you have the vision and relational intelligence to attract and hold people together around a shared purpose. This is a growing and well-compensated field." },
+    { title: 'Fractional Executive (COO / Chief of Staff)', description: "Many growing companies need experienced leadership but can't afford a full-time C-suite hire. As a fractional executive you work with 2–4 companies at once, bringing strategic leadership where it matters most — with full flexibility over your schedule." },
   ],
   business_ideas: [
-    {
-      name: 'Career Transition Coaching Practice',
-      description:
-        'You understand first-hand what it means to reinvent yourself professionally. A coaching practice built around mid-career professionals who want to pivot — whether to a new industry, a business, or a portfolio career — would be deeply authentic and immediately credible for you.',
-    },
-    {
-      name: 'Membership Community for Career Changers',
-      description:
-        "A paid online community (think $29–$99/month) for people navigating big professional transitions. You'd provide monthly workshops, guest experts, peer accountability groups, and a resource library — a recurring revenue model that builds real asset value over time.",
-    },
-    {
-      name: 'Corporate Training & Workshop Business',
-      description:
-        'Organizations spend heavily on leadership development, change management, and team culture. You could package your expertise into half-day or full-day workshops and sell them to HR teams, leadership retreats, and conferences — high-margin and scalable.',
-    },
+    { name: 'Career Transition Coaching Practice', description: 'You understand first-hand what it means to reinvent yourself professionally. A coaching practice built around mid-career professionals who want to pivot — whether to a new industry, a business, or a portfolio career — would be deeply authentic and immediately credible for you.' },
+    { name: 'Membership Community for Career Changers', description: "A paid online community (think $29–$99/month) for people navigating big professional transitions. You'd provide monthly workshops, guest experts, peer accountability groups, and a resource library — a recurring revenue model that builds real asset value over time." },
+    { name: 'Corporate Training & Workshop Business', description: 'Organizations spend heavily on leadership development, change management, and team culture. You could package your expertise into half-day or full-day workshops and sell them to HR teams, leadership retreats, and conferences — high-margin and scalable.' },
   ],
   startup_ideas: [
     { name: 'Executive Coaching Practice', benefit: 'Helps leaders navigate high-stakes decisions with human wisdom' },
@@ -1470,31 +1121,11 @@ const TEST_RESULTS = {
     { name: 'Restorative Justice / Mediation Firm', benefit: 'Facilitates healing and resolution through empathetic human process' },
   ],
   roadmap: [
-    {
-      title: 'Clarify Your Niche',
-      action:
-        'Write a one-paragraph answer to: "I help [specific person] do [specific thing] so they can [specific outcome]." Share it with 5 people you respect and get honest feedback.',
-    },
-    {
-      title: 'Have 10 Exploratory Conversations',
-      action:
-        'Reach out to 10 people in your network who fit your target client profile. Ask for a 20-minute conversation — not to sell anything, but to understand their biggest challenges. Your offer will sharpen dramatically.',
-    },
-    {
-      title: 'Build Your Proof of Concept',
-      action:
-        "Deliver your service to 2–3 people for free or at a steep discount in exchange for detailed testimonials and a case study. This removes the 'no track record' objection before it ever comes up.",
-    },
-    {
-      title: 'Set Up Your Simple Online Presence',
-      action:
-        'Create a one-page website (or even a strong LinkedIn profile rewrite) that clearly states who you help, what you do, and how to get started. Don\'t wait until it\'s perfect — done beats perfect.',
-    },
-    {
-      title: 'Land Your First Paying Client',
-      action:
-        'Make a direct, simple offer to 3–5 warm contacts. Be specific about what they get, the price, and the time commitment. Your first "yes" will unlock your confidence more than any training or planning ever could.',
-    },
+    { title: 'Clarify Your Niche', action: 'Write a one-paragraph answer to: "I help [specific person] do [specific thing] so they can [specific outcome]." Share it with 5 people you respect and get honest feedback.' },
+    { title: 'Have 10 Exploratory Conversations', action: 'Reach out to 10 people in your network who fit your target client profile. Ask for a 20-minute conversation — not to sell anything, but to understand their biggest challenges. Your offer will sharpen dramatically.' },
+    { title: 'Build Your Proof of Concept', action: "Deliver your service to 2–3 people for free or at a steep discount in exchange for detailed testimonials and a case study. This removes the 'no track record' objection before it ever comes up." },
+    { title: 'Set Up Your Simple Online Presence', action: "Create a one-page website (or even a strong LinkedIn profile rewrite) that clearly states who you help, what you do, and how to get started. Don't wait until it's perfect — done beats perfect." },
+    { title: 'Land Your First Paying Client', action: 'Make a direct, simple offer to 3–5 warm contacts. Be specific about what they get, the price, and the time commitment. Your first "yes" will unlock your confidence more than any training or planning ever could.' },
   ],
   target_companies: [
     { name: 'Korn Ferry', sector: 'Leadership Consulting' },
@@ -1527,18 +1158,13 @@ const TEST_RESULTS = {
   ],
 };
 
-/* ── START ASSESSMENT (free — email only) ───────── */
+/* ── START ASSESSMENT ───────────────────────────── */
 function startAssessment() {
   const email = document.getElementById('email-input').value.trim();
   if (!email) { alert('Please enter your email address to receive your results.'); return; }
   state.email = email;
-
-  // Local dev test mode: set ?test=1 in URL to use mock results
   const params = new URLSearchParams(window.location.search);
-  if (params.get('test') === '1') {
-    state.testMode = true;
-  }
-
+  if (params.get('test') === '1') { state.testMode = true; }
   buildAssessment();
   showPage('assessment');
 }
@@ -1546,7 +1172,6 @@ function startAssessment() {
 /* ── SUBMIT ASSESSMENT ──────────────────────────── */
 async function submitAssessment() {
   showPage('loading');
-
   const messages = [
     'Identifying your core strengths and patterns…',
     'Matching your profile to career pathways…',
@@ -1556,32 +1181,21 @@ async function submitAssessment() {
   ];
   let idx = 0;
   const el = document.getElementById('loading-msg');
-  const timer = setInterval(() => {
-    idx = (idx + 1) % messages.length;
-    el.textContent = messages[idx];
-  }, 3000);
+  const timer = setInterval(() => { idx = (idx + 1) % messages.length; el.textContent = messages[idx]; }, 3000);
 
-  // ── LOCAL TEST BYPASS ──
   if (state.testMode) {
-    setTimeout(() => {
-      clearInterval(timer);
-      displayResults(TEST_RESULTS);
-    }, 4000); // simulate a realistic loading wait
+    setTimeout(() => { clearInterval(timer); displayResults(TEST_RESULTS); }, 4000);
     return;
   }
 
   try {
-    const res  = await fetch('/.netlify/functions/generate-results', {
+    const res = await fetch('/.netlify/functions/generate-results', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email:   state.email,
-        answers: state.answers,
-      }),
+      body: JSON.stringify({ email: state.email, answers: state.answers }),
     });
     clearInterval(timer);
     const data = await res.json();
-
     if (data.results) {
       displayResults(data.results);
     } else {
@@ -1600,39 +1214,21 @@ function displayResults(r) {
   document.getElementById('results-title').textContent = 'Your Profile';
   document.getElementById('profile-name').textContent  = r.tribe_name || '';
   document.getElementById('results-intro').textContent = r.tribe_description || '';
-
-  document.getElementById('past-content').innerHTML =
-    `<p>${r.past_analysis || ''}</p>`;
-
+  document.getElementById('past-content').innerHTML = `<p>${r.past_analysis || ''}</p>`;
   document.getElementById('careers-content').innerHTML =
-    (r.career_paths || []).map(c =>
-      `<li><div><strong>${c.title}</strong>${c.description}</div></li>`
-    ).join('');
-
+    (r.career_paths || []).map(c => `<li><div><strong>${c.title}</strong>${c.description}</div></li>`).join('');
   document.getElementById('business-content').innerHTML =
-    (r.business_ideas || []).map(b =>
-      `<li><div><strong>${b.name}</strong>${b.description}</div></li>`
-    ).join('');
-
+    (r.business_ideas || []).map(b => `<li><div><strong>${b.name}</strong>${b.description}</div></li>`).join('');
   document.getElementById('roadmap-content').innerHTML =
-    (r.roadmap || []).map((s, i) =>
-      `<li><div><strong>Step ${i + 1}: ${s.title}</strong>${s.action}</div></li>`
-    ).join('');
-
+    (r.roadmap || []).map((s, i) => `<li><div><strong>Step ${i + 1}: ${s.title}</strong>${s.action}</div></li>`).join('');
   document.getElementById('startup-content').innerHTML =
-    (r.startup_ideas || []).map(s =>
-      `<div class="company-chip"><strong>${s.name}</strong><span>${s.benefit}</span></div>`
-    ).join('');
-
+    (r.startup_ideas || []).map(s => `<div class="company-chip"><strong>${s.name}</strong><span>${s.benefit}</span></div>`).join('');
   document.getElementById('companies-content').innerHTML =
-    (r.target_companies || []).map(c =>
-      `<div class="company-chip"><strong>${c.name}</strong><span>${c.sector}</span></div>`
-    ).join('');
+    (r.target_companies || []).map(c => `<div class="company-chip"><strong>${c.name}</strong><span>${c.sector}</span></div>`).join('');
 
-  // Wire up social sharing buttons with profile name
   const profileName = r.tribe_name || 'my Profile';
   const shareUrl  = 'https://pathworksblueprint.com';
-  const shareText = `I just discovered I'm "${profileName}" — a career & life assessment by Pathworks Project. Find out yours:`;
+  const shareText = `I just discovered I'm "${profileName}" — a career & life assessment by Changing Tribes. Find out yours:`;
   document.getElementById('share-li').href =
     `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent('Pathworks Blueprint — ' + profileName)}&summary=${encodeURIComponent(shareText)}`;
   document.getElementById('share-x').href =
@@ -1664,25 +1260,12 @@ function copyShareLink() {
 /* ══════════════════════════════════════════════════
    PATHWORKS COMPASS
 ══════════════════════════════════════════════════ */
+const compass = { email: '', accessCode: '', direction: '', profileName: '', testMode: false };
 
-/* ── COMPASS STATE ──────────────────────────────── */
-const compass = {
-  email:       '',
-  accessCode:  '',
-  direction:   '',
-  profileName: '',
-  testMode:    false,
-};
-
-/* ── SHOW COMPASS ACCESS PAGE ───────────────────── */
 function showCompassAccess() {
-  // Pre-fill email and profile name from Blueprint if available
   compass.email       = state.email || '';
   compass.profileName = document.getElementById('profile-name')?.textContent || '';
-
-  if (compass.email) {
-    document.getElementById('compass-email-input').value = compass.email;
-  }
+  if (compass.email) { document.getElementById('compass-email-input').value = compass.email; }
   if (compass.profileName) {
     document.getElementById('compass-profile-display').textContent = ' ' + compass.profileName;
     document.getElementById('compass-context-box').style.display = 'block';
@@ -1690,118 +1273,68 @@ function showCompassAccess() {
   showPage('compass-access');
 }
 
-/* ── COMPASS COUPON ─────────────────────────────── */
 async function applyCompassCoupon() {
   const email  = document.getElementById('compass-email-input').value.trim();
   const coupon = document.getElementById('compass-coupon-input').value.trim().toUpperCase();
   const errEl  = document.getElementById('compass-coupon-error');
   const okEl   = document.getElementById('compass-coupon-success');
-
   if (!email)  { alert('Please enter your email address first.'); return; }
   if (!coupon) { alert('Please enter a coupon code.'); return; }
-
   errEl.style.display = 'none';
   okEl.style.display  = 'none';
-
-  // Local test bypass
   if (coupon === TEST_COUPON) {
-    compass.email      = email;
-    compass.accessCode = 'TEST-COMPASS-LOCAL';
-    compass.testMode   = true;
-    okEl.textContent   = '✓ Test coupon applied! Enter your direction and click below.';
+    compass.email = email; compass.accessCode = 'TEST-COMPASS-LOCAL'; compass.testMode = true;
+    okEl.textContent = '✓ Test coupon applied! Enter your direction and click below.';
     okEl.style.display = 'block';
     document.getElementById('compass-free-btn').style.display = 'block';
     return;
   }
-
   try {
-    const res  = await fetch('/.netlify/functions/verify-coupon', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, coupon }),
-    });
+    const res  = await fetch('/.netlify/functions/verify-coupon', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, coupon }) });
     const data = await res.json();
-
     if (data.valid) {
-      compass.email      = email;
-      compass.accessCode = data.access_code;
-      okEl.textContent   = '✓ Coupon applied! Enter your direction and click below.';
+      compass.email = email; compass.accessCode = data.access_code;
+      okEl.textContent = '✓ Coupon applied! Enter your direction and click below.';
       okEl.style.display = 'block';
       document.getElementById('compass-free-btn').style.display = 'block';
-    } else {
-      errEl.style.display = 'block';
-    }
-  } catch {
-    errEl.style.display = 'block';
-  }
+    } else { errEl.style.display = 'block'; }
+  } catch { errEl.style.display = 'block'; }
 }
 
-/* ── COMPASS CHECKOUT ───────────────────────────── */
 async function startCompassCheckout() {
   const email = document.getElementById('compass-email-input').value.trim();
   if (!email) { alert('Please enter your email address first.'); return; }
   compass.email = email;
-
   try {
-    const res  = await fetch('/.netlify/functions/compass-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
+    const res  = await fetch('/.netlify/functions/compass-checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
     const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert('Payment setup failed. Please try again.');
-    }
-  } catch {
-    alert('Something went wrong. Please try again.');
-  }
+    if (data.url) { window.location.href = data.url; } else { alert('Payment setup failed. Please try again.'); }
+  } catch { alert('Something went wrong. Please try again.'); }
 }
 
-/* ── HANDLE COMPASS STRIPE RETURN ───────────────── */
 async function handleCompassReturn() {
   const params    = new URLSearchParams(window.location.search);
   const sessionId = params.get('compass_session');
   if (!sessionId) return;
-
   window.history.replaceState({}, '', window.location.pathname);
-
   try {
-    const res  = await fetch('/.netlify/functions/compass-verify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: sessionId }),
-    });
+    const res  = await fetch('/.netlify/functions/compass-verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ session_id: sessionId }) });
     const data = await res.json();
-
     if (data.valid) {
-      compass.email      = data.email;
-      compass.accessCode = data.access_code;
-      // Pre-fill the page and send to access
+      compass.email = data.email; compass.accessCode = data.access_code;
       document.getElementById('compass-email-input').value = data.email;
       showPage('compass-access');
-    } else {
-      alert('Payment could not be verified. Please contact hello@pathworksproject.com.');
-    }
-  } catch {
-    alert('Payment verification failed. Please contact hello@pathworksproject.com.');
-  }
+    } else { alert('Payment could not be verified. Please contact hello@changingtribes.com.'); }
+  } catch { alert('Payment verification failed. Please contact hello@changingtribes.com.'); }
 }
 
-/* ── SUBMIT COMPASS ─────────────────────────────── */
 async function submitCompass() {
   const direction = document.getElementById('compass-direction-input').value.trim();
   if (!direction) { alert('Please enter a sentence or two about where you want to go.'); return; }
-
   const email = document.getElementById('compass-email-input').value.trim();
   if (!email) { alert('Please enter your email address.'); return; }
-
-  compass.direction = direction;
-  compass.email     = email;
-
+  compass.direction = direction; compass.email = email;
   showPage('compass-loading');
-
   const messages = [
     'Mapping your direction to your Blueprint profile…',
     'Identifying your most AI-resistant strengths…',
@@ -1811,33 +1344,19 @@ async function submitCompass() {
   ];
   let idx = 0;
   const el    = document.getElementById('compass-loading-msg');
-  const timer = setInterval(() => {
-    idx = (idx + 1) % messages.length;
-    el.textContent = messages[idx];
-  }, 3500);
+  const timer = setInterval(() => { idx = (idx + 1) % messages.length; el.textContent = messages[idx]; }, 3500);
 
-  // Local test bypass
   if (compass.testMode) {
-    setTimeout(() => {
-      clearInterval(timer);
-      displayCompassResults(TEST_COMPASS_RESULTS);
-    }, 5000);
+    setTimeout(() => { clearInterval(timer); displayCompassResults(TEST_COMPASS_RESULTS); }, 5000);
     return;
   }
 
   try {
     const res = await fetch('/.netlify/functions/compass-results-background', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email:       compass.email,
-        access_code: compass.accessCode,
-        direction:   compass.direction,
-      }),
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: compass.email, access_code: compass.accessCode, direction: compass.direction }),
     });
     clearInterval(timer);
-
-    // Background function returns 202 immediately — show success page right away
     if (res.status === 202 || res.ok) {
       showCompassSuccess({ email: compass.email, direction: compass.direction });
     } else {
@@ -1847,19 +1366,15 @@ async function submitCompass() {
     }
   } catch (fetchErr) {
     clearInterval(timer);
-    console.error('Compass fetch error:', fetchErr);
     alert('Something went wrong generating your Compass. Please try again.');
     showPage('compass-access');
   }
 }
 
-/* ── DISPLAY COMPASS RESULTS ────────────────────── */
 function displayCompassResults(r) {
   document.getElementById('compass-results-title').textContent = r.compass_title || 'Your Direction Profile';
   document.getElementById('compass-direction-tag').textContent  = '"' + compass.direction + '"';
   document.getElementById('compass-intro').textContent          = r.compass_intro || '';
-
-  // Career paths with 10-year arcs
   document.getElementById('compass-careers-content').innerHTML =
     (r.career_paths || []).map(c => `
       <div class="compass-career-card">
@@ -1872,8 +1387,6 @@ function displayCompassResults(r) {
           <div class="arc-phase"><div class="arc-label">Years 8–10</div><p>${c.years_8_10}</p></div>
         </div>
       </div>`).join('');
-
-  // Business models
   document.getElementById('compass-business-content').innerHTML =
     (r.business_models || []).map(b => `
       <div class="compass-business-card">
@@ -1888,8 +1401,6 @@ function displayCompassResults(r) {
         <p style="color:var(--muted);font-size:0.85rem;margin:0.5rem 0 0;">🤝 First client: ${b.first_client_path || ''}</p>
         <p style="color:var(--green);font-size:0.82rem;font-style:italic;margin:0.5rem 0 0;">🛡️ ${b.ai_resistance}</p>
       </div>`).join('');
-
-  // 90-day action plan
   document.getElementById('compass-action-content').innerHTML =
     (r.action_plan || []).map(a => `
       <div class="action-card">
@@ -1897,15 +1408,13 @@ function displayCompassResults(r) {
         <h4>${a.title}</h4>
         <p>${a.action}</p>
       </div>`).join('');
-
   showPage('compass-results');
 }
 
-/* ── COMPASS SUCCESS (email delivery) ───────────────── */
 function showCompassSuccess(r) {
   document.getElementById('compass-success-title').textContent = 'Your Compass Report Is Being Prepared';
   document.getElementById('compass-success-intro').textContent =
-    'We\'re generating your personalized Pathworks Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.';
+    "We're generating your personalized Pathworks Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.";
   document.getElementById('compass-success-email').textContent = (r && r.email) || compass.email || '';
   showPage('compass-success');
 }
@@ -1913,80 +1422,29 @@ function showCompassSuccess(r) {
 /* ── COMPASS TEST DATA ───────────────────────────── */
 const TEST_COMPASS_RESULTS = {
   compass_title: 'The Animal Welfare Advocate',
-  compass_intro: 'Your Blueprint profile — a natural facilitator with deep people skills, operational experience, and a preference for meaningful in-person impact — maps beautifully onto the animal welfare and care sector. People who do this work well combine emotional attunement, relationship trust, and hands-on presence: three things AI cannot replicate.',
+  compass_intro: 'Your Blueprint profile — a natural facilitator with deep people skills, operational experience, and a preference for meaningful in-person impact — maps beautifully onto the animal welfare and care sector.',
   career_paths: [
-    {
-      title: 'Animal-Assisted Therapy Coordinator',
-      why_it_fits: 'Your coaching background and deep people skills are exactly what this role demands — you work with both animals and the humans in their care. It combines your operational strengths with the meaningful one-on-one impact you thrive on.',
-      ai_resistance: 'This role depends entirely on human presence, emotional regulation, and trust-based relationships — all categories where AI has no foothold.',
-      years_1_3: 'Certification in animal-assisted interventions, entry-level coordinator roles in hospitals, schools, or rehab centers. Salary range $38K–$52K.',
-      years_4_7: 'Senior coordinator or program director, possibly running your own therapy animal program within a facility. Growing reputation in the field.',
-      years_8_10: 'Consulting for healthcare systems or schools, speaking at conferences, or founding your own AAT nonprofit or practice. Top practitioners earn $80K–$120K+.',
-    },
-    {
-      title: 'Veterinary Practice Manager',
-      why_it_fits: 'Your operations and leadership experience transfers directly into running the business side of a veterinary practice. You bring the organizational skills the clinical team lacks while staying close to animals every day.',
-      ai_resistance: 'Managing teams, navigating emotional client conversations around pet health, and running a physical facility all require irreplaceable human judgment and presence.',
-      years_1_3: 'Office or practice management role in a vet clinic, learning the industry. Salary $42K–$60K. Many practices actively hire from outside the industry for operational talent.',
-      years_4_7: 'Practice Manager or Operations Director at a larger multi-vet practice or specialty clinic. Revenue management, team leadership, client experience.',
-      years_8_10: 'Regional manager for a vet group, consultant to independent practices, or co-owner of your own clinic. Compensation $90K–$140K+.',
-    },
-    {
-      title: 'Animal Welfare Advocate & Trainer',
-      why_it_fits: 'Your facilitation and teaching background combined with your passion for animals makes professional animal training or humane education a natural fit — you already know how to change human behavior, which is what most animal work actually requires.',
-      ai_resistance: 'Animal behavior work requires physical presence, read-the-room judgment, and trust relationships built over time — completely immune to AI displacement.',
-      years_1_3: 'Certification (CPDT-KA or similar), building a client base, working alongside shelters or rescue organizations. $30K–$50K building up.',
-      years_4_7: 'Established private practice with recurring clients, staff or associate trainers, specialty niche (reactivity, shelter dogs, service animals).',
-      years_8_10: 'Master trainer, online course creator, shelter consultant, or author. Strong practitioners regularly earn $80K–$150K and build real businesses.',
-    },
+    { title: 'Animal-Assisted Therapy Coordinator', why_it_fits: 'Your coaching background and deep people skills are exactly what this role demands — you work with both animals and the humans in their care.', ai_resistance: 'This role depends entirely on human presence, emotional regulation, and trust-based relationships — all categories where AI has no foothold.', years_1_3: 'Certification in animal-assisted interventions, entry-level coordinator roles. Salary range $38K–$52K.', years_4_7: 'Senior coordinator or program director, possibly running your own therapy animal program within a facility.', years_8_10: 'Consulting for healthcare systems or schools, speaking at conferences, or founding your own AAT nonprofit or practice. Top practitioners earn $80K–$120K+.' },
+    { title: 'Veterinary Practice Manager', why_it_fits: 'Your operations and leadership experience transfers directly into running the business side of a veterinary practice.', ai_resistance: 'Managing teams, navigating emotional client conversations around pet health, and running a physical facility all require irreplaceable human judgment.', years_1_3: 'Office or practice management role in a vet clinic, learning the industry. Salary $42K–$60K.', years_4_7: 'Practice Manager or Operations Director at a larger multi-vet practice or specialty clinic.', years_8_10: 'Regional manager for a vet group, consultant to independent practices, or co-owner of your own clinic. Compensation $90K–$140K+.' },
+    { title: 'Animal Welfare Advocate & Trainer', why_it_fits: 'Your facilitation and teaching background combined with your passion for animals makes professional animal training a natural fit.', ai_resistance: 'Animal behavior work requires physical presence, read-the-room judgment, and trust relationships built over time — completely immune to AI displacement.', years_1_3: 'Certification (CPDT-KA or similar), building a client base, working alongside shelters. $30K–$50K building up.', years_4_7: 'Established private practice with recurring clients, staff or associate trainers, specialty niche.', years_8_10: 'Master trainer, online course creator, shelter consultant, or author. Strong practitioners regularly earn $80K–$150K.' },
   ],
   business_models: [
-    {
-      name: 'Pet Behavior & Training Practice',
-      description: 'A private dog or animal training business serving pet owners in your community, specializing in a niche such as reactivity, puppies, or service animal prep. Your facilitation and people skills make you exceptional with the human side of training.',
-      revenue_model: '$85–$150/hr for private sessions, $45–$75/person for group classes, $800–$2,500 for training packages.',
-      time_to_income: '2–4 months after certification',
-      ai_resistance: 'Physical presence and hands-on skill are the entire product. AI can explain training theory; only a skilled human can actually teach it.',
-    },
-    {
-      name: 'Animal Welfare Consulting for Organizations',
-      description: 'Consulting to animal shelters, humane societies, and rescue organizations on operations, staff training, and community engagement programs. Your ops and coaching background is rare in the nonprofit animal sector.',
-      revenue_model: '$75–$150/hr consulting, or retainer arrangements of $2,000–$5,000/month for ongoing work.',
-      time_to_income: '3–6 months to first contract',
-      ai_resistance: 'Organizational culture change, staff development, and community relationship building all depend on trusted human consultants, not software.',
-    },
-    {
-      name: 'Animal-Assisted Wellness Retreats',
-      description: 'Weekend or multi-day retreats that combine animals (horses, dogs, or farm animals) with personal development, mindfulness, or team-building for corporate groups or individuals. A premium experience in a fast-growing wellness category.',
-      revenue_model: '$300–$800/person for day experiences, $1,500–$3,500 for multi-day retreats, corporate group packages $5,000–$20,000.',
-      time_to_income: '6–12 months to first retreat',
-      ai_resistance: 'Live animal experiences, human facilitation, and the emotional impact of being in nature with animals are impossible to digitize or automate.',
-    },
+    { name: 'Pet Behavior & Training Practice', description: 'A private dog or animal training business serving pet owners in your community.', why_it_fits: 'Your facilitation and people skills make you exceptional with the human side of training.', revenue_model: '$85–$150/hr for private sessions', time_to_income: '2–4 months after certification', year_3_potential: 'Established practice', first_client_path: 'Local shelter partnerships', ai_resistance: 'Physical presence and hands-on skill are the entire product.' },
+    { name: 'Animal Welfare Consulting', description: 'Consulting to animal shelters, humane societies, and rescue organizations on operations and staff training.', why_it_fits: 'Your ops and coaching background is rare in the nonprofit animal sector.', revenue_model: '$75–$150/hr consulting', time_to_income: '3–6 months to first contract', year_3_potential: 'Retainer clients', first_client_path: 'Local shelter outreach', ai_resistance: 'Organizational culture change and community relationship building depend on trusted human consultants.' },
+    { name: 'Animal-Assisted Wellness Retreats', description: 'Weekend retreats combining animals with personal development for corporate groups or individuals.', why_it_fits: 'A premium experience in a fast-growing wellness category that uses all your facilitation skills.', revenue_model: '$300–$800/person for day experiences', time_to_income: '6–12 months to first retreat', year_3_potential: 'Corporate packages $5K–$20K', first_client_path: 'Network in wellness and HR communities', ai_resistance: 'Live animal experiences and human facilitation are impossible to digitize.' },
   ],
   action_plan: [
-    { period: 'Week 1–2', title: 'Get Clear on Your Lane', action: 'Identify which of the 3 career paths or business models feels most aligned. Talk to 3 people already working in that space — not to ask for a job, but to understand the reality of the work. Ask: what does a typical week look like, what skills matter most, and what would they do differently if starting over?' },
-    { period: 'Week 3–4', title: 'Get Your Credential Roadmap', action: 'Research the 1–2 certifications that open doors in your chosen path. Register for or enroll in the most accessible entry certification. Many have online components you can start immediately.' },
-    { period: 'Week 5–6', title: 'Get Visible in the Field', action: 'Volunteer at a local shelter, rescue, or veterinary practice for even 4 hours a week. This builds real-world experience, relationships, and credibility faster than any course. Update your LinkedIn to reflect your direction.' },
-    { period: 'Week 7–8', title: 'Build Your First Asset', action: 'Create one tangible asset: a one-page bio or simple website, a LinkedIn article about your transition, or a simple service description for your first clients. Done and imperfect beats perfect and invisible.' },
-    { period: 'Week 9–10', title: 'Make Your First Direct Ask', action: 'Reach out to 5 organizations or potential clients with a specific, humble offer: an informational interview, a free consultation, or a small pilot project. Your goal is one "yes" that gives you real experience and a testimonial.' },
-    { period: 'Week 11–12', title: 'Review, Refine, Recommit', action: 'Assess what you learned in the first 90 days. What surprised you? What excited you most? Adjust your direction if needed, then set your next 90-day goal with one specific milestone: a certification completed, a first paying client, or a job application submitted.' },
+    { period: 'Week 1–2', title: 'Get Clear on Your Lane', action: 'Identify which of the 3 career paths or business models feels most aligned. Talk to 3 people already working in that space.' },
+    { period: 'Week 3–4', title: 'Get Your Credential Roadmap', action: 'Research the 1–2 certifications that open doors in your chosen path. Register for or enroll in the most accessible entry certification.' },
+    { period: 'Week 5–6', title: 'Get Visible in the Field', action: 'Volunteer at a local shelter, rescue, or veterinary practice for even 4 hours a week.' },
+    { period: 'Week 7–8', title: 'Build Your First Asset', action: 'Create one tangible asset: a one-page bio or simple website, or a simple service description for your first clients.' },
+    { period: 'Week 9–10', title: 'Make Your First Direct Ask', action: 'Reach out to 5 organizations or potential clients with a specific, humble offer: an informational interview or a free consultation.' },
+    { period: 'Week 11–12', title: 'Review, Refine, Recommit', action: 'Assess what you learned in the first 90 days. Adjust your direction if needed, then set your next 90-day goal.' },
   ],
 };
 
 /* ── INIT ────────────────────────────────────────── */
-window.addEventListener('load', () => {
-  // Check for Compass domain — show Compass landing directly
-  const host = window.location.hostname;
-  if (host.includes('tribescompass') || host.includes('pathworkscompass')) {
-    document.title = 'Pathworks Compass — Your 10-Year Career Map';
-    const navLogo = document.getElementById('nav-logo-text');
-    if (navLogo) navLogo.innerHTML = 'Pathworks Compass';
-    showCompassAccess();
-    return;
-  }
-  // Check for Compass Stripe return
-  handleCompassReturn();
-});
+handleCompassReturn();
 </script>
 </body>
 </html>
