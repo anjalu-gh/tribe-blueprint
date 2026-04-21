@@ -26,14 +26,14 @@
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:  #C85C2D;
-      --orange-dark: #A34923;
-      --brown:   #3D1F0D;
-      --cream:   #FDF6ED;
+      --orange:  #2A4A5C;
+      --orange-dark: #1D3545;
+      --brown:   #1A2E38;
+      --cream:   #F0F6F9;
       --green:   #2D5016;
       --gold:    #D4A017;
-      --muted:   #6B4C3B;
-      --border:  #E8D5C0;
+      --muted:   #5C7A8A;
+      --border:  #C0D5E0;
       --white:   #ffffff;
     }
     html { scroll-behavior: smooth; }
@@ -467,7 +467,7 @@
     }
     .company-chip {
       background: var(--cream);
-      border: 1px solid #E8D5C0;
+      border: 1px solid #C0D5E0;
       border-radius: 10px;
       padding: 0.75rem 0.6rem;
       text-align: center;
@@ -505,7 +505,7 @@
 
     /* ===== TRIBES COMPASS ===== */
     .compass-upsell {
-      background: linear-gradient(135deg, var(--brown) 0%, #5a2e10 100%);
+      background: linear-gradient(135deg, var(--brown) 0%, #2A4A5C 100%);
       border-radius: 20px;
       padding: 3rem 2.5rem;
       margin: 2rem 0 1rem;
@@ -524,7 +524,7 @@
       margin-bottom: 0.75rem;
     }
     .compass-upsell p {
-      color: #E8D5C0;
+      color: #C0D5E0;
       line-height: 1.75;
       font-size: 0.95rem;
       max-width: 560px;
@@ -544,7 +544,7 @@
       border-radius: 50px;
       padding: 0.4rem 1rem;
       font-size: 0.82rem;
-      color: #E8D5C0;
+      color: #C0D5E0;
     }
     .btn-compass {
       background: var(--gold);
@@ -574,7 +574,7 @@
     .compass-access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
     .compass-context {
       background: var(--brown);
-      color: #E8D5C0;
+      color: #C0D5E0;
       border-radius: 10px;
       padding: 1rem 1.4rem;
       font-size: 0.88rem;
@@ -616,7 +616,7 @@
     .compass-direction-tag {
       display: inline-block;
       background: var(--brown);
-      color: #E8D5C0;
+      color: #C0D5E0;
       padding: 0.5rem 1.4rem;
       border-radius: 50px;
       font-size: 0.88rem;
@@ -890,17 +890,17 @@
       <button class="btn-primary" onclick="showPage('access')" style="width:100%;background:var(--green);">Start Free →</button>
     </div>
     <!-- PAID: Compass -->
-    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#3D1F0D 0%,#5a2e10 100%);color:#FDF6ED;">
+    <div class="pricing-card" style="border:2px solid var(--gold);background:linear-gradient(160deg,#1A2E38 0%,#2A4A5C 100%);color:#FDF6ED;">
       <span class="top-badge" style="background:var(--gold);color:var(--brown);">✦ Upgrade — One-Time</span>
       <div class="price-big" style="color:var(--gold);"><sup style="font-size:1.8rem;top:-1rem;color:var(--gold);">$</sup>39</div>
-      <p class="price-note" style="color:#E8D5C0;">Tribes Compass — Your 10-Year Map</p>
-      <ul class="includes-list" style="color:#E8D5C0;">
-        <li style="border-color:#5a3a20;">Everything in Blueprint, plus:</li>
-        <li style="border-color:#5a3a20;">20+ career paths built from your Blueprint</li>
-        <li style="border-color:#5a3a20;">20+ businesses you could start, matched to your strengths</li>
-        <li style="border-color:#5a3a20;">10-year arc for your chosen direction</li>
-        <li style="border-color:#5a3a20;">90-day action plan to start immediately</li>
-        <li style="border-color:#5a3a20;">Full Compass report emailed to you</li>
+      <p class="price-note" style="color:#C0D5E0;">Tribes Compass — Your 10-Year Map</p>
+      <ul class="includes-list" style="color:#C0D5E0;">
+        <li style="border-color:#3A6070;">Everything in Blueprint, plus:</li>
+        <li style="border-color:#3A6070;">20+ career paths built from your Blueprint</li>
+        <li style="border-color:#3A6070;">20+ businesses you could start, matched to your strengths</li>
+        <li style="border-color:#3A6070;">10-year arc for your chosen direction</li>
+        <li style="border-color:#3A6070;">90-day action plan to start immediately</li>
+        <li style="border-color:#3A6070;">Full Compass report emailed to you</li>
       </ul>
       <button class="btn-compass" onclick="showPage('access')" style="width:100%;">Get Compass after Blueprint →</button>
     </div>
@@ -1212,7 +1212,7 @@
     <div class="badge" style="margin-bottom:1.5rem;">✦ Your Pathworks Compass Is On Its Way</div>
     <h2 id="compass-success-title" style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--brown);margin-bottom:1rem;"></h2>
     <p id="compass-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;"></p>
-    <div style="background:#FFF8F0;border:1px solid #E8D5C0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
+    <div style="background:#EDF4F8;border:1px solid #C0D5E0;border-radius:12px;padding:28px 32px;margin-bottom:2rem;">
       <p style="font-size:1.1rem;color:var(--brown);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
       <p id="compass-success-email" style="font-size:1rem;color:var(--accent);font-weight:700;margin-bottom:1rem;"></p>
       <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalized resources — all tailored to your Blueprint profile.</p>
