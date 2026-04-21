@@ -112,7 +112,7 @@ exports.handler = async (event) => {
   // ── Build Claude prompt ─────────────────────────
   const scoreSummary = buildScoreSummary(answers || {});
 
-  const prompt = `You are a deeply insightful career counselor and business strategist working with Changing Tribes — a platform that helps people transition to new chapters of their professional lives.
+  const prompt = `You are a deeply insightful career counselor and business strategist working with Pathworks Project — a platform that helps people transition to new chapters of their professional lives.
 
 A person has completed a 40-question personality, skills, and context assessment. Their responses are grouped into 8 categories below (each score is 1–10):
 
@@ -136,7 +136,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
 
 {
   "tribe_name": "The [Archetype Name]",
-  "tribe_description": "2–3 sentences describing this person's unique archetype and what makes them stand out professionally.",
+  "tribe_description": "2–3 sentences describing this person's unique profile and what makes them stand out professionally.",
   "past_analysis": "2–3 sentences about the kinds of roles and environments they have likely thrived or struggled in, based on their scores — reference their proven skills and experience background specifically.",
   "career_paths": [
     { "title": "Specific Career Title", "description": "2–3 sentences on why this path fits their exact profile, references their transferable skills, and explains why it is resilient to AI and automation." },
@@ -167,7 +167,7 @@ Return ONLY valid JSON — no markdown fences, no explanation, just the JSON obj
 
 For startup_ideas: List exactly 20 types of businesses this person could realistically start or run. Every idea must be AI-resistant — built on human judgment, physical presence, trust, emotional intelligence, creativity, or complex relationship-driven value that AI cannot easily replicate. For each entry provide: the business name/type and the core customer benefit (what problem it solves or value it delivers). Match the mix to their proven skills, archetype, and practical context (local/global, B2C/B2B, income timeline). Include a variety of models: service businesses, consulting practices, community businesses, physical/local businesses, creative ventures, and mission-driven organizations.
 
-For target_companies: List exactly 27 real, named companies where this person could realistically apply or partner with. These must be AI-resistant organizations — companies where human judgment, relationships, physical presence, creative direction, or complex problem-solving are central to the value delivered. Match the companies to this person's specific tribe archetype, career paths, proven skills, and practical context (local vs. global, B2C vs. B2B). Include a mix of: well-known employers, mid-size growth companies, mission-driven organizations, and industry-specific firms. Use real company names only.`;
+For target_companies: List exactly 27 real, named companies where this person could realistically apply or partner with. These must be AI-resistant organizations — companies where human judgment, relationships, physical presence, creative direction, or complex problem-solving are central to the value delivered. Match the companies to this person's specific profile, career paths, proven skills, and practical context (local vs. global, B2C vs. B2B). Include a mix of: well-known employers, mid-size growth companies, mission-driven organizations, and industry-specific firms. Use real company names only.`;
 
   // ── Call Claude ─────────────────────────────────
   console.log('Step 2: Calling Claude API...');
@@ -308,20 +308,20 @@ async function sendResultsEmail(email, results) {
         <!-- HEADER -->
         <tr>
           <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
-            <p style="margin:0 0 4px;color:#E8D5C0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Changing Tribes</p>
-            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Tribes Blueprint</h1>
+            <p style="margin:0 0 4px;color:#E8D5C0;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Pathworks Project</p>
+            <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Pathworks Blueprint</h1>
           </td>
         </tr>
 
-        <!-- TRIBE NAME -->
+        <!-- PROFILE NAME -->
         <tr>
           <td style="background:#C85C2D;padding:24px 32px;text-align:center;">
-            <p style="margin:0 0 4px;color:#FDF6ED;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Your Tribe Profile</p>
+            <p style="margin:0 0 4px;color:#FDF6ED;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Your Profile</p>
             <h2 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">${results.tribe_name || ''}</h2>
           </td>
         </tr>
 
-        <!-- TRIBE DESCRIPTION -->
+        <!-- PROFILE DESCRIPTION -->
         <tr>
           <td style="background:#ffffff;padding:32px;border-left:1px solid #E8D5C0;border-right:1px solid #E8D5C0;">
             <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.75;">${results.tribe_description || ''}</p>
