@@ -620,7 +620,7 @@ function generateCompassPDF(email, direction, results) {
        .text('Your next chapter starts now.', M, 110, { align: 'center', width: CW });
     doc.moveDown(1.5);
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(11)
-       .text('This report was generated specifically for you based on your Tribes Blueprint\nprofile and direction statement. Keep it, share it, and return to it\nas your journey unfolds.', M + 40, doc.y, { align: 'center', width: CW - 80, lineGap: 4 });
+       .text('This report was generated specifically for you based on your Pathworks Blueprint\nProfile and direction statement. Keep it, share it, and return to it\nas your journey unfolds.', M + 40, doc.y, { align: 'center', width: CW - 80, lineGap: 4 });
     doc.moveDown(2);
     doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(12)
        .text('pathworksproject.com', M, doc.y, { align: 'center', width: CW });
