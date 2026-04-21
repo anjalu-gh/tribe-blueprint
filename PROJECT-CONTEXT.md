@@ -25,7 +25,7 @@ Tribe Blueprint is a paid personality and skills assessment web app for Changing
 | Payments | Stripe Checkout — $19 USD (`PRICE_CENTS=1900`) |
 | AI | Anthropic Claude API — model: `claude-haiku-4-5-20251001` |
 | CRM | Zoho CRM v2 API — upserts Contact on assessment completion |
-| Email | Resend API — sends branded results email from blueprint@changingtribes.com |
+| Email | Resend API — sends branded results email from hello@changingtribes.com |
 
 ---
 
@@ -102,7 +102,7 @@ Test coupon (local bypass only, no DB needed): `TESTDRIVE`
 ## Email (Resend)
 
 - Domain: `changingtribes.com` — **verified** in Resend dashboard (April 2026)
-- From address: `blueprint@changingtribes.com`
+- From address: `hello@changingtribes.com`
 - DNS records added to InMotion Hosting:
   - DKIM TXT record on `resend._domainkey.changingtribes.com`
   - SPF TXT record on `changingtribes.com` (separate from any pre-existing SPF for send.changingtribes.com — both coexist fine)
