@@ -143,7 +143,7 @@
       max-width: 600px;
       margin: 0 auto 2.5rem;
     }
-    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero-cta { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
 
     .features {
       display: grid;
@@ -844,8 +844,8 @@
     <h1>Discover Where Your<br><em>Next Tribe Awaits</em></h1>
     <p>Discover your Blueprint — <strong>free in 7 minutes</strong>. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39.</p>
     <div class="hero-cta">
+      <p style="margin:0;font-size:0.85rem;color:var(--muted);">Free · 7 minutes · No payment required</p>
       <button class="btn-primary" onclick="showPage('access')">Start My Free Assessment →</button>
-      <p style="margin-top:0.85rem;font-size:0.85rem;color:var(--muted);">Free · 7 minutes · No payment required</p>
     </div>
   </div>
 
@@ -1087,9 +1087,9 @@
         <li>🗺️ 90-day action plan to get moving immediately</li>
         <li>📧 Full report emailed to you instantly</li>
       </ul>
-      <button class="btn-compass" onclick="showCompassAccess()">
-        Unlock Pathworks Compass →
-      </button>
+      <a href="https://www.pathworkscompass.com" target="_blank" class="btn-compass" style="display:inline-block;text-decoration:none;">
+        Continue to Pathworks Compass →
+      </a>
       <p style="margin-top:1rem;font-size:0.8rem;opacity:0.65;">One-time access · Powered by AI · Results in under 60 seconds</p>
     </div>
 
