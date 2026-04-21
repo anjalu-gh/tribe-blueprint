@@ -3,536 +3,1642 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pathworks Project — Your AI-Resistant Career & Business Plan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Pathworks Blueprint</title>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:      #1A6B72;
-      --orange-light:#E8920A;
-      --brown:       #0F3D45;
-      --cream:       #F0F8FA;
-      --cream-dark:  #D8ECF0;
-      --green:       #2D5016;
-      --muted:       #4A6670;
-      --border:      #B8D4DA;
-      --white:       #ffffff;
+      --forest:   #0F3D45;   /* deep navy-teal */
+      --slate:    #1A6B72;   /* deep teal brand */
+      --gold:     #E8920A;   /* warm amber accent */
+      --gold-lt:  #F5A93A;   /* bright amber highlight */
+      --cream:    #F0F8FA;   /* soft white-blue */
+      --paper:    #D8ECF0;   /* slightly darker blue-white */
+      --ink:      #111111;
+      --mist:     #4A6670;   /* slate muted */
+      --white:    #FFFFFF;
     }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--brown); }
-
-    /* ── NAV ── */
-    nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; background: var(--white);
-      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background: #E8F4F7;
+      color: var(--ink);
     }
-    .nav-brand { display: flex; flex-direction: column; }
-    .nav-brand strong { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--orange); }
-    .nav-brand span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
-    .nav-cta {
-      background: var(--orange); color: var(--white); padding: 0.6rem 1.4rem;
-      border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: #145A60; }
 
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(170deg, #F0F8FA 0%, #D8ECF0 60%, #C0DDE4 100%);
-      color: var(--brown); text-align: center; padding: 80px 24px 90px;
-      border-bottom: 1px solid var(--border);
+    /* ===== SECTION LABELS ===== */
+    .section-label {
+      background: var(--ink);
+      color: var(--gold-lt);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.6rem 2rem;
+      text-align: center;
+    }
+
+    /* ====================================================
+       COMPASS PAGE
+    ==================================================== */
+    .compass-page {
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .cp-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: var(--white);
+      border-bottom: 2px solid var(--forest);
+    }
+    .cp-nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .cp-nav-logo svg { width: 36px; height: 36px; }
+    .cp-nav-wordmark {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--forest);
+      line-height: 1;
+    }
+    .cp-nav-wordmark span {
+      display: block;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+    .cp-nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .cp-nav-links a {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--forest);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+    .cp-nav-cta {
+      background: var(--forest);
+      color: var(--cream) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+    }
+
+    /* HERO */
+    .compass-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+      overflow: hidden;
+    }
+    .compass-hero-left {
+      background: var(--forest);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .compass-hero-left::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 2px solid rgba(232,146,10,0.25);
+    }
+    .compass-hero-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,146,10,0.15);
     }
     .hero-eyebrow {
-      display: inline-block; background: rgba(26,107,114,0.1);
-      border: 1px solid rgba(26,107,114,0.3); color: var(--orange);
-      padding: 6px 18px; border-radius: 20px; font-size: 0.8rem;
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
     }
-    .hero h1 {
-      font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4rem);
-      line-height: 1.15; margin-bottom: 18px; color: var(--brown);
+    .compass-hero-h1 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
-    .hero h1 em { color: var(--orange-light); font-style: normal; }
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--muted);
-      max-width: 640px; margin: 0 auto 40px; line-height: 1.75;
+    .compass-hero-h1 em {
+      font-style: normal;
+      color: var(--gold-lt);
     }
-    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--orange-light); color: var(--white); padding: 16px 34px;
-      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
-      display: inline-block; transition: background 0.2s; border: none; cursor: pointer;
+    .compass-hero-body {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(240,248,250,0.85);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
     }
-    .btn-primary:hover { background: #C97200; }
-    .btn-secondary {
-      background: transparent; color: var(--brown);
-      border: 2px solid var(--border); padding: 16px 34px;
-      border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.05rem;
-      display: inline-block; transition: border-color 0.2s;
+    .compass-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
-    .btn-secondary:hover { border-color: var(--muted); }
-    .hero-note { margin-top: 20px; font-size: 0.82rem; color: var(--muted); opacity: 0.7; }
+    .btn-gold {
+      background: var(--gold-lt);
+      color: var(--ink);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      padding: 1rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-ghost {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--gold-lt);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(232,146,10,0.4);
+      padding-bottom: 2px;
+    }
 
-    /* ── SECTION WRAPPER ── */
-    section { padding: 72px 24px; }
-    .container { max-width: 960px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--orange); margin-bottom: 12px;
+    /* COMPASS VISUAL SIDE */
+    .compass-hero-right {
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
     }
-    .section-title {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem);
-      color: var(--brown); line-height: 1.25; margin-bottom: 18px;
+    .compass-outer-ring {
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      top: -5%; left: -5%;
+      border-radius: 50%;
+      border: 1px dashed rgba(15,61,69,0.12);
     }
-    .section-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 640px; }
 
-    /* ── PROBLEM ── */
-    .problem { background: var(--cream); }
-    .problem-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px; margin-top: 48px;
+    /* Compass SVG wrapper */
+    .compass-visual {
+      width: min(400px, 80%);
+      aspect-ratio: 1;
+      position: relative;
+      z-index: 2;
     }
-    .problem-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 12px; padding: 28px 24px;
+    .compass-visual svg {
+      width: 100%;
+      height: 100%;
+      drop-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
-    .problem-card .icon { font-size: 2rem; margin-bottom: 14px; display: block; }
-    .problem-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
-    .problem-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
 
-    /* ── HOW IT WORKS ── */
-    .how { background: var(--white); }
-    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 52px; }
-    .step {
-      display: grid; grid-template-columns: 80px 1fr; gap: 28px;
-      align-items: flex-start; padding: 32px 0;
-      border-bottom: 1px solid var(--border);
+    /* FEATURES STRIP */
+    .compass-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 2px solid var(--forest);
     }
-    .step:last-child { border-bottom: none; }
-    .step-num {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: var(--brown); color: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif; font-size: 1.5rem; flex-shrink: 0;
+    .compass-feature {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(15,61,69,0.15);
+      background: var(--white);
     }
-    .step-content {}
-    .step-tag {
-      display: inline-block; background: #E0F3F5; color: var(--orange);
-      border: 1px solid #96C8D0; border-radius: 20px; padding: 3px 12px;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 8px;
+    .compass-feature:last-child { border-right: none; }
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
     }
-    .step-content h3 { font-size: 1.25rem; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
-    .step-content p { font-size: 0.98rem; color: var(--muted); line-height: 1.75; }
-    .step-price {
-      display: inline-block; margin-top: 12px;
-      background: var(--cream); border: 1px solid var(--border);
-      border-radius: 6px; padding: 6px 14px;
-      font-size: 0.85rem; font-weight: 600; color: var(--brown);
+    .feature-title {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
     }
-    .step-deliverable {
-      margin-top: 16px; background: #F0F7F0;
-      border-left: 3px solid var(--green); border-radius: 0 8px 8px 0;
-      padding: 12px 16px;
+    .feature-desc {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: #4A4A4A;
     }
-    .step-deliverable p { font-size: 0.9rem; color: var(--green); line-height: 1.6; }
 
-    /* ── SCIENCE ── */
-    .science { background: var(--brown); color: var(--white); }
-    .science .section-label { color: #E8920A; }
-    .science .section-title { color: var(--white); }
-    .science .section-sub { color: #B8D4DA; }
-    .science-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px; margin-top: 48px;
+    /* WHAT YOU GET SECTION */
+    .compass-what {
+      background: var(--forest);
+      padding: 5rem 3rem;
     }
-    .science-card {
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px; padding: 28px 24px;
+    .compass-what-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
     }
-    .science-card h3 { font-size: 1rem; font-weight: 700; color: #E8920A; margin-bottom: 10px; }
-    .science-card p { font-size: 0.92rem; color: #B8D4DA; line-height: 1.75; }
-    .categories-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px; margin-top: 40px;
+    .compass-what-text h2 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
     }
-    .cat-pill {
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 8px; padding: 14px 16px;
+    .compass-what-text h2 em {
+      font-style: normal;
+      color: var(--gold-lt);
     }
-    .cat-pill .num { font-size: 0.75rem; color: var(--orange-light); font-weight: 700; margin-bottom: 4px; }
-    .cat-pill .name { font-size: 0.9rem; color: var(--white); font-weight: 600; }
-    .cat-pill .desc { font-size: 0.8rem; color: #7AABB5; margin-top: 4px; line-height: 1.5; }
+    .compass-what-text p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: rgba(240,248,250,0.8);
+      margin-bottom: 2rem;
+    }
+    .compass-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .compass-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--gold);
+    }
+    .compass-item-num {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--gold-lt);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 2.5rem;
+    }
+    .compass-item-body h3 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .compass-item-body p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(240,248,250,0.7);
+      margin: 0;
+    }
 
-    /* ── AI SECTION ── */
-    .ai-resistant { background: var(--cream); }
-    .ai-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;
+    /* ====================================================
+       BLUEPRINT PAGE
+    ==================================================== */
+    .blueprint-page {
+      background: var(--cream);
     }
-    @media (max-width: 680px) { .ai-grid { grid-template-columns: 1fr; } }
-    .ai-card {
-      border-radius: 12px; padding: 28px 24px; border: 1px solid var(--border);
-    }
-    .ai-card.bad { background: #FFF5F5; border-color: #F5C0C0; }
-    .ai-card.good { background: #F0F7F0; border-color: #A8D0A8; }
-    .ai-card h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
-    .ai-card.bad h3 { color: #8B2020; }
-    .ai-card.good h3 { color: var(--green); }
-    .ai-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
 
-    /* ── DELIVERABLES ── */
-    .deliverables { background: var(--white); }
-    .del-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 52px;
+    .blueprint-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: var(--cream);
+      border-bottom: 2px solid var(--ink);
     }
-    @media (max-width: 680px) { .del-grid { grid-template-columns: 1fr; } }
-    .del-card {
-      border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    .bp-nav-logo {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--ink);
     }
-    .del-header { padding: 22px 24px; }
-    .del-header.blueprint { background: var(--brown); }
-    .del-header.compass { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
-    .del-header h3 { color: var(--white); font-size: 1.1rem; font-weight: 700; }
-    .del-header p { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin-top: 4px; }
-    .del-header .price { color: var(--white); font-size: 1.6rem; font-weight: 700; margin-top: 10px; }
-    .del-body { padding: 24px; }
-    .del-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
-    .del-item .check { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .del-btn {
-      display: block; text-align: center; text-decoration: none;
-      font-weight: 700; font-size: 0.95rem; padding: 14px;
-      border-radius: 8px; margin: 0 24px 24px; transition: background 0.2s;
+    .bp-nav-logo span {
+      font-weight: 300;
+      color: var(--gold);
     }
-    .del-btn.blueprint { background: var(--brown); color: var(--white); }
-    .del-btn.blueprint:hover { background: #0A2E33; }
-    .del-btn.compass { background: var(--orange-light); color: var(--white); }
-    .del-btn.compass:hover { background: #C97200; }
+    .bp-badge {
+      background: var(--gold-lt);
+      color: var(--ink);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+    }
 
-    /* ── TESTIMONIAL / TRUST ── */
-    .trust { background: var(--cream-dark); text-align: center; }
-    .trust-inner { max-width: 680px; margin: 0 auto; }
-    .trust blockquote {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.6rem);
-      color: var(--brown); line-height: 1.65; font-style: italic; margin-bottom: 20px;
+    /* BLUEPRINT HERO */
+    .blueprint-hero {
+      padding: 6rem 3rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+      align-items: center;
     }
-    .trust-name { font-weight: 600; color: var(--muted); font-size: 0.9rem; }
+    .bp-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .blueprint-hero h1 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .blueprint-hero h1 mark {
+      background: var(--gold-lt);
+      color: var(--ink);
+      padding: 0 0.15em;
+    }
+    .blueprint-hero-body {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #3A3A3A;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+    .bp-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .btn-dark {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 1rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.03em;
+    }
+    .btn-outline {
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.9rem 1.8rem;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .bp-price-note {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--mist);
+      margin-top: 0.8rem;
+    }
 
-    /* ── FINAL CTA ── */
-    .final-cta {
-      background: linear-gradient(160deg, var(--orange) 0%, #0A2E33 100%);
-      color: var(--white); text-align: center; padding: 80px 24px;
+    /* Blueprint card visual */
+    .bp-card-visual {
+      position: relative;
     }
-    .final-cta h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--white); margin-bottom: 18px;
+    .bp-card {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      padding: 2rem;
+      position: relative;
     }
-    .final-cta p { color: rgba(255,255,255,0.85); font-size: 1.05rem; max-width: 560px; margin: 0 auto 36px; line-height: 1.75; }
-    .final-cta .btn-white {
-      background: var(--white); color: var(--orange); padding: 16px 40px;
-      border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
-      display: inline-block; transition: opacity 0.2s;
+    .bp-card::before {
+      content: '';
+      position: absolute;
+      top: 8px; right: -8px; bottom: -8px; left: 8px;
+      border: 2px solid var(--gold);
+      z-index: -1;
     }
-    .final-cta .btn-white:hover { opacity: 0.9; }
-    .final-cta .sub { margin-top: 16px; font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+    .bp-card-label {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 1rem;
+    }
+    .bp-card-tribe {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .bp-card-subtitle {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .bp-card-divider {
+      height: 2px;
+      background: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+    .bp-card-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.78rem;
+      margin-bottom: 0.5rem;
+    }
+    .bp-card-row span:first-child { color: var(--mist); font-weight: 400; }
+    .bp-card-row span:last-child { font-weight: 600; color: var(--ink); }
+    .bp-card-bottom {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bp-card-stamp {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--brown); color: #B8D4DA; text-align: center;
-      padding: 32px 24px; font-size: 0.85rem; line-height: 1.75;
+    /* How it works */
+    .bp-how {
+      background: var(--paper);
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      padding: 5rem 3rem;
     }
-    footer a { color: var(--orange-light); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    .bp-how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .bp-how-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+    .bp-how-header h2 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--ink);
+    }
+    .bp-how-header .finger-point {
+      font-size: 2.5rem;
+      transform: rotate(-15deg);
+      display: inline-block;
+    }
+    .bp-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+    .bp-step {
+      padding: 2.5rem 2rem;
+      border-right: 2px solid var(--ink);
+      position: relative;
+    }
+    .bp-step:last-child { border-right: none; }
+    .bp-step-num {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 4rem;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .bp-step-title {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .bp-step-desc {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #4A4A4A;
+    }
+    .bp-step-arrow {
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--gold-lt);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      z-index: 2;
+      border: 2px solid var(--ink);
+    }
+    .bp-step:last-child .bp-step-arrow { display: none; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      nav { padding: 1rem; }
-      .step { grid-template-columns: 50px 1fr; gap: 16px; }
-      .step-num { width: 44px; height: 44px; font-size: 1.2rem; }
+    /* ====================================================
+       FACEBOOK ADS SECTION
+    ==================================================== */
+    .ads-section {
+      background: #E8F4F7;
+      padding: 4rem 3rem;
+    }
+    .ads-section-title {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .ads-section-sub {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: #5A5A5A;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Phone frame */
+    .ad-frame {
+      background: #1A1A1A;
+      border-radius: 28px;
+      padding: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .ad-frame::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+      margin: 0 auto 12px;
+    }
+    .ad-phone-screen {
+      background: #F0F0F0;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .ad-feed-header {
+      background: white;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid #EAEAEA;
+    }
+    .ad-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--forest);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--gold-lt);
+      font-weight: 700;
+      font-family: 'Public Sans', sans-serif;
+      flex-shrink: 0;
+    }
+    .ad-feed-meta { flex: 1; }
+    .ad-feed-name {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #1A1A1A;
+      line-height: 1;
+    }
+    .ad-feed-sub {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.6rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .ad-sponsored {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.55rem;
+      background: #E4E6EB;
+      color: #555;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* AD CARD 1 — Forest/Gold */
+    .ad-card-1 {
+      background: var(--forest);
+      padding: 1.8rem 1.5rem;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-card-1 .ad-compass-bg {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 140px; height: 140px;
+      opacity: 0.15;
+    }
+    .ad-card-1 .ad-eyebrow {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ad-card-1 h3 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      line-height: 1.05;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+    .ad-card-1 h3 em {
+      font-style: normal;
+      color: var(--gold-lt);
+    }
+
+    /* AD CARD 2 — Slate Teal / Gold (Will Bank inspired) */
+    .ad-card-2 {
+      background: var(--slate);
+      padding: 1.8rem 1.5rem;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-card-2 .ad-top {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(232,146,10,0.7);
+    }
+    .ad-card-2 h3 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.0;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .ad-card-2 h3 span { color: var(--gold-lt); }
+    .ad-card-2 .ad-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ad-card-2 .ad-logo {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--cream);
+    }
+    .ad-card-2 .ad-compass-sm {
+      width: 36px; height: 36px;
+    }
+
+    /* AD CARD 3 — Cream/Forest split */
+    .ad-card-3 {
+      aspect-ratio: 1;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+    }
+    .ad-card-3-top {
+      background: var(--cream);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 2px solid var(--ink);
+    }
+    .ad-card-3-top h3 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .ad-card-3-top .tag {
+      display: inline-block;
+      background: var(--forest);
+      color: var(--gold-lt);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .ad-card-3-bottom {
+      background: var(--forest);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .ad-card-3-bottom p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 0.72rem;
+      line-height: 1.55;
+      color: rgba(240,248,250,0.85);
+      margin-bottom: 0.6rem;
+    }
+    .ad-card-3-bottom .ad-cta-pill {
+      display: inline-block;
+      background: var(--gold-lt);
+      color: var(--ink);
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.8rem;
+    }
+
+    /* Feed caption */
+    .ad-feed-caption {
+      background: white;
+      padding: 0.6rem 1rem;
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.65rem;
+      color: #333;
+      line-height: 1.4;
+      border-top: 1px solid #EAEAEA;
+    }
+    .ad-feed-caption strong { font-weight: 600; }
+    .ad-feed-actions {
+      background: white;
+      padding: 0.4rem 1rem;
+      display: flex;
+      gap: 1.2rem;
+      border-top: 1px solid #EAEAEA;
+    }
+    .ad-feed-action {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .ad-feed-btn {
+      background: white;
+      border: 1px solid #DADDE1;
+      padding: 0.35rem 1rem;
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+      margin: 0.4rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    /* ====================================================
+       COLOR PALETTE GUIDE
+    ==================================================== */
+    .palette-section {
+      background: var(--white);
+      padding: 3rem;
+      border-top: 2px solid var(--ink);
+    }
+    .palette-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .palette-title {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .palette-swatches {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+    .swatch {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .swatch-label {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.65rem;
+      color: #555;
+      margin-top: 0.4rem;
+      text-align: center;
+    }
+    .swatch-name {
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: var(--ink);
+      display: block;
+      text-align: center;
+    }
+
+    /* type specimens */
+    .type-section {
+      background: var(--cream);
+      padding: 3rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    .type-inner { max-width: 900px; margin: 0 auto; }
+    .type-title {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .type-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .type-specimen-label {
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 0.5rem;
+    }
+    .type-h1 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .type-h2 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .type-h3 {
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .type-body {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #3A3A3A;
+      margin-bottom: 0.5rem;
+    }
+    .type-body-italic {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--mist);
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-brand">
-    <strong>Pathworks Project</strong>
-    <span>A Changing Tribes Company</span>
-  </div>
-  <a href="https://pathworksblueprint.com" class="nav-cta">Start My Blueprint →</a>
-</nav>
+<!-- ================================================
+     SECTION 1: COMPASS PAGE
+================================================ -->
+<div class="section-label">① COMPASS PAGE — Full Page Design</div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">AI Is Reshaping Every Career</div>
-  <h1>What are you<br>gonna do <em>next?</em></h1>
-  <p class="hero-sub">
-    Pathworks gives you a data-driven answer — a personalized Blueprint of who you are professionally, and a Compass that maps exactly where to go next, with AI-resistant careers and businesses built specifically for you.
-  </p>
-  <div class="hero-btns">
-    <a href="https://pathworksblueprint.com" class="btn-primary">Start My Blueprint — $19</a>
-    <a href="#how-it-works" class="btn-secondary">See How It Works ↓</a>
+<div class="compass-page">
+
+  <!-- NAV -->
+  <nav class="cp-nav">
+    <div class="cp-nav-logo">
+      <!-- Compass rose icon in nav -->
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" stroke="#0F3D45" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="3" fill="#E8920A"/>
+        <!-- N -->
+        <polygon points="18,2 20.5,16 18,13 15.5,16" fill="#0F3D45"/>
+        <!-- S -->
+        <polygon points="18,34 15.5,20 18,23 20.5,20" fill="#4A6670"/>
+        <!-- E -->
+        <polygon points="34,18 20,15.5 23,18 20,20.5" fill="#4A6670"/>
+        <!-- W -->
+        <polygon points="2,18 16,20.5 13,18 16,15.5" fill="#4A6670"/>
+        <text x="18" y="8" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" font-weight="600" fill="#0F3D45">N</text>
+        <text x="18" y="31" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">S</text>
+        <text x="30" y="19.5" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">E</text>
+        <text x="6" y="19.5" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">W</text>
+      </svg>
+      <div class="cp-nav-wordmark">
+        Pathworks
+        <span>by Changing Tribes</span>
+      </div>
+    </div>
+    <ul class="cp-nav-links">
+      <li><a href="#">Blueprint</a></li>
+      <li><a href="#">Compass</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="cp-nav-cta">Get Started →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="compass-hero">
+    <div class="compass-hero-left">
+      <div class="hero-eyebrow">The Pathworks Compass</div>
+      <h1 class="compass-hero-h1">
+        Find Your<br/>
+        <em>True</em><br/>
+        Direction
+      </h1>
+      <p class="compass-hero-body">
+        You've built real experience. Now discover exactly where it can take you —
+        20+ career paths and 20+ business ideas, all mapped from your unique Blueprint.
+      </p>
+      <div class="compass-cta-row">
+        <!-- Vintage pointing finger SVG -->
+        <a href="#" class="btn-gold">
+          Unlock My Compass
+        </a>
+        <a href="#" class="btn-ghost">See a sample →</a>
+      </div>
+    </div>
+
+    <div class="compass-hero-right">
+      <div class="compass-outer-ring"></div>
+      <div class="compass-visual">
+        <!-- Detailed Compass Rose SVG -->
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer decorative rings -->
+          <circle cx="200" cy="200" r="192" stroke="#0F3D45" stroke-width="1" fill="none" opacity="0.2"/>
+          <circle cx="200" cy="200" r="180" stroke="#0F3D45" stroke-width="1.5" fill="none" opacity="0.15"/>
+          <circle cx="200" cy="200" r="168" stroke="#E8920A" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+          <!-- Degree marks -->
+          <g stroke="#0F3D45" stroke-width="0.8" opacity="0.3">
+            <!-- Cardinal marks -->
+            <line x1="200" y1="32" x2="200" y2="20"/>
+            <line x1="200" y1="368" x2="200" y2="380"/>
+            <line x1="32" y1="200" x2="20" y2="200"/>
+            <line x1="368" y1="200" x2="380" y2="200"/>
+            <!-- Intercardinal -->
+            <line x1="320" y1="80" x2="328" y2="72"/>
+            <line x1="80" y1="80" x2="72" y2="72"/>
+            <line x1="320" y1="320" x2="328" y2="328"/>
+            <line x1="80" y1="320" x2="72" y2="328"/>
+          </g>
+
+          <!-- Main compass face -->
+          <circle cx="200" cy="200" r="160" fill="#F0F8FA" stroke="#0F3D45" stroke-width="2"/>
+          <circle cx="200" cy="200" r="155" fill="none" stroke="#E8920A" stroke-width="0.5" opacity="0.5"/>
+
+          <!-- Compass rose petals — North (gold) -->
+          <path d="M200,40 L212,185 L200,170 L188,185 Z" fill="#0F3D45"/>
+          <path d="M200,40 L206,140 L200,130 L194,140 Z" fill="#E8920A"/>
+
+          <!-- South (muted) -->
+          <path d="M200,360 L188,215 L200,230 L212,215 Z" fill="#4A6670"/>
+          <path d="M200,360 L194,260 L200,270 L206,260 Z" fill="#C8D4CD"/>
+
+          <!-- East (muted) -->
+          <path d="M360,200 L215,212 L230,200 L215,188 Z" fill="#4A6670"/>
+          <path d="M360,200 L260,206 L270,200 L260,194 Z" fill="#C8D4CD"/>
+
+          <!-- West (muted) -->
+          <path d="M40,200 L185,188 L170,200 L185,212 Z" fill="#4A6670"/>
+          <path d="M40,200 L140,194 L130,200 L140,206 Z" fill="#C8D4CD"/>
+
+          <!-- Intercardinal points — NE -->
+          <path d="M283,117 L207,192 L217,182 L207,207 Z" fill="#0F3D45" opacity="0.5"/>
+          <!-- NW -->
+          <path d="M117,117 L193,192 L183,182 L193,207 Z" fill="#0F3D45" opacity="0.5"/>
+          <!-- SE -->
+          <path d="M283,283 L207,208 L217,218 L207,193 Z" fill="#0F3D45" opacity="0.5"/>
+          <!-- SW -->
+          <path d="M117,283 L193,208 L183,218 L193,193 Z" fill="#0F3D45" opacity="0.5"/>
+
+          <!-- Inner ring -->
+          <circle cx="200" cy="200" r="38" fill="#D8ECF0" stroke="#0F3D45" stroke-width="1.5"/>
+          <circle cx="200" cy="200" r="30" fill="#F0F8FA" stroke="#E8920A" stroke-width="1"/>
+
+          <!-- Center jewel -->
+          <circle cx="200" cy="200" r="8" fill="#E8920A"/>
+          <circle cx="200" cy="200" r="4" fill="#F5A93A"/>
+
+          <!-- Cardinal letter N -->
+          <text x="200" y="68" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="18" font-weight="600" fill="#0F3D45">N</text>
+          <text x="200" y="344" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">S</text>
+          <text x="340" y="205" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">E</text>
+          <text x="62" y="205" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">W</text>
+
+          <!-- Intercardinal smaller letters -->
+          <text x="294" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F3D45" opacity="0.6">NE</text>
+          <text x="108" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F3D45" opacity="0.6">NW</text>
+          <text x="294" y="300" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F3D45" opacity="0.6">SE</text>
+          <text x="108" y="300" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F3D45" opacity="0.6">SW</text>
+        </svg>
+      </div>
+    </div>
   </div>
-  <p class="hero-note">15-minute assessment · Instant results · Used by career changers and entrepreneurs</p>
+
+  <!-- FEATURES STRIP -->
+  <div class="compass-features">
+    <div class="compass-feature">
+      <span class="feature-icon">🧭</span>
+      <div class="feature-title">20+ Career Paths</div>
+      <p class="feature-desc">Every path drawn directly from your unique experience, strengths, and working style.</p>
+    </div>
+    <div class="compass-feature">
+      <span class="feature-icon">💡</span>
+      <div class="feature-title">20+ Business Ideas</div>
+      <p class="feature-desc">Vetted ventures that match your Blueprint — not generic ideas, your ideas.</p>
+    </div>
+    <div class="compass-feature">
+      <span class="feature-icon">🗺️</span>
+      <div class="feature-title">Custom Roadmap</div>
+      <p class="feature-desc">A 90-day action plan tailored to your chosen direction, starting this week.</p>
+    </div>
+    <div class="compass-feature">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Instant Results</div>
+      <p class="feature-desc">AI-powered analysis delivered in under 60 seconds. No waiting, no appointment.</p>
+    </div>
+  </div>
+
+  <!-- WHAT YOU GET -->
+  <div class="compass-what">
+    <div class="compass-what-inner">
+      <div class="compass-what-text">
+        <h2>Your Blueprint<br/>is just the<br/><em>starting point.</em></h2>
+        <p>
+          The Compass takes everything revealed in your Blueprint and plots where
+          it can realistically take you — based on who you actually are, not who
+          you think you should be.
+        </p>
+        <!-- Vintage pointing finger -->
+        <svg width="160" height="70" viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg">
+          <!-- Vintage hand/finger pointing right -->
+          <g transform="translate(0, 10)">
+            <!-- Cuff -->
+            <rect x="0" y="18" width="35" height="28" rx="3" fill="#D8ECF0" stroke="#F5A93A" stroke-width="1.5"/>
+            <line x1="0" y1="26" x2="35" y2="26" stroke="#E8920A" stroke-width="1"/>
+            <line x1="0" y1="32" x2="35" y2="32" stroke="#E8920A" stroke-width="0.5"/>
+            <line x1="0" y1="38" x2="35" y2="38" stroke="#E8920A" stroke-width="0.5"/>
+            <!-- Hand base -->
+            <path d="M35,18 L90,18 Q100,18 100,28 L100,46 Q100,56 90,56 L35,56 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1.5"/>
+            <!-- Index finger extended -->
+            <path d="M70,18 L120,8 Q135,4 148,10 Q158,15 155,22 Q152,28 142,27 L100,22 L100,18 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1.5"/>
+            <!-- Finger knuckle lines -->
+            <line x1="108" y1="14" x2="106" y2="20" stroke="#E8920A" stroke-width="0.8" opacity="0.5"/>
+            <line x1="122" y1="11" x2="120" y2="17" stroke="#E8920A" stroke-width="0.8" opacity="0.5"/>
+            <!-- Fingernail -->
+            <ellipse cx="148" cy="17" rx="6" ry="4" fill="#D8ECF0" stroke="#E8920A" stroke-width="1"/>
+            <!-- Curled fingers suggestion -->
+            <path d="M50,56 Q55,62 62,60 Q68,58 65,52" fill="none" stroke="#E8920A" stroke-width="1" opacity="0.5"/>
+            <path d="M65,56 Q70,62 77,60 Q83,58 80,52" fill="none" stroke="#E8920A" stroke-width="1" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="compass-items">
+        <div class="compass-item">
+          <div class="compass-item-num">01</div>
+          <div class="compass-item-body">
+            <h3>Complete your Blueprint (free)</h3>
+            <p>7 minutes to surface your strengths, values, and work style through our guided assessment.</p>
+          </div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-item-num">02</div>
+          <div class="compass-item-body">
+            <h3>Unlock the Compass</h3>
+            <p>One payment of $39 transforms your Blueprint into a full navigation guide for your next chapter.</p>
+          </div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-item-num">03</div>
+          <div class="compass-item-body">
+            <h3>Choose your direction</h3>
+            <p>Browse 20+ career paths and 20+ business ideas — then follow your personalized 90-day roadmap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end compass-page -->
+
+
+<!-- ================================================
+     SECTION 2: BLUEPRINT PAGE
+================================================ -->
+<div class="section-label">② BLUEPRINT PAGE — Full Page Design</div>
+
+<div class="blueprint-page">
+
+  <!-- NAV -->
+  <nav class="blueprint-nav">
+    <div class="bp-nav-logo">Pathworks <span>Blueprint</span></div>
+    <div class="bp-badge">Free · 7 Minutes</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="blueprint-hero">
+    <div>
+      <div class="bp-hero-tag">
+        <!-- Vintage finger pointing left/right inline -->
+        <svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8,3 L14,3 Q17,3 17,6 Q17,9 14,9 L8,9 L8,7 L4,7 Q2,7 2,6 Q2,5 4,5 L8,5 Z" fill="#F5A93A"/>
+          <circle cx="2" cy="6" r="1.5" fill="#F5A93A"/>
+        </svg>
+        Step 1 — Start Here
+      </div>
+      <h1 class="blueprint-hero h1" style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:clamp(2.8rem,5vw,4.5rem);line-height:1.0;color:#111;margin-bottom:1.5rem;">
+        Discover Your<br/>
+        <mark style="background:#F5A93A;color:#111;padding:0 0.15em;">Blueprint.</mark><br/>
+        Free.
+      </h1>
+      <p class="blueprint-hero-body">
+        In 7 minutes, surface the strengths, values, and working style you've
+        built across your career. Your Blueprint is the foundation — everything
+        else is built from it.
+      </p>
+      <div class="bp-cta-row">
+        <!-- Vintage pointing finger leading to CTA -->
+        <svg width="50" height="28" viewBox="0 0 50 28" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+          <g transform="translate(0,4)">
+            <rect x="0" y="6" width="12" height="10" rx="1" fill="#D8ECF0" stroke="#E8920A" stroke-width="1"/>
+            <line x1="0" y1="9" x2="12" y2="9" stroke="#E8920A" stroke-width="0.5"/>
+            <path d="M12,6 L32,6 Q36,6 36,11 Q36,18 32,18 L12,18 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1"/>
+            <path d="M24,6 L42,2 Q48,0 50,4 Q51,7 48,8 L36,10 L36,6 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1"/>
+            <ellipse cx="49" cy="5" rx="2.5" ry="1.8" fill="#D8ECF0" stroke="#E8920A" stroke-width="0.8"/>
+          </g>
+        </svg>
+        <a href="#" class="btn-dark">Start My Blueprint →</a>
+        <a href="#" class="btn-outline">I have a coupon</a>
+      </div>
+      <p class="bp-price-note">Free to complete · Compass upgrade available for $39</p>
+    </div>
+
+    <!-- Blueprint card mockup -->
+    <div class="bp-card-visual">
+      <div class="bp-card">
+        <div class="bp-card-label">Your Pathworks Blueprint</div>
+        <div class="bp-card-tribe">The Pioneer</div>
+        <div class="bp-card-subtitle">Explorer · Builder · Pathfinder</div>
+        <div class="bp-card-divider"></div>
+        <div class="bp-card-row">
+          <span>Leadership</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="bp-card-row">
+          <span>Creative Thinking</span>
+          <span>★★★★☆</span>
+        </div>
+        <div class="bp-card-row">
+          <span>Systems & Structure</span>
+          <span>★★★☆☆</span>
+        </div>
+        <div class="bp-card-row">
+          <span>Relationship Building</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="bp-card-row">
+          <span>Entrepreneurial Drive</span>
+          <span>★★★★★</span>
+        </div>
+        <div class="bp-card-bottom">
+          <span>Pathworks by Changing Tribes</span>
+          <div class="bp-card-stamp">🧭</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="bp-how">
+    <div class="bp-how-inner">
+      <div class="bp-how-header">
+        <h2>How it works</h2>
+        <!-- Pointing finger decoration -->
+        <svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(0,6)">
+            <rect x="0" y="7" width="18" height="14" rx="2" fill="#D8ECF0" stroke="#E8920A" stroke-width="1.2"/>
+            <line x1="0" y1="11" x2="18" y2="11" stroke="#E8920A" stroke-width="0.6"/>
+            <path d="M18,7 L48,7 Q54,7 54,14 Q54,21 48,21 L18,21 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1.2"/>
+            <path d="M35,7 L62,2 Q70,0 74,5 Q76,9 72,11 L54,14 L54,7 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="1.2"/>
+            <ellipse cx="73" cy="7" rx="4" ry="2.5" fill="#D8ECF0" stroke="#E8920A" stroke-width="1"/>
+            <path d="M26,21 Q29,26 33,24" fill="none" stroke="#E8920A" stroke-width="0.8" opacity="0.5"/>
+            <path d="M36,21 Q39,26 43,24" fill="none" stroke="#E8920A" stroke-width="0.8" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="bp-steps">
+        <div class="bp-step">
+          <div class="bp-step-num">01</div>
+          <div class="bp-step-title">Take the Assessment</div>
+          <p class="bp-step-desc">
+            25 questions across 5 dimensions. Rate your real-world experience
+            on sliding scales — no right or wrong answers.
+          </p>
+          <div class="bp-step-arrow">→</div>
+        </div>
+        <div class="bp-step">
+          <div class="bp-step-num">02</div>
+          <div class="bp-step-title">Get Your Blueprint</div>
+          <p class="bp-step-desc">
+            Instant AI analysis reveals your Tribe type, core strengths,
+            and the working style that makes you effective.
+          </p>
+          <div class="bp-step-arrow">→</div>
+        </div>
+        <div class="bp-step">
+          <div class="bp-step-num">03</div>
+          <div class="bp-step-title">Unlock Your Compass</div>
+          <p class="bp-step-desc">
+            Add the Compass for $39 and get 20+ careers, 20+ businesses,
+            and a personalized 90-day action plan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end blueprint-page -->
+
+
+<!-- ================================================
+     SECTION 3: META / FACEBOOK ADS
+================================================ -->
+<div class="section-label">③ META / FACEBOOK AD MOCKUPS — 3 Creative Variations</div>
+
+<div class="ads-section">
+  <h2 class="ads-section-title">Meta Ad Creatives</h2>
+  <p class="ads-section-sub">Three ad variations — shown in a mobile feed frame</p>
+
+  <div class="ads-grid">
+
+    <!-- AD 1: "Find Your Direction" — Forest/Gold -->
+    <div class="ad-frame">
+      <div class="ad-phone-screen">
+        <div class="ad-feed-header">
+          <div class="ad-avatar">PW</div>
+          <div class="ad-feed-meta">
+            <div class="ad-feed-name">Pathworks Blueprint</div>
+            <div class="ad-feed-sub">Sponsored · 🌐</div>
+          </div>
+          <span class="ad-sponsored">Ad</span>
+        </div>
+        <div class="ad-card-1">
+          <!-- Compass bg decoration -->
+          <svg class="ad-compass-bg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="58" stroke="white" stroke-width="1" fill="none"/>
+            <circle cx="60" cy="60" r="44" stroke="white" stroke-width="0.5" fill="none"/>
+            <polygon points="60,4 64,55 60,50 56,55" fill="white"/>
+            <polygon points="60,116 56,65 60,70 64,65" fill="white" opacity="0.4"/>
+            <polygon points="116,60 65,64 70,60 65,56" fill="white" opacity="0.4"/>
+            <polygon points="4,60 55,56 50,60 55,64" fill="white" opacity="0.4"/>
+            <circle cx="60" cy="60" r="6" fill="white" opacity="0.5"/>
+            <circle cx="60" cy="60" r="2" fill="white"/>
+          </svg>
+          <div class="ad-eyebrow">Pathworks Compass</div>
+          <h3>
+            Find Your<br/>
+            <em>True</em><br/>
+            Direction
+          </h3>
+        </div>
+        <div class="ad-feed-caption">
+          <strong>20+ careers. 20+ businesses.</strong> All built from your unique Blueprint. Free assessment, $39 Compass unlock.
+        </div>
+        <div class="ad-feed-btn">Learn More</div>
+        <div class="ad-feed-actions">
+          <span class="ad-feed-action">👍 Like</span>
+          <span class="ad-feed-action">💬 Comment</span>
+          <span class="ad-feed-action">↗ Share</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 2: "Can Be More Will" inspired — Gold/Black bold -->
+    <div class="ad-frame">
+      <div class="ad-phone-screen">
+        <div class="ad-feed-header">
+          <div class="ad-avatar">PW</div>
+          <div class="ad-feed-meta">
+            <div class="ad-feed-name">Pathworks Blueprint</div>
+            <div class="ad-feed-sub">Sponsored · 🌐</div>
+          </div>
+          <span class="ad-sponsored">Ad</span>
+        </div>
+        <div class="ad-card-2">
+          <div class="ad-top">Your Next Chapter</div>
+          <h3>
+            YOUR<br/>
+            NEXT<br/>
+            <span>PATH</span><br/>
+            STARTS<br/>
+            HERE
+          </h3>
+          <div class="ad-bottom-row">
+            <div class="ad-logo">Pathworks</div>
+            <!-- Mini compass SVG — gold on slate -->
+            <svg class="ad-compass-sm" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="17" stroke="#F5A93A" stroke-width="1.5" fill="rgba(232,146,10,0.08)"/>
+              <polygon points="18,3 20,16 18,14 16,16" fill="#F5A93A"/>
+              <polygon points="18,33 16,20 18,22 20,20" fill="rgba(232,146,10,0.4)"/>
+              <polygon points="33,18 20,20 22,18 20,16" fill="rgba(232,146,10,0.4)"/>
+              <polygon points="3,18 16,16 14,18 16,20" fill="rgba(232,146,10,0.4)"/>
+              <circle cx="18" cy="18" r="3" fill="#F5A93A"/>
+              <circle cx="18" cy="18" r="1.5" fill="#1A6B72"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ad-feed-caption">
+          You've built the experience. <strong>Discover where it can take you</strong> — 20+ careers and businesses mapped to your Blueprint.
+        </div>
+        <div class="ad-feed-btn">Get Your Blueprint Free</div>
+        <div class="ad-feed-actions">
+          <span class="ad-feed-action">👍 Like</span>
+          <span class="ad-feed-action">💬 Comment</span>
+          <span class="ad-feed-action">↗ Share</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 3: Split cream/forest with pointing finger -->
+    <div class="ad-frame">
+      <div class="ad-phone-screen">
+        <div class="ad-feed-header">
+          <div class="ad-avatar">PW</div>
+          <div class="ad-feed-meta">
+            <div class="ad-feed-name">Pathworks Blueprint</div>
+            <div class="ad-feed-sub">Sponsored · 🌐</div>
+          </div>
+          <span class="ad-sponsored">Ad</span>
+        </div>
+        <div class="ad-card-3">
+          <div class="ad-card-3-top">
+            <div class="tag">Free · 7 Minutes</div>
+            <h3>
+              Ready to stop<br/>
+              wondering what's<br/>
+              next for you?
+            </h3>
+          </div>
+          <div class="ad-card-3-bottom">
+            <!-- Small pointing finger -->
+            <svg width="50" height="20" viewBox="0 0 50 20" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:0.4rem;">
+              <g transform="translate(0,3)">
+                <rect x="0" y="4" width="10" height="8" rx="1" fill="#D8ECF0" stroke="#E8920A" stroke-width="0.8"/>
+                <path d="M10,4 L28,4 Q32,4 32,8 Q32,12 28,12 L10,12 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="0.8"/>
+                <path d="M20,4 L38,1 Q44,0 46,3 Q47,5.5 44,6.5 L32,8 L32,4 Z" fill="#C8E6ED" stroke="#E8920A" stroke-width="0.8"/>
+                <ellipse cx="45" cy="4" rx="2.5" ry="1.5" fill="#D8ECF0" stroke="#E8920A" stroke-width="0.6"/>
+              </g>
+            </svg>
+            <p>
+              "The Blueprint showed me exactly what I'd been missing —
+              and the Compass gave me the plan to act on it."
+            </p>
+            <span class="ad-cta-pill">Start Free →</span>
+          </div>
+        </div>
+        <div class="ad-feed-caption">
+          <strong>Take the free Blueprint assessment.</strong> Unlock your Compass for $39. Know your next step by tonight.
+        </div>
+        <div class="ad-feed-btn">Start Free Assessment</div>
+        <div class="ad-feed-actions">
+          <span class="ad-feed-action">👍 Like</span>
+          <span class="ad-feed-action">💬 Comment</span>
+          <span class="ad-feed-action">↗ Share</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<!-- THE PROBLEM -->
-<section class="problem">
-  <div class="container">
-    <p class="section-label">The Challenge</p>
-    <h2 class="section-title">Most career advice ignores what's actually happening</h2>
-    <p class="section-sub">AI is reshaping entire industries. The roles people trained for are changing — and most tools built to help don't account for any of it.</p>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <span class="icon">🤖</span>
-        <h3>AI Is Replacing Jobs Faster Than Expected</h3>
-        <p>Roles built around routine analysis, data processing, writing, and scheduling are disappearing. Knowing which direction is safe — and which isn't — matters more than it ever has.</p>
+
+<!-- ================================================
+     COLOR PALETTE & TYPE GUIDE
+================================================ -->
+<div class="section-label">④ COLOR PALETTE & TYPOGRAPHY GUIDE</div>
+
+<div class="palette-section">
+  <div class="palette-inner">
+    <div class="palette-title">Color Palette</div>
+    <div class="palette-swatches" style="grid-template-columns:repeat(7,1fr);">
+      <div>
+        <div class="swatch" style="background:#0F3D45;"></div>
+        <div class="swatch-name">#0F3D45</div>
+        <div class="swatch-label">Deep Navy-Teal<br/>(Primary)</div>
       </div>
-      <div class="problem-card">
-        <span class="icon">🗺️</span>
-        <h3>Most Assessments Tell You Who You Are, Not What to Do</h3>
-        <p>Generic personality tests give you a label. What you actually need is a specific, actionable plan — real careers, real businesses, real income projections — built around your exact profile.</p>
+      <div>
+        <div class="swatch" style="background:#1A6B72;border:2px solid #F5A93A;"></div>
+        <div class="swatch-name" style="color:#1A6B72;font-weight:700;">#1A6B72</div>
+        <div class="swatch-label"><strong>Deep Teal ✦ Brand</strong><br/>(Alt Primary)</div>
       </div>
-      <div class="problem-card">
-        <span class="icon">🔁</span>
-        <h3>Transferable Skills Are Your Greatest Asset</h3>
-        <p>Everything you've built and done across your career is more valuable than you think. The key is knowing how to translate it into what comes next — before someone else makes that decision for you.</p>
+      <div>
+        <div class="swatch" style="background:#E8920A;"></div>
+        <div class="swatch-name">#E8920A</div>
+        <div class="swatch-label">Warm Amber<br/>(Accent)</div>
+      </div>
+      <div>
+        <div class="swatch" style="background:#F5A93A;"></div>
+        <div class="swatch-name">#F5A93A</div>
+        <div class="swatch-label">Bright Amber<br/>(Highlight)</div>
+      </div>
+      <div>
+        <div class="swatch" style="background:#F0F8FA;border:1px solid #ddd;"></div>
+        <div class="swatch-name">#F0F8FA</div>
+        <div class="swatch-label">Soft White-Blue<br/>(Background)</div>
+      </div>
+      <div>
+        <div class="swatch" style="background:#4A6670;"></div>
+        <div class="swatch-name">#4A6670</div>
+        <div class="swatch-label">Slate<br/>(Supporting)</div>
+      </div>
+      <div>
+        <div class="swatch" style="background:#111111;"></div>
+        <div class="swatch-name">#111111</div>
+        <div class="swatch-label">Ink Black<br/>(Text)</div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how-it-works">
-  <div class="container">
-    <p class="section-label">Your Path Forward</p>
-    <h2 class="section-title">Two steps to a clear, confident plan</h2>
-    <p class="section-sub">Pathworks is built around two connected tools. Take them in sequence for the full picture — or start with the Blueprint and decide from there.</p>
-
-    <div class="steps">
-
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <span class="step-tag">Pathworks Blueprint</span>
-          <h3>Discover who you are professionally — in 15 minutes</h3>
-          <p>The Blueprint is a 40-question assessment that builds a complete picture of how you work, what energizes you, what you've actually built and done, how AI-resistant your natural strengths are, and what context you're operating in right now. It draws from established career science — Holland's RIASEC model, the Big Five personality framework, StrengthsFinder, and the Values in Action inventory — but applies it specifically to the world of work in the AI era.</p>
-          <p style="margin-top:12px;">You'll receive a full Tribe Profile — your professional archetype — plus career path recommendations, business ideas, and a 5-step action roadmap. All delivered instantly.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center;">
-            <span class="step-price">$19 one-time</span>
-            <a href="https://pathworksblueprint.com" class="btn-primary" style="font-size:0.9rem;padding:10px 20px;">Take the Blueprint →</a>
+    <!-- Slate teal combination preview -->
+    <div style="margin-top:2.5rem;">
+      <div class="palette-title">Slate Teal in Use — Split Combo Preview</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1rem;">
+        <!-- Combo 1: Slate + Gold -->
+        <div style="background:#1A6B72;padding:2rem;display:flex;flex-direction:column;gap:0.8rem;">
+          <div style="font-family:'Public Sans',sans-serif;font-weight:500;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#F5A93A;">Pathworks Compass</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:1.6rem;line-height:1;color:#FFFFFF;">Find Your<br/>True <span style="color:#F5A93A;">North.</span></div>
+          <div style="font-family:'Merriweather',serif;font-weight:300;font-size:0.78rem;line-height:1.6;color:rgba(240,248,250,0.75);">Your career story, mapped to careers and businesses that fit.</div>
+          <div style="display:inline-block;background:#F5A93A;color:#111;font-family:'Public Sans',sans-serif;font-weight:600;font-size:0.75rem;padding:0.5rem 1rem;width:fit-content;">Get Started →</div>
+        </div>
+        <!-- Combo 2: Slate + Cream split -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;">
+          <div style="background:#1A6B72;padding:1.5rem;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 80 80" width="70" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="38" stroke="#F5A93A" stroke-width="1.5" fill="none"/>
+              <circle cx="40" cy="40" r="28" stroke="rgba(232,146,10,0.3)" stroke-width="1" fill="none"/>
+              <polygon points="40,4 43,36 40,32 37,36" fill="#F5A93A"/>
+              <polygon points="40,76 37,44 40,48 43,44" fill="rgba(232,146,10,0.4)"/>
+              <polygon points="76,40 44,43 48,40 44,37" fill="rgba(232,146,10,0.4)"/>
+              <polygon points="4,40 36,37 32,40 36,43" fill="rgba(232,146,10,0.4)"/>
+              <circle cx="40" cy="40" r="5" fill="#F5A93A"/>
+              <circle cx="40" cy="40" r="2" fill="#1A6B72"/>
+              <text x="40" y="16" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="7" font-weight="600" fill="white">N</text>
+            </svg>
           </div>
-          <div class="step-deliverable">
-            <p>✓ Your Tribe Profile archetype &nbsp;·&nbsp; ✓ 3 matched career paths &nbsp;·&nbsp; ✓ 3 business ideas &nbsp;·&nbsp; ✓ 5-step action roadmap &nbsp;·&nbsp; ✓ Results emailed instantly</p>
+          <div style="background:#F0F8FA;padding:1.5rem;display:flex;flex-direction:column;justify-content:center;gap:0.5rem;">
+            <div style="font-family:'Public Sans',sans-serif;font-weight:700;font-size:1.1rem;color:#111;line-height:1.1;">Know Your Next Step</div>
+            <div style="font-family:'Merriweather',serif;font-style:italic;font-weight:300;font-size:0.72rem;color:#4A4A4A;line-height:1.5;">Blueprint free. Compass $39.</div>
+            <div style="background:#1A6B72;color:#F5A93A;font-family:'Public Sans',sans-serif;font-weight:600;font-size:0.68rem;padding:0.35rem 0.7rem;width:fit-content;">Start Free</div>
           </div>
         </div>
-      </div>
-
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <span class="step-tag">Pathworks Compass</span>
-          <h3>Get your 10-year plan — built around where you want to go</h3>
-          <p>The Compass takes your full Blueprint profile and adds one thing: where you want to go. You type one or two sentences about the career or business direction you're drawn to — "I want to work with animals," "I want to consult in healthcare," "I want to build something online" — and the Compass combines that with your 40-question profile to generate a deeply personalized plan.</p>
-          <p style="margin-top:12px;">You receive a 7–10 page personalized report (delivered as a beautiful PDF in your inbox) covering three AI-resistant career paths with full 10-year arcs, three tailored business models with realistic financial projections, your ideal work environment, a 90-day action plan, and a hand-picked resource list.</p>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;align-items:center;">
-            <span class="step-price">$39 one-time</span>
-            <a href="https://pathworkscompass.com" class="btn-primary" style="font-size:0.9rem;padding:10px 20px;">Take the Compass →</a>
-          </div>
-          <div class="step-deliverable">
-            <p>✓ 3 AI-resistant career paths with 10-year income arcs &nbsp;·&nbsp; ✓ 3 custom business models with financials &nbsp;·&nbsp; ✓ 90-day action plan &nbsp;·&nbsp; ✓ 7–10 page branded PDF report emailed to you</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- THE SCIENCE -->
-<section class="science">
-  <div class="container">
-    <p class="section-label">The Science Behind It</p>
-    <h2 class="section-title">Built on proven frameworks — updated for the AI era</h2>
-    <p class="section-sub">Pathworks isn't guesswork. The assessment draws from the most validated career science frameworks available, and adds the one dimension most assessments completely ignore: AI resistance.</p>
-
-    <div class="science-grid">
-      <div class="science-card">
-        <h3>Holland's RIASEC Model</h3>
-        <p>The foundation of virtually every serious career assessment. RIASEC maps people across six work-style dimensions — Realistic, Investigative, Artistic, Social, Enterprising, and Conventional — to identify genuine career fit. Pathworks uses this as its core architecture.</p>
-      </div>
-      <div class="science-card">
-        <h3>Big Five Personality Applied to Work</h3>
-        <p>The Big Five (OCEAN) is the most rigorously validated personality framework in psychological research. Rather than just labeling you, Pathworks applies it specifically to how you work — autonomy vs. collaboration, structure vs. flexibility, stability vs. change.</p>
-      </div>
-      <div class="science-card">
-        <h3>Transferable Skills Inventory</h3>
-        <p>Inspired by StrengthsFinder and the Values in Action inventory, Pathworks adds a dimension most career tests miss: what you've actually built and done. Not just what you prefer — what you've proven. Sales, systems, coaching, creative work, leadership, technical expertise.</p>
-      </div>
-      <div class="science-card">
-        <h3>AI-Resistance Framework</h3>
-        <p>Unique to Pathworks. A dedicated set of questions maps the five dimensions that AI genuinely cannot replace: physical presence, emotional attunement, high-trust relationship building, situational judgment in ambiguous human contexts, and deep community-level impact. This is what future-proofs your plan.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:48px;">
-      <p style="color:#B8D4DA;font-size:0.9rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">The 8 Assessment Categories — 40 Questions Total</p>
-      <div class="categories-grid">
-        <div class="cat-pill">
-          <div class="num">Q1–5</div>
-          <div class="name">How You Work</div>
-          <div class="desc">Independence, structure, direction, visibility, environment</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q6–10</div>
-          <div class="name">What Energizes You</div>
-          <div class="desc">Analytical vs. creative, stability vs. growth, scale vs. depth</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q11–15</div>
-          <div class="name">Your Skills & Strengths</div>
-          <div class="desc">Specialist vs. generalist, detail vs. vision, strategy vs. execution</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q16–20</div>
-          <div class="name">Risk & Change</div>
-          <div class="desc">Income certainty, organizational type, decision-making, risk appetite</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q21–25</div>
-          <div class="name">Your Values & Vision</div>
-          <div class="desc">Security vs. purpose, balance, impact scale, independence, legacy</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q26–30</div>
-          <div class="name">What You've Built & Done</div>
-          <div class="desc">Proven transferable skills — what you've actually done, not just preferred</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q31–35</div>
-          <div class="name">Your Human Edge</div>
-          <div class="desc">AI-resistance profile — the five dimensions AI cannot replicate</div>
-        </div>
-        <div class="cat-pill">
-          <div class="num">Q36–40</div>
-          <div class="name">Your World & Context</div>
-          <div class="desc">Local vs. global, timeline, team size, who you serve, digital vs. physical</div>
+        <!-- Combo 3: Cream page, slate detail -->
+        <div style="background:#F0F8FA;padding:2rem;border-left:4px solid #1A6B72;">
+          <div style="font-family:'Public Sans',sans-serif;font-weight:500;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#1A6B72;margin-bottom:0.5rem;">Changing Tribes</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:1.4rem;line-height:1.05;color:#111;margin-bottom:0.8rem;">Your experience.<br/>A new <span style="background:#F5A93A;padding:0 0.1em;">direction.</span></div>
+          <div style="font-family:'Merriweather',serif;font-weight:300;font-size:0.78rem;line-height:1.6;color:#3A3A3A;margin-bottom:1rem;">Stop guessing. Start navigating toward work that fits who you've become.</div>
+          <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:0.75rem;color:#1A6B72;border-bottom:2px solid #1A6B72;display:inline;">Learn more →</div>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- AI RESISTANT -->
-<section class="ai-resistant">
-  <div class="container">
-    <p class="section-label">Future-Proof Your Career</p>
-    <h2 class="section-title">Not all careers are created equal right now</h2>
-    <p class="section-sub">The Compass doesn't just match you to careers you'd be good at — it explicitly steers you toward paths that AI will augment, not eliminate. Here's what that distinction looks like in practice.</p>
-
-    <div class="ai-grid">
-      <div class="ai-card bad">
-        <h3>⚠️ Higher AI Displacement Risk</h3>
-        <div class="ai-item">✗ <span>Roles built around routine data analysis or reporting</span></div>
-        <div class="ai-item">✗ <span>Writing, editing, and content production at scale</span></div>
-        <div class="ai-item">✗ <span>Scheduling, coordination, and administrative processing</span></div>
-        <div class="ai-item">✗ <span>Basic customer service and tier-1 support</span></div>
-        <div class="ai-item">✗ <span>Standard legal research, bookkeeping, and data entry</span></div>
-      </div>
-      <div class="ai-card good">
-        <h3>✅ Strong AI Resistance</h3>
-        <div class="ai-item">✓ <span>Roles requiring physical presence and hands-on judgment</span></div>
-        <div class="ai-item">✓ <span>High-trust relationship and therapeutic work</span></div>
-        <div class="ai-item">✓ <span>Complex human leadership and organizational navigation</span></div>
-        <div class="ai-item">✓ <span>Community-embedded, place-based professional roles</span></div>
-        <div class="ai-item">✓ <span>Entrepreneurial and creative work at the human frontier</span></div>
-      </div>
-    </div>
-    <p style="margin-top:24px;font-size:0.9rem;color:var(--muted);text-align:center;">The Compass maps your specific Human Edge scores against this framework — so you get recommendations matched to your unique AI-resistance profile, not generic advice.</p>
-  </div>
-</section>
-
-<!-- DELIVERABLES / PRICING -->
-<section class="deliverables">
-  <div class="container">
-    <p class="section-label">What You Get</p>
-    <h2 class="section-title">Two tools. One clear path forward.</h2>
-    <p class="section-sub">Start with the Blueprint. Add the Compass when you're ready to go deeper. Both are yours permanently — no subscription, no recurring fees.</p>
-
-    <div class="del-grid">
-      <div class="del-card">
-        <div class="del-header blueprint">
-          <h3>Pathworks Blueprint</h3>
-          <p>Your professional profile & starting roadmap</p>
-          <div class="price">$19</div>
-        </div>
-        <div class="del-body">
-          <div class="del-item"><span class="check">✓</span><span>40-question assessment across 8 professional dimensions</span></div>
-          <div class="del-item"><span class="check">✓</span><span>Your Tribe Profile — a full professional archetype with detailed description</span></div>
-          <div class="del-item"><span class="check">✓</span><span>3 matched career paths based on your profile</span></div>
-          <div class="del-item"><span class="check">✓</span><span>3 business ideas suited to your skills and working style</span></div>
-          <div class="del-item"><span class="check">✓</span><span>5-step action roadmap to get moving immediately</span></div>
-          <div class="del-item"><span class="check">✓</span><span>Full results emailed instantly — keep them forever</span></div>
-        </div>
-        <a href="https://pathworksblueprint.com" class="del-btn blueprint">Start My Blueprint →</a>
-      </div>
-
-      <div class="del-card">
-        <div class="del-header compass">
-          <h3>Pathworks Compass</h3>
-          <p>Your personalized 10-year plan & PDF report</p>
-          <div class="price">$39</div>
-        </div>
-        <div class="del-body">
-          <div class="del-item"><span class="check">✓</span><span>3 AI-resistant career paths with full 10-year income arcs (Years 1–3, 4–7, 8–10)</span></div>
-          <div class="del-item"><span class="check">✓</span><span>3 custom business models with startup costs, Year 1 & Year 3 revenue targets</span></div>
-          <div class="del-item"><span class="check">✓</span><span>Your ideal work environment and culture fit</span></div>
-          <div class="del-item"><span class="check">✓</span><span>12-week (90-day) action plan — fortnightly steps, specific and concrete</span></div>
-          <div class="del-item"><span class="check">✓</span><span>Hand-picked books, communities, and tools matched to your direction</span></div>
-          <div class="del-item"><span class="check">✓</span><span>7–10 page branded PDF report emailed to you — save, print, or share it</span></div>
-        </div>
-        <a href="https://pathworkscompass.com" class="del-btn compass">Get My Compass →</a>
-      </div>
-    </div>
-
-    <p style="text-align:center;margin-top:28px;font-size:0.88rem;color:var(--muted);">
-      Already completed the Blueprint? You can go straight to the <a href="https://pathworkscompass.com" style="color:var(--orange-light);font-weight:600;">Pathworks Compass →</a>
-    </p>
-  </div>
-</section>
-
-<!-- READY TO GO DEEPER -->
-<section style="background:var(--cream);padding:60px 24px;text-align:center;">
-  <div class="container" style="max-width:700px;">
-    <p class="section-label">Want to Go Further?</p>
-    <h2 class="section-title">Work Directly With Andy</h2>
-    <p style="font-size:1.05rem;color:var(--muted);line-height:1.8;margin-bottom:28px;">
-      Pathworks gives you the tools. <strong style="color:var(--brown);">Changing Tribes</strong> gives you the person. If you want hands-on coaching, a deeper conversation about your results, or support building out your next business or career move — connect directly.
-    </p>
-    <a href="https://changingtribes.com" target="_blank" class="btn-primary">Visit Changing Tribes →</a>
-    <p style="margin-top:14px;font-size:0.82rem;color:var(--muted);">One-on-one coaching · Business building support · Career transition guidance</p>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<div class="final-cta">
-  <h2>Your next chapter starts with clarity.</h2>
-  <p>Take 15 minutes. Answer 40 honest questions. Walk away knowing exactly who you are professionally, where to go next, and which path AI won't take from you.</p>
-  <a href="https://pathworksblueprint.com" class="btn-white">Start My Blueprint — $19</a>
-  <p class="sub">One-time fee · No subscription · Instant results emailed to you</p>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <p>
-    <a href="https://pathworksblueprint.com">Pathworks Blueprint</a> &nbsp;·&nbsp;
-    <a href="https://pathworkscompass.com">Pathworks Compass</a> &nbsp;·&nbsp;
-    <a href="https://changingtribes.com">Changing Tribes</a>
-  </p>
-  <p style="margin-top:8px;">© 2026 Pathworks Project · A Changing Tribes Company</p>
-  <p style="margin-top:6px;font-size:0.78rem;opacity:0.6;">Results are AI-generated and for informational purposes only.</p>
-</footer>
+<div class="type-section">
+  <div class="type-inner">
+    <div class="type-title">Typography System</div>
+    <div class="type-row">
+      <div>
+        <div class="type-specimen-label">Public Sans — Headlines</div>
+        <div class="type-h1">Find Your Direction</div>
+        <div class="type-h2">The Pathworks Compass</div>
+        <div class="type-h3">Unlock Your Next Chapter</div>
+        <div style="font-family:'Public Sans',sans-serif;font-weight:500;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:#4A6670;margin-top:0.5rem;">Label / Eyebrow Text</div>
+      </div>
+      <div>
+        <div class="type-specimen-label">Merriweather — Body Text</div>
+        <div class="type-body">
+          You've built real experience across your career. Now it's time
+          to discover exactly where that experience can take you — and
+          get a clear plan to move forward with confidence.
+        </div>
+        <div class="type-body-italic">
+          "The Blueprint showed me exactly what I'd been
+          missing — and the Compass gave me the plan to act on it."
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
