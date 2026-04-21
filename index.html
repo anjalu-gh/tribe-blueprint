@@ -437,7 +437,7 @@
 <!-- ════════════════════════════════════════════
      PAGE: LANDING
 ════════════════════════════════════════════ -->
-<div id="page-landing" class="page active">
+<div id="page-landing" class="page">
 
   <!-- HERO -->
   <section class="hero-split">
@@ -1444,6 +1444,15 @@ const TEST_COMPASS_RESULTS = {
 };
 
 /* ── INIT ────────────────────────────────────────── */
+(function initDefaultPage() {
+  // If the visitor is on the Compass domain, land on compass-access.
+  // Otherwise show the Blueprint landing page.
+  const compassDomains = ['tribescompass.com', 'www.tribescompass.com', 'pathworkscompass.com', 'www.pathworkscompass.com'];
+  const host = window.location.hostname.toLowerCase();
+  const defaultPage = compassDomains.includes(host) ? 'compass-access' : 'landing';
+  showPage(defaultPage);
+})();
+
 handleCompassReturn();
 </script>
 </body>
