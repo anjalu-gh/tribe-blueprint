@@ -657,7 +657,7 @@ async function sendCompassEmail(email, direction, results) {
 </html>`;
 
   await resend.emails.send({
-    from:    'Pathworks Compass <blueprint@changingtribes.com>',
+    from:    'Pathworks Compass <hello@changingtribes.com>',
     to:      email,
     subject: `Your Pathworks Compass: ${results.compass_title || 'Results Inside'}`,
     html,

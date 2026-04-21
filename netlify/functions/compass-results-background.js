@@ -883,7 +883,7 @@ async function sendCompassEmail(email, direction, results) {
 </table></body></html>`;
 
   const emailPayload = {
-    from:    'Pathworks Compass <blueprint@changingtribes.com>',
+    from:    'Pathworks Compass <hello@changingtribes.com>',
     to:      email,
     subject: `Your Pathworks Compass: ${results.compass_title || 'Results Inside'}`,
     html,
