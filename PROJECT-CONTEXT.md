@@ -2,7 +2,7 @@
 
 **Last updated:** April 21, 2026  
 **Owner:** Andy (andrew@changingtribes.com)  
-**Live URL:** https://blueprint.changingtribes.com  
+**Live URL:** https://www.pathworksblueprint.com  
 **GitHub repo:** https://github.com/anjalu-gh/tribe-blueprint  
 **Netlify site:** auto-deploys from GitHub main branch  
 
@@ -63,7 +63,7 @@ tribe-blueprint/
 | `ZOHO_CLIENT_SECRET` | Zoho OAuth2 client secret |
 | `ZOHO_REFRESH_TOKEN` | Zoho OAuth2 refresh token (long-lived) |
 | `ZOHO_DATACENTER` | `com` for USA |
-| `APP_URL` | `https://blueprint.changingtribes.com` |
+| `APP_URL` | `https://www.pathworksblueprint.com` |
 | `PRICE_CENTS` | `1900` (= $19.00) |
 | `RESEND_API_KEY` | Resend API key (re_H4jq...) |
 
