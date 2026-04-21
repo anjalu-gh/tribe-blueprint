@@ -8,14 +8,14 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --orange:      #C85C2D;
-      --orange-light:#E8943A;
-      --brown:       #3D1F0D;
-      --cream:       #FDF6ED;
-      --cream-dark:  #F5EBD8;
+      --orange:      #1A6B72;
+      --orange-light:#E8920A;
+      --brown:       #0F3D45;
+      --cream:       #F0F8FA;
+      --cream-dark:  #D8ECF0;
       --green:       #2D5016;
-      --muted:       #6B4C3B;
-      --border:      #E8D5C0;
+      --muted:       #4A6670;
+      --border:      #B8D4DA;
       --white:       #ffffff;
     }
     html { scroll-behavior: smooth; }
@@ -35,17 +35,17 @@
       border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
       transition: background 0.2s;
     }
-    .nav-cta:hover { background: #A34923; }
+    .nav-cta:hover { background: #145A60; }
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(170deg, #FDF6ED 0%, #F5E6D0 60%, #EDD5B0 100%);
+      background: linear-gradient(170deg, #F0F8FA 0%, #D8ECF0 60%, #C0DDE4 100%);
       color: var(--brown); text-align: center; padding: 80px 24px 90px;
       border-bottom: 1px solid var(--border);
     }
     .hero-eyebrow {
-      display: inline-block; background: rgba(200,92,45,0.1);
-      border: 1px solid rgba(200,92,45,0.3); color: var(--orange);
+      display: inline-block; background: rgba(26,107,114,0.1);
+      border: 1px solid rgba(26,107,114,0.3); color: var(--orange);
       padding: 6px 18px; border-radius: 20px; font-size: 0.8rem;
       letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px;
     }
@@ -53,18 +53,18 @@
       font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4rem);
       line-height: 1.15; margin-bottom: 18px; color: var(--brown);
     }
-    .hero h1 em { color: var(--orange); font-style: normal; }
+    .hero h1 em { color: var(--orange-light); font-style: normal; }
     .hero-sub {
       font-size: clamp(1rem, 2.5vw, 1.2rem); color: var(--muted);
       max-width: 640px; margin: 0 auto 40px; line-height: 1.75;
     }
     .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--orange); color: var(--white); padding: 16px 34px;
+      background: var(--orange-light); color: var(--white); padding: 16px 34px;
       border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
       display: inline-block; transition: background 0.2s; border: none; cursor: pointer;
     }
-    .btn-primary:hover { background: #A34923; }
+    .btn-primary:hover { background: #C97200; }
     .btn-secondary {
       background: transparent; color: var(--brown);
       border: 2px solid var(--border); padding: 16px 34px;
@@ -118,8 +118,8 @@
     }
     .step-content {}
     .step-tag {
-      display: inline-block; background: #FFF3E8; color: var(--orange);
-      border: 1px solid #F5C49A; border-radius: 20px; padding: 3px 12px;
+      display: inline-block; background: #E0F3F5; color: var(--orange);
+      border: 1px solid #96C8D0; border-radius: 20px; padding: 3px 12px;
       font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; margin-bottom: 8px;
     }
@@ -140,9 +140,9 @@
 
     /* ── SCIENCE ── */
     .science { background: var(--brown); color: var(--white); }
-    .science .section-label { color: #F5C49A; }
+    .science .section-label { color: #E8920A; }
     .science .section-title { color: var(--white); }
-    .science .section-sub { color: #E8D5C0; }
+    .science .section-sub { color: #B8D4DA; }
     .science-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px; margin-top: 48px;
@@ -151,8 +151,8 @@
       background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
       border-radius: 12px; padding: 28px 24px;
     }
-    .science-card h3 { font-size: 1rem; font-weight: 700; color: #F5C49A; margin-bottom: 10px; }
-    .science-card p { font-size: 0.92rem; color: #E8D5C0; line-height: 1.75; }
+    .science-card h3 { font-size: 1rem; font-weight: 700; color: #E8920A; margin-bottom: 10px; }
+    .science-card p { font-size: 0.92rem; color: #B8D4DA; line-height: 1.75; }
     .categories-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px; margin-top: 40px;
@@ -163,7 +163,7 @@
     }
     .cat-pill .num { font-size: 0.75rem; color: var(--orange-light); font-weight: 700; margin-bottom: 4px; }
     .cat-pill .name { font-size: 0.9rem; color: var(--white); font-weight: 600; }
-    .cat-pill .desc { font-size: 0.8rem; color: #C8A898; margin-top: 4px; line-height: 1.5; }
+    .cat-pill .desc { font-size: 0.8rem; color: #7AABB5; margin-top: 4px; line-height: 1.5; }
 
     /* ── AI SECTION ── */
     .ai-resistant { background: var(--cream); }
@@ -205,9 +205,9 @@
       border-radius: 8px; margin: 0 24px 24px; transition: background 0.2s;
     }
     .del-btn.blueprint { background: var(--brown); color: var(--white); }
-    .del-btn.blueprint:hover { background: #5A2E10; }
-    .del-btn.compass { background: var(--orange); color: var(--white); }
-    .del-btn.compass:hover { background: #A34923; }
+    .del-btn.blueprint:hover { background: #0A2E33; }
+    .del-btn.compass { background: var(--orange-light); color: var(--white); }
+    .del-btn.compass:hover { background: #C97200; }
 
     /* ── TESTIMONIAL / TRUST ── */
     .trust { background: var(--cream-dark); text-align: center; }
@@ -220,7 +220,7 @@
 
     /* ── FINAL CTA ── */
     .final-cta {
-      background: linear-gradient(160deg, var(--orange) 0%, #8B3010 100%);
+      background: linear-gradient(160deg, var(--orange) 0%, #0A2E33 100%);
       color: var(--white); text-align: center; padding: 80px 24px;
     }
     .final-cta h2 {
@@ -238,7 +238,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--brown); color: #E8D5C0; text-align: center;
+      background: var(--brown); color: #B8D4DA; text-align: center;
       padding: 32px 24px; font-size: 0.85rem; line-height: 1.75;
     }
     footer a { color: var(--orange-light); text-decoration: none; }
@@ -377,7 +377,7 @@
     </div>
 
     <div style="margin-top:48px;">
-      <p style="color:#E8D5C0;font-size:0.9rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">The 8 Assessment Categories — 40 Questions Total</p>
+      <p style="color:#B8D4DA;font-size:0.9rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;">The 8 Assessment Categories — 40 Questions Total</p>
       <div class="categories-grid">
         <div class="cat-pill">
           <div class="num">Q1–5</div>
@@ -497,7 +497,7 @@
     </div>
 
     <p style="text-align:center;margin-top:28px;font-size:0.88rem;color:var(--muted);">
-      Already completed the Blueprint? You can go straight to the <a href="https://pathworkscompass.com" style="color:var(--orange);font-weight:600;">Pathworks Compass →</a>
+      Already completed the Blueprint? You can go straight to the <a href="https://pathworkscompass.com" style="color:var(--orange-light);font-weight:600;">Pathworks Compass →</a>
     </p>
   </div>
 </section>

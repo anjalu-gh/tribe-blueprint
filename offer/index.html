@@ -10,13 +10,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --brown:   #3D1F0D;
-      --orange:  #C85C2D;
-      --gold:    #D4A853;
-      --amber:   #E8943A;
-      --cream:   #FDF6ED;
-      --muted:   #6B4C3B;
-      --light:   #FFF8F0;
+      --brown:   #0F3D45;
+      --orange:  #1A6B72;
+      --gold:    #E8920A;
+      --amber:   #E8920A;
+      --cream:   #F0F8FA;
+      --muted:   #4A6670;
+      --light:   #E8F4F5;
       --white:   #ffffff;
     }
 
@@ -30,7 +30,7 @@
     /* ── NAV ── */
     nav {
       background: var(--white);
-      border-bottom: 1px solid #F0DFC8;
+      border-bottom: 1px solid #B8D4DA;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -66,11 +66,11 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #FFF3E0 0%, #FFE4B5 50%, #FDDBA0 100%);
+      background: linear-gradient(160deg, #E0F0F4 0%, #C8E4EA 50%, #B0D8E0 100%);
       color: var(--brown);
       padding: 6rem 2rem 5rem;
       text-align: center;
-      border-bottom: 2px solid #F0C87A;
+      border-bottom: 2px solid #8FC5CC;
     }
     .hero-badge {
       display: inline-block;
@@ -94,7 +94,7 @@
     }
     .hero h1 em {
       font-style: italic;
-      color: var(--orange);
+      color: var(--gold);
     }
     .hero p {
       font-size: 1.15rem;
@@ -111,7 +111,7 @@
       align-items: center;
     }
     .btn-primary {
-      background: var(--orange);
+      background: var(--gold);
       color: var(--white);
       padding: 1rem 2.2rem;
       border-radius: 10px;
@@ -120,7 +120,7 @@
       text-decoration: none;
       transition: opacity 0.2s;
       display: inline-block;
-      box-shadow: 0 4px 16px rgba(200, 92, 45, 0.3);
+      box-shadow: 0 4px 16px rgba(26, 107, 114, 0.3);
     }
     .btn-primary:hover { opacity: 0.88; }
     .btn-ghost {
@@ -167,7 +167,7 @@
     }
     .pain-card {
       background: var(--white);
-      border: 1px solid #E8D5C0;
+      border: 1px solid #B8D4DA;
       border-radius: 16px;
       padding: 1.75rem;
     }
@@ -188,7 +188,7 @@
       border-radius: 20px;
       padding: 2.5rem 2rem;
       position: relative;
-      border: 1px solid #E8D5C0;
+      border: 1px solid #B8D4DA;
     }
     .step-number {
       position: absolute;
@@ -232,7 +232,7 @@
       padding: 0.4rem 1rem;
       border-radius: 8px;
       margin-top: 1.25rem;
-      border: 1px solid #E8D5C0;
+      border: 1px solid #B8D4DA;
     }
     .step-cta {
       display: inline-block;
@@ -250,7 +250,7 @@
     }
     .step-cta:hover { opacity: 0.88; }
     .step-cta.gold {
-      background: linear-gradient(135deg, var(--gold) 0%, #b8882e 100%);
+      background: linear-gradient(135deg, var(--gold) 0%, #B86B00 100%);
     }
     .step-arrow {
       display: flex;
@@ -273,15 +273,15 @@
       padding: 2rem 1.5rem;
       background: var(--white);
       border-radius: 16px;
-      border: 1px solid #E8D5C0;
+      border: 1px solid #B8D4DA;
     }
     .benefit .ico { font-size: 2.2rem; margin-bottom: 0.75rem; }
     .benefit h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
     .benefit p { font-size: 0.85rem; color: var(--muted); }
 
     /* ── SOCIAL PROOF ── */
-    .proof-section { background: linear-gradient(160deg, var(--orange) 0%, #D4661A 100%); color: var(--white); }
-    .proof-section .section-label { color: #FFE4B5; }
+    .proof-section { background: linear-gradient(160deg, var(--orange) 0%, #0A4A50 100%); color: var(--white); }
+    .proof-section .section-label { color: #A8D8DE; }
     .proof-section h2 { color: var(--white); }
     .proof-section .lead { color: rgba(255,255,255,0.85); }
     .stats {
@@ -295,14 +295,14 @@
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 800;
-      color: #FFE4B5;
+      color: #A8D8DE;
       line-height: 1;
     }
     .stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-top: 0.4rem; }
 
     /* ── FINAL CTA ── */
     .final-cta {
-      background: linear-gradient(160deg, #3D1F0D 0%, #6B2F0A 100%);
+      background: linear-gradient(160deg, #0F3D45 0%, #1A6B72 100%);
       color: var(--white);
       text-align: center;
       padding: 5rem 2rem;
@@ -339,7 +339,7 @@
     /* ── COMPASS CALLOUT ── */
     .compass-callout {
       background: var(--cream);
-      border-top: 1px solid #E8D5C0;
+      border-top: 1px solid #B8D4DA;
       padding: 3rem 2rem;
       text-align: center;
     }
@@ -349,7 +349,7 @@
       margin-bottom: 0.75rem;
     }
     .compass-callout a {
-      color: var(--orange);
+      color: var(--gold);
       font-weight: 700;
       text-decoration: underline;
       text-underline-offset: 3px;
@@ -359,12 +359,12 @@
     /* ── FOOTER ── */
     footer {
       background: var(--brown);
-      color: #b09070;
+      color: #7AABB5;
       text-align: center;
       padding: 2rem;
       font-size: 0.82rem;
     }
-    footer a { color: #E8D5C0; }
+    footer a { color: #B8D4DA; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
@@ -452,7 +452,7 @@
           <li>A personalized transition roadmap</li>
           <li>Full results emailed instantly</li>
         </ul>
-        <div class="step-price"><span style="text-decoration:line-through; opacity:0.5; font-weight:400;">$19</span> &nbsp;<span style="color:var(--orange);">FREE with coupon</span></div>
+        <div class="step-price"><span style="text-decoration:line-through; opacity:0.5; font-weight:400;">$19</span> &nbsp;<span style="color:var(--gold);">FREE with coupon</span></div>
         <a href="https://blueprint.changingtribes.com" class="step-cta">Get Free Access →</a>
       </div>
 
@@ -486,19 +486,19 @@
 
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
 
-      <div style="background:var(--white); border:1px solid #E8D5C0; border-radius:16px; padding:1.75rem;">
+      <div style="background:var(--white); border:1px solid #B8D4DA; border-radius:16px; padding:1.75rem;">
         <div style="font-size:1.5rem; margin-bottom:0.75rem;">🔬</div>
         <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:0.5rem;">Holland's RIASEC Model</h3>
         <p style="font-size:0.9rem; color:var(--muted); line-height:1.65;">The foundation of most professional career assessments worldwide. RIASEC maps how people naturally prefer to work — and which environments let them thrive. It's the backbone of tools used by the US Department of Labor and most career counseling programs.</p>
       </div>
 
-      <div style="background:var(--white); border:1px solid #E8D5C0; border-radius:16px; padding:1.75rem;">
+      <div style="background:var(--white); border:1px solid #B8D4DA; border-radius:16px; padding:1.75rem;">
         <div style="font-size:1.5rem; margin-bottom:0.75rem;">🧠</div>
         <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:0.5rem;">Big Five Personality (Work Style)</h3>
         <p style="font-size:0.9rem; color:var(--muted); line-height:1.65;">The most research-validated personality model in psychology, applied specifically to how you work — not just who you are. We use it to identify your natural working style, collaboration preferences, and the environments where you do your best thinking.</p>
       </div>
 
-      <div style="background:var(--white); border:1px solid #E8D5C0; border-radius:16px; padding:1.75rem;">
+      <div style="background:var(--white); border:1px solid #B8D4DA; border-radius:16px; padding:1.75rem;">
         <div style="font-size:1.5rem; margin-bottom:0.75rem;">💡</div>
         <h3 style="font-size:1.05rem; font-weight:700; margin-bottom:0.5rem;">Values in Action + StrengthsFinder</h3>
         <p style="font-size:0.9rem; color:var(--muted); line-height:1.65;">Inspired by the VIA Character Strengths inventory and Gallup's StrengthsFinder, our values and skills dimensions help identify not just what you're good at — but what gives your work meaning. That combination predicts long-term career satisfaction far better than skills alone.</p>
@@ -506,7 +506,7 @@
 
     </div>
 
-    <div style="background:var(--white); border:1px solid #E8D5C0; border-radius:20px; padding:2.5rem; max-width:780px; margin:0 auto;">
+    <div style="background:var(--white); border:1px solid #B8D4DA; border-radius:20px; padding:2.5rem; max-width:780px; margin:0 auto;">
       <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:1.25rem; line-height:1.3;">How the 40 Questions Are Designed</h3>
       <p style="font-size:0.95rem; color:var(--muted); line-height:1.75; margin-bottom:1rem;">Every question presents two contrasting approaches — and <strong>neither answer is right or wrong.</strong> There are no trick questions, no "good" scores, and no outcomes you should aim for. The assessment is designed to surface how you actually work, not how you think you should work.</p>
       <p style="font-size:0.95rem; color:var(--muted); line-height:1.75; margin-bottom:1rem;">The 40 questions span five dimensions, each chosen to triangulate a different aspect of career fit:</p>
@@ -534,7 +534,7 @@
       </div>
     </div>
 
-    <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FDDBA0 100%); border:1px solid #F0C87A; border-radius:20px; padding:2.5rem; max-width:780px; margin:2rem auto 0;">
+    <div style="background: linear-gradient(135deg, #E0F0F4 0%, #C8E4EA 100%); border:1px solid #8FC5CC; border-radius:20px; padding:2.5rem; max-width:780px; margin:2rem auto 0;">
       <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:1.25rem; line-height:1.3;">From Blueprint to Compass: How They Work Together</h3>
       <p style="font-size:0.95rem; color:var(--muted); line-height:1.75; margin-bottom:1rem;">The Blueprint identifies your <strong>transferable skill clusters</strong> — the capabilities you've built across your career that travel with you into any new context. These become the foundation for everything that comes next.</p>
       <p style="font-size:0.95rem; color:var(--muted); line-height:1.75; margin-bottom:1rem;">Tribes Compass takes those skill clusters and adds one more ingredient: <strong>your own words about where you want to go.</strong> You write one or two sentences about the career or business you're drawn to. That's it. No long forms, no elaborate goal-setting.</p>
