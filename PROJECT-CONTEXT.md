@@ -1,10 +1,94 @@
 # Tribe Blueprint — Project Context & Restore Point
 
-**Last updated:** April 21, 2026  
-**Owner:** Andy (andrew@changingtribes.com)  
-**Live URL:** https://www.pathworksblueprint.com  
-**GitHub repo:** https://github.com/anjalu-gh/tribe-blueprint  
-**Netlify site:** auto-deploys from GitHub main branch  
+**Last updated:** April 22, 2026 — 12:10 PM EST
+**Owner:** Andy (andrew@changingtribes.com)
+**Live URLs:**
+- https://www.pathworksblueprint.com (Blueprint)
+- https://www.pathworkscompass.com (Compass)
+- https://www.pathworksproject.com (Project landing)
+
+**GitHub repo:** https://github.com/anjalu-gh/tribe-blueprint
+**Netlify:** 3 sites, all auto-deploy from GitHub main branch
+
+---
+
+## 🔖 SAVE POINT — April 22, 2026 @ 12:10 PM EST
+
+**Trigger phrase to restore context:** `RESET TO PATHWORKS SAVE POINT 2026-04-22`
+
+If you ever get stuck, paste that phrase and I'll re-read this file and treat this as the known-good baseline.
+
+### State of the three sites as of this save point
+
+**1. pathworksblueprint.com** (root of repo → `index.html`)
+- Full paid assessment app, untouched in this session
+- Stripe + Supabase + Anthropic + Zoho + Resend all wired
+
+**2. pathworkscompass.com** (root of repo → `index.html`, hostname-switched)
+- Same HTML file as Blueprint, but JS detects `pathworkscompass` hostname and swaps:
+  - `document.title` → "Pathworks Compass | by Changing Tribes"
+  - Nav wordmark → "Pathworks Compass / by Changing Tribes"
+  - Nav links replaced with: "Need to return to the Pathworks Blueprint?" text + "Get Started" CTA → pathworksblueprint.com
+- Hostname-switching script lives at top of `<body>` in `index.html` (≈ lines 7–22)
+- `<ul class="nav-links">` has `id="nav-links-list"` hook at ≈ line 445
+
+**3. pathworksproject.com** (repo subfolder → `pathworks-landing/index.html`)
+- Standalone landing page; different HTML from Blueprint/Compass
+- Hero section now matches Blueprint copy word-for-word ("Turn What You Know Into What Comes Next")
+- Top nav wired: Blueprint → blueprint URL · Compass → compass URL · About → `#how-it-works` anchor · Get Started → blueprint URL
+- Section "Your Blueprint is just the starting point" has `id="how-it-works"` (≈ line 1175)
+- Pointer graphic is a real vintage woodcut hand: `pathworks-landing/vintage-hand.png` rendered via `<img>` with `filter: invert(1); mix-blend-mode: screen;` so it reads as cream on the teal background
+
+### Folders on Andy's Mac (Desktop)
+- ✅ `~/Desktop/New Project/tribe-blueprint/` — LIVE SOURCE, do all edits here
+- 🗑️ `~/Desktop/New Project/pathworks-compass/` — DELETED (was stale legacy)
+- 📦 `~/Desktop/New Project/pathworks-project/` — ARCHIVED (was stale legacy)
+
+### Deploy flow (confirmed working)
+```bash
+cd ~/Desktop/"New Project"/tribe-blueprint
+git add <files>
+git commit -m "describe change"
+git push
+# → Netlify auto-deploys all 3 sites in ~60 seconds
+```
+
+### Git tag at this save point
+Run this once to mark the code at this state (see "Backup" section below for details):
+```bash
+cd ~/Desktop/"New Project"/tribe-blueprint
+git tag -a save-2026-04-22-1210 -m "Save point: April 22, 2026 12:10 PM EST"
+git push origin save-2026-04-22-1210
+```
+
+### Known-good backend env vars
+All 13 Netlify env vars (Supabase, Stripe, Anthropic, Zoho, Resend, APP_URL, PRICE_CENTS) set and verified. See table below.
+
+---
+
+## 💾 How to back up the whole project
+
+**Option A — Zip the folder (fast, local, no tools needed).**
+Open Terminal and run:
+```bash
+cd ~/Desktop
+zip -r "tribe-blueprint-backup-2026-04-22.zip" "New Project/tribe-blueprint" -x "*/node_modules/*" "*/.git/*"
+```
+This produces a dated zip on your Desktop. Excludes `node_modules` (rebuildable) and `.git` (code lives on GitHub). Do this any time you want a frozen snapshot before experimenting.
+
+**Option B — Git tag (for code only, free via GitHub).**
+```bash
+cd ~/Desktop/"New Project"/tribe-blueprint
+git tag -a save-2026-04-22-1210 -m "Save point: April 22, 2026 12:10 PM EST"
+git push origin save-2026-04-22-1210
+```
+To roll back later:
+```bash
+git checkout save-2026-04-22-1210       # look at the old version
+git reset --hard save-2026-04-22-1210   # force main back to this tag (destructive, be sure)
+```
+
+**Option C — Both.** Recommended. Zip = full safety (env files, images, uploads). Tag = clean rewind for code.
 
 ---
 
