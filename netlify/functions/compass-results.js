@@ -351,22 +351,22 @@ async function sendCompassEmail(email, direction, results) {
   // ── Profile Snapshot ──
   const snap = results.profile_snapshot || {};
   const strengthsHtml = (snap.core_strengths || []).map(s =>
-    `<span style="display:inline-block;background:#FDF6ED;border:1px solid #E8D5C0;border-radius:20px;padding:4px 12px;margin:3px 4px 3px 0;font-size:13px;color:#3D1F0D;font-weight:600;">${s}</span>`
+    `<span style="display:inline-block;background:#F0F8FA;border:1px solid #B8D4DA;border-radius:20px;padding:4px 12px;margin:3px 4px 3px 0;font-size:13px;color:#0F3D45;font-weight:600;">${s}</span>`
   ).join('');
 
   // ── Career Paths ──
   const careerPathsHtml = (results.career_paths || []).map((c, i) => `
     <tr>
-      <td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
-        <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Career Path ${i + 1}</p>
-        <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:10px;">→ ${c.title}</strong>
-        <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${c.why_it_fits}</p>
+      <td style="padding:24px 0;border-bottom:2px solid #B8D4DA;">
+        <p style="margin:0 0 4px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Career Path ${i + 1}</p>
+        <strong style="color:#0F3D45;font-size:17px;display:block;margin-bottom:10px;">→ ${c.title}</strong>
+        <p style="margin:0 0 10px;color:#4A6670;font-size:14px;line-height:1.7;">${c.why_it_fits}</p>
 
         <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
           <tr>
-            <td style="background:#FFF8F0;border-left:3px solid #E8943A;border-radius:0 8px 8px 0;padding:12px 16px;">
-              <p style="margin:0 0 4px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">A Day in the Life</p>
-              <p style="margin:0;color:#6B4C3B;font-size:13px;line-height:1.65;font-style:italic;">${c.day_in_the_life}</p>
+            <td style="background:#D8ECF0;border-left:3px solid #1A6B72;border-radius:0 8px 8px 0;padding:12px 16px;">
+              <p style="margin:0 0 4px;color:#1A6B72;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">A Day in the Life</p>
+              <p style="margin:0;color:#4A6670;font-size:13px;line-height:1.65;font-style:italic;">${c.day_in_the_life}</p>
             </td>
           </tr>
         </table>
@@ -380,28 +380,28 @@ async function sendCompassEmail(email, direction, results) {
           </tr>
         </table>
 
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #B8D4DA;border-radius:8px;overflow:hidden;">
           <tr>
-            <td style="background:#FDF6ED;padding:12px 14px;border-bottom:1px solid #E8D5C0;">
-              <strong style="color:#3D1F0D;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">📅 Your 10-Year Arc</strong>
+            <td style="background:#F0F8FA;padding:12px 14px;border-bottom:1px solid #B8D4DA;">
+              <strong style="color:#0F3D45;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">📅 Your 10-Year Arc</strong>
             </td>
           </tr>
           <tr>
-            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
-              <strong style="color:#C85C2D;font-size:12px;">Years 1–3 · Getting In</strong>
-              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_1_3}</p>
+            <td style="padding:10px 14px;border-bottom:1px solid #B8D4DA;">
+              <strong style="color:#1A6B72;font-size:12px;">Years 1–3 · Getting In</strong>
+              <p style="margin:4px 0 0;color:#4A6670;font-size:13px;line-height:1.6;">${c.years_1_3}</p>
             </td>
           </tr>
           <tr>
-            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
-              <strong style="color:#C85C2D;font-size:12px;">Years 4–7 · Building Authority</strong>
-              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_4_7}</p>
+            <td style="padding:10px 14px;border-bottom:1px solid #B8D4DA;">
+              <strong style="color:#1A6B72;font-size:12px;">Years 4–7 · Building Authority</strong>
+              <p style="margin:4px 0 0;color:#4A6670;font-size:13px;line-height:1.6;">${c.years_4_7}</p>
             </td>
           </tr>
           <tr>
             <td style="padding:10px 14px;">
-              <strong style="color:#C85C2D;font-size:12px;">Years 8–10 · Legacy & Leadership</strong>
-              <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${c.years_8_10}</p>
+              <strong style="color:#1A6B72;font-size:12px;">Years 8–10 · Legacy & Leadership</strong>
+              <p style="margin:4px 0 0;color:#4A6670;font-size:13px;line-height:1.6;">${c.years_8_10}</p>
             </td>
           </tr>
         </table>
@@ -414,7 +414,7 @@ async function sendCompassEmail(email, direction, results) {
             </td>
           </tr>
         </table>
-        <p style="margin:8px 0 0;color:#9A6B5A;font-size:12px;font-style:italic;">⚠️ Watch out for: ${c.watch_out_for}</p>
+        <p style="margin:8px 0 0;color:#4A6670;font-size:12px;font-style:italic;">⚠️ Watch out for: ${c.watch_out_for}</p>
         <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${c.ai_resistance}</p>
       </td>
     </tr>`).join('');
@@ -424,36 +424,36 @@ async function sendCompassEmail(email, direction, results) {
     <tr>
       <td style="padding:12px 0;border-bottom:1px solid #F5E0E0;">
         <strong style="color:#8B2020;font-size:14px;">✗ ${a.title}</strong>
-        <p style="margin:4px 0 0;color:#6B4C3B;font-size:13px;line-height:1.6;">${a.reason}</p>
+        <p style="margin:4px 0 0;color:#4A6670;font-size:13px;line-height:1.6;">${a.reason}</p>
       </td>
     </tr>`).join('');
 
   // ── Business Models ──
   const businessHtml = (results.business_models || []).map((b, i) => `
     <tr>
-      <td style="padding:24px 0;border-bottom:2px solid #E8D5C0;">
-        <p style="margin:0 0 4px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Business Idea ${i + 1}</p>
-        <strong style="color:#3D1F0D;font-size:17px;display:block;margin-bottom:6px;">→ ${b.name}</strong>
-        <p style="margin:0 0 10px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.concept}</p>
-        <p style="margin:0 0 12px;color:#6B4C3B;font-size:14px;line-height:1.7;">${b.why_it_fits}</p>
+      <td style="padding:24px 0;border-bottom:2px solid #B8D4DA;">
+        <p style="margin:0 0 4px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Business Idea ${i + 1}</p>
+        <strong style="color:#0F3D45;font-size:17px;display:block;margin-bottom:6px;">→ ${b.name}</strong>
+        <p style="margin:0 0 10px;color:#4A6670;font-size:14px;line-height:1.7;">${b.concept}</p>
+        <p style="margin:0 0 12px;color:#4A6670;font-size:14px;line-height:1.7;">${b.why_it_fits}</p>
 
-        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #E8D5C0;border-radius:8px;overflow:hidden;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;border:1px solid #B8D4DA;border-radius:8px;overflow:hidden;">
           <tr>
-            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
-              <strong style="color:#3D1F0D;font-size:12px;">💸 Startup Cost:</strong>
-              <span style="color:#6B4C3B;font-size:13px;"> ${b.startup_cost}</span>
+            <td style="padding:10px 14px;border-bottom:1px solid #B8D4DA;">
+              <strong style="color:#0F3D45;font-size:12px;">💸 Startup Cost:</strong>
+              <span style="color:#4A6670;font-size:13px;"> ${b.startup_cost}</span>
             </td>
           </tr>
           <tr>
-            <td style="padding:10px 14px;border-bottom:1px solid #E8D5C0;">
-              <strong style="color:#3D1F0D;font-size:12px;">🎯 Year 1 Target:</strong>
-              <span style="color:#6B4C3B;font-size:13px;"> ${b.year_1_target}</span>
+            <td style="padding:10px 14px;border-bottom:1px solid #B8D4DA;">
+              <strong style="color:#0F3D45;font-size:12px;">🎯 Year 1 Target:</strong>
+              <span style="color:#4A6670;font-size:13px;"> ${b.year_1_target}</span>
             </td>
           </tr>
           <tr>
             <td style="padding:10px 14px;">
-              <strong style="color:#3D1F0D;font-size:12px;">📈 Year 3 Potential:</strong>
-              <span style="color:#6B4C3B;font-size:13px;"> ${b.year_3_potential}</span>
+              <strong style="color:#0F3D45;font-size:12px;">📈 Year 3 Potential:</strong>
+              <span style="color:#4A6670;font-size:13px;"> ${b.year_3_potential}</span>
             </td>
           </tr>
         </table>
@@ -467,7 +467,7 @@ async function sendCompassEmail(email, direction, results) {
           </tr>
         </table>
         <p style="margin:8px 0 0;color:#2D5016;font-size:12px;font-style:italic;">🛡️ AI-resistant because: ${b.ai_resistance}</p>
-        <p style="margin:6px 0 0;color:#6B4C3B;font-size:12px;font-style:italic;">🤝 Ideal partner: ${b.ideal_partner}</p>
+        <p style="margin:6px 0 0;color:#4A6670;font-size:12px;font-style:italic;">🤝 Ideal partner: ${b.ideal_partner}</p>
       </td>
     </tr>`).join('');
 
@@ -480,46 +480,46 @@ async function sendCompassEmail(email, direction, results) {
   // ── Action Plan ──
   const actionHtml = (results.action_plan || []).map(a => `
     <tr>
-      <td style="padding:16px 0;border-bottom:1px solid #E8D5C0;">
-        <strong style="color:#C85C2D;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">${a.period}</strong>
-        <strong style="display:block;color:#3D1F0D;font-size:15px;margin:4px 0 8px;">${a.title}</strong>
-        <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.7;">${a.action}</p>
+      <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
+        <strong style="color:#1A6B72;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;">${a.period}</strong>
+        <strong style="display:block;color:#0F3D45;font-size:15px;margin:4px 0 8px;">${a.title}</strong>
+        <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.7;">${a.action}</p>
       </td>
     </tr>`).join('');
 
   // ── Resources ──
   const res = results.resources || {};
   const booksHtml = (res.books || []).map(b =>
-    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">📖 ${b.title}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${b.why}</p></td></tr>`
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#0F3D45;font-size:13px;">📖 ${b.title}</strong><p style="margin:3px 0 0;color:#4A6670;font-size:12px;line-height:1.5;">${b.why}</p></td></tr>`
   ).join('');
   const communitiesHtml = (res.communities || []).map(c =>
-    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🌐 ${c.name}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${c.why}</p></td></tr>`
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#0F3D45;font-size:13px;">🌐 ${c.name}</strong><p style="margin:3px 0 0;color:#4A6670;font-size:12px;line-height:1.5;">${c.why}</p></td></tr>`
   ).join('');
   const toolsHtml = (res.tools || []).map(t =>
-    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#3D1F0D;font-size:13px;">🛠️ ${t.name}</strong><p style="margin:3px 0 0;color:#6B4C3B;font-size:12px;line-height:1.5;">${t.why}</p></td></tr>`
+    `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#0F3D45;font-size:13px;">🛠️ ${t.name}</strong><p style="margin:3px 0 0;color:#4A6670;font-size:12px;line-height:1.5;">${t.why}</p></td></tr>`
   ).join('');
 
   const html = `
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
-<body style="margin:0;padding:0;background:#FDF6ED;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FDF6ED;padding:40px 20px;">
+<body style="margin:0;padding:0;background:#F0F8FA;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;padding:40px 20px;">
     <tr><td align="center">
       <table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
 
         <!-- HEADER -->
         <tr>
-          <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
+          <td style="background:#0F3D45;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
+            <p style="margin:0 0 6px;color:#B8D4DA;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
             <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Pathworks Compass</h1>
-            <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
+            <p style="margin:0;color:#B8D4DA;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
           </td>
         </tr>
 
         <!-- COMPASS TITLE -->
         <tr>
-          <td style="background:linear-gradient(135deg,#C85C2D,#E8943A);padding:24px 32px;text-align:center;">
+          <td style="background:linear-gradient(135deg,#0F3D45,#1A6B72);padding:24px 32px;text-align:center;">
             <p style="margin:0 0 6px;color:rgba(255,255,255,0.8);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Your Direction Profile</p>
             <h2 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">${results.compass_title || ''}</h2>
           </td>
@@ -527,24 +527,24 @@ async function sendCompassEmail(email, direction, results) {
 
         <!-- DIRECTION + INTRO -->
         <tr>
-          <td style="background:#ffffff;padding:28px 32px;border-left:1px solid #E8D5C0;border-right:1px solid #E8D5C0;">
-            <p style="margin:0 0 8px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Your Direction</p>
-            <p style="margin:0 0 18px;color:#3D1F0D;font-size:16px;font-style:italic;line-height:1.65;border-left:3px solid #E8943A;padding-left:14px;">"${direction}"</p>
-            <p style="margin:0;color:#6B4C3B;font-size:15px;line-height:1.8;">${results.compass_intro || ''}</p>
+          <td style="background:#ffffff;padding:28px 32px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+            <p style="margin:0 0 8px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;">Your Direction</p>
+            <p style="margin:0 0 18px;color:#0F3D45;font-size:16px;font-style:italic;line-height:1.65;border-left:3px solid #1A6B72;padding-left:14px;">"${direction}"</p>
+            <p style="margin:0;color:#4A6670;font-size:15px;line-height:1.8;">${results.compass_intro || ''}</p>
           </td>
         </tr>
 
         <!-- PROFILE SNAPSHOT -->
         <tr>
-          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">🧬 Your Profile Snapshot</h3>
-            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${snap.archetype_headline || ''}</p>
+          <td style="background:#F0F8FA;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#0F3D45;font-size:18px;font-weight:700;">🧬 Your Profile Snapshot</h3>
+            <p style="margin:0 0 16px;color:#4A6670;font-size:14px;line-height:1.75;">${snap.archetype_headline || ''}</p>
 
-            <p style="margin:0 0 8px;color:#3D1F0D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Core Strengths</p>
+            <p style="margin:0 0 8px;color:#0F3D45;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Core Strengths</p>
             <div style="margin-bottom:16px;">${strengthsHtml}</div>
 
-            <p style="margin:0 0 8px;color:#3D1F0D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">How You Work Best</p>
-            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${snap.working_style || ''}</p>
+            <p style="margin:0 0 8px;color:#0F3D45;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">How You Work Best</p>
+            <p style="margin:0 0 16px;color:#4A6670;font-size:14px;line-height:1.75;">${snap.working_style || ''}</p>
 
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
@@ -567,86 +567,86 @@ async function sendCompassEmail(email, direction, results) {
 
         <!-- CAREER PATHS -->
         <tr>
-          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🧭 Your Career Paths — Full 10-Year View</h3>
-            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Five to six paths matched to who you are and where you want to go.</p>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#0F3D45;font-size:18px;font-weight:700;">🧭 Your Career Paths — Full 10-Year View</h3>
+            <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Five to six paths matched to who you are and where you want to go.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
           </td>
         </tr>
 
         <!-- CAREERS TO AVOID -->
         <tr>
-          <td style="background:#FFF8F8;padding:24px 32px;border:1px solid #E8D5C0;border-top:none;">
+          <td style="background:#FFF8F8;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
             <h3 style="margin:0 0 6px;color:#8B2020;font-size:17px;font-weight:700;">⛔ Careers to Avoid</h3>
-            <p style="margin:0 0 16px;color:#9A7A6A;font-size:13px;">These paths would drain you — here's why, based on your specific profile.</p>
+            <p style="margin:0 0 16px;color:#4A6670;font-size:13px;">These paths would drain you — here's why, based on your specific profile.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${avoidHtml}</table>
           </td>
         </tr>
 
         <!-- BUSINESS MODELS -->
         <tr>
-          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🚀 Business Models Built for You</h3>
-            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Five to six business ideas tailored to your skills, direction, and practical context.</p>
+          <td style="background:#F0F8FA;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#0F3D45;font-size:18px;font-weight:700;">🚀 Business Models Built for You</h3>
+            <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Five to six business ideas tailored to your skills, direction, and practical context.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${businessHtml}</table>
           </td>
         </tr>
 
         <!-- WORK ENVIRONMENT -->
         <tr>
-          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">🏡 Your Ideal Work Environment</h3>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#0F3D45;font-size:18px;font-weight:700;">🏡 Your Ideal Work Environment</h3>
 
-            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Where You Thrive</p>
-            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_setup || ''}</p>
+            <p style="margin:0 0 6px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Where You Thrive</p>
+            <p style="margin:0 0 16px;color:#4A6670;font-size:14px;line-height:1.75;">${env.ideal_setup || ''}</p>
 
-            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Ideal Team</p>
-            <p style="margin:0 0 16px;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.ideal_team || ''}</p>
+            <p style="margin:0 0 6px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Ideal Team</p>
+            <p style="margin:0 0 16px;color:#4A6670;font-size:14px;line-height:1.75;">${env.ideal_team || ''}</p>
 
             <p style="margin:0 0 8px;color:#8B2020;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Red Flags — Walk Away From These</p>
             <ul style="margin:0 0 16px;padding-left:18px;">${redFlagsHtml}</ul>
 
-            <p style="margin:0 0 6px;color:#C85C2D;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Leadership Style</p>
-            <p style="margin:0;color:#6B4C3B;font-size:14px;line-height:1.75;">${env.leadership_style || ''}</p>
+            <p style="margin:0 0 6px;color:#1A6B72;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Your Leadership Style</p>
+            <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.75;">${env.leadership_style || ''}</p>
           </td>
         </tr>
 
         <!-- 90-DAY ACTION PLAN -->
         <tr>
-          <td style="background:#FDF6ED;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#3D1F0D;font-size:18px;font-weight:700;">🗺️ Your 90-Day Action Plan</h3>
-            <p style="margin:0 0 20px;color:#9A7A6A;font-size:13px;">Fortnightly steps — specific, concrete, and calibrated to your timeline.</p>
+          <td style="background:#F0F8FA;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#0F3D45;font-size:18px;font-weight:700;">🗺️ Your 90-Day Action Plan</h3>
+            <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Fortnightly steps — specific, concrete, and calibrated to your timeline.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${actionHtml}</table>
           </td>
         </tr>
 
         <!-- RESOURCES -->
         <tr>
-          <td style="background:#ffffff;padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">📚 Resources Matched to You</h3>
-            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Books</p>
+          <td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#0F3D45;font-size:18px;font-weight:700;">📚 Resources Matched to You</h3>
+            <p style="margin:0 0 10px;color:#1A6B72;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Books</p>
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${booksHtml}</table>
-            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Communities & Networks</p>
+            <p style="margin:0 0 10px;color:#1A6B72;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Communities & Networks</p>
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">${communitiesHtml}</table>
-            <p style="margin:0 0 10px;color:#C85C2D;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Tools & Platforms</p>
+            <p style="margin:0 0 10px;color:#1A6B72;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">Tools & Platforms</p>
             <table width="100%" cellpadding="0" cellspacing="0">${toolsHtml}</table>
           </td>
         </tr>
 
         <!-- CLOSING MESSAGE -->
         <tr>
-          <td style="background:linear-gradient(160deg,#FFF3E0,#FFE4B5);padding:28px 32px;border:1px solid #E8D5C0;border-top:none;">
-            <h3 style="margin:0 0 16px;color:#3D1F0D;font-size:18px;font-weight:700;">✉️ A Note for the Road</h3>
+          <td style="background:linear-gradient(160deg,#D8ECF0,#F0F8FA);padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 16px;color:#0F3D45;font-size:18px;font-weight:700;">✉️ A Note for the Road</h3>
             <p style="margin:0;color:#5A3A2A;font-size:15px;line-height:1.85;white-space:pre-line;">${results.closing_message || ''}</p>
           </td>
         </tr>
 
         <!-- CTA -->
         <tr>
-          <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
-            <a href="https://www.changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Changing Tribes · <a href="https://www.changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
+          <td style="background:#0F3D45;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
+            <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
+            <a href="https://www.changingtribes.com" style="background:#E8920A;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+            <p style="margin:28px 0 0;color:#4A6670;font-size:12px;">© 2026 Changing Tribes · <a href="https://www.changingtribes.com" style="color:#B8D4DA;">changingtribes.com</a></p>
           </td>
         </tr>
 
