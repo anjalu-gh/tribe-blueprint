@@ -12,6 +12,10 @@
         document.addEventListener('DOMContentLoaded', function(){
           var el = document.getElementById('nav-wordmark-text');
           if(el) el.innerHTML = 'Pathworks Compass<span>by Changing Tribes</span>';
+          var navList = document.getElementById('nav-links-list');
+          if(navList) navList.innerHTML =
+            '<li><span style="font-weight:500;font-size:0.9rem;color:var(--forest);letter-spacing:0.03em;">Need to return to the Pathworks Blueprint?</span></li>' +
+            '<li><a href="https://www.pathworksblueprint.com" class="nav-cta">Get Started</a></li>';
         });
       } else if(h.indexOf('pathworksproject') !== -1) {
         document.title = 'Pathworks Project | by Changing Tribes';
@@ -442,7 +446,7 @@
       <span>by Changing Tribes</span>
     </div>
   </div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links-list">
     <li><a onclick="navTo('#how')">How It Works</a></li>
     <li><a onclick="navTo('#pricing')">Pricing</a></li>
     <li><a onclick="navTo('#faq')">FAQ</a></li>
