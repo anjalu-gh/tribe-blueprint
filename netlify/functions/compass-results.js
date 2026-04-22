@@ -511,7 +511,7 @@ async function sendCompassEmail(email, direction, results) {
         <!-- HEADER -->
         <tr>
           <td style="background:#3D1F0D;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Pathworks Project</p>
+            <p style="margin:0 0 6px;color:#E8D5C0;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
             <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Pathworks Compass</h1>
             <p style="margin:0;color:#E8D5C0;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
           </td>
@@ -646,7 +646,7 @@ async function sendCompassEmail(email, direction, results) {
           <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
             <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
             <a href="https://www.changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
-            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#E8D5C0;">pathworksproject.com</a></p>
+            <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Changing Tribes · <a href="https://www.changingtribes.com" style="color:#E8D5C0;">changingtribes.com</a></p>
           </td>
         </tr>
 
