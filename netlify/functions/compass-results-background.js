@@ -622,6 +622,9 @@ function generateCompassPDF(email, direction, results) {
     doc.fillColor('#E8D5C0').font('Helvetica').fontSize(11)
        .text('This report was generated specifically for you based on your Pathworks Blueprint\nProfile and direction statement. Keep it, share it, and return to it\nas your journey unfolds.', M + 40, doc.y, { align: 'center', width: CW - 80, lineGap: 4 });
     doc.moveDown(2);
+    doc.fillColor('#E8D5C0').font('Helvetica').fontSize(12)
+       .text('Ready to take action? Get personalized assistance in reaching your goals.', M + 20, doc.y, { align: 'center', width: CW - 40, lineGap: 3 });
+    doc.moveDown(1.2);
     doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(12)
        .text('changingtribes.com', M, doc.y, { align: 'center', width: CW });
     doc.moveDown(0.5);
