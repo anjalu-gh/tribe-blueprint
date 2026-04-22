@@ -644,8 +644,8 @@ async function sendCompassEmail(email, direction, results) {
         <!-- CTA -->
         <tr>
           <td style="background:#3D1F0D;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
-            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Explore more resources and tools at Pathworks Project.</p>
-            <a href="https://pathworksproject.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Pathworks Project →</a>
+            <p style="margin:0 0 20px;color:#E8D5C0;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
+            <a href="https://www.changingtribes.com" style="background:#C85C2D;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
             <p style="margin:28px 0 0;color:#6B4C3B;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#E8D5C0;">pathworksproject.com</a></p>
           </td>
         </tr>
