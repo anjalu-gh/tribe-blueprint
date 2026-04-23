@@ -821,6 +821,28 @@
 </div>
 
 <!-- ════════════════════════════════════════════
+     PAGE: BLUEPRINT SUCCESS  (email-is-on-its-way confirmation)
+════════════════════════════════════════════ -->
+<div id="page-blueprint-success" class="page">
+  <div class="results-wrap" style="max-width:640px;text-align:center;padding:60px 24px;">
+    <div class="badge" style="margin-bottom:1.5rem;">✦ Your Pathworks Blueprint Is On Its Way</div>
+    <h2 id="blueprint-success-title" style="font-family:'Merriweather',serif;font-size:2rem;color:var(--forest);margin-bottom:1rem;">Your Blueprint Report Is Being Prepared</h2>
+    <p id="blueprint-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;">We're generating your personalized Pathworks Blueprint right now — your profile, career paths, business ideas, 20 business types, target companies, and transition roadmap, tailored specifically to your answers. This typically takes 2–3 minutes and will be delivered straight to your inbox.</p>
+    <div style="background:#EDF4F8;border:1px solid #C0D5E0;padding:28px 32px;margin-bottom:2rem;">
+      <p style="font-size:1.1rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;">📬 Your full Blueprint report will be sent to:</p>
+      <p id="blueprint-success-email" style="font-size:1rem;color:var(--slate);font-weight:700;margin-bottom:1rem;"></p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your profile type, an analysis of your past work, 3 career paths, 3 business ideas, 20 business types you could start, target companies where you can thrive, and a 5-step transition roadmap.</p>
+    </div>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
+    <a href="https://www.pathworkscompass.com" class="btn-primary" target="_blank">Continue to Pathworks Compass →</a>
+  </div>
+  <footer>
+    <p>© 2026 Changing Tribes · <a href="https://changingtribes.com">changingtribes.com</a></p>
+    <p style="margin-top:0.4rem">Results are AI-generated and for informational purposes only.</p>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════════
      PAGE: COMPASS ACCESS
 ════════════════════════════════════════════ -->
 <div id="page-compass-access" class="page">
@@ -1193,40 +1215,45 @@ function startAssessment() {
 async function submitAssessment() {
   showPage('loading');
   const messages = [
-    'Identifying your core strengths and patterns…',
-    'Matching your profile to career pathways…',
-    'Discovering your ideal business opportunities…',
-    'Crafting your personal transition roadmap…',
-    'Finalizing your Profile…',
+    'Submitting your responses…',
+    'Queueing your Blueprint for generation…',
+    'Preparing your personalized report…',
   ];
   let idx = 0;
   const el = document.getElementById('loading-msg');
-  const timer = setInterval(() => { idx = (idx + 1) % messages.length; el.textContent = messages[idx]; }, 3000);
+  const timer = setInterval(() => { idx = (idx + 1) % messages.length; el.textContent = messages[idx]; }, 2000);
 
   if (state.testMode) {
-    setTimeout(() => { clearInterval(timer); displayResults(TEST_RESULTS); }, 4000);
+    setTimeout(() => { clearInterval(timer); displayResults(TEST_RESULTS); }, 3000);
     return;
   }
 
   try {
-    const res = await fetch('/.netlify/functions/generate-results', {
+    // Background function — Netlify returns 202 immediately; Claude/Supabase/Zoho/Resend run async.
+    const res = await fetch('/.netlify/functions/generate-results-background', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: state.email, answers: state.answers }),
     });
     clearInterval(timer);
-    const data = await res.json();
-    if (data.results) {
-      displayResults(data.results);
+    if (res.status === 202 || res.ok) {
+      showBlueprintSuccess({ email: state.email });
     } else {
-      alert('Could not generate results. Please try again.');
+      const data = await res.json().catch(() => ({}));
+      alert('Could not submit your responses: ' + (data.error || 'please try again.'));
       showPage('assessment');
     }
   } catch {
     clearInterval(timer);
-    alert('Something went wrong generating your results. Please try again.');
+    alert('Something went wrong submitting your responses. Please try again.');
     showPage('assessment');
   }
+}
+
+/* ── SHOW BLUEPRINT SUCCESS (email-on-its-way page) ─ */
+function showBlueprintSuccess(r) {
+  document.getElementById('blueprint-success-email').textContent = (r && r.email) || state.email || '';
+  showPage('blueprint-success');
 }
 
 /* ── DISPLAY RESULTS ────────────────────────────── */
