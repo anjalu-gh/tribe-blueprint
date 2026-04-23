@@ -397,7 +397,7 @@ async function sendResultsEmail(email, results) {
 </html>`;
 
   await resend.emails.send({
-    from: 'Tribe Blueprint <hello@changingtribes.com>',
+    from: 'Pathworks Blueprint <hello@changingtribes.com>',
     to: email,
     subject: `Your Pathworks Blueprint: ${results.tribe_name || 'Results Inside'}`,
     html,
