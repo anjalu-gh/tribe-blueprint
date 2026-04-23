@@ -242,7 +242,7 @@ async function sendResultsEmail(email, results) {
   const careerPathsHtml = (results.career_paths || []).map(c => `
     <tr>
       <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F3D45;font-size:15px;">→ ${c.title}</strong>
+        <strong style="color:#0F4F53;font-size:15px;">→ ${c.title}</strong>
         <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${c.description}</p>
       </td>
     </tr>`).join('');
@@ -250,7 +250,7 @@ async function sendResultsEmail(email, results) {
   const businessIdeasHtml = (results.business_ideas || []).map(b => `
     <tr>
       <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F3D45;font-size:15px;">→ ${b.name}</strong>
+        <strong style="color:#0F4F53;font-size:15px;">→ ${b.name}</strong>
         <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${b.description}</p>
       </td>
     </tr>`).join('');
@@ -263,7 +263,7 @@ async function sendResultsEmail(email, results) {
     const cells = row.map(s => `
       <td width="33%" style="padding:10px 8px;vertical-align:top;">
         <div style="background:#ffffff;border:1px solid #B8D4DA;border-radius:8px;padding:12px 10px;text-align:center;">
-          <strong style="color:#0F3D45;font-size:13px;display:block;margin-bottom:4px;">${s.name}</strong>
+          <strong style="color:#0F4F53;font-size:13px;display:block;margin-bottom:4px;">${s.name}</strong>
           <span style="color:#1A6B72;font-size:11px;line-height:1.4;display:block;">${s.benefit}</span>
         </div>
       </td>`).join('');
@@ -275,7 +275,7 @@ async function sendResultsEmail(email, results) {
   const roadmapHtml = (results.roadmap || []).map((s, i) => `
     <tr>
       <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F3D45;font-size:15px;">Step ${i + 1}: ${s.title}</strong>
+        <strong style="color:#0F4F53;font-size:15px;">Step ${i + 1}: ${s.title}</strong>
         <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${s.action}</p>
       </td>
     </tr>`).join('');
@@ -288,7 +288,7 @@ async function sendResultsEmail(email, results) {
     const cells = row.map(c => `
       <td width="33%" style="padding:10px 8px;vertical-align:top;">
         <div style="background:#ffffff;border:1px solid #B8D4DA;border-radius:8px;padding:12px 10px;text-align:center;">
-          <strong style="color:#0F3D45;font-size:13px;display:block;margin-bottom:4px;">${c.name}</strong>
+          <strong style="color:#0F4F53;font-size:13px;display:block;margin-bottom:4px;">${c.name}</strong>
           <span style="color:#1A6B72;font-size:11px;">${c.sector}</span>
         </div>
       </td>`).join('');
@@ -309,7 +309,7 @@ async function sendResultsEmail(email, results) {
 
         <!-- HEADER -->
         <tr>
-          <td style="background:#0F3D45;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
+          <td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
             <p style="margin:0 0 4px;color:#B8D4DA;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Pathworks Project</p>
             <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Pathworks Blueprint</h1>
           </td>
@@ -333,7 +333,7 @@ async function sendResultsEmail(email, results) {
         <!-- PAST ANALYSIS -->
         <tr>
           <td style="background:#D8ECF0;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 12px;color:#0F3D45;font-size:18px;">🔍 Understanding Your Past</h3>
+            <h3 style="margin:0 0 12px;color:#0F4F53;font-size:18px;">🔍 Understanding Your Past</h3>
             <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.75;">${results.past_analysis || ''}</p>
           </td>
         </tr>
@@ -341,7 +341,7 @@ async function sendResultsEmail(email, results) {
         <!-- CAREER PATHS -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F3D45;font-size:18px;">🧭 Your Next Career Paths</h3>
+            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🧭 Your Next Career Paths</h3>
             <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
           </td>
         </tr>
@@ -349,7 +349,7 @@ async function sendResultsEmail(email, results) {
         <!-- BUSINESS IDEAS -->
         <tr>
           <td style="background:#D8ECF0;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F3D45;font-size:18px;">🚀 Business Ideas For You</h3>
+            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🚀 Business Ideas For You</h3>
             <table width="100%" cellpadding="0" cellspacing="0">${businessIdeasHtml}</table>
           </td>
         </tr>
@@ -357,7 +357,7 @@ async function sendResultsEmail(email, results) {
         <!-- STARTUP IDEAS -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#0F3D45;font-size:18px;">💡 20 Businesses You Could Start</h3>
+            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">💡 20 Businesses You Could Start</h3>
             <p style="margin:0 0 16px;color:#4A6670;font-size:13px;line-height:1.5;">AI-resistant business types matched to your skills and tribe profile — each one built on human strengths that automation cannot replace.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${startupIdeasHtml}</table>
           </td>
@@ -366,7 +366,7 @@ async function sendResultsEmail(email, results) {
         <!-- ROADMAP -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F3D45;font-size:18px;">🗺️ Your Transition Roadmap</h3>
+            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🗺️ Your Transition Roadmap</h3>
             <table width="100%" cellpadding="0" cellspacing="0">${roadmapHtml}</table>
           </td>
         </tr>
@@ -374,7 +374,7 @@ async function sendResultsEmail(email, results) {
         <!-- TARGET COMPANIES -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#0F3D45;font-size:18px;">🏢 Companies Where You Can Thrive</h3>
+            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">🏢 Companies Where You Can Thrive</h3>
             <p style="margin:0 0 16px;color:#4A6670;font-size:13px;line-height:1.5;">AI-resistant organizations matched to your tribe profile and skills — places where human judgment and relationships drive the value.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${companiesHtml}</table>
           </td>
@@ -382,10 +382,10 @@ async function sendResultsEmail(email, results) {
 
         <!-- CTA -->
         <tr>
-          <td style="background:#0F3D45;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
+          <td style="background:#0F4F53;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
             <p style="margin:0 0 8px;color:#E7B928;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Ready to Go Deeper?</p>
             <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.6;">Your Blueprint shows you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> maps exactly where to go next — 3 career paths, 3 businesses to start, and your 10-year arc.</p>
-            <a href="https://www.pathworkscompass.com" style="background:#E7B928;color:#0F3D45;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
+            <a href="https://www.pathworkscompass.com" style="background:#E7B928;color:#0F4F53;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
             <p style="margin:0 0 20px;color:#4A6670;font-size:12px;">or</p>
             <a href="https://pathworksproject.com" style="background:#1A6B72;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Pathworks Project →</a>
             <p style="margin:24px 0 0;color:#4A6670;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#B8D4DA;">pathworksproject.com</a></p>
