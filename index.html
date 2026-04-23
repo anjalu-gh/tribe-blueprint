@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pathworks Blueprint | by Changing Tribes</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <script>
     (function(){
       var h = location.hostname;
@@ -11,7 +12,7 @@
         document.title = 'Pathworks Compass | by Changing Tribes';
         document.addEventListener('DOMContentLoaded', function(){
           var el = document.getElementById('nav-wordmark-text');
-          if(el) el.innerHTML = 'Pathworks Compass<span>by Changing Tribes</span>';
+          if(el) el.innerHTML = 'pathworks<span>COMPASS</span>';
           var navList = document.getElementById('nav-links-list');
           if(navList) navList.innerHTML =
             '<li><span style="font-weight:500;font-size:0.9rem;color:var(--forest);letter-spacing:0.03em;">Need to return to the Pathworks Blueprint?</span></li>' +
@@ -71,10 +72,10 @@
       padding: 1.2rem 3rem; background: var(--white);
       border-bottom: 2px solid var(--forest); position: sticky; top: 0; z-index: 100;
     }
-    .nav-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; cursor: pointer; }
-    .nav-logo svg { width: 36px; height: 36px; flex-shrink: 0; }
-    .nav-wordmark { font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--forest); line-height: 1; }
-    .nav-wordmark span { display: block; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; cursor: pointer; }
+    .nav-logo svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .nav-wordmark { font-family: 'Merriweather', serif; font-weight: 900; font-size: 1.35rem; color: var(--forest); line-height: 1; letter-spacing: -0.01em; }
+    .nav-wordmark span { display: block; font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest); opacity: 0.75; margin-top: 5px; }
     .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
     .nav-links a { font-weight: 500; font-size: 0.9rem; color: var(--forest); text-decoration: none; letter-spacing: 0.03em; cursor: pointer; }
     .nav-cta { background: var(--forest); color: var(--cream) !important; padding: 0.55rem 1.4rem; }
@@ -428,22 +429,12 @@
 ════════════════════════════════════════════ -->
 <nav class="site-nav">
   <div class="nav-logo" onclick="showPage('landing')">
-    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="18" cy="18" r="17" stroke="#0F4F53" stroke-width="1.5" fill="none"/>
-      <circle cx="18" cy="18" r="12" stroke="#0F4F53" stroke-width="0.75" fill="none" stroke-dasharray="2 3"/>
-      <polygon points="18,4 20,18 18,22 16,18" fill="#0F4F53"/>
-      <polygon points="18,32 20,18 18,14 16,18" fill="#0F4F53" opacity="0.35"/>
-      <polygon points="32,18 18,20 14,18 18,16" fill="#0F4F53" opacity="0.35"/>
-      <polygon points="4,18 18,20 22,18 18,16" fill="#0F4F53" opacity="0.2"/>
-      <circle cx="18" cy="18" r="2.5" fill="#E7B928"/>
-      <text x="18" y="10.5" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F4F53" font-weight="bold">N</text>
-      <text x="18" y="29" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F4F53" opacity="0.5">S</text>
-      <text x="27" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F4F53" opacity="0.5">E</text>
-      <text x="9" y="19" text-anchor="middle" font-size="3.5" font-family="sans-serif" fill="#0F4F53" opacity="0.5">W</text>
+    <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Pathworks">
+      <circle cx="18" cy="18" r="14" fill="#F4C83F"/>
     </svg>
     <div class="nav-wordmark" id="nav-wordmark-text">
-      Pathworks Blueprint
-      <span>by Changing Tribes</span>
+      pathworks
+      <span>BLUEPRINT</span>
     </div>
   </div>
   <ul class="nav-links" id="nav-links-list">

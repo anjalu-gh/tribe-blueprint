@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pathworks Project</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,23 +60,27 @@
     .cp-nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
     }
-    .cp-nav-logo svg { width: 36px; height: 36px; }
+    .cp-nav-logo svg { width: 28px; height: 28px; flex-shrink: 0; }
     .cp-nav-wordmark {
-      font-family: 'Public Sans', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-family: 'Merriweather', serif;
+      font-weight: 900;
+      font-size: 1.35rem;
       color: var(--forest);
       line-height: 1;
+      letter-spacing: -0.01em;
     }
     .cp-nav-wordmark span {
       display: block;
-      font-weight: 300;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-family: 'Public Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--mist);
+      color: var(--forest);
+      opacity: 0.75;
+      margin-top: 5px;
     }
     .cp-nav-links {
       display: flex;
@@ -1017,26 +1022,12 @@
   <!-- NAV -->
   <nav class="cp-nav">
     <div class="cp-nav-logo">
-      <!-- Compass rose icon in nav -->
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="18" cy="18" r="17" stroke="#0F4F53" stroke-width="1.5"/>
-        <circle cx="18" cy="18" r="3" fill="#E7B928"/>
-        <!-- N -->
-        <polygon points="18,2 20.5,16 18,13 15.5,16" fill="#0F4F53"/>
-        <!-- S -->
-        <polygon points="18,34 15.5,20 18,23 20.5,20" fill="#4A6670"/>
-        <!-- E -->
-        <polygon points="34,18 20,15.5 23,18 20,20.5" fill="#4A6670"/>
-        <!-- W -->
-        <polygon points="2,18 16,20.5 13,18 16,15.5" fill="#4A6670"/>
-        <text x="18" y="8" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" font-weight="600" fill="#0F4F53">N</text>
-        <text x="18" y="31" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">S</text>
-        <text x="30" y="19.5" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">E</text>
-        <text x="6" y="19.5" text-anchor="middle" font-family="Public Sans,sans-serif" font-size="4" fill="#4A6670">W</text>
+      <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Pathworks">
+        <circle cx="18" cy="18" r="14" fill="#F4C83F"/>
       </svg>
       <div class="cp-nav-wordmark">
-        Pathworks Project
-        <span>by Changing Tribes</span>
+        pathworks
+        <span>PROJECT</span>
       </div>
     </div>
     <ul class="cp-nav-links">

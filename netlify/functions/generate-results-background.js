@@ -309,8 +309,19 @@ async function sendResultsEmail(email, results) {
 
         <!-- HEADER -->
         <tr>
-          <td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:32px;text-align:center;">
-            <p style="margin:0 0 4px;color:#B8D4DA;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Pathworks Project</p>
+          <td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:36px 32px 32px;text-align:center;">
+            <!-- Pathworks Blueprint lockup -->
+            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px;">
+              <tr>
+                <td style="vertical-align:middle;padding-right:12px;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#F4C83F;font-size:0;line-height:0;">&nbsp;</div>
+                </td>
+                <td style="vertical-align:middle;text-align:left;">
+                  <div style="font-family:Georgia,'Times New Roman',serif;font-weight:900;font-size:22px;color:#ffffff;line-height:1;letter-spacing:-0.01em;">pathworks</div>
+                  <div style="font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:9px;color:#F4C83F;letter-spacing:0.22em;margin-top:6px;">BLUEPRINT</div>
+                </td>
+              </tr>
+            </table>
             <h1 style="margin:0;color:#ffffff;font-size:28px;font-weight:700;">Your Pathworks Blueprint</h1>
           </td>
         </tr>

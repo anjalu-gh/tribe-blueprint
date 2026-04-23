@@ -389,11 +389,29 @@ function generateCompassPDF(email, direction, results) {
     // ══════════════════════════════════════════════
     doc.rect(0, 0, W, 220).fill(BROWN);
     doc.fillColor('#B8D4DA').font('Helvetica').fontSize(9)
-       .text('PATHWORKS PROJECT  ·  A CHANGING TRIBES COMPANY', M, 50, { align: 'center', width: CW, characterSpacing: 1 });
-    doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(30)
-       .text('PATHWORKS COMPASS', M, 75, { align: 'center', width: CW });
+       .text('PATHWORKS PROJECT  ·  A CHANGING TRIBES COMPANY', M, 45, { align: 'center', width: CW, characterSpacing: 1 });
+
+    // ── Logo lockup: yellow dot + "pathworks" wordmark (centered) ──
+    const _wm = 'pathworks';
+    doc.font('Helvetica-Bold').fontSize(32);
+    const _wmW = doc.widthOfString(_wm);
+    const _dotSize = 22;
+    const _gap = 10;
+    const _lockupW = _dotSize + _gap + _wmW;
+    const _lockupX = (W - _lockupW) / 2;
+    const _lockupY = 78;
+    // Yellow circle (dot)
+    doc.circle(_lockupX + _dotSize / 2, _lockupY + 16, _dotSize / 2).fill(GOLD);
+    // Wordmark
+    doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(32)
+       .text(_wm, _lockupX + _dotSize + _gap, _lockupY, { lineBreak: false });
+
+    // "COMPASS" descriptor in gold, tracked caps
+    doc.fillColor(GOLD).font('Helvetica-Bold').fontSize(11)
+       .text('COMPASS', M, 128, { align: 'center', width: CW, characterSpacing: 4 });
+
     doc.fillColor('#B8D4DA').font('Helvetica').fontSize(12)
-       .text('Your Personalized Career & Business Report', M, 118, { align: 'center', width: CW });
+       .text('Your Personalized Career & Business Report', M, 155, { align: 'center', width: CW });
 
     doc.rect(0, 220, W, 60).fill(ORANGE);
     const titleText = safe(results.compass_title || 'Your Direction Profile');
@@ -809,10 +827,21 @@ async function sendCompassEmail(email, direction, results) {
 <tr><td align="center"><table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
 
   <!-- HEADER -->
-  <tr><td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:36px 32px;text-align:center;">
-    <p style="margin:0 0 6px;color:#B8D4DA;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;">Changing Tribes</p>
+  <tr><td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:40px 32px 32px;text-align:center;">
+    <!-- Pathworks Compass lockup -->
+    <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px;">
+      <tr>
+        <td style="vertical-align:middle;padding-right:12px;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#F4C83F;font-size:0;line-height:0;">&nbsp;</div>
+        </td>
+        <td style="vertical-align:middle;text-align:left;">
+          <div style="font-family:Georgia,'Times New Roman',serif;font-weight:900;font-size:22px;color:#ffffff;line-height:1;letter-spacing:-0.01em;">pathworks</div>
+          <div style="font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:9px;color:#F4C83F;letter-spacing:0.22em;margin-top:6px;">COMPASS</div>
+        </td>
+      </tr>
+    </table>
     <h1 style="margin:0 0 6px;color:#ffffff;font-size:30px;font-weight:700;">Your Pathworks Compass</h1>
-    <p style="margin:0;color:#B8D4DA;font-size:13px;opacity:0.8;">Your complete career & business roadmap</p>
+    <p style="margin:0;color:#B8D4DA;font-size:13px;opacity:0.8;">Your complete career &amp; business roadmap</p>
   </td></tr>
 
   <!-- TITLE BAND -->
