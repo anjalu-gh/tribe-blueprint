@@ -383,9 +383,9 @@ async function sendResultsEmail(email, results) {
         <!-- CTA -->
         <tr>
           <td style="background:#0F3D45;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
-            <p style="margin:0 0 8px;color:#E8920A;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Ready to Go Deeper?</p>
+            <p style="margin:0 0 8px;color:#E7B928;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Ready to Go Deeper?</p>
             <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.6;">Your Blueprint shows you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> maps exactly where to go next — 3 career paths, 3 businesses to start, and your 10-year arc.</p>
-            <a href="https://www.pathworkscompass.com" style="background:#E8920A;color:#0F3D45;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
+            <a href="https://www.pathworkscompass.com" style="background:#E7B928;color:#0F3D45;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
             <p style="margin:0 0 20px;color:#4A6670;font-size:12px;">or</p>
             <a href="https://pathworksproject.com" style="background:#1A6B72;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Pathworks Project →</a>
             <p style="margin:24px 0 0;color:#4A6670;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#B8D4DA;">pathworksproject.com</a></p>

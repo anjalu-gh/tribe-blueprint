@@ -300,7 +300,7 @@ function generateCompassPDF(email, direction, results) {
     const GREEN   = '#2D5016';   // kept for financial sections
     const BORDER  = '#B8D4DA';   // teal border
     const LBLUE   = '#4466CC';   // kept for callout boxes
-    const GOLD    = '#E8920A';   // gold CTA accent
+    const GOLD    = '#E7B928';   // gold CTA accent
     const W = 612, H = 792, M = 50, CW = W - M * 2;
 
     // Strip control chars AND emoji (Helvetica can't render them — outputs garbage)
@@ -879,7 +879,7 @@ async function sendCompassEmail(email, direction, results) {
   <!-- FOOTER CTA -->
   <tr><td style="background:#0F3D45;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
     <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
-    <a href="https://www.changingtribes.com" style="background:#E8920A;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+    <a href="https://www.changingtribes.com" style="background:#E7B928;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
     <p style="margin:28px 0 0;color:#4A6670;font-size:12px;">© ${new Date().getFullYear()} Changing Tribes · <a href="https://www.changingtribes.com" style="color:#B8D4DA;">changingtribes.com</a></p>
   </td></tr>
 
