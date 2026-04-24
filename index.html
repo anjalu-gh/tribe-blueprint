@@ -27,16 +27,16 @@
       }
     })();
   </script>
-  <meta name="description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
+  <meta name="description" content="Discover your Blueprint free in 7 minutes — your work style, strengths, and AI-age advantage. Then unlock your Compass: 5–7 careers, 5–7 businesses, 12 real companies, and 20 startup ideas for $39." />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pathworksblueprint.com" />
   <meta property="og:title" content="Pathworks Blueprint — Find Your Next Chapter" />
-  <meta property="og:description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
+  <meta property="og:description" content="Discover your Blueprint free in 7 minutes — your work style, strengths, and AI-age advantage. Then unlock your Compass: 5–7 careers, 5–7 businesses, 12 real companies, and 20 startup ideas for $39." />
   <meta property="og:image" content="https://pathworksblueprint.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pathworks Blueprint — Find Your Next Chapter" />
-  <meta name="twitter:description" content="Discover your Blueprint free in 7 minutes. Then unlock your Compass: 20+ careers, 20+ businesses to start, all built from your Blueprint for just $39." />
+  <meta name="twitter:description" content="Discover your Blueprint free in 7 minutes — your work style, strengths, and AI-age advantage. Then unlock your Compass: 5–7 careers, 5–7 businesses, 12 real companies, and 20 startup ideas for $39." />
   <meta name="twitter:image" content="https://pathworksblueprint.com/og-image.png" />
   <script defer data-domain="pathworksblueprint.com" src="https://plausible.io/js/script.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
@@ -417,6 +417,10 @@
     .result-list li:last-child { border-bottom: none; }
     .result-list li::before { content: "→"; color: var(--slate); font-weight: 700; flex-shrink: 0; margin-top: 0.12em; }
     .result-list li strong { color: var(--forest); display: block; margin-bottom: 0.2rem; font-size: 0.95rem; }
+    .result-list-plain li { padding: 0.55rem 0; border-bottom: 1px dashed var(--border); }
+    .result-list-plain li:last-child { border-bottom: none; }
+    .result-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 640px) { .result-2col { grid-template-columns: 1fr; gap: 1.4rem; } }
     .companies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
     @media (max-width: 600px) { .companies-grid { grid-template-columns: repeat(2, 1fr); } }
     .company-chip { background: var(--cream); border: 1px solid #C0D5E0; padding: 0.75rem 0.6rem; text-align: center; }
@@ -543,7 +547,7 @@
     <div class="hero-left">
       <div class="hero-eyebrow">Career &amp; Life Transition Assessment</div>
       <h1 class="hero-h1">Turn What<br>You Know<br><em>Into What<br>Comes Next</em></h1>
-      <p class="hero-body">Discover the AI-resistant career paths and business ideas that fit who you actually are — then get a clear plan for exactly what to do next.</p>
+      <p class="hero-body">Understand how you actually work best — your strengths, blind spots, energizers, and AI-age advantage. Then use the Compass to map exactly where to take them.</p>
       <div class="hero-cta-row">
         <button class="btn-gold" onclick="showPage('access')">Start My Free Blueprint →</button>
         <a class="btn-ghost" onclick="navTo('#how')">See how it works</a>
@@ -584,22 +588,23 @@
           <div class="jv-title">Your Blueprint</div>
           <div class="jv-sub">Who you actually are.</div>
           <div class="jv-chips">
-            <span>Your direction</span>
-            <span>Strengths profile</span>
             <span>Work style</span>
+            <span>Strengths &amp; blind spots</span>
+            <span>Energizers &amp; drains</span>
+            <span>AI-age advantage</span>
           </div>
         </div>
 
         <div class="jv-card jv-compass">
           <div class="jv-eyebrow">Step 2 · $39</div>
           <div class="jv-title">Your Compass</div>
-          <div class="jv-sub">Your 20-page roadmap.</div>
+          <div class="jv-sub">Where you can go.</div>
           <div class="jv-chips">
-            <span>3 AI-resistant careers</span>
-            <span>3 business models</span>
-            <span>10-year arc each</span>
-            <span>Income targets</span>
-            <span>90-day first steps</span>
+            <span>5–7 career paths</span>
+            <span>5–7 businesses</span>
+            <span>12 real companies</span>
+            <span>20 startup ideas</span>
+            <span>90-day action plan</span>
           </div>
         </div>
 
@@ -613,22 +618,22 @@
     <div class="feature-cell">
       <span class="feature-icon">🔍</span>
       <div class="feature-title">Understand Your Past</div>
-      <p class="feature-desc">See the hidden patterns in your work history and why you've thrived — or struggled — in the roles you've had.</p>
+      <p class="feature-desc">See the hidden patterns in your work history — why you've thrived or struggled in the roles you've had.</p>
     </div>
     <div class="feature-cell">
-      <span class="feature-icon">🧭</span>
-      <div class="feature-title">Find Your Next Career</div>
-      <p class="feature-desc">Get specific career paths matched to your unique blend of skills, values, and working style.</p>
+      <span class="feature-icon">⚙️</span>
+      <div class="feature-title">How You Work Best</div>
+      <p class="feature-desc">Your real working style — pace, autonomy, collaboration, energizers and drains, all named clearly.</p>
     </div>
     <div class="feature-cell">
-      <span class="feature-icon">🚀</span>
-      <div class="feature-title">Discover Your Business</div>
-      <p class="feature-desc">Uncover business ideas that fit your natural strengths — with realistic paths to actually start them.</p>
+      <span class="feature-icon">✦</span>
+      <div class="feature-title">Strengths &amp; Blind Spots</div>
+      <p class="feature-desc">The capabilities that make you distinctive — and the patterns that tend to trip you up if left unchecked.</p>
     </div>
     <div class="feature-cell">
-      <span class="feature-icon">🗺️</span>
-      <div class="feature-title">Your Transition Roadmap</div>
-      <p class="feature-desc">A clear, personalized action plan for making your next big move — step by concrete step.</p>
+      <span class="feature-icon">🛡️</span>
+      <div class="feature-title">Your AI-Age Edge</div>
+      <p class="feature-desc">What you can do that AI cannot easily replicate — the human advantage to build your next chapter on.</p>
     </div>
   </div>
 
@@ -649,13 +654,13 @@
         <div class="step">
           <div class="step-num">02</div>
           <div class="step-title">Get Your AI-Generated Profile</div>
-          <p class="step-desc">Your Blueprint results appear on screen in under 60 seconds and are emailed to you instantly. You'll see your profile, 3 career paths, 3 business ideas, 20 business types, target companies, and a 5-step roadmap.</p>
+          <p class="step-desc">Your Blueprint is emailed to you within a few minutes — your named archetype, work style, energizers, drains, 5 strengths to lean into, 4 blind spots, the environments where you thrive, and your AI-age advantage.</p>
           <div class="step-arrow">→</div>
         </div>
         <div class="step">
           <div class="step-num">03</div>
           <div class="step-title">Unlock Your Compass (Optional)</div>
-          <p class="step-desc">Upgrade to the Pathworks Compass for $39 — a deeper 10-year direction map built from your Blueprint: 20+ specific career paths, 20+ businesses, and a 90-day action plan tailored to exactly where you want to go.</p>
+          <p class="step-desc">Upgrade to the Pathworks Compass for $39 — a direction-specific map built from your Blueprint: 5–7 career paths, 5–7 businesses matched to your capital, 12 real companies, 20 startup ideas, and a 90-day action plan.</p>
         </div>
       </div>
     </div>
@@ -674,35 +679,35 @@
           <div class="what-item-num">1</div>
           <div class="what-item-body">
             <h3>Your Personal Profile &amp; Archetype</h3>
-            <p>A named profile built from your answers — explains how you work best and why you've ended up where you are.</p>
+            <p>A named profile built from your answers — how you work best, what makes you distinctive, and why you've ended up where you are.</p>
           </div>
         </div>
         <div class="what-item">
           <div class="what-item-num">2</div>
           <div class="what-item-body">
-            <h3>3 Matched Career Paths</h3>
-            <p>Specific, AI-resistant careers tailored to your skills, values, and working style — with context on why each one fits you.</p>
+            <h3>Your Energizers &amp; Drains</h3>
+            <p>The specific things that make you come alive at work — and the ones that quietly deplete you. Named clearly, so you can design around them.</p>
           </div>
         </div>
         <div class="what-item">
           <div class="what-item-num">3</div>
           <div class="what-item-body">
-            <h3>3 Tailored Business Ideas</h3>
-            <p>Businesses you could realistically build, matched to your proven experience and natural strengths.</p>
+            <h3>5 Strengths &amp; 4 Blind Spots</h3>
+            <p>The capabilities to lean into for your next chapter — and the patterns to watch for, with concrete ways to guard against each one.</p>
           </div>
         </div>
         <div class="what-item">
           <div class="what-item-num">4</div>
           <div class="what-item-body">
-            <h3>20 AI-Resistant Business Types</h3>
-            <p>A curated grid of businesses that thrive on human skills — each one built on what automation cannot replace.</p>
+            <h3>Where You'll Thrive (and Where You Won't)</h3>
+            <p>The kinds of environments, cultures, and structures that will bring out your best — and the ones to steer clear of.</p>
           </div>
         </div>
         <div class="what-item">
           <div class="what-item-num">5</div>
           <div class="what-item-body">
-            <h3>5-Step Transition Roadmap</h3>
-            <p>Concrete, sequenced actions you can start this week — no vague advice, no "network more" platitudes.</p>
+            <h3>Your AI-Age Advantage + 30-Day Roadmap</h3>
+            <p>What AI can't replicate in you, plus 5 concrete reflective steps to put your Blueprint to work this month.</p>
           </div>
         </div>
       </div>
@@ -774,7 +779,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">What's included in the free Blueprint vs. the $39 Compass?<span class="faq-arrow">▼</span></button>
-        <div class="faq-a">The free Blueprint gives you your Profile, 3 career paths, 3 business ideas, 20 AI-resistant business types, target companies, and a 5-step transition roadmap — completed in about 7 minutes. The Compass ($39) takes your Blueprint results and your chosen direction, then maps out 20+ specific career paths, 20+ businesses you could start, your specific 10-year career arc, detailed business models with financial projections, and a 90-day action plan tailored to exactly where you want to go. If you upgrade to Compass and have a technical issue, reach out at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a>.</div>
+        <div class="faq-a">The free Blueprint tells you <em>who you actually are</em> at work — your archetype, work style, top 5 strengths, 4 blind spots to watch, energizers and drains, the environments where you'll thrive, your AI-age advantage, and a 30-day roadmap — completed in about 7 minutes. The Compass ($39) tells you <em>where you can go</em> — it takes your Blueprint plus your direction and available capital, then maps 5–7 AI-resistant career paths, 5–7 capital-matched businesses you could start, 12 real named companies where your profile can thrive, 20 lightweight startup ideas to spark your thinking, and a 90-day action plan tailored to exactly where you want to go. If you upgrade to Compass and have a technical issue, reach out at <a href="mailto:hello@changingtribes.com">hello@changingtribes.com</a>.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Is my data safe?<span class="faq-arrow">▼</span></button>
@@ -871,26 +876,43 @@
       <div id="past-content"></div>
     </div>
     <div class="result-card">
-      <h3>🧭 Your Next Career Paths</h3>
-      <ul class="result-list" id="careers-content"></ul>
+      <h3>⚙️ How You Work Best</h3>
+      <div id="workstyle-content"></div>
     </div>
     <div class="result-card">
-      <h3>🚀 Business Ideas For You</h3>
-      <ul class="result-list" id="business-content"></ul>
+      <h3>⚡ Energizers &amp; 🪫 Drains</h3>
+      <div class="result-2col">
+        <div>
+          <h4 style="color:var(--forest);margin:0 0 0.6rem;font-size:1rem;">⚡ Energizers</h4>
+          <ul class="result-list result-list-plain" id="energizers-content"></ul>
+        </div>
+        <div>
+          <h4 style="color:#8B3030;margin:0 0 0.6rem;font-size:1rem;">🪫 Drains</h4>
+          <ul class="result-list result-list-plain" id="drains-content"></ul>
+        </div>
+      </div>
     </div>
     <div class="result-card">
-      <h3>💡 20 Businesses You Could Start</h3>
-      <p style="color:var(--muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant business types matched to your profile and proven skills — each one built on human strengths that automation cannot replace.</p>
-      <div class="companies-grid" id="startup-content"></div>
+      <h3>✦ Strengths to Lean Into</h3>
+      <ul class="result-list" id="strengths-content"></ul>
     </div>
     <div class="result-card">
-      <h3>🗺️ Your Transition Roadmap</h3>
+      <h3>⚠ Blind Spots to Watch</h3>
+      <ul class="result-list" id="blindspots-content"></ul>
+    </div>
+    <div class="result-card">
+      <h3>🌱 Environments Where You'll Thrive</h3>
+      <div id="envthrive-content"></div>
+      <h3 style="margin-top:1.5rem;color:#8B3030;">🚫 Environments to Avoid</h3>
+      <div id="envavoid-content"></div>
+    </div>
+    <div class="result-card" style="background:linear-gradient(135deg,#0F4F53,#1A6B72);color:#fff;">
+      <h3 style="color:#F4C83F;">🛡️ Your AI-Age Advantage</h3>
+      <div id="aiedge-content" style="color:#D8ECF0;"></div>
+    </div>
+    <div class="result-card">
+      <h3>🗺️ Your Next 30 Days</h3>
       <ul class="result-list" id="roadmap-content"></ul>
-    </div>
-    <div class="result-card">
-      <h3>🏢 Companies Where You Can Thrive</h3>
-      <p style="color:var(--muted);font-size:0.9rem;margin:0 0 1.25rem;">AI-resistant organizations matched to your profile — places where human judgment, relationships, and your specific skills drive the value.</p>
-      <div class="companies-grid" id="companies-content"></div>
     </div>
     <div class="share-section">
       <p>🎉 Share your Profile with your network</p>
@@ -936,11 +958,11 @@
   <div class="results-wrap" style="max-width:640px;text-align:center;padding:60px 24px;">
     <div class="badge" style="margin-bottom:1.5rem;">✦ Your Pathworks Blueprint Is On Its Way</div>
     <h2 id="blueprint-success-title" style="font-family:'Merriweather',serif;font-size:2rem;color:var(--forest);margin-bottom:1rem;">Your Blueprint Report Is Being Prepared</h2>
-    <p id="blueprint-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;">We're generating your personalized Pathworks Blueprint right now — your profile, career paths, business ideas, 20 business types, target companies, and transition roadmap, tailored specifically to your answers. This typically takes 2–3 minutes and will be delivered straight to your inbox.</p>
+    <p id="blueprint-success-intro" style="color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:2rem;">We're generating your personalized Pathworks Blueprint right now — your archetype, work style, energizers and drains, strengths and blind spots, ideal environments, AI-age advantage, and a 30-day roadmap, all tailored specifically to your answers. This typically takes 2–3 minutes and will be delivered straight to your inbox.</p>
     <div style="background:#EDF4F8;border:1px solid #C0D5E0;padding:28px 32px;margin-bottom:2rem;">
       <p style="font-size:1.1rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;">📬 Your full Blueprint report will be sent to:</p>
       <p id="blueprint-success-email" style="font-size:1rem;color:var(--slate);font-weight:700;margin-bottom:1rem;"></p>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your profile type, an analysis of your past work, 3 career paths, 3 business ideas, 20 business types you could start, target companies where you can thrive, and a 5-step transition roadmap.</p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your profile type, an analysis of your past work, how you work best, your energizers and drains, 5 strengths to lean into, 4 blind spots to watch, the environments where you'll thrive, your AI-age advantage, and a 30-day roadmap.</p>
     </div>
     <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
     <a href="https://www.pathworkscompass.com" class="btn-primary" target="_blank">Continue to Pathworks Compass →</a>
@@ -1248,74 +1270,44 @@ const TEST_COUPON = 'TESTDRIVE';
 const TEST_RESULTS = {
   tribe_name: 'The Pathfinder',
   tribe_description: 'You are a rare blend of strategic thinker and connector — someone who instinctively sees where things are heading before others do. You thrive when you can shape direction rather than just execute it, and you bring people along on the journey with natural warmth and credibility.',
-  past_analysis: 'Your past roles have likely spanned a few different industries or functions — not because you lacked focus, but because you outgrew each environment and sought new challenges. You may have been the person who quietly became the go-to advisor, the one colleagues brought their hardest problems to. Traditional org structures have probably felt a little constraining.',
-  career_paths: [
-    { title: 'Business Coach / Consultant', description: 'Your combination of strategic thinking, people skills, and broad experience makes you a natural advisor. Businesses will pay well for someone who can walk in, diagnose problems fast, and guide them forward — and you have the range to do it across sectors.' },
-    { title: 'Community or Organization Builder', description: "Whether it's building a professional association, a mastermind group, or an online community, you have the vision and relational intelligence to attract and hold people together around a shared purpose. This is a growing and well-compensated field." },
-    { title: 'Fractional Executive (COO / Chief of Staff)', description: "Many growing companies need experienced leadership but can't afford a full-time C-suite hire. As a fractional executive you work with 2–4 companies at once, bringing strategic leadership where it matters most — with full flexibility over your schedule." },
+  past_analysis: 'Your past roles have likely spanned a few different industries or functions — not because you lacked focus, but because you outgrew each environment and sought new challenges. You have real, observable range: the scores suggest you have both sold/persuaded AND coached/developed AND managed teams, which is an uncommon trio. Traditional org structures have probably felt a little constraining; you may have been the person who quietly became the go-to advisor colleagues brought their hardest problems to.',
+  work_style: 'You work best with meaningful autonomy and the freedom to set your own direction, within a rhythm of your own choosing. You gravitate toward strategic work over pure execution, but you can roll up your sleeves when the stakes call for it. You make decisions through a blend of careful analysis and strong gut instinct for people and situations. You prefer a small, high-trust team to a large hierarchy.',
+  energizers: [
+    'Being asked to diagnose a messy situation nobody else has cracked',
+    'Helping someone else have their own breakthrough',
+    'Starting something from scratch where the rules are still forming',
+    'Deep one-on-one conversations where real things get said',
+    'Connecting people who should know each other',
   ],
-  business_ideas: [
-    { name: 'Career Transition Coaching Practice', description: 'You understand first-hand what it means to reinvent yourself professionally. A coaching practice built around mid-career professionals who want to pivot — whether to a new industry, a business, or a portfolio career — would be deeply authentic and immediately credible for you.' },
-    { name: 'Membership Community for Career Changers', description: "A paid online community (think $29–$99/month) for people navigating big professional transitions. You'd provide monthly workshops, guest experts, peer accountability groups, and a resource library — a recurring revenue model that builds real asset value over time." },
-    { name: 'Corporate Training & Workshop Business', description: 'Organizations spend heavily on leadership development, change management, and team culture. You could package your expertise into half-day or full-day workshops and sell them to HR teams, leadership retreats, and conferences — high-margin and scalable.' },
+  drains: [
+    'Repetitive execution work with no variation or novelty',
+    'Multi-layer approval chains before you can move on anything',
+    'Meetings with no decision, no outcome, and no clear owner',
+    'Being micromanaged by someone whose judgment you do not trust',
+    'Environments where politics matter more than the work',
   ],
-  startup_ideas: [
-    { name: 'Executive Coaching Practice', benefit: 'Helps leaders navigate high-stakes decisions with human wisdom' },
-    { name: 'Career Transition Consultancy', benefit: 'Guides professionals through career pivots with personalized strategy' },
-    { name: 'Leadership Development Workshops', benefit: 'Builds human leadership capabilities teams cannot get from software' },
-    { name: 'Fractional COO Service', benefit: 'Delivers senior operations expertise small companies can afford' },
-    { name: 'Organizational Culture Firm', benefit: 'Transforms company culture through human-centered facilitation' },
-    { name: 'Team Conflict Mediation Practice', benefit: 'Resolves workplace conflict through skilled human dialogue' },
-    { name: 'Community-Based Coworking Space', benefit: 'Creates human connection and belonging for remote workers' },
-    { name: 'Corporate Training & Facilitation', benefit: 'Delivers experiential learning that requires a live human presence' },
-    { name: 'Mental Health & Wellness Consulting', benefit: 'Supports employee wellbeing with empathetic human guidance' },
-    { name: 'Peer Advisory Board (Like Vistage)', benefit: 'Brings CEOs together for collective wisdom and accountability' },
-    { name: 'Strategic Communications Agency', benefit: 'Crafts authentic brand narratives that build real human trust' },
-    { name: 'Boutique Recruiting / Talent Advisory', benefit: 'Matches people and culture fit in ways algorithms miss' },
-    { name: 'Community Health Navigator Service', benefit: 'Connects patients to resources through trusted human advocacy' },
-    { name: 'Family Office / Wealth Transitions Advisor', benefit: 'Guides families through complex financial and emotional decisions' },
-    { name: 'Nonprofit Capacity Building Consultancy', benefit: 'Strengthens mission-driven organizations with strategic expertise' },
-    { name: 'Educational Tutoring & Mentorship Business', benefit: 'Builds student confidence through meaningful human relationships' },
-    { name: 'Events & Experiential Marketing Agency', benefit: 'Creates memorable in-person brand experiences AI cannot design' },
-    { name: 'Trades & Services Franchise', benefit: 'Delivers hands-on work that requires a skilled physical presence' },
-    { name: 'Holistic Wellness Studio', benefit: 'Provides body-centered healing through trained human practitioners' },
-    { name: 'Restorative Justice / Mediation Firm', benefit: 'Facilitates healing and resolution through empathetic human process' },
+  strengths_to_lean_into: [
+    { name: 'Pattern Recognition', description: 'You spot shapes and connections in ambiguous information that others miss — people, markets, org dynamics. This is your superpower; build a career where it is the product, not a side-effect.' },
+    { name: 'Trusted Advisor Instinct', description: 'People naturally bring you their harder problems because your judgment lands well. Lean in: craft roles and businesses where being the trusted outside perspective is the value you deliver.' },
+    { name: 'Cross-Pollination', description: 'You pull insights from one industry and apply them to another without effort. Put yourself in rooms where that translation is scarce and valuable.' },
+    { name: 'Constructive Directness', description: "You can tell someone a hard truth in a way they can actually hear — a rarer skill than most assume. Protect it and don't let hierarchy soften it out of you." },
+    { name: 'Warm Credibility', description: 'You come across as both accomplished and approachable, which opens doors a pure expert or a pure connector cannot. Use this for senior-stakeholder work and ecosystem building.' },
   ],
+  blind_spots: [
+    { name: 'Restless Next-Chapter Seeking', description: 'You may move on from situations before you have fully harvested their value. Before your next pivot, write down what you have not yet extracted from the current chapter.' },
+    { name: 'Over-Trusting Your Gut', description: 'Your gut is usually right — but when it is wrong, you tend to double down. Build in a simple kill-switch: whenever you feel certain, ask one trusted outsider to actively argue the other side.' },
+    { name: 'Conflict Avoidance in Warm Relationships', description: 'Your warmth can make it harder to deliver the same hard truths you share with strangers. Name this pattern with your closest collaborators up-front so they explicitly invite your directness.' },
+    { name: 'Underpricing Yourself', description: "You may under-charge because the work feels 'easy' to you — but it is easy because you are good at it. Anchor your pricing to the outcome you deliver, not the hours you spend." },
+  ],
+  environments_thrive: 'You flourish in small, high-trust teams where the work has real stakes and your judgment is genuinely wanted. You need enough autonomy to shape direction, a tolerance for useful ambiguity, and people around you who value candor. Cadence matters: a few days of deep strategic work followed by a few days of intense human contact works far better for you than evenly paced execution every day. You thrive where your range is a feature, not a question.',
+  environments_avoid: 'Large, process-heavy organizations with long approval chains will grind you down, as will roles defined by narrow specialization or repetitive deliverables. Cultures that prize politics over outcomes, or where candor is punished, will quietly eat at you until you leave. Avoid any setup where your core value is "just execute."',
+  ai_edge: 'Your advantage in the age of AI is the blend that is hardest to replicate: reading a room, holding a difficult one-on-one conversation, drawing on cross-industry patterns, and being trusted with the things that matter most. AI can draft slides, summarize documents, and run analyses — but it cannot be the person a founder calls at 10pm when something is actually on the line. Build a life where your judgment, presence, and relationships are the product; let AI handle the rest.',
   roadmap: [
-    { title: 'Clarify Your Niche', action: 'Write a one-paragraph answer to: "I help [specific person] do [specific thing] so they can [specific outcome]." Share it with 5 people you respect and get honest feedback.' },
-    { title: 'Have 10 Exploratory Conversations', action: 'Reach out to 10 people in your network who fit your target client profile. Ask for a 20-minute conversation — not to sell anything, but to understand their biggest challenges. Your offer will sharpen dramatically.' },
-    { title: 'Build Your Proof of Concept', action: "Deliver your service to 2–3 people for free or at a steep discount in exchange for detailed testimonials and a case study. This removes the 'no track record' objection before it ever comes up." },
-    { title: 'Set Up Your Simple Online Presence', action: "Create a one-page website (or even a strong LinkedIn profile rewrite) that clearly states who you help, what you do, and how to get started. Don't wait until it's perfect — done beats perfect." },
-    { title: 'Land Your First Paying Client', action: 'Make a direct, simple offer to 3–5 warm contacts. Be specific about what they get, the price, and the time commitment. Your first "yes" will unlock your confidence more than any training or planning ever could.' },
-  ],
-  target_companies: [
-    { name: 'Korn Ferry', sector: 'Leadership Consulting' },
-    { name: 'Deloitte', sector: 'Strategy & Advisory' },
-    { name: 'McKinsey & Co.', sector: 'Management Consulting' },
-    { name: 'BetterUp', sector: 'Coaching / HR Tech' },
-    { name: 'Gallup', sector: 'Org. Development' },
-    { name: 'YPO', sector: 'Executive Community' },
-    { name: 'Vistage', sector: 'CEO Coaching' },
-    { name: 'EY Parthenon', sector: 'Strategy Consulting' },
-    { name: 'Accenture', sector: 'Business Transformation' },
-    { name: 'The Bridgespan Group', sector: 'Nonprofit Strategy' },
-    { name: 'Edelman', sector: 'Communications' },
-    { name: 'Teach For America', sector: 'Education / Leadership' },
-    { name: 'Omidyar Network', sector: 'Social Impact' },
-    { name: 'IDEO', sector: 'Design & Innovation' },
-    { name: 'Bain & Company', sector: 'Management Consulting' },
-    { name: 'LinkedIn Learning', sector: 'Professional Development' },
-    { name: 'Aspen Institute', sector: 'Leadership & Policy' },
-    { name: 'Civic Consulting Alliance', sector: 'Public Sector Advisory' },
-    { name: 'Envisio', sector: 'Strategy Execution' },
-    { name: 'CoachHub', sector: 'Digital Coaching' },
-    { name: 'SHRM', sector: 'HR & Workforce' },
-    { name: 'HubSpot', sector: 'Marketing / Growth' },
-    { name: 'Patagonia', sector: 'Mission-Driven Business' },
-    { name: 'Salesforce', sector: 'CRM / Partnerships' },
-    { name: 'NFTE', sector: 'Entrepreneurship Ed.' },
-    { name: 'Idealist', sector: 'Social Impact Careers' },
-    { name: 'Conscious Capitalism', sector: 'Business Community' },
+    { title: 'Map your current energy', action: 'For the next 7 days, keep a simple two-column log: what energized you at work today, and what drained you. Patterns will emerge fast.' },
+    { title: 'Name your non-negotiables', action: 'Using this Blueprint, write down 3 things any future role or business MUST have for you, and 3 things it CANNOT have. Keep it near your desk.' },
+    { title: 'Have 3 listening conversations', action: 'Reach out to 3 people whose work life you quietly admire. Ask how they designed their current role — not to copy them, but to see what is possible.' },
+    { title: 'Pressure-test your blind spots', action: 'Pick the blind spot that stings most above, and design one concrete 2-week experiment to guard against it — a different decision habit, a check-in partner, something real.' },
+    { title: 'Move into the Compass', action: 'When you have a direction statement — a rough sentence about where you want to head — run it through Pathworks Compass to turn this Blueprint into specific career and business paths.' },
   ],
 };
 
@@ -1380,17 +1372,21 @@ function displayResults(r) {
   document.getElementById('results-title').textContent = 'Your Profile';
   document.getElementById('profile-name').textContent  = r.tribe_name || '';
   document.getElementById('results-intro').textContent = r.tribe_description || '';
-  document.getElementById('past-content').innerHTML = `<p>${r.past_analysis || ''}</p>`;
-  document.getElementById('careers-content').innerHTML =
-    (r.career_paths || []).map(c => `<li><div><strong>${c.title}</strong>${c.description}</div></li>`).join('');
-  document.getElementById('business-content').innerHTML =
-    (r.business_ideas || []).map(b => `<li><div><strong>${b.name}</strong>${b.description}</div></li>`).join('');
+  document.getElementById('past-content').innerHTML       = `<p>${r.past_analysis || ''}</p>`;
+  document.getElementById('workstyle-content').innerHTML  = `<p>${r.work_style || ''}</p>`;
+  document.getElementById('energizers-content').innerHTML =
+    (r.energizers || []).map(e => `<li>${e}</li>`).join('');
+  document.getElementById('drains-content').innerHTML =
+    (r.drains || []).map(d => `<li>${d}</li>`).join('');
+  document.getElementById('strengths-content').innerHTML =
+    (r.strengths_to_lean_into || []).map(s => `<li><div><strong>${s.name}</strong>${s.description}</div></li>`).join('');
+  document.getElementById('blindspots-content').innerHTML =
+    (r.blind_spots || []).map(b => `<li><div><strong>${b.name}</strong>${b.description}</div></li>`).join('');
+  document.getElementById('envthrive-content').innerHTML = `<p>${r.environments_thrive || ''}</p>`;
+  document.getElementById('envavoid-content').innerHTML  = `<p>${r.environments_avoid || ''}</p>`;
+  document.getElementById('aiedge-content').innerHTML    = `<p>${r.ai_edge || ''}</p>`;
   document.getElementById('roadmap-content').innerHTML =
     (r.roadmap || []).map((s, i) => `<li><div><strong>Step ${i + 1}: ${s.title}</strong>${s.action}</div></li>`).join('');
-  document.getElementById('startup-content').innerHTML =
-    (r.startup_ideas || []).map(s => `<div class="company-chip"><strong>${s.name}</strong><span>${s.benefit}</span></div>`).join('');
-  document.getElementById('companies-content').innerHTML =
-    (r.target_companies || []).map(c => `<div class="company-chip"><strong>${c.name}</strong><span>${c.sector}</span></div>`).join('');
 
   const profileName = r.tribe_name || 'my Profile';
   const shareUrl  = 'https://pathworksblueprint.com';
@@ -1601,7 +1597,7 @@ const TEST_COMPASS_RESULTS = {
     { name: 'Animal-Assisted Wellness Retreats', description: 'Weekend retreats combining animals with personal development for corporate groups or individuals.', why_it_fits: 'A premium experience in a fast-growing wellness category that uses all your facilitation skills.', revenue_model: '$300–$800/person for day experiences', time_to_income: '6–12 months to first retreat', year_3_potential: 'Corporate packages $5K–$20K', first_client_path: 'Network in wellness and HR communities', ai_resistance: 'Live animal experiences and human facilitation are impossible to digitize.' },
   ],
   action_plan: [
-    { period: 'Week 1–2', title: 'Get Clear on Your Lane', action: 'Identify which of the 3 career paths or business models feels most aligned. Talk to 3 people already working in that space.' },
+    { period: 'Week 1–2', title: 'Get Clear on Your Lane', action: 'Identify which of the recommended career paths or business models feels most aligned. Talk to 3 people already working in that space.' },
     { period: 'Week 3–4', title: 'Get Your Credential Roadmap', action: 'Research the 1–2 certifications that open doors in your chosen path. Register for or enroll in the most accessible entry certification.' },
     { period: 'Week 5–6', title: 'Get Visible in the Field', action: 'Volunteer at a local shelter, rescue, or veterinary practice for even 4 hours a week.' },
     { period: 'Week 7–8', title: 'Build Your First Asset', action: 'Create one tangible asset: a one-page bio or simple website, or a simple service description for your first clients.' },

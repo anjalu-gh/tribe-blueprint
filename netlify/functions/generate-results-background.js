@@ -91,6 +91,21 @@ function buildScoreSummary(answers) {
     .join('\n\n');
 }
 
+// Extract the root JSON object using brace counting — tolerates trailing text
+function extractRootJSON(str) {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = 0; i < str.length; i++) {
+    const c = str[i];
+    if (esc)                 { esc = false; continue; }
+    if (c === '\\' && inStr) { esc = true;  continue; }
+    if (c === '"')           { inStr = !inStr; continue; }
+    if (inStr)               continue;
+    if (c === '{')           depth++;
+    if (c === '}')           { depth--; if (depth === 0) return str.substring(0, i + 1); }
+  }
+  return str;
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
@@ -114,78 +129,94 @@ exports.handler = async (event) => {
   // ── Build Claude prompt ─────────────────────────
   const scoreSummary = buildScoreSummary(answers || {});
 
-  const prompt = `You are a deeply insightful career counselor and business strategist working with Pathworks Project — a platform that helps people transition to new chapters of their professional lives.
+  const prompt = `You are a deeply insightful people analyst and coach working with Pathworks Blueprint — the first step in the Pathworks suite. The Blueprint is about WHO the person is: how they work, what energizes them, where they thrive, what drains them, and what makes them uniquely valuable in the age of AI. A separate tool, Pathworks Compass, handles the WHERE (specific careers, businesses, companies). Do NOT recommend careers, businesses, or companies in this response — the Blueprint is strictly a personal work-style profile.
 
-A person has completed a 40-question personality, skills, and context assessment. Their responses are grouped into 8 categories below (each score is 1–10):
+A person has completed a 40-question assessment. Their responses are grouped into 8 categories below (each score is 1–10):
 
 ${scoreSummary}
 
-IMPORTANT GUIDANCE FOR EACH CATEGORY:
+HOW TO READ THE CATEGORIES:
+1. "How You Work", "What Energizes You", "Your Skills & Strengths", "Risk & Change", "Your Values & Vision" — these define core working style, motivation, and operating preferences.
+2. "What You've Built & Done" — these are their proven, observable skills. Reference them specifically when naming strengths (e.g. "you have real sales DNA", "you're a natural facilitator").
+3. "Your Human Edge" — this is the AI-resistance profile. High-right scores (in-person, emotional attunement, human judgment, ambiguity tolerance, deep personal impact) mean their human value is harder for AI to replace. Call this out explicitly in the ai_edge section.
+4. "Your World & Context" — practical constraints (timeline, local/global, B2C/B2B, physical/digital). Use these to color the picture but don't turn them into career recommendations.
 
-1. "How You Work", "What Energizes You", "Your Skills & Strengths", "Risk & Change", "Your Values & Vision" — use these to build the person's core personality archetype and working style profile.
+YOUR JOB: Produce a rich personal Blueprint — warm, specific, and reflective. Speak directly as "you". Sound like a thoughtful coach who has read the person carefully, not a generic personality test.
 
-2. "What You've Built & Done" — these are their PROVEN, TRANSFERABLE SKILLS. Use these to ground your career and business recommendations in what this person has actually done, not just what they prefer. A person with high scores toward "sold, pitched, persuaded" has real sales DNA. A person toward "coached, taught, developed" has real facilitation and mentoring ability. Use this category to add credibility and specificity to your suggestions.
+LENGTH: Keep each description to 2–3 sentences unless specified. Every bullet in list fields should be 1 concrete sentence.
 
-3. "Your Human Edge" — this is the AI-RESISTANCE profile. Use these scores to identify this person's most future-proof strengths — the capabilities that AI and automation genuinely cannot replace. High scores toward the right side of these questions (in-person work, emotional attunement, human judgment, ambiguity navigation, deep personal impact) indicate strong AI-resistant attributes. Explicitly factor this into career path and business idea recommendations — prioritize paths where human presence, trust, and judgment are irreplaceable.
-
-4. "Your World & Context" — use these as PRACTICAL CONSTRAINTS and signals. The income timeline (q37) should shape how aggressive or cautious the roadmap steps are. Local vs. global (q36) should shape whether suggestions are community-based or location-independent. Individual vs. organizational clients (q39) shapes whether suggestions are B2C or B2B. Physical vs. digital world (q40) should influence the type of business and career suggested.
-
-Based on all 40 scores, generate a rich, personalized career and business analysis. Be specific and actionable — avoid generic advice. Speak warmly and directly to the person as "you".
-
-CRITICAL: Keep every description field to a MAXIMUM of 2 sentences. Be punchy and specific, not verbose. The entire JSON response must be under 3000 tokens.
-
-Return ONLY valid JSON — no markdown fences, no explanation, just the JSON object — with this exact structure:
+Return ONLY valid JSON — no markdown fences, no explanation — with this exact structure:
 
 {
-  "tribe_name": "The [Archetype Name]",
-  "tribe_description": "2–3 sentences describing this person's unique profile and what makes them stand out professionally.",
-  "past_analysis": "2–3 sentences about the kinds of roles and environments they have likely thrived or struggled in, based on their scores — reference their proven skills and experience background specifically.",
-  "career_paths": [
-    { "title": "Specific Career Title", "description": "2–3 sentences on why this path fits their exact profile, references their transferable skills, and explains why it is resilient to AI and automation." },
-    { "title": "Specific Career Title", "description": "2–3 sentences." },
-    { "title": "Specific Career Title", "description": "2–3 sentences." }
+  "tribe_name": "The [Archetype Name] — evocative, specific, 2-4 words",
+  "tribe_description": "2-3 sentences naming who this person is at their best and what makes their blend of traits distinctive.",
+  "past_analysis": "3-4 sentences describing the kinds of work and environments they've likely thrived in vs. struggled with — reference their proven-skills scores (q26-q30) specifically.",
+  "work_style": "3-4 sentences describing how they actually work best — pace, structure, autonomy, collaboration preferences, decision-making style.",
+  "energizers": [
+    "A specific thing that makes this person come alive at work",
+    "Another energizer",
+    "Another energizer",
+    "Another energizer",
+    "Another energizer"
   ],
-  "business_ideas": [
-    { "name": "Specific Business Type or Name", "description": "2–3 sentences on why this idea suits their proven skills, fits their practical context (local/global, B2C/B2B, timeline), and why it plays to human strengths AI cannot easily replace." },
-    { "name": "Specific Business Type or Name", "description": "2–3 sentences." },
-    { "name": "Specific Business Type or Name", "description": "2–3 sentences." }
+  "drains": [
+    "A specific thing that depletes this person's energy at work",
+    "Another drain",
+    "Another drain",
+    "Another drain",
+    "Another drain"
   ],
+  "strengths_to_lean_into": [
+    { "name": "Named strength (2-4 words)", "description": "2 sentences: what this strength looks like in action and why it matters for this person." },
+    { "name": "...", "description": "..." },
+    { "name": "...", "description": "..." },
+    { "name": "...", "description": "..." },
+    { "name": "...", "description": "..." }
+  ],
+  "blind_spots": [
+    { "name": "Named blind spot (2-4 words)", "description": "2 sentences: what tends to go wrong for this person and a concrete way to guard against it." },
+    { "name": "...", "description": "..." },
+    { "name": "...", "description": "..." },
+    { "name": "...", "description": "..." }
+  ],
+  "environments_thrive": "3-4 sentences on the kinds of environments, cultures, and structures where this person will flourish. Focus on conditions (pace, autonomy, people dynamics, cadence), not specific job titles or companies.",
+  "environments_avoid": "2-3 sentences on the kinds of environments that will grind this person down, calibrated to their specific scores.",
+  "ai_edge": "3-4 sentences describing this person's human advantage in the age of AI — what they can do that AI cannot easily replicate. Ground this in their Human Edge and proven-skills scores.",
   "roadmap": [
-    { "title": "Action Step Title", "action": "A specific, concrete action they can take in the next 30 days — calibrated to their income timeline and practical context." },
-    { "title": "Action Step Title", "action": "Specific action." },
-    { "title": "Action Step Title", "action": "Specific action." },
-    { "title": "Action Step Title", "action": "Specific action." },
-    { "title": "Action Step Title", "action": "Specific action." }
-  ],
-  "startup_ideas": [
-    { "name": "Business Type or Concept", "benefit": "Core benefit or value this business delivers to customers" },
-    ... (provide exactly 20 entries total)
-  ],
-  "target_companies": [
-    { "name": "Company Name", "sector": "Industry / Role Type" },
-    ... (provide exactly 27 entries total)
+    { "title": "Action step title", "action": "A concrete reflective or experimental step they can take in the next 30 days to better understand or leverage their profile — not a career-change action." },
+    { "title": "...", "action": "..." },
+    { "title": "...", "action": "..." },
+    { "title": "...", "action": "..." },
+    { "title": "...", "action": "..." }
   ]
 }
 
-For startup_ideas: List exactly 20 types of businesses this person could realistically start or run. Every idea must be AI-resistant — built on human judgment, physical presence, trust, emotional intelligence, creativity, or complex relationship-driven value that AI cannot easily replicate. For each entry provide: the business name/type and the core customer benefit (what problem it solves or value it delivers). Match the mix to their proven skills, archetype, and practical context (local/global, B2C/B2B, income timeline). Include a variety of models: service businesses, consulting practices, community businesses, physical/local businesses, creative ventures, and mission-driven organizations.
-
-For target_companies: List exactly 27 real, named companies where this person could realistically apply or partner with. These must be AI-resistant organizations — companies where human judgment, relationships, physical presence, creative direction, or complex problem-solving are central to the value delivered. Match the companies to this person's specific profile, career paths, proven skills, and practical context (local vs. global, B2C vs. B2B). Include a mix of: well-known employers, mid-size growth companies, mission-driven organizations, and industry-specific firms. Use real company names only.`;
+CRITICAL CONSTRAINTS:
+- Do NOT include career_paths, business_ideas, startup_ideas, target_companies, or any list of specific jobs/businesses/companies. Those belong to Pathworks Compass, which is the next tool they'll use. If tempted to recommend a career or business, stop and reframe it as a strength, energizer, or environment condition instead.
+- energizers and drains: 5 items each, specific and non-redundant.
+- strengths_to_lean_into: exactly 5 items.
+- blind_spots: exactly 4 items.
+- roadmap: exactly 5 items, all about self-knowledge / experimentation / environment design — NOT about landing jobs or starting businesses.`;
 
   // ── Call Claude ─────────────────────────────────
   console.log('Step 2: Calling Claude API...');
   let results;
   try {
     const message = await anthropic.messages.create({
-      model: 'claude-opus-4-6',
-      max_tokens: 5000,
-      messages: [{ role: 'user', content: prompt }],
+      model:      'claude-opus-4-6',
+      max_tokens: 7000,
+      system:     'You are a JSON-only responder. Output nothing except the JSON object — no markdown, no backticks, no commentary. Keep every placeholder replaced with warm, specific, deeply personalised content. Follow the schema exactly and respect every count requirement. This is a personal work-style Blueprint, not a career recommendation — do not list specific careers, businesses, or companies.',
+      messages:   [
+        { role: 'user',      content: prompt },
+        { role: 'assistant', content: '{'    },
+      ],
     });
 
-    const raw = message.content[0].text.trim()
-      .replace(/^```json\s*/i, '')
-      .replace(/\s*```$/i, '');
+    console.log('Blueprint stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
+    const rawText  = '{' + message.content[0].text;
+    const jsonText = extractRootJSON(rawText);
 
-    results = JSON.parse(raw);
+    results = JSON.parse(jsonText);
     console.log('Step 2 done: Claude responded OK');
   } catch (aiErr) {
     console.error('AI / parse error:', aiErr.message);
@@ -239,64 +270,38 @@ For target_companies: List exactly 27 real, named companies where this person co
 async function sendResultsEmail(email, results) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const careerPathsHtml = (results.career_paths || []).map(c => `
+  // ── Energizers / Drains 2-col list ──
+  const energizersHtml = (results.energizers || []).map(e =>
+    `<li style="margin-bottom:8px;color:#0F4F53;font-size:14px;line-height:1.55;">${e}</li>`).join('');
+  const drainsHtml = (results.drains || []).map(d =>
+    `<li style="margin-bottom:8px;color:#8B3030;font-size:14px;line-height:1.55;">${d}</li>`).join('');
+
+  // ── Strengths ──
+  const strengthsHtml = (results.strengths_to_lean_into || []).map(s => `
     <tr>
-      <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F4F53;font-size:15px;">→ ${c.title}</strong>
-        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${c.description}</p>
+      <td style="padding:14px 0;border-bottom:1px solid #B8D4DA;">
+        <strong style="color:#0F4F53;font-size:15px;">✦ ${s.name || ''}</strong>
+        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.65;">${s.description || ''}</p>
       </td>
     </tr>`).join('');
 
-  const businessIdeasHtml = (results.business_ideas || []).map(b => `
+  // ── Blind spots ──
+  const blindSpotsHtml = (results.blind_spots || []).map(b => `
     <tr>
-      <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F4F53;font-size:15px;">→ ${b.name}</strong>
-        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${b.description}</p>
+      <td style="padding:14px 0;border-bottom:1px solid #E0C8C8;">
+        <strong style="color:#8B3030;font-size:15px;">⚠ ${b.name || ''}</strong>
+        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.65;">${b.description || ''}</p>
       </td>
     </tr>`).join('');
 
-  // Startup ideas grid — 3 per row
-  const startups = results.startup_ideas || [];
-  const startupRows = [];
-  for (let i = 0; i < startups.length; i += 3) {
-    const row = startups.slice(i, i + 3);
-    const cells = row.map(s => `
-      <td width="33%" style="padding:10px 8px;vertical-align:top;">
-        <div style="background:#ffffff;border:1px solid #B8D4DA;border-radius:8px;padding:12px 10px;text-align:center;">
-          <strong style="color:#0F4F53;font-size:13px;display:block;margin-bottom:4px;">${s.name}</strong>
-          <span style="color:#1A6B72;font-size:11px;line-height:1.4;display:block;">${s.benefit}</span>
-        </div>
-      </td>`).join('');
-    const empties = row.length < 3 ? Array(3 - row.length).fill('<td width="33%"></td>').join('') : '';
-    startupRows.push(`<tr>${cells}${empties}</tr>`);
-  }
-  const startupIdeasHtml = startupRows.join('');
-
+  // ── Roadmap (self-knowledge steps) ──
   const roadmapHtml = (results.roadmap || []).map((s, i) => `
     <tr>
       <td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
-        <strong style="color:#0F4F53;font-size:15px;">Step ${i + 1}: ${s.title}</strong>
-        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.6;">${s.action}</p>
+        <strong style="color:#0F4F53;font-size:15px;">Step ${i + 1}: ${s.title || ''}</strong>
+        <p style="margin:6px 0 0;color:#4A6670;font-size:14px;line-height:1.65;">${s.action || ''}</p>
       </td>
     </tr>`).join('');
-
-  // Build companies grid — 3 per row
-  const companies = results.target_companies || [];
-  const companyRows = [];
-  for (let i = 0; i < companies.length; i += 3) {
-    const row = companies.slice(i, i + 3);
-    const cells = row.map(c => `
-      <td width="33%" style="padding:10px 8px;vertical-align:top;">
-        <div style="background:#ffffff;border:1px solid #B8D4DA;border-radius:8px;padding:12px 10px;text-align:center;">
-          <strong style="color:#0F4F53;font-size:13px;display:block;margin-bottom:4px;">${c.name}</strong>
-          <span style="color:#1A6B72;font-size:11px;">${c.sector}</span>
-        </div>
-      </td>`).join('');
-    // Pad last row if needed
-    const empties = row.length < 3 ? Array(3 - row.length).fill('<td width="33%"></td>').join('') : '';
-    companyRows.push(`<tr>${cells}${empties}</tr>`);
-  }
-  const companiesHtml = companyRows.join('');
 
   const html = `
 <!DOCTYPE html>
@@ -349,57 +354,90 @@ async function sendResultsEmail(email, results) {
           </td>
         </tr>
 
-        <!-- CAREER PATHS -->
+        <!-- HOW YOU WORK -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🧭 Your Next Career Paths</h3>
-            <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
+            <h3 style="margin:0 0 12px;color:#0F4F53;font-size:18px;">⚙️ How You Work Best</h3>
+            <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.75;">${results.work_style || ''}</p>
           </td>
         </tr>
 
-        <!-- BUSINESS IDEAS -->
+        <!-- ENERGIZERS + DRAINS (2 col) -->
         <tr>
           <td style="background:#D8ECF0;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🚀 Business Ideas For You</h3>
-            <table width="100%" cellpadding="0" cellspacing="0">${businessIdeasHtml}</table>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="50%" valign="top" style="padding-right:14px;">
+                  <h3 style="margin:0 0 10px;color:#0F4F53;font-size:16px;">⚡ Energizers</h3>
+                  <p style="margin:0 0 10px;color:#4A6670;font-size:12px;line-height:1.5;">What brings you alive at work.</p>
+                  <ul style="margin:0;padding-left:18px;">${energizersHtml}</ul>
+                </td>
+                <td width="50%" valign="top" style="padding-left:14px;border-left:1px solid #B8D4DA;">
+                  <h3 style="margin:0 0 10px;color:#8B3030;font-size:16px;">🪫 Drains</h3>
+                  <p style="margin:0 0 10px;color:#4A6670;font-size:12px;line-height:1.5;">What depletes you — watch for these.</p>
+                  <ul style="margin:0;padding-left:18px;">${drainsHtml}</ul>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 
-        <!-- STARTUP IDEAS -->
+        <!-- STRENGTHS -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">💡 20 Businesses You Could Start</h3>
-            <p style="margin:0 0 16px;color:#4A6670;font-size:13px;line-height:1.5;">AI-resistant business types matched to your skills and tribe profile — each one built on human strengths that automation cannot replace.</p>
-            <table width="100%" cellpadding="0" cellspacing="0">${startupIdeasHtml}</table>
+            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">✦ Strengths to Lean Into</h3>
+            <p style="margin:0 0 10px;color:#4A6670;font-size:13px;line-height:1.5;">The capabilities that make you distinctive. Build your next chapter on these.</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${strengthsHtml}</table>
+          </td>
+        </tr>
+
+        <!-- BLIND SPOTS -->
+        <tr>
+          <td style="background:#FFF8F5;padding:24px 32px;border:1px solid #E0C8C8;border-top:none;">
+            <h3 style="margin:0 0 6px;color:#8B3030;font-size:18px;">⚠ Blind Spots to Watch</h3>
+            <p style="margin:0 0 10px;color:#4A6670;font-size:13px;line-height:1.5;">Patterns that tend to trip people with your profile up. Name them, plan around them.</p>
+            <table width="100%" cellpadding="0" cellspacing="0">${blindSpotsHtml}</table>
+          </td>
+        </tr>
+
+        <!-- ENVIRONMENTS THRIVE / AVOID -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <h3 style="margin:0 0 10px;color:#0F4F53;font-size:18px;">🌱 Environments Where You'll Thrive</h3>
+            <p style="margin:0 0 18px;color:#4A6670;font-size:14px;line-height:1.75;">${results.environments_thrive || ''}</p>
+            <h3 style="margin:0 0 10px;color:#8B3030;font-size:16px;">🚫 Environments to Avoid</h3>
+            <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.75;">${results.environments_avoid || ''}</p>
+          </td>
+        </tr>
+
+        <!-- AI EDGE -->
+        <tr>
+          <td style="background:#0F4F53;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+            <p style="margin:0 0 6px;color:#F4C83F;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;">Your AI-Age Advantage</p>
+            <h3 style="margin:0 0 12px;color:#ffffff;font-size:20px;">🛡️ What AI Can't Replicate in You</h3>
+            <p style="margin:0;color:#B8D4DA;font-size:14px;line-height:1.8;">${results.ai_edge || ''}</p>
           </td>
         </tr>
 
         <!-- ROADMAP -->
         <tr>
           <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 4px;color:#0F4F53;font-size:18px;">🗺️ Your Transition Roadmap</h3>
+            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">🗺️ Your Next 30 Days</h3>
+            <p style="margin:0 0 10px;color:#4A6670;font-size:13px;line-height:1.5;">Concrete, reflective steps to put this Blueprint to work — not jobs to chase, but clarity to build.</p>
             <table width="100%" cellpadding="0" cellspacing="0">${roadmapHtml}</table>
           </td>
         </tr>
 
-        <!-- TARGET COMPANIES -->
+        <!-- CTA — TO COMPASS -->
         <tr>
-          <td style="background:#ffffff;padding:24px 32px;border:1px solid #B8D4DA;border-top:none;">
-            <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;">🏢 Companies Where You Can Thrive</h3>
-            <p style="margin:0 0 16px;color:#4A6670;font-size:13px;line-height:1.5;">AI-resistant organizations matched to your tribe profile and skills — places where human judgment and relationships drive the value.</p>
-            <table width="100%" cellpadding="0" cellspacing="0">${companiesHtml}</table>
-          </td>
-        </tr>
-
-        <!-- CTA -->
-        <tr>
-          <td style="background:#0F4F53;border-radius:0 0 16px 16px;padding:32px;text-align:center;">
-            <p style="margin:0 0 8px;color:#E7B928;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Ready to Go Deeper?</p>
-            <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.6;">Your Blueprint shows you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> maps exactly where to go next — 3 career paths, 3 businesses to start, and your 10-year arc.</p>
-            <a href="https://www.pathworkscompass.com" style="background:#E7B928;color:#0F4F53;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;margin-bottom:20px;">Continue to Pathworks Compass →</a>
-            <p style="margin:0 0 20px;color:#4A6670;font-size:12px;">or</p>
-            <a href="https://pathworksproject.com" style="background:#1A6B72;color:#ffffff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;display:inline-block;">Visit Pathworks Project →</a>
-            <p style="margin:24px 0 0;color:#4A6670;font-size:12px;">© 2026 Pathworks Project · <a href="https://pathworksproject.com" style="color:#B8D4DA;">pathworksproject.com</a></p>
+          <td style="background:#0F4F53;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
+            <p style="margin:0 0 8px;color:#F4C83F;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Your Blueprint is step 1 of 2</p>
+            <h3 style="margin:0 0 14px;color:#ffffff;font-size:22px;">Now map exactly where to go next.</h3>
+            <p style="margin:0 0 22px;color:#B8D4DA;font-size:14px;line-height:1.7;">The Blueprint tells you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> takes your Blueprint profile and your direction statement and generates 5–7 career paths, 5–7 businesses matched to your capital, 12 real companies where you'd thrive, and 20 startup ideas — plus a full 90-day action plan and resources list, delivered as a PDF.</p>
+            <a href="https://www.pathworkscompass.com" style="background:#F4C83F;color:#0F4F53;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;margin-bottom:22px;">Continue to Pathworks Compass →</a>
+            <p style="margin:0 0 6px;color:#B8D4DA;font-size:12px;">Or explore the full Pathworks Project:</p>
+            <a href="https://pathworksproject.com" style="color:#F4C83F;text-decoration:none;font-weight:600;font-size:13px;">pathworksproject.com →</a>
+            <p style="margin:24px 0 0;color:#4A6670;font-size:12px;">© ${new Date().getFullYear()} Pathworks Project · A Changing Tribes company</p>
           </td>
         </tr>
 
@@ -484,49 +522,42 @@ async function pushToZoho(email, results, answers) {
     }
   });
 
-  // ── Full career paths ──
-  const careerFull = (results.career_paths || [])
-    .map(c => `• ${c.title}\n  ${c.description}`)
+  // ── Energizers / Drains ──
+  const energizersFull = (results.energizers || []).map(e => `• ${e}`).join('\n');
+  const drainsFull     = (results.drains     || []).map(d => `• ${d}`).join('\n');
+
+  // ── Strengths ──
+  const strengthsFull = (results.strengths_to_lean_into || [])
+    .map(s => `• ${s.name}\n  ${s.description}`)
     .join('\n\n');
 
-  // ── Full business ideas ──
-  const bizFull = (results.business_ideas || [])
+  // ── Blind spots ──
+  const blindSpotsFull = (results.blind_spots || [])
     .map(b => `• ${b.name}\n  ${b.description}`)
     .join('\n\n');
 
-  // ── Startup ideas (20 AI-resistant business types) ──
-  const startupFull = (results.startup_ideas || [])
-    .map(s => `• ${s.name} — ${s.benefit}`)
-    .join('\n');
-
-  // ── Full roadmap ──
+  // ── Roadmap ──
   const roadmapFull = (results.roadmap || [])
     .map((s, i) => `Step ${i + 1}: ${s.title}\n  ${s.action}`)
     .join('\n\n');
 
-  // ── Target companies ──
-  const companiesFull = (results.target_companies || [])
-    .map(c => `• ${c.name} (${c.sector})`)
-    .join('\n');
-
   const description =
-    `━━━ TRIBES BLUEPRINT ASSESSMENT ━━━\n` +
+    `━━━ PATHWORKS BLUEPRINT ━━━\n` +
     `Tribe Profile: ${results.tribe_name || ''}\n` +
     `${results.tribe_description || ''}\n\n` +
     `━━━ UNDERSTANDING THEIR PAST ━━━\n` +
     `${results.past_analysis || ''}\n\n` +
-    `━━━ ASSESSMENT SCORES ━━━\n` +
-    `${scoreLines.join('\n\n')}\n\n` +
-    `━━━ CAREER PATHS ━━━\n` +
-    `${careerFull}\n\n` +
-    `━━━ BUSINESS IDEAS ━━━\n` +
-    `${bizFull}\n\n` +
-    `━━━ STARTUP IDEAS (20 AI-RESISTANT BUSINESS TYPES) ━━━\n` +
-    `${startupFull}\n\n` +
-    `━━━ TRANSITION ROADMAP ━━━\n` +
-    `${roadmapFull}\n\n` +
-    `━━━ TARGET COMPANIES (AI-RESISTANT) ━━━\n` +
-    `${companiesFull}`;
+    `━━━ HOW THEY WORK BEST ━━━\n` +
+    `${results.work_style || ''}\n\n` +
+    `━━━ ENERGIZERS ━━━\n${energizersFull}\n\n` +
+    `━━━ DRAINS ━━━\n${drainsFull}\n\n` +
+    `━━━ STRENGTHS TO LEAN INTO ━━━\n${strengthsFull}\n\n` +
+    `━━━ BLIND SPOTS ━━━\n${blindSpotsFull}\n\n` +
+    `━━━ ENVIRONMENTS WHERE THEY THRIVE ━━━\n${results.environments_thrive || ''}\n\n` +
+    `━━━ ENVIRONMENTS TO AVOID ━━━\n${results.environments_avoid || ''}\n\n` +
+    `━━━ AI-AGE ADVANTAGE ━━━\n${results.ai_edge || ''}\n\n` +
+    `━━━ 30-DAY ROADMAP ━━━\n${roadmapFull}\n\n` +
+    `━━━ ASSESSMENT SCORES ━━━\n${scoreLines.join('\n\n')}`;
 
   const payload = {
     data: [
