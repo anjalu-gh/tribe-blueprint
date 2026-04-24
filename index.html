@@ -355,12 +355,13 @@
     .access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
     .form-group { margin-bottom: 1.2rem; }
     label { display: block; margin-bottom: 0.35rem; font-weight: 600; font-size: 0.875rem; color: var(--forest); }
-    input[type="email"], input[type="text"] {
+    input[type="email"], input[type="text"], select {
       width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border);
       font-size: 1rem; font-family: 'Public Sans', sans-serif; background: var(--white);
       color: var(--forest); transition: border-color 0.2s;
     }
-    input:focus { outline: none; border-color: var(--slate); }
+    input:focus, select:focus { outline: none; border-color: var(--slate); }
+    select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%230F4F53' stroke-width='2' fill='none' stroke-linecap='round'/></svg>"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
     .inline-row { display: flex; gap: 0.75rem; }
     .inline-row input { flex: 1; }
     .msg { font-size: 0.85rem; margin-top: 0.45rem; display: none; }
@@ -970,6 +971,16 @@
       <textarea id="compass-direction-input" placeholder="e.g. I want to work with animals… or I want to move into healthcare… or I want to build something online that gives me freedom…"></textarea>
     </div>
     <div class="form-group">
+      <label for="compass-capital-input">How much capital could you invest in starting a business? <span style="font-weight:400;color:var(--muted)">(helps us tailor your business recommendations)</span></label>
+      <select id="compass-capital-input">
+        <option value="under-5k">Bootstrapped — under $5,000</option>
+        <option value="5k-25k">Limited — $5,000 – $25,000</option>
+        <option value="25k-100k">Moderate — $25,000 – $100,000</option>
+        <option value="100k-plus">Significant — $100,000+</option>
+        <option value="career-only">Not pursuing a business — career change only</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for="compass-coupon-input">Have a Coupon Code?</label>
       <div class="inline-row">
         <input type="text" id="compass-coupon-input" placeholder="Enter coupon code" />
@@ -1488,7 +1499,8 @@ async function submitCompass() {
   if (!direction) { alert('Please enter a sentence or two about where you want to go.'); return; }
   const email = document.getElementById('compass-email-input').value.trim();
   if (!email) { alert('Please enter your email address.'); return; }
-  compass.direction = direction; compass.email = email;
+  const capital = document.getElementById('compass-capital-input').value;
+  compass.direction = direction; compass.email = email; compass.capital = capital;
   showPage('compass-loading');
   const messages = [
     'Mapping your direction to your Blueprint profile…',
@@ -1509,7 +1521,7 @@ async function submitCompass() {
   try {
     const res = await fetch('/.netlify/functions/compass-results-background', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: compass.email, access_code: compass.accessCode, direction: compass.direction }),
+      body: JSON.stringify({ email: compass.email, access_code: compass.accessCode, direction: compass.direction, capital: compass.capital }),
     });
     clearInterval(timer);
     if (res.status === 202 || res.ok) {

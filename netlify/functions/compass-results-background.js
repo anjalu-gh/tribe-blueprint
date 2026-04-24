@@ -104,13 +104,23 @@ function extractRootJSON(str) {
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return;
 
-  let email, access_code, direction;
+  let email, access_code, direction, capital;
   try {
-    ({ email, access_code, direction } = JSON.parse(event.body));
+    ({ email, access_code, direction, capital } = JSON.parse(event.body));
   } catch {
     console.error('Background: invalid request body');
     return;
   }
+
+  // Map capital code to human-readable guidance for the prompt
+  const CAPITAL_MAP = {
+    'under-5k':    { label: 'Bootstrapped — under $5,000 available to invest',       guidance: 'Business recommendations MUST be realistic for someone with under $5,000 to invest. Prioritize service-based businesses, consulting, freelancing, coaching, online courses, newsletters, community-based work, and lean operations that can be launched with a laptop and personal network. DO NOT recommend businesses requiring real estate, significant inventory, equipment, or hiring staff upfront. Every business model\'s "startup_cost" must be under $5,000.' },
+    '5k-25k':      { label: 'Limited capital — $5,000 to $25,000 available',         guidance: 'Business recommendations must fit a $5,000–$25,000 startup budget. Service businesses, productized services, small e-commerce, local services with minimal equipment, consulting practices with basic marketing spend, boutique workshops, or small-scale physical goods. Every business model\'s "startup_cost" must be in this range or below.' },
+    '25k-100k':    { label: 'Moderate capital — $25,000 to $100,000 available',      guidance: 'Business recommendations can include modest physical operations, small agency builds, inventory-based businesses, franchise entry options, small-team hires, or B2B plays with sales and marketing investment. Every business model\'s "startup_cost" must be in this range or below — do not recommend businesses requiring more than $100,000.' },
+    '100k-plus':   { label: 'Significant capital — $100,000 or more available',      guidance: 'Business recommendations can include acquisition of existing businesses, franchise purchases, real estate-based operations, inventory-heavy e-commerce, agency builds with early hires, or capital-intensive operations. Still, include a MIX — at least two options should be bootstrappable under $25,000 so the person has a range of entry points.' },
+    'career-only': { label: 'Career change only — not pursuing a business',          guidance: 'This person is NOT pursuing a business. Lean HEAVILY into career paths — generate 7 (the high end of the range) rich career paths. For business_models, include only 2 lean options (under $5,000 startup cost each) as optional side-income paths they could explore later. Emphasize the career recommendations and skip extensive business detail.' },
+  };
+  const capitalInfo = CAPITAL_MAP[capital] || CAPITAL_MAP['under-5k'];
 
   // ── Verify access code ──────────────────────────
   console.log('BG Step 1: Verifying access code...');
@@ -158,7 +168,7 @@ exports.handler = async (event) => {
     ? `Their Tribes Blueprint archetype is: "${blueprintTribeName}".`
     : '';
 
-  const prompt = `You are a world-class career strategist, business advisor, and executive coach working with Pathworks Project — a platform that helps people navigate major professional transitions with clarity and confidence.
+  const prompt = `You are a world-class career strategist, business advisor, and executive coach working with Pathworks Compass — the career and business mapping tool that follows the Pathworks Blueprint.
 
 A person has completed the Pathworks Blueprint 40-question assessment and is now using Pathworks Compass to map their specific direction. ${blueprintContext}
 
@@ -168,23 +178,29 @@ THEIR DIRECTION STATEMENT (what they want to do next):
 THEIR TRIBES BLUEPRINT PROFILE (40-question assessment scores):
 ${scoreSummary}
 
-YOUR TASK:
-Generate a deeply personal Tribes Compass report. Be specific — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers, and communities.
+CAPITAL CONTEXT (CRITICAL — shapes all business recommendations):
+${capitalInfo.label}
+${capitalInfo.guidance}
 
-INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 sentences per field. Name real companies, platforms, dollar figures. Return valid JSON only.
+YOUR TASK:
+Generate a deeply personal Pathworks Compass report. Be specific — reference their actual scores and direction. Speak as "you". Name real industries, platforms, income numbers, and real companies.
+
+INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 sentences per field unless noted. Name real companies, platforms, dollar figures. Return valid JSON only.
 
 {
   "compass_title": "Write a specific title for this person e.g. The Healthcare Operations Entrepreneur",
   "compass_intro": "2 sentences: why their profile makes them well-suited for their direction.",
   "career_paths": [
-    { "title": "Specific career title", "why_it_fits": "2 sentences referencing their scores.", "day_in_the_life": "2 vivid sentences of a typical day.", "income_reality": "Entry to senior income range with real numbers.", "years_1_3": "Specific entry path, roles, income.", "years_4_7": "Progression and income growth.", "years_8_10": "Where leaders end up.", "how_to_break_in": "2 specific first steps naming real platforms.", "watch_out_for": "The real risk in this path.", "ai_resistance": "Why this needs irreplaceable humans." },
-    { "title": "Specific career title", "why_it_fits": "2 sentences.", "day_in_the_life": "2 sentences.", "income_reality": "Real range.", "years_1_3": "Entry path.", "years_4_7": "Progression.", "years_8_10": "Ceiling.", "how_to_break_in": "2 steps.", "watch_out_for": "Main risk.", "ai_resistance": "Why human." },
-    { "title": "Specific career title", "why_it_fits": "2 sentences.", "day_in_the_life": "2 sentences.", "income_reality": "Real range.", "years_1_3": "Entry path.", "years_4_7": "Progression.", "years_8_10": "Ceiling.", "how_to_break_in": "2 steps.", "watch_out_for": "Main risk.", "ai_resistance": "Why human." }
+    { "title": "Specific career title", "why_it_fits": "2 sentences referencing their scores.", "day_in_the_life": "2 vivid sentences of a typical day.", "income_reality": "Entry to senior income range with real numbers.", "years_1_3": "Specific entry path, roles, income.", "years_4_7": "Progression and income growth.", "years_8_10": "Where leaders end up.", "how_to_break_in": "2 specific first steps naming real platforms.", "watch_out_for": "The real risk in this path.", "ai_resistance": "Why this needs irreplaceable humans." }
   ],
   "business_models": [
-    { "name": "Specific business name", "concept": "2 sentences: what it does and who it serves.", "why_it_fits": "2 sentences on profile fit.", "startup_cost": "Realistic cost range.", "year_1_target": "Realistic year 1 revenue.", "year_3_potential": "Year 3 upside.", "first_client_path": "2 specific tactics to land first client.", "ai_resistance": "Why this needs humans.", "ideal_partner": "Ideal co-founder profile." },
-    { "name": "Specific business name", "concept": "2 sentences.", "why_it_fits": "2 sentences.", "startup_cost": "Cost range.", "year_1_target": "Year 1 revenue.", "year_3_potential": "Year 3 upside.", "first_client_path": "2 tactics.", "ai_resistance": "1 sentence.", "ideal_partner": "1 sentence." },
-    { "name": "Specific business name", "concept": "2 sentences.", "why_it_fits": "2 sentences.", "startup_cost": "Cost range.", "year_1_target": "Year 1 revenue.", "year_3_potential": "Year 3 upside.", "first_client_path": "2 tactics.", "ai_resistance": "1 sentence.", "ideal_partner": "1 sentence." }
+    { "name": "Specific business name", "concept": "2 sentences: what it does and who it serves.", "why_it_fits": "2 sentences on profile fit.", "startup_cost": "Realistic cost range — MUST match their capital tier.", "year_1_target": "Realistic year 1 revenue.", "year_3_potential": "Year 3 upside.", "first_client_path": "2 specific tactics to land first client.", "ai_resistance": "Why this needs humans.", "ideal_partner": "Ideal co-founder profile." }
+  ],
+  "companies": [
+    { "name": "Real company name", "sector": "Industry / typical role type there", "why_fit": "1 sentence on why this company fits their direction + blueprint." }
+  ],
+  "startup_ideas": [
+    { "name": "Business type / startup idea", "benefit": "Core customer benefit in 1 sentence — why this works for their capital tier." }
   ],
   "work_environment": {
     "ideal_setup": "2 sentences on physical/remote setup and schedule preferences.",
@@ -224,7 +240,12 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
   }
 }
 
-MANDATORY: The "resources" section must be fully populated with 5 items in each category. Name REAL, recognisable books (with author), REAL communities (LinkedIn groups, Slack/Discord communities, professional associations, subreddits — include the platform), and REAL tools/platforms/software. Never leave any list short or generic.`;
+CRITICAL COUNT REQUIREMENTS — do not deviate:
+- "career_paths": generate between 5 and 7 entries (pick the number that feels strongest for this person — err toward 6–7).
+- "business_models": generate between 5 and 7 entries. Every startup_cost MUST match their capital tier described above. If they selected "career-only", include only 2 lean business_models (under $5,000 each).
+- "companies": generate exactly 12 real, named companies where this person could realistically thrive given their direction + blueprint. Mix public giants, well-known private companies, and notable startups. Each entry must include a real company name (not a placeholder), the sector/role type, and a 1-sentence fit rationale.
+- "startup_ideas": generate exactly 20 distinct startup/business ideas appropriate for their capital tier and direction. These are lightweight one-liners (not full business models) — a name + a 1-sentence core benefit. All 20 must be startable within their capital tier.
+- "resources": 5 items in each of books, communities, and tools. Name REAL books (with author), REAL communities (LinkedIn groups, Slack/Discord communities, professional associations, subreddits — include the platform), and REAL tools/platforms/software. Never leave any list short or generic.`;
 
   // ── Call Claude ──────────────────────────────────
   console.log('BG Step 3: Calling Claude API...');
@@ -232,8 +253,8 @@ MANDATORY: The "resources" section must be fully populated with 5 items in each 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 12000,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific, deeply personalised content for this person. Write 2–3 sentences per field — rich, specific, naming real platforms and dollar figures.',
+      max_tokens: 20000,
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific, deeply personalised content for this person. Follow the count requirements EXACTLY (5–7 career_paths, 5–7 business_models, 12 companies, 20 startup_ideas, 5 of each resource). Write 2–3 sentences per long field — rich, specific, naming real platforms and dollar figures.',
       messages:   [
         { role: 'user',      content: prompt },
         { role: 'assistant', content: '{'   },
@@ -527,7 +548,7 @@ function generateCompassPDF(email, direction, results) {
     newPage();
     sectionHeader('Track 1: AI-Resistant Career & Job Paths');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-       .text('Three AI-resistant career and job paths matched to your profile — with a full 10-year roadmap for each.', M, doc.y, { width: CW })
+       .text('AI-resistant career and job paths matched to your profile — with a full 10-year roadmap for each.', M, doc.y, { width: CW })
        .moveDown(0.6);
 
     (results.career_paths || []).forEach((c, i) => {
@@ -587,7 +608,7 @@ function generateCompassPDF(email, direction, results) {
     newPage();
     sectionHeader('Track 2: Business & Entrepreneurship Paths');
     doc.fillColor(MUTED).font('Helvetica').fontSize(10)
-       .text('Three business and entrepreneurship ideas tailored to your skills — with startup costs, revenue targets, and first-client strategy.', M, doc.y, { width: CW })
+       .text('Business and entrepreneurship ideas tailored to your skills and capital — with startup costs, revenue targets, and first-client strategy.', M, doc.y, { width: CW })
        .moveDown(0.6);
 
     (results.business_models || []).forEach((b, i) => {
@@ -634,6 +655,94 @@ function generateCompassPDF(email, direction, results) {
       doc.moveDown(0.4);
       hRule();
     });
+
+    // ══════════════════════════════════════════════
+    // COMPANIES WHERE YOU COULD THRIVE
+    // ══════════════════════════════════════════════
+    if (Array.isArray(results.companies) && results.companies.length) {
+      newPage();
+      sectionHeader('Companies Where You Could Thrive');
+      doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+         .text('Real companies (public, private, and notable startups) where your direction and blueprint line up with the kind of work they do.', M, doc.y, { width: CW })
+         .moveDown(0.6);
+
+      // 2-column card grid — pair rows together so the taller card sets row height
+      const colGap = 10;
+      const cardW  = (CW - colGap) / 2;
+      const computeCardH = (co) => {
+        const nameH   = doc.heightOfString(safe(co.name || ''),    { width: cardW - 24, fontSize: 11 });
+        const sectorH = doc.heightOfString(safe(co.sector || ''),  { width: cardW - 24, fontSize: 9 });
+        const whyH    = doc.heightOfString(safe(co.why_fit || ''), { width: cardW - 24, fontSize: 9.5 });
+        return { nameH, sectorH, whyH, total: nameH + sectorH + whyH + 38 };
+      };
+      for (let i = 0; i < results.companies.length; i += 2) {
+        const left  = results.companies[i];
+        const right = results.companies[i + 1];
+        const lH = computeCardH(left);
+        const rH = right ? computeCardH(right) : null;
+        const rowH = Math.max(lH.total, rH ? rH.total : 0);
+        checkBreak(rowH + 10);
+        const rowY = doc.y;
+
+        const drawCard = (co, dims, xOffset) => {
+          const x = M + xOffset;
+          doc.rect(x, rowY, cardW, rowH).fill('#F0F8FA').strokeColor(BORDER).lineWidth(0.5).stroke();
+          doc.rect(x, rowY, 3, rowH).fill(ORANGE);
+          doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(11)
+             .text(safe(co.name || ''), x + 12, rowY + 8, { width: cardW - 24 });
+          doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(9)
+             .text(safe(co.sector || '').toUpperCase(), x + 12, rowY + 8 + dims.nameH + 4, { width: cardW - 24, characterSpacing: 0.3 });
+          doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+             .text(safe(co.why_fit || ''), x + 12, rowY + 8 + dims.nameH + 4 + dims.sectorH + 6, { width: cardW - 24, lineGap: 1.5 });
+        };
+        drawCard(left, lH, 0);
+        if (right) drawCard(right, rH, cardW + colGap);
+        doc.y = rowY + rowH + 8;
+      }
+    }
+
+    // ══════════════════════════════════════════════
+    // 20 STARTUP IDEAS
+    // ══════════════════════════════════════════════
+    if (Array.isArray(results.startup_ideas) && results.startup_ideas.length) {
+      newPage();
+      sectionHeader('20 Business Ideas You Could Start');
+      doc.fillColor(MUTED).font('Helvetica').fontSize(10)
+         .text('Lightweight startup ideas matched to your direction and capital tier — a menu of possibilities to explore.', M, doc.y, { width: CW })
+         .moveDown(0.6);
+
+      const iColGap = 10;
+      const iCardW  = (CW - iColGap) / 2;
+      const computeIdeaH = (s) => {
+        const nameH = doc.heightOfString(safe(s.name || ''),    { width: iCardW - 34, fontSize: 10.5 });
+        const benH  = doc.heightOfString(safe(s.benefit || ''), { width: iCardW - 34, fontSize: 9.5 });
+        return { nameH, benH, total: nameH + benH + 22 };
+      };
+      for (let i = 0; i < results.startup_ideas.length; i += 2) {
+        const left  = results.startup_ideas[i];
+        const right = results.startup_ideas[i + 1];
+        const lH = computeIdeaH(left);
+        const rH = right ? computeIdeaH(right) : null;
+        const rowH = Math.max(lH.total, rH ? rH.total : 0);
+        checkBreak(rowH + 8);
+        const rowY = doc.y;
+
+        const drawIdea = (s, dims, idx, xOffset) => {
+          const x = M + xOffset;
+          doc.rect(x, rowY, iCardW, rowH).fill('#FFF9EC').strokeColor(GOLD).lineWidth(0.5).stroke();
+          doc.circle(x + 14, rowY + 16, 10).fill(GOLD);
+          doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(9)
+             .text(String(idx + 1), x + 8, rowY + 12, { width: 12, align: 'center' });
+          doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10.5)
+             .text(safe(s.name || ''), x + 28, rowY + 8, { width: iCardW - 34 });
+          doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
+             .text(safe(s.benefit || ''), x + 28, rowY + 8 + dims.nameH + 3, { width: iCardW - 34, lineGap: 1.5 });
+        };
+        drawIdea(left, lH, i, 0);
+        if (right) drawIdea(right, rH, i + 1, iCardW + iColGap);
+        doc.y = rowY + rowH + 6;
+      }
+    }
 
     // ══════════════════════════════════════════════
     // WORK ENVIRONMENT
@@ -764,16 +873,24 @@ async function updateZohoWithCompass(email, direction, results) {
   const bizSummary = (results.business_models || [])
     .map(b => `• ${b.name}\n  ${b.concept}\n  Startup: ${b.startup_cost} | Y1: ${b.year_1_target} | Y3: ${b.year_3_potential}\n  First client: ${b.first_client_path}`)
     .join('\n\n');
+  const companiesSummary = (results.companies || [])
+    .map(co => `• ${co.name} (${co.sector}) — ${co.why_fit}`)
+    .join('\n');
+  const ideasSummary = (results.startup_ideas || [])
+    .map((s, i) => `${i + 1}. ${s.name} — ${s.benefit}`)
+    .join('\n');
   const actionSummary = (results.action_plan || [])
     .map(a => `${a.period} — ${a.title}: ${a.action}`)
     .join('\n');
 
   const compassNote =
-    `\n\n━━━ TRIBES COMPASS RESULTS ━━━\n` +
+    `\n\n━━━ PATHWORKS COMPASS RESULTS ━━━\n` +
     `Direction: "${direction}"\nProfile: ${results.compass_title || ''}\n\n` +
     `${results.compass_intro || ''}\n\n` +
     `━━━ CAREER PATHS ━━━\n${careerSummary}\n\n` +
     `━━━ BUSINESS MODELS ━━━\n${bizSummary}\n\n` +
+    (companiesSummary ? `━━━ COMPANIES WHERE THEY COULD THRIVE ━━━\n${companiesSummary}\n\n` : '') +
+    (ideasSummary ? `━━━ 20 STARTUP IDEAS ━━━\n${ideasSummary}\n\n` : '') +
     `━━━ 90-DAY ACTION PLAN ━━━\n${actionSummary}`;
 
   const namePart = email.split('@')[0].replace(/[._-]+/g, ' ');
@@ -888,6 +1005,50 @@ async function sendCompassEmail(email, direction, results) {
   const redFlagsHtml = (env.red_flags || []).map(f =>
     `<li style="margin-bottom:6px;color:#8B3030;font-size:13px;">${f}</li>`).join('');
 
+  // ── Companies HTML (2-column grid) ──
+  const companiesArr = Array.isArray(results.companies) ? results.companies : [];
+  const companiesRowsHtml = [];
+  for (let i = 0; i < companiesArr.length; i += 2) {
+    const a = companiesArr[i];
+    const b = companiesArr[i + 1];
+    const cell = (co) => co ? `
+      <td width="50%" valign="top" style="padding:8px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;border-left:3px solid #1A6B72;border-radius:0 8px 8px 0;">
+          <tr><td style="padding:12px 14px;">
+            <strong style="color:#0F4F53;font-size:14px;display:block;margin-bottom:2px;">${co.name || ''}</strong>
+            <span style="color:#1A6B72;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${co.sector || ''}</span>
+            <p style="margin:6px 0 0;color:#4A6670;font-size:12px;line-height:1.55;">${co.why_fit || ''}</p>
+          </td></tr>
+        </table>
+      </td>` : `<td width="50%">&nbsp;</td>`;
+    companiesRowsHtml.push(`<tr>${cell(a)}${cell(b)}</tr>`);
+  }
+  const companiesHtml = companiesRowsHtml.join('');
+
+  // ── Startup ideas HTML (2-column numbered grid) ──
+  const ideasArr = Array.isArray(results.startup_ideas) ? results.startup_ideas : [];
+  const ideasRowsHtml = [];
+  for (let i = 0; i < ideasArr.length; i += 2) {
+    const a = ideasArr[i];
+    const b = ideasArr[i + 1];
+    const cell = (s, idx) => s ? `
+      <td width="50%" valign="top" style="padding:6px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF9EC;border:1px solid #E7B928;border-radius:8px;">
+          <tr>
+            <td width="30" valign="top" style="padding:10px 0 10px 10px;">
+              <div style="width:22px;height:22px;border-radius:50%;background:#E7B928;color:#ffffff;font-weight:700;font-size:11px;text-align:center;line-height:22px;">${idx + 1}</div>
+            </td>
+            <td valign="top" style="padding:10px 12px 10px 4px;">
+              <strong style="color:#0F4F53;font-size:13px;display:block;">${s.name || ''}</strong>
+              <p style="margin:4px 0 0;color:#4A6670;font-size:12px;line-height:1.5;">${s.benefit || ''}</p>
+            </td>
+          </tr>
+        </table>
+      </td>` : `<td width="50%">&nbsp;</td>`;
+    ideasRowsHtml.push(`<tr>${cell(a, i)}${cell(b, i + 1)}</tr>`);
+  }
+  const ideasHtml = ideasRowsHtml.join('');
+
   // ── Action plan HTML ──
   const actionHtml = (results.action_plan || []).map(a => `
     <tr><td style="padding:16px 0;border-bottom:1px solid #B8D4DA;">
@@ -944,22 +1105,38 @@ async function sendCompassEmail(email, direction, results) {
 
   <!-- PDF CALLOUT -->
   <tr><td style="background:#FFF3E0;padding:20px 32px;border:1px solid #B8D4DA;border-top:none;text-align:center;">
-    <p style="margin:0;color:#0F4F53;font-size:14px;line-height:1.6;">📎 <strong>Your full Compass Report is attached as a PDF</strong> — save it, print it, or share it. It includes your complete career paths, business models, 90-day action plan, and resources.</p>
+    <p style="margin:0;color:#0F4F53;font-size:14px;line-height:1.6;">📎 <strong>Your full Compass Report is attached as a PDF</strong> — save it, print it, or share it. It includes your complete career paths, business models, companies where you could thrive, 20 startup ideas, 90-day action plan, and resources.</p>
   </td></tr>
 
   <!-- CAREER PATHS -->
   <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
     <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;font-weight:700;">🧭 Your Career Paths — Full 10-Year View</h3>
-    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Three paths matched to who you are and where you want to go.</p>
+    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Paths matched to who you are and where you want to go.</p>
     <table width="100%" cellpadding="0" cellspacing="0">${careerPathsHtml}</table>
   </td></tr>
 
   <!-- BUSINESS MODELS -->
   <tr><td style="background:#F0F8FA;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
     <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;font-weight:700;">🚀 Business Models Built for You</h3>
-    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Three business ideas tailored to your skills, direction, and context.</p>
+    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Business ideas tailored to your skills, direction, and capital.</p>
     <table width="100%" cellpadding="0" cellspacing="0">${businessHtml}</table>
   </td></tr>
+
+  ${companiesHtml ? `
+  <!-- COMPANIES WHERE YOU COULD THRIVE -->
+  <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+    <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;font-weight:700;">🏢 Companies Where You Could Thrive</h3>
+    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Real companies where your direction and blueprint line up with the kind of work they do.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${companiesHtml}</table>
+  </td></tr>` : ''}
+
+  ${ideasHtml ? `
+  <!-- 20 STARTUP IDEAS -->
+  <tr><td style="background:#F0F8FA;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
+    <h3 style="margin:0 0 6px;color:#0F4F53;font-size:18px;font-weight:700;">💡 20 Business Ideas You Could Start</h3>
+    <p style="margin:0 0 20px;color:#4A6670;font-size:13px;">Lightweight startup ideas matched to your direction and capital tier.</p>
+    <table width="100%" cellpadding="0" cellspacing="0">${ideasHtml}</table>
+  </td></tr>` : ''}
 
   <!-- WORK ENVIRONMENT -->
   <tr><td style="background:#ffffff;padding:28px 32px;border:1px solid #B8D4DA;border-top:none;">
