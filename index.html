@@ -427,14 +427,18 @@
     footer a { color: var(--slate); text-decoration: none; }
 
     /* ══════════════ COMPASS UPSELL ══════════════ */
-    .compass-upsell { background: linear-gradient(135deg, var(--forest) 0%, #2A4A5C 100%); padding: 3rem 2.5rem; margin: 2rem 0 1rem; text-align: center; color: var(--white); }
-    .compass-upsell .badge { background: var(--gold); color: var(--forest); margin-bottom: 1.2rem; }
-    .compass-upsell h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.8rem; color: var(--white); margin-bottom: 0.75rem; }
-    .compass-upsell p { color: #C0D5E0; line-height: 1.75; font-size: 0.95rem; max-width: 560px; margin: 0 auto 1.5rem; }
-    .compass-upsell-features { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2rem; }
-    .compass-upsell-features li { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 1rem; font-size: 0.82rem; color: #C0D5E0; }
-    .btn-compass { background: var(--gold); color: var(--forest); padding: 1rem 2.8rem; border: none; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'Public Sans', sans-serif; }
-    .btn-compass:hover { background: #d4820a; }
+    .compass-upsell { background: linear-gradient(135deg, var(--forest) 0%, #2A4A5C 100%); padding: 3rem 2.5rem; margin: 2rem 0 1rem; text-align: center; color: var(--white); border-top: 6px solid var(--gold-lt); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .compass-upsell .badge { background: var(--gold-lt); color: var(--forest); margin-bottom: 1.2rem; font-weight: 700; }
+    .compass-upsell h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.9rem; color: var(--white); margin-bottom: 0.75rem; line-height: 1.2; }
+    .compass-upsell h2 em { font-style: normal; color: var(--gold-lt); }
+    .compass-upsell p { color: #C0D5E0; line-height: 1.75; font-size: 0.95rem; max-width: 580px; margin: 0 auto 1.5rem; }
+    .compass-upsell-steps { list-style: none; padding: 0; max-width: 580px; margin: 1.5rem auto 2rem; text-align: left; counter-reset: step; }
+    .compass-upsell-steps li { display: flex; gap: 1rem; align-items: flex-start; padding: 0.85rem 0; color: rgba(240,248,250,0.9); font-size: 0.94rem; line-height: 1.55; border-bottom: 1px solid rgba(244,200,63,0.15); }
+    .compass-upsell-steps li:last-child { border-bottom: none; }
+    .compass-upsell-steps li::before { counter-increment: step; content: counter(step); background: var(--gold-lt); color: var(--forest); font-weight: 700; font-size: 0.85rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Public Sans', sans-serif; }
+    .compass-upsell-steps strong { color: var(--gold-lt); font-weight: 700; }
+    .btn-compass { background: var(--gold-lt); color: var(--forest); padding: 1.1rem 3rem; border: none; font-size: 1.08rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'Public Sans', sans-serif; letter-spacing: 0.02em; box-shadow: 0 6px 20px rgba(244,200,63,0.35); }
+    .btn-compass:hover { background: #FFD85A; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(244,200,63,0.45); }
 
     /* ══════════════ COMPASS ACCESS ══════════════ */
     .compass-access-wrap { max-width: 540px; margin: 0 auto; padding: 4rem 2rem; }
@@ -902,18 +906,16 @@
       </div>
     </div>
     <div class="compass-upsell">
-      <div class="badge">✦ Take It Further</div>
-      <h2>Ready for Your Pathworks Compass?</h2>
-      <p>You now know your profile. Pathworks Compass takes your Blueprint results, adds where you want to go, and maps out exactly which career or business to pursue — and what the next 10 years could look like.</p>
-      <ul class="compass-upsell-features">
-        <li>🧭 3 AI-resistant career paths matched to your direction</li>
-        <li>📈 10-year arc for each career (Years 1–3, 4–7, 8–10)</li>
-        <li>🚀 3 business models built for your skills and direction</li>
-        <li>🗺️ 90-day action plan to get moving immediately</li>
-        <li>📧 Full report emailed to you instantly</li>
-      </ul>
+      <div class="badge">✦ Ready to Get Started?</div>
+      <h2>Your Blueprint shows <em>who you are.</em><br>Your Compass maps <em>where you can go.</em></h2>
+      <p>You've got your profile. Now combine it with a few sentences about the direction you want to head — and get a full career &amp; business roadmap built just for you.</p>
+      <ol class="compass-upsell-steps">
+        <li>Head to <strong>PathworksCompass.com</strong> and enter the same email you just used for your Blueprint.</li>
+        <li>Write a few sentences about where you want to head next — a new AI-resistant career, a business you want to start, or a field you're curious about.</li>
+        <li>In under 60 seconds, receive your full <strong>Pathworks Compass Report</strong>: tailored careers and businesses, salary expectations, recommended communities and tools, and a 90-day action plan to get moving forward.</li>
+      </ol>
       <a href="https://www.pathworkscompass.com" target="_blank" class="btn-compass" style="display:inline-block;text-decoration:none;">Continue to Pathworks Compass →</a>
-      <p style="margin-top:1rem;font-size:0.8rem;opacity:0.65;">One-time access · Powered by AI · Results in under 60 seconds</p>
+      <p style="margin-top:1rem;font-size:0.8rem;opacity:0.7;">$39 · One-time · Full report emailed to you</p>
     </div>
     <div class="cta-footer">
       <p>Want to go deeper? Visit the Pathworks Project community.</p>
