@@ -86,6 +86,21 @@ function buildScoreSummary(answers) {
     .join('\n\n');
 }
 
+// Extract just the root JSON object using brace counting — handles trailing text robustly
+function extractRootJSON(str) {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = 0; i < str.length; i++) {
+    const c = str[i];
+    if (esc)                 { esc = false; continue; }
+    if (c === '\\' && inStr) { esc = true;  continue; }
+    if (c === '"')           { inStr = !inStr; continue; }
+    if (inStr)               continue;
+    if (c === '{')           depth++;
+    if (c === '}')           { depth--; if (depth === 0) return str.substring(0, i + 1); }
+  }
+  return str;
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return;
 
@@ -186,22 +201,30 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
   ],
   "resources": {
     "books": [
-      { "title": "Real book title and author", "why": "Why relevant to their direction." },
-      { "title": "Real book title and author", "why": "1 sentence." },
-      { "title": "Real book title and author", "why": "1 sentence." }
+      { "title": "Real book title by Real Author", "why": "1 sentence on why relevant to their direction." },
+      { "title": "Real book title by Real Author", "why": "1 sentence." },
+      { "title": "Real book title by Real Author", "why": "1 sentence." },
+      { "title": "Real book title by Real Author", "why": "1 sentence." },
+      { "title": "Real book title by Real Author", "why": "1 sentence." }
     ],
     "communities": [
-      { "name": "Real community name", "why": "Why join and what to do there." },
-      { "name": "Real community name", "why": "1 sentence." },
-      { "name": "Real community name", "why": "1 sentence." }
+      { "name": "Real community (platform)", "why": "Why join and what to do there." },
+      { "name": "Real community (platform)", "why": "1 sentence." },
+      { "name": "Real community (platform)", "why": "1 sentence." },
+      { "name": "Real community (platform)", "why": "1 sentence." },
+      { "name": "Real community (platform)", "why": "1 sentence." }
     ],
     "tools": [
-      { "name": "Real tool name", "why": "Why this matters for their path." },
-      { "name": "Real tool name", "why": "1 sentence." },
-      { "name": "Real tool name", "why": "1 sentence." }
+      { "name": "Real tool or platform", "why": "Why this matters for their path." },
+      { "name": "Real tool or platform", "why": "1 sentence." },
+      { "name": "Real tool or platform", "why": "1 sentence." },
+      { "name": "Real tool or platform", "why": "1 sentence." },
+      { "name": "Real tool or platform", "why": "1 sentence." }
     ]
   }
-}`;
+}
+
+MANDATORY: The "resources" section must be fully populated with 5 items in each category. Name REAL, recognisable books (with author), REAL communities (LinkedIn groups, Slack/Discord communities, professional associations, subreddits — include the platform), and REAL tools/platforms/software. Never leave any list short or generic.`;
 
   // ── Call Claude ──────────────────────────────────
   console.log('BG Step 3: Calling Claude API...');
@@ -209,7 +232,7 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
   try {
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
-      max_tokens: 8000,
+      max_tokens: 12000,
       system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific, deeply personalised content for this person. Write 2–3 sentences per field — rich, specific, naming real platforms and dollar figures.',
       messages:   [
         { role: 'user',      content: prompt },
@@ -219,21 +242,6 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
 
     console.log('BG stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
     const rawText = '{' + message.content[0].text;
-
-    // Extract just the root JSON object using brace counting — handles trailing text robustly
-    function extractRootJSON(str) {
-      let depth = 0, inStr = false, esc = false;
-      for (let i = 0; i < str.length; i++) {
-        const c = str[i];
-        if (esc)            { esc = false; continue; }
-        if (c === '\\' && inStr) { esc = true;  continue; }
-        if (c === '"')      { inStr = !inStr; continue; }
-        if (inStr)          continue;
-        if (c === '{')      depth++;
-        if (c === '}')      { depth--; if (depth === 0) return str.substring(0, i + 1); }
-      }
-      return str;
-    }
     const jsonText = extractRootJSON(rawText);
 
     results = JSON.parse(jsonText);
@@ -241,6 +249,83 @@ INSTRUCTIONS: Replace ALL fields with real, specific content for this person. 2 
   } catch (aiErr) {
     console.error('BG Claude/parse error:', aiErr.constructor.name, aiErr.message);
     return;
+  }
+
+  // ── Resources guardrail: retry if Books/Communities/Tools came back thin ─
+  try {
+    const res = results.resources || {};
+    const thin =
+      !Array.isArray(res.books)       || res.books.length       < 4 ||
+      !Array.isArray(res.communities) || res.communities.length < 4 ||
+      !Array.isArray(res.tools)       || res.tools.length       < 4;
+
+    if (thin) {
+      console.log('BG Resources thin — books:', res.books?.length || 0,
+                  'communities:', res.communities?.length || 0,
+                  'tools:', res.tools?.length || 0, '→ retrying resources only');
+
+      const pathTitles = (results.career_paths || []).map(p => p.title).filter(Boolean).join(', ');
+      const bizNames   = (results.business_models || []).map(b => b.name).filter(Boolean).join(', ');
+
+      const resourcesPrompt = `You are a career strategist. A person is pursuing this direction: "${direction || 'Not specified'}".
+${pathTitles ? `The career paths recommended to them are: ${pathTitles}.` : ''}
+${bizNames ? `The business models recommended to them are: ${bizNames}.` : ''}
+
+Generate a resources list tailored to their direction and these recommendations. Return JSON only — no markdown, no explanation.
+
+{
+  "books": [
+    { "title": "Real book title by Real Author", "why": "1 sentence on why relevant." },
+    { "title": "Real book title by Real Author", "why": "1 sentence." },
+    { "title": "Real book title by Real Author", "why": "1 sentence." },
+    { "title": "Real book title by Real Author", "why": "1 sentence." },
+    { "title": "Real book title by Real Author", "why": "1 sentence." }
+  ],
+  "communities": [
+    { "name": "Real community (platform — LinkedIn group, Slack, Discord, subreddit, association)", "why": "Why join and what to do there." },
+    { "name": "Real community (platform)", "why": "1 sentence." },
+    { "name": "Real community (platform)", "why": "1 sentence." },
+    { "name": "Real community (platform)", "why": "1 sentence." },
+    { "name": "Real community (platform)", "why": "1 sentence." }
+  ],
+  "tools": [
+    { "name": "Real tool or platform", "why": "Why this matters for their path." },
+    { "name": "Real tool or platform", "why": "1 sentence." },
+    { "name": "Real tool or platform", "why": "1 sentence." },
+    { "name": "Real tool or platform", "why": "1 sentence." },
+    { "name": "Real tool or platform", "why": "1 sentence." }
+  ]
+}
+
+MANDATORY: All three lists must be fully populated with 5 REAL, recognisable items each. Name actual authors, actual community/platform names, and actual software/tools.`;
+
+      const retryMsg = await anthropic.messages.create({
+        model:      'claude-haiku-4-5-20251001',
+        max_tokens: 2500,
+        system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation.',
+        messages:   [
+          { role: 'user',      content: resourcesPrompt },
+          { role: 'assistant', content: '{' },
+        ],
+      });
+
+      const retryRaw  = '{' + retryMsg.content[0].text;
+      const retryJSON = extractRootJSON(retryRaw);
+      const retryRes  = JSON.parse(retryJSON);
+
+      results.resources = {
+        books:       Array.isArray(retryRes.books)       && retryRes.books.length       >= (res.books?.length       || 0) ? retryRes.books       : (res.books       || retryRes.books       || []),
+        communities: Array.isArray(retryRes.communities) && retryRes.communities.length >= (res.communities?.length || 0) ? retryRes.communities : (res.communities || retryRes.communities || []),
+        tools:       Array.isArray(retryRes.tools)       && retryRes.tools.length       >= (res.tools?.length       || 0) ? retryRes.tools       : (res.tools       || retryRes.tools       || []),
+      };
+      console.log('BG Resources retry done — books:', results.resources.books.length,
+                  'communities:', results.resources.communities.length,
+                  'tools:', results.resources.tools.length);
+    }
+  } catch (retryErr) {
+    console.error('BG Resources retry failed (non-fatal):', retryErr.message);
+    // Keep whatever resources we had from the first call — don't block the email/PDF.
+    if (!results.resources) results.resources = { books: [], communities: [], tools: [] };
   }
 
   // ── Persist to Supabase ──────────────────────────
