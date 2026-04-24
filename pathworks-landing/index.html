@@ -231,6 +231,85 @@
       drop-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
 
+    /* ══════════════ JOURNEY VIZ (hero right) ══════════════ */
+    .journey-viz {
+      position: relative;
+      width: min(460px, 96%);
+      aspect-ratio: 460/600;
+      z-index: 2;
+    }
+    .journey-path {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.08));
+    }
+    .jv-label {
+      position: absolute;
+      font-family: 'Public Sans', sans-serif;
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--forest);
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 3;
+    }
+    .jv-start { top: 5.5%; left: 14%; transform: translate(-50%, -150%); }
+    .jv-end   { top: 92.5%; left: 82%; transform: translate(-50%, 170%); }
+    .jv-card {
+      position: absolute;
+      background: #ffffff;
+      border-left: 3px solid var(--gold-lt);
+      padding: 14px 16px 12px;
+      box-shadow: 0 14px 34px rgba(15,79,83,0.15), 0 2px 6px rgba(15,79,83,0.08);
+      width: 220px;
+      font-family: 'Public Sans', sans-serif;
+      z-index: 4;
+    }
+    .jv-blueprint { top: 16%; right: -4%; }
+    .jv-compass   { top: 50%; left: -4%; width: 240px; border-left-width: 4px; }
+    .jv-eyebrow {
+      font-size: 0.60rem; font-weight: 700;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--forest);
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+    .jv-title {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--forest);
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .jv-sub {
+      font-size: 0.78rem;
+      color: #5A6A70;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    .jv-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 5px;
+    }
+    .jv-chips span {
+      background: #F5EEDF;
+      color: #3D4A50;
+      font-size: 0.66rem;
+      font-weight: 500;
+      padding: 3px 8px;
+      white-space: nowrap;
+      line-height: 1.3;
+    }
+    @media (max-width: 900px) {
+      .journey-viz { width: min(420px, 100%); }
+      .jv-blueprint { right: 0; }
+      .jv-compass { left: 0; width: 220px; }
+    }
+
     /* FEATURES STRIP */
     .compass-features {
       display: grid;
@@ -1063,77 +1142,53 @@
 
     <div class="compass-hero-right">
       <div class="compass-outer-ring"></div>
-      <div class="compass-visual">
-        <!-- Detailed Compass Rose SVG -->
-        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <!-- Outer decorative rings -->
-          <circle cx="200" cy="200" r="192" stroke="#0F4F53" stroke-width="1" fill="none" opacity="0.2"/>
-          <circle cx="200" cy="200" r="180" stroke="#0F4F53" stroke-width="1.5" fill="none" opacity="0.15"/>
-          <circle cx="200" cy="200" r="168" stroke="#E7B928" stroke-width="0.8" fill="none" opacity="0.3"/>
-
-          <!-- Degree marks -->
-          <g stroke="#0F4F53" stroke-width="0.8" opacity="0.3">
-            <!-- Cardinal marks -->
-            <line x1="200" y1="32" x2="200" y2="20"/>
-            <line x1="200" y1="368" x2="200" y2="380"/>
-            <line x1="32" y1="200" x2="20" y2="200"/>
-            <line x1="368" y1="200" x2="380" y2="200"/>
-            <!-- Intercardinal -->
-            <line x1="320" y1="80" x2="328" y2="72"/>
-            <line x1="80" y1="80" x2="72" y2="72"/>
-            <line x1="320" y1="320" x2="328" y2="328"/>
-            <line x1="80" y1="320" x2="72" y2="328"/>
-          </g>
-
-          <!-- Main compass face -->
-          <circle cx="200" cy="200" r="160" fill="#F0F8FA" stroke="#0F4F53" stroke-width="2"/>
-          <circle cx="200" cy="200" r="155" fill="none" stroke="#E7B928" stroke-width="0.5" opacity="0.5"/>
-
-          <!-- Compass rose petals — North (gold) -->
-          <path d="M200,40 L212,185 L200,170 L188,185 Z" fill="#0F4F53"/>
-          <path d="M200,40 L206,140 L200,130 L194,140 Z" fill="#E7B928"/>
-
-          <!-- South (muted) -->
-          <path d="M200,360 L188,215 L200,230 L212,215 Z" fill="#4A6670"/>
-          <path d="M200,360 L194,260 L200,270 L206,260 Z" fill="#C8D4CD"/>
-
-          <!-- East (muted) -->
-          <path d="M360,200 L215,212 L230,200 L215,188 Z" fill="#4A6670"/>
-          <path d="M360,200 L260,206 L270,200 L260,194 Z" fill="#C8D4CD"/>
-
-          <!-- West (muted) -->
-          <path d="M40,200 L185,188 L170,200 L185,212 Z" fill="#4A6670"/>
-          <path d="M40,200 L140,194 L130,200 L140,206 Z" fill="#C8D4CD"/>
-
-          <!-- Intercardinal points — NE -->
-          <path d="M283,117 L207,192 L217,182 L207,207 Z" fill="#0F4F53" opacity="0.5"/>
-          <!-- NW -->
-          <path d="M117,117 L193,192 L183,182 L193,207 Z" fill="#0F4F53" opacity="0.5"/>
-          <!-- SE -->
-          <path d="M283,283 L207,208 L217,218 L207,193 Z" fill="#0F4F53" opacity="0.5"/>
-          <!-- SW -->
-          <path d="M117,283 L193,208 L183,218 L193,193 Z" fill="#0F4F53" opacity="0.5"/>
-
-          <!-- Inner ring -->
-          <circle cx="200" cy="200" r="38" fill="#D8ECF0" stroke="#0F4F53" stroke-width="1.5"/>
-          <circle cx="200" cy="200" r="30" fill="#F0F8FA" stroke="#E7B928" stroke-width="1"/>
-
-          <!-- Center jewel -->
-          <circle cx="200" cy="200" r="8" fill="#E7B928"/>
-          <circle cx="200" cy="200" r="4" fill="#F4C83F"/>
-
-          <!-- Cardinal letter N -->
-          <text x="200" y="68" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="18" font-weight="600" fill="#0F4F53">N</text>
-          <text x="200" y="344" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">S</text>
-          <text x="340" y="205" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">E</text>
-          <text x="62" y="205" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="14" font-weight="400" fill="#4A6670">W</text>
-
-          <!-- Intercardinal smaller letters -->
-          <text x="294" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F4F53" opacity="0.6">NE</text>
-          <text x="108" y="108" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F4F53" opacity="0.6">NW</text>
-          <text x="294" y="300" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F4F53" opacity="0.6">SE</text>
-          <text x="108" y="300" text-anchor="middle" font-family="Public Sans, sans-serif" font-size="9" fill="#0F4F53" opacity="0.6">SW</text>
+      <div class="journey-viz" aria-label="Your Pathworks journey: today, Blueprint, Compass, your plan">
+        <svg class="journey-path" viewBox="0 0 460 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="230" cy="300" r="280" fill="none" stroke="#0F4F53" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.09"/>
+          <path d="M 65 40
+                   C 200 60, 360 100, 395 210
+                   C 415 310, 70 310, 55 420
+                   C 45 505, 260 530, 380 560"
+                fill="none" stroke="#0F4F53" stroke-width="2"
+                stroke-dasharray="5 8" opacity="0.42" stroke-linecap="round"/>
+          <circle cx="65" cy="40" r="7" fill="#FFFFFF" stroke="#0F4F53" stroke-width="2"/>
+          <circle cx="65" cy="40" r="2.5" fill="#0F4F53"/>
+          <circle cx="395" cy="210" r="24" fill="#F4C83F" opacity="0.22"/>
+          <circle cx="395" cy="210" r="12" fill="#F4C83F" stroke="#0F4F53" stroke-width="2"/>
+          <circle cx="55" cy="420" r="28" fill="#F4C83F" opacity="0.24"/>
+          <circle cx="55" cy="420" r="14" fill="#F4C83F" stroke="#0F4F53" stroke-width="2"/>
+          <circle cx="380" cy="560" r="28" fill="#F4C83F" opacity="0.3"/>
+          <circle cx="380" cy="560" r="16" fill="#F4C83F" stroke="#0F4F53" stroke-width="2.5"/>
+          <path d="M 372 561 L 378 567 L 389 555" fill="none" stroke="#0F4F53" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+
+        <div class="jv-label jv-start">You · Today</div>
+
+        <div class="jv-card jv-blueprint">
+          <div class="jv-eyebrow">Step 1 · Free · 7 min</div>
+          <div class="jv-title">Your Blueprint</div>
+          <div class="jv-sub">Who you actually are.</div>
+          <div class="jv-chips">
+            <span>Your direction</span>
+            <span>Strengths profile</span>
+            <span>Work style</span>
+          </div>
+        </div>
+
+        <div class="jv-card jv-compass">
+          <div class="jv-eyebrow">Step 2 · $39</div>
+          <div class="jv-title">Your Compass</div>
+          <div class="jv-sub">Your 20-page roadmap.</div>
+          <div class="jv-chips">
+            <span>3 AI-resistant careers</span>
+            <span>3 business models</span>
+            <span>10-year arc each</span>
+            <span>Income targets</span>
+            <span>90-day first steps</span>
+          </div>
+        </div>
+
+        <div class="jv-label jv-end">Your Plan</div>
       </div>
     </div>
   </div>
