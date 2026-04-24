@@ -13,6 +13,8 @@
         document.addEventListener('DOMContentLoaded', function(){
           var el = document.getElementById('nav-wordmark-text');
           if(el) el.innerHTML = 'pathworks<span>COMPASS</span>';
+          var fw = document.getElementById('footer-wordmark-text');
+          if(fw) fw.innerHTML = 'pathworks<span>COMPASS</span>';
           var navList = document.getElementById('nav-links-list');
           if(navList) navList.innerHTML =
             '<li><span style="font-weight:500;font-size:0.9rem;color:var(--forest);letter-spacing:0.03em;">Need to return to the Pathworks Blueprint?</span></li>' +
@@ -319,8 +321,10 @@
       background: var(--forest); padding: 3rem; display: flex;
       justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;
     }
-    .footer-logo { font-weight: 600; font-size: 1rem; color: var(--cream); }
-    .footer-logo span { display: block; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,248,250,0.5); margin-top: 3px; }
+    .footer-brand { display: flex; align-items: center; gap: 0.7rem; }
+    .footer-brand svg { width: 32px; height: 32px; flex-shrink: 0; }
+    .footer-wordmark { font-family: 'Merriweather', serif; font-weight: 900; font-size: 1.15rem; color: var(--cream); line-height: 1; letter-spacing: -0.01em; }
+    .footer-wordmark span { display: block; font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,248,250,0.55); margin-top: 4px; }
     .footer-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
     .footer-links a { font-size: 0.85rem; color: rgba(240,248,250,0.6); text-decoration: none; }
     .footer-links a:hover { color: var(--gold-lt); }
@@ -776,13 +780,19 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-logo">
-      Pathworks Blueprint
-      <span>by Changing Tribes</span>
+    <div class="footer-brand">
+      <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-label="Pathworks">
+        <circle cx="18" cy="18" r="14" fill="#F4C83F"/>
+      </svg>
+      <div class="footer-wordmark" id="footer-wordmark-text">
+        pathworks
+        <span>BLUEPRINT</span>
+      </div>
     </div>
     <ul class="footer-links">
       <li><a href="#">Blueprint</a></li>
       <li><a href="https://www.pathworkscompass.com" target="_blank">Compass</a></li>
+      <li><a href="https://www.pathworksproject.com" target="_blank">Project</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
       <li><a href="mailto:hello@changingtribes.com">Contact</a></li>
     </ul>
