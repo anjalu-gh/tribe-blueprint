@@ -479,12 +479,24 @@ async function sendResultsEmail(email, results) {
 </body>
 </html>`;
 
-  await resend.emails.send({
+  // Resend returns { data, error } instead of throwing on API-level failures
+  // (bounced address, suppression list, etc.). Capture both so silent
+  // rejections show up in the Netlify function log.
+  const { data: resendData, error: resendError } = await resend.emails.send({
     from: 'Pathworks Blueprint <hello@changingtribes.com>',
     to: email,
     subject: `Your Pathworks Blueprint: ${results.tribe_name || 'Results Inside'}`,
     html,
   });
+  if (resendError) {
+    console.error('[blueprint] Resend returned error:', JSON.stringify({
+      name:       resendError.name,
+      message:    resendError.message,
+      statusCode: resendError.statusCode,
+    }));
+    throw new Error(`Resend send failed: ${resendError.message || resendError.name}`);
+  }
+  console.log('[blueprint] Resend accepted, message id:', resendData?.id || '(no id returned)');
 }
 
 // ── ZOHO CRM HELPER ─────────────────────────────────────────

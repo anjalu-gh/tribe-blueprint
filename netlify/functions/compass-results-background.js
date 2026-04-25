@@ -1193,5 +1193,17 @@ async function sendCompassEmail(email, direction, results) {
     }];
   }
 
-  await resend.emails.send(emailPayload);
+  // Resend returns { data, error } instead of throwing on API-level failures
+  // (bounced address, suppression list, payload too large, etc.). Capture
+  // both so silent rejections show up in the Netlify function log.
+  const { data: resendData, error: resendError } = await resend.emails.send(emailPayload);
+  if (resendError) {
+    console.error('[compass] Resend returned error:', JSON.stringify({
+      name:       resendError.name,
+      message:    resendError.message,
+      statusCode: resendError.statusCode,
+    }));
+    throw new Error(`Resend send failed: ${resendError.message || resendError.name}`);
+  }
+  console.log('[compass] Resend accepted, message id:', resendData?.id || '(no id returned)');
 }
