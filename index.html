@@ -466,9 +466,14 @@
     .btn-compass:hover { background: #FFD85A; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(244,200,63,0.45); }
 
     /* ══════════════ COMPASS ACCESS ══════════════ */
-    .compass-access-wrap { max-width: 540px; margin: 0 auto; padding: 4rem 2rem; }
+    /* Widened from 540px → 1080px so the intro paragraphs flow into fewer
+       lines and the email field is visible above the fold without scrolling.
+       Body copy is capped at a comfortable reading width via .sub so we
+       don't end up with 1500px-wide single-line paragraphs. */
+    .compass-access-wrap { max-width: 1080px; margin: 0 auto; padding: 4rem 2rem; }
     .compass-access-wrap h2 { font-family: 'Merriweather', serif; font-weight: 700; font-size: 2rem; margin-bottom: 0.5rem; color: var(--forest); }
-    .compass-access-wrap .sub { color: var(--muted); margin-bottom: 2rem; line-height: 1.65; }
+    .compass-access-wrap .sub { color: var(--muted); margin-bottom: 1.25rem; line-height: 1.65; max-width: 880px; }
+    .compass-access-wrap .sub:last-of-type { margin-bottom: 2rem; }
     .compass-context { background: var(--forest); color: #C0D5E0; padding: 1rem 1.4rem; font-size: 0.88rem; margin-bottom: 1.8rem; line-height: 1.6; }
     .compass-context strong { color: var(--white); }
     textarea { width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); font-size: 1rem; font-family: 'Public Sans', sans-serif; background: var(--white); color: var(--forest); resize: vertical; min-height: 90px; transition: border-color 0.2s; }
