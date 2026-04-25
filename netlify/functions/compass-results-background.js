@@ -915,6 +915,47 @@ async function updateZohoWithCompass(email, direction, results) {
   );
 }
 
+// Build a compact plain-text version of the Compass email. Including a
+// `text:` body alongside the HTML body helps mail clients that don't render
+// HTML, and improves Gmail's classification (a missing text alternative is a
+// minor signal that nudges mail toward the Promotions tab).
+function buildCompassPlainText(direction, results) {
+  const lines = [];
+  lines.push('YOUR PATHWORKS COMPASS');
+  lines.push('======================');
+  lines.push('');
+  if (results.compass_title) lines.push(results.compass_title);
+  if (direction)             lines.push('Direction: "' + direction + '"');
+  lines.push('');
+  if (results.compass_intro) { lines.push(results.compass_intro); lines.push(''); }
+
+  if (Array.isArray(results.career_paths) && results.career_paths.length) {
+    lines.push('— Career paths to consider —');
+    results.career_paths.forEach((c, i) => lines.push('  ' + (i + 1) + '. ' + (c.title || '')));
+    lines.push('');
+  }
+  if (Array.isArray(results.business_models) && results.business_models.length) {
+    lines.push('— Businesses you could start —');
+    results.business_models.forEach((b, i) => lines.push('  ' + (i + 1) + '. ' + (b.name || '')));
+    lines.push('');
+  }
+  if (Array.isArray(results.companies) && results.companies.length) {
+    lines.push('— Real companies where you could thrive —');
+    results.companies.slice(0, 12).forEach(c => lines.push('  • ' + (c.name || '')));
+    lines.push('');
+  }
+  if (Array.isArray(results.action_plan) && results.action_plan.length) {
+    lines.push('— Your 90-day action plan —');
+    results.action_plan.forEach(a => lines.push('  ' + (a.period || '') + ': ' + (a.title || '')));
+    lines.push('');
+  }
+  lines.push('The full Compass — with detailed write-ups for each career path and business, your 10-year arc, 20 startup ideas, and a curated resources list — is in the HTML version of this email and the attached PDF.');
+  lines.push('');
+  lines.push('— Changing Tribes / Pathworks');
+  lines.push('https://www.changingtribes.com');
+  return lines.join('\n');
+}
+
 // ── EMAIL (HTML + PDF attachment) ────────────────────────────
 async function sendCompassEmail(email, direction, results) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -1188,6 +1229,7 @@ async function sendCompassEmail(email, direction, results) {
     to:      email,
     subject: `Your Pathworks Compass: ${results.compass_title || 'Results Inside'}`,
     html,
+    text:    buildCompassPlainText(direction, results),
   };
 
   if (pdfBuffer) {

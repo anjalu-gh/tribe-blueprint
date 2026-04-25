@@ -300,6 +300,48 @@ CRITICAL CONSTRAINTS:
   };
 };
 
+// Build a compact plain-text version of the Blueprint email. Including a
+// `text:` body alongside the HTML body helps mail clients that don't render
+// HTML, and improves Gmail's classification (a missing text alternative is a
+// minor signal that nudges mail toward the Promotions tab).
+function buildBlueprintPlainText(results) {
+  const lines = [];
+  lines.push('YOUR PATHWORKS BLUEPRINT');
+  lines.push('========================');
+  lines.push('');
+  if (results.tribe_name)        lines.push('Your archetype: ' + results.tribe_name);
+  if (results.tribe_description) lines.push('');
+  if (results.tribe_description) lines.push(results.tribe_description);
+  lines.push('');
+  if (Array.isArray(results.energizers) && results.energizers.length) {
+    lines.push('— What energizes you —');
+    results.energizers.forEach(e => lines.push('  • ' + e));
+    lines.push('');
+  }
+  if (Array.isArray(results.drains) && results.drains.length) {
+    lines.push('— What drains you —');
+    results.drains.forEach(d => lines.push('  • ' + d));
+    lines.push('');
+  }
+  if (Array.isArray(results.strengths) && results.strengths.length) {
+    lines.push('— Your 5 strengths —');
+    results.strengths.forEach(s => lines.push('  • ' + (s.title || s)));
+    lines.push('');
+  }
+  if (Array.isArray(results.blind_spots) && results.blind_spots.length) {
+    lines.push('— Your 4 blind spots —');
+    results.blind_spots.forEach(b => lines.push('  • ' + (b.title || b)));
+    lines.push('');
+  }
+  lines.push('Your full Blueprint with the detailed breakdowns, environments, AI-age advantage and 30-day roadmap is in the HTML version of this email.');
+  lines.push('');
+  lines.push('Ready to map where this can take you? → https://www.pathworkscompass.com');
+  lines.push('');
+  lines.push('— Changing Tribes / Pathworks');
+  lines.push('https://www.changingtribes.com');
+  return lines.join('\n');
+}
+
 // ── EMAIL HELPER ─────────────────────────────────────────────
 async function sendResultsEmail(email, results) {
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -489,6 +531,7 @@ async function sendResultsEmail(email, results) {
     to: email,
     subject: `Your Pathworks Blueprint: ${results.tribe_name || 'Results Inside'}`,
     html,
+    text: buildBlueprintPlainText(results),
   });
   if (resendError) {
     console.error('[blueprint] Resend returned error:', JSON.stringify({
