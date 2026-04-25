@@ -22,10 +22,12 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Direction is required' }) };
   }
 
-  // After payment, return the user to the Compass domain so the right
-  // navbar/branding shows on the success page. Falls back to the Blueprint
-  // domain if COMPASS_APP_URL isn't set, which preserves the old behavior.
-  const compassAppUrl = process.env.COMPASS_APP_URL || 'https://www.pathworkscompass.com';
+  // After payment, ALWAYS return the user to the Pathworks Compass domain so
+  // the right brand/navbar renders on the success page. We intentionally
+  // hardcode this rather than reading an env var — a misconfigured
+  // COMPASS_APP_URL pointed real customers at tribescompass.com (legacy
+  // brand) instead, which is why this is no longer overridable.
+  const compassAppUrl = 'https://www.pathworkscompass.com';
   const priceCents    = parseInt(process.env.COMPASS_PRICE_CENTS || '3900', 10);
   const priceId       = process.env.COMPASS_PRICE_ID; // e.g. price_xxx for the real Stripe product
 

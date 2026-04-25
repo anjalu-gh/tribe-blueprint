@@ -14,6 +14,23 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_KEY
 );
 
+// Extract the root JSON object using brace counting — tolerates trailing prose
+// or stray text around the JSON. Required because we no longer use
+// assistant-message prefill (newer Claude models reject it).
+function extractRootJSON(str) {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = 0; i < str.length; i++) {
+    const c = str[i];
+    if (esc)                 { esc = false; continue; }
+    if (c === '\\' && inStr) { esc = true;  continue; }
+    if (c === '"')           { inStr = !inStr; continue; }
+    if (inStr)               continue;
+    if (c === '{')           depth++;
+    if (c === '}')           { depth--; if (depth === 0) return str.substring(0, i + 1); }
+  }
+  return str;
+}
+
 // Category labels — matches generate-results.js exactly
 const QUESTION_LABELS = {
   q1:  { left: 'Working independently',                  right: 'Collaborating with a team',               category: 'How You Work' },
@@ -204,21 +221,24 @@ INSTRUCTIONS: Replace every placeholder with real, specific content for this per
   console.log('Compass Step 3: Calling Claude API...');
   let results;
   try {
+    // No assistant prefill — newer Claude models (incl. Opus 4.6) reject it
+    // outright with "conversation must end with a user message". We force
+    // JSON-only via the system prompt and clean up with extractRootJSON.
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
       max_tokens: 4500,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific content for this person. Each value must be ONE sentence — specific and direct, naming real companies, platforms, and dollar figures. Do not write more than one sentence per field.',
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no preamble, no closing remarks. Start with `{` and end with `}`. Replace every placeholder with real, specific content for this person. Each value must be ONE sentence — specific and direct, naming real companies, platforms, and dollar figures. Do not write more than one sentence per field.',
       messages:   [
-        { role: 'user',      content: prompt },
-        { role: 'assistant', content: '{'   },
+        { role: 'user', content: prompt },
       ],
     });
 
     console.log('Compass stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
-    const rawText = '{' + message.content[0].text;
-    console.log('Compass raw (first 300):', rawText.slice(0, 300));
+    const rawText  = message.content[0].text;
+    const jsonText = extractRootJSON(rawText);
+    console.log('Compass raw (first 300):', jsonText.slice(0, 300));
 
-    results = JSON.parse(rawText);
+    results = JSON.parse(jsonText);
     console.log('Compass Step 3 done: Claude responded OK');
   } catch (aiErr) {
     console.error('Compass AI / parse error:', aiErr.constructor.name, aiErr.message);

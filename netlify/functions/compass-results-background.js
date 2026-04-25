@@ -251,18 +251,20 @@ CRITICAL COUNT REQUIREMENTS — do not deviate:
   console.log('BG Step 3: Calling Claude API...');
   let results;
   try {
+    // No assistant prefill — newer Claude models reject it ("conversation
+    // must end with a user message"). System prompt + extractRootJSON do
+    // the JSON-only enforcement.
     const message = await anthropic.messages.create({
       model:      'claude-haiku-4-5-20251001',
       max_tokens: 20000,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation. Replace every placeholder with real, specific, deeply personalised content for this person. Follow the count requirements EXACTLY (5–7 career_paths, 5–7 business_models, 12 companies, 20 startup_ideas, 5 of each resource). Write 2–3 sentences per long field — rich, specific, naming real platforms and dollar figures.',
+      system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no preamble, no closing remarks. Start with `{` and end with `}`. Replace every placeholder with real, specific, deeply personalised content for this person. Follow the count requirements EXACTLY (5–7 career_paths, 5–7 business_models, 12 companies, 20 startup_ideas, 5 of each resource). Write 2–3 sentences per long field — rich, specific, naming real platforms and dollar figures.',
       messages:   [
-        { role: 'user',      content: prompt },
-        { role: 'assistant', content: '{'   },
+        { role: 'user', content: prompt },
       ],
     });
 
     console.log('BG stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
-    const rawText = '{' + message.content[0].text;
+    const rawText  = message.content[0].text;
     const jsonText = extractRootJSON(rawText);
 
     results = JSON.parse(jsonText);
@@ -323,14 +325,14 @@ MANDATORY: All three lists must be fully populated with 5 REAL, recognisable ite
       const retryMsg = await anthropic.messages.create({
         model:      'claude-haiku-4-5-20251001',
         max_tokens: 2500,
-        system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no explanation.',
+        // No assistant prefill (see top-of-file note).
+        system:     'You are a JSON-only responder. Output nothing except the JSON object. No markdown, no backticks, no preamble. Start with `{` and end with `}`.',
         messages:   [
-          { role: 'user',      content: resourcesPrompt },
-          { role: 'assistant', content: '{' },
+          { role: 'user', content: resourcesPrompt },
         ],
       });
 
-      const retryRaw  = '{' + retryMsg.content[0].text;
+      const retryRaw  = retryMsg.content[0].text;
       const retryJSON = extractRootJSON(retryRaw);
       const retryRes  = JSON.parse(retryJSON);
 

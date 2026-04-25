@@ -9,6 +9,15 @@ const Anthropic = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
+// Surface missing env vars at boot — Netlify function logs will show this
+// every cold start, so a misconfigured deploy is obvious instead of failing
+// silently mid-pipeline.
+const REQUIRED_ENV = ['ANTHROPIC_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY', 'RESEND_API_KEY'];
+const missingEnv = REQUIRED_ENV.filter((k) => !process.env[k]);
+if (missingEnv.length) {
+  console.error('[blueprint] MISSING ENV VARS:', missingEnv.join(', '));
+}
+
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const supabase = createClient(
@@ -202,18 +211,21 @@ CRITICAL CONSTRAINTS:
   console.log('Step 2: Calling Claude API...');
   let results;
   try {
+    // NOTE: claude-opus-4-6 rejects assistant-message prefill ("conversation
+    // must end with a user message"). We rely on the system prompt + the
+    // brace-counting extractRootJSON to strip any stray prose that might
+    // sneak in around the JSON object.
     const message = await anthropic.messages.create({
       model:      'claude-opus-4-6',
       max_tokens: 7000,
-      system:     'You are a JSON-only responder. Output nothing except the JSON object — no markdown, no backticks, no commentary. Keep every placeholder replaced with warm, specific, deeply personalised content. Follow the schema exactly and respect every count requirement. This is a personal work-style Blueprint, not a career recommendation — do not list specific careers, businesses, or companies.',
+      system:     'You are a JSON-only responder. Output nothing except the JSON object — no markdown, no backticks, no commentary, no preamble, no closing remarks. Start your response with `{` and end it with `}`. Keep every placeholder replaced with warm, specific, deeply personalised content. Follow the schema exactly and respect every count requirement. This is a personal work-style Blueprint, not a career recommendation — do not list specific careers, businesses, or companies.',
       messages:   [
-        { role: 'user',      content: prompt },
-        { role: 'assistant', content: '{'    },
+        { role: 'user', content: prompt },
       ],
     });
 
     console.log('Blueprint stop_reason:', message.stop_reason, '| output_tokens:', message.usage?.output_tokens);
-    const rawText  = '{' + message.content[0].text;
+    const rawText  = message.content[0].text;
     const jsonText = extractRootJSON(rawText);
 
     results = JSON.parse(jsonText);
@@ -224,15 +236,35 @@ CRITICAL CONSTRAINTS:
   }
 
   // ── Persist to Supabase ─────────────────────────
+  // NOTE: Supabase JS v2 returns `{ data, error }` and does NOT throw on
+  // row-level failures (RLS rejection, schema mismatch, bad URL/key once
+  // initialized, etc.). A bare try/catch will silently swallow all of
+  // those — we have to read `error` explicitly and log it loudly so
+  // Netlify function logs surface the failure.
+  console.log('Step 2.5: Persisting to Supabase...');
   try {
-    await supabase.from('assessments').insert({
-      email: resolvedEmail,
-      answers,
-      results,
-    });
+    const { data: dbData, error: dbError } = await supabase
+      .from('assessments')
+      .insert({
+        email: resolvedEmail,
+        answers,
+        results,
+      })
+      .select();
+
+    if (dbError) {
+      console.error('[blueprint] Supabase insert returned error:', JSON.stringify({
+        message: dbError.message,
+        details: dbError.details,
+        hint:    dbError.hint,
+        code:    dbError.code,
+      }));
+    } else {
+      console.log('[blueprint] Supabase insert OK, rows:', dbData?.length ?? 0);
+    }
   } catch (dbErr) {
-    // Non-fatal — results already generated, just log
-    console.error('Supabase persist error:', dbErr.message);
+    // Network / client init failures land here
+    console.error('[blueprint] Supabase persist threw:', dbErr.message);
   }
 
   // ── Push Contact to Zoho CRM ────────────────────
