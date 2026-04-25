@@ -6,6 +6,26 @@
   <title>Pathworks Blueprint | by Changing Tribes</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <script>
+    // Legacy-domain hard redirect — runs before anything else parses on the page.
+    // Netlify also 301-redirects domain aliases to the primary, but this is a
+    // belt-and-braces safety net so anyone who lands on the legacy
+    // tribesblueprint.com / tribescompass.com hosts (cached link, social
+    // share, old email) gets bounced to the canonical Pathworks domain
+    // with their path + query string preserved.
+    (function(){
+      var h = location.hostname.toLowerCase();
+      var rest = location.pathname + location.search + location.hash;
+      if (h === 'tribescompass.com' || h === 'www.tribescompass.com') {
+        location.replace('https://www.pathworkscompass.com' + rest);
+        return;
+      }
+      if (h === 'tribesblueprint.com' || h === 'www.tribesblueprint.com') {
+        location.replace('https://www.pathworksblueprint.com' + rest);
+        return;
+      }
+    })();
+  </script>
+  <script>
     (function(){
       var h = location.hostname;
       if(h.indexOf('pathworkscompass') !== -1) {
@@ -981,13 +1001,15 @@
 <div id="page-compass-access" class="page">
   <div class="compass-access-wrap">
     <h2>🧭 Pathworks Compass</h2>
-    <p class="sub">We'll connect your transferable skills with new paths forward — no need to be "qualified" in the traditional sense. Tell us what career or business excites you and we'll map out your next 10 years.</p>
+    <p class="sub">The Blueprint you just created is a snapshot of <strong>YOU</strong> — your personality, your work style, and your preferences. The Blueprint never changes unless you go back and adjust those sliders.</p>
+    <p class="sub">Next, you'll use the same email address you used for the Blueprint and add it to Pathworks Compass. Here we layer your Pathworks Blueprint Profile over what you'd like to do in the future for a career or business. (If you're thinking about a business that requires start-up capital, provide that information so the system can give you realistic starting points for your new venture.)</p>
+    <p class="sub">So go ahead — add your email and write a few sentences about what you want to do in the future. You'll receive a list of AI-resistant careers and companies to contact, businesses you can start, a 10-year roadmap broken into segments, and plenty of resources to help get you started.</p>
     <div id="compass-context-box" class="compass-context" style="display:none;">
       <strong>Your Pathworks Blueprint Profile:</strong>
       <span id="compass-profile-display"></span>
     </div>
     <div class="form-group">
-      <label for="compass-email-input">Your Email Address</label>
+      <label for="compass-email-input">Your Email Address <span style="font-weight:400;color:var(--muted)">(the same one you used to create your Pathworks Blueprint Profile)</span></label>
       <input type="email" id="compass-email-input" placeholder="you@example.com" />
     </div>
     <div class="form-group">
