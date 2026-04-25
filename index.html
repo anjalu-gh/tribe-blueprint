@@ -1078,7 +1078,7 @@
     <div style="background:#EDF4F8;border:1px solid #C0D5E0;padding:28px 32px;margin-bottom:2rem;">
       <p style="font-size:1.1rem;color:var(--forest);font-weight:600;margin-bottom:0.5rem;">📬 Your full Compass report will be sent to:</p>
       <p id="compass-success-email" style="font-size:1rem;color:var(--slate);font-weight:700;margin-bottom:1rem;"></p>
-      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your complete career path 10-year arcs, business model recommendations with financial projections, your 90-day action plan, and personalized resources — all tailored to your Blueprint profile.</p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.65;">Your report includes your 5–7 AI-resistant career paths, 5–7 capital-matched businesses you could start, 12 real companies where your profile can thrive, 20 lightweight startup ideas, and a 90-day action plan — all tailored to your Blueprint profile and chosen direction.</p>
     </div>
     <p style="font-size:0.85rem;color:var(--muted);margin-bottom:2rem;">Don't see it? Check your spam folder or promotions tab.</p>
     <a href="https://www.changingtribes.com" class="btn-primary" target="_blank">Visit Changing Tribes →</a>
@@ -1466,11 +1466,18 @@ async function applyCompassCoupon() {
 }
 
 async function startCompassCheckout() {
-  const email = document.getElementById('compass-email-input').value.trim();
-  if (!email) { alert('Please enter your email address first.'); return; }
-  compass.email = email;
+  const email     = document.getElementById('compass-email-input').value.trim();
+  const direction = document.getElementById('compass-direction-input').value.trim();
+  const capital   = document.getElementById('compass-capital-input').value;
+  if (!email)     { alert('Please enter your email address first.'); return; }
+  if (!direction) { alert('Please tell us what career or business you would like to pursue (1–2 sentences).'); return; }
+  compass.email = email; compass.direction = direction; compass.capital = capital;
   try {
-    const res  = await fetch('/.netlify/functions/compass-checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+    const res  = await fetch('/.netlify/functions/compass-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, direction, capital }),
+    });
     const data = await res.json();
     if (data.url) { window.location.href = data.url; } else { alert('Payment setup failed. Please try again.'); }
   } catch { alert('Something went wrong. Please try again.'); }
@@ -1481,15 +1488,85 @@ async function handleCompassReturn() {
   const sessionId = params.get('compass_session');
   if (!sessionId) return;
   window.history.replaceState({}, '', window.location.pathname);
+
+  // Show the loading screen immediately so the user isn't staring at the
+  // landing page while we verify + kick off the background generation.
+  showPage('compass-loading');
+  const messages = [
+    'Confirming your payment…',
+    'Mapping your direction to your Blueprint profile…',
+    'Identifying your most AI-resistant strengths…',
+    'Building your business and company matches…',
+    'Crafting your 90-day action plan…',
+  ];
+  let idx = 0;
+  const loadingEl = document.getElementById('compass-loading-msg');
+  if (loadingEl) loadingEl.textContent = messages[0];
+  const timer = setInterval(() => {
+    idx = (idx + 1) % messages.length;
+    if (loadingEl) loadingEl.textContent = messages[idx];
+  }, 3500);
+
   try {
-    const res  = await fetch('/.netlify/functions/compass-verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ session_id: sessionId }) });
+    const res  = await fetch('/.netlify/functions/compass-verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId }),
+    });
     const data = await res.json();
-    if (data.valid) {
-      compass.email = data.email; compass.accessCode = data.access_code;
-      document.getElementById('compass-email-input').value = data.email;
+    if (!data.valid) {
+      clearInterval(timer);
+      alert('Payment could not be verified. Please contact hello@changingtribes.com.');
       showPage('compass-access');
-    } else { alert('Payment could not be verified. Please contact hello@changingtribes.com.'); }
-  } catch { alert('Payment verification failed. Please contact hello@changingtribes.com.'); }
+      return;
+    }
+
+    compass.email      = data.email      || compass.email;
+    compass.accessCode = data.access_code;
+    compass.direction  = data.direction  || compass.direction;
+    compass.capital    = data.capital    || compass.capital || 'career-only';
+
+    // Pre-fill the form fields too, in case anything kicks the user back here.
+    const emailInput     = document.getElementById('compass-email-input');
+    const directionInput = document.getElementById('compass-direction-input');
+    const capitalInput   = document.getElementById('compass-capital-input');
+    if (emailInput)     emailInput.value     = compass.email;
+    if (directionInput) directionInput.value = compass.direction;
+    if (capitalInput && compass.capital) capitalInput.value = compass.capital;
+
+    // We have everything we need — kick off background generation directly
+    // so the user lands on the success page without re-entering anything.
+    if (!compass.direction) {
+      // Edge case: metadata missing for some reason. Fall back to the form.
+      clearInterval(timer);
+      showPage('compass-access');
+      return;
+    }
+
+    const genRes = await fetch('/.netlify/functions/compass-results-background', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email:       compass.email,
+        access_code: compass.accessCode,
+        direction:   compass.direction,
+        capital:     compass.capital,
+      }),
+    });
+    clearInterval(timer);
+
+    if (genRes.status === 202 || genRes.ok) {
+      showCompassSuccess({ email: compass.email, direction: compass.direction });
+    } else {
+      const errData = await genRes.json().catch(() => ({}));
+      alert('Could not generate your Compass: ' + (errData.error || 'unknown error') + '. Please contact hello@changingtribes.com.');
+      showPage('compass-access');
+    }
+  } catch (err) {
+    clearInterval(timer);
+    alert('Payment verification failed. Please contact hello@changingtribes.com.');
+    showPage('compass-access');
+  }
 }
 
 async function submitCompass() {
@@ -1579,7 +1656,7 @@ function displayCompassResults(r) {
 function showCompassSuccess(r) {
   document.getElementById('compass-success-title').textContent = 'Your Compass Report Is Being Prepared';
   document.getElementById('compass-success-intro').textContent =
-    "We're generating your personalized Pathworks Compass report right now — a full career roadmap, business ideas, and 90-day action plan tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.";
+    "We're generating your personalized Pathworks Compass report right now — your matched career paths, capital-sized businesses, real companies, startup ideas, and 90-day action plan, tailored specifically to your direction and Blueprint profile. This typically takes 2–3 minutes and will be delivered straight to your inbox.";
   document.getElementById('compass-success-email').textContent = (r && r.email) || compass.email || '';
   showPage('compass-success');
 }

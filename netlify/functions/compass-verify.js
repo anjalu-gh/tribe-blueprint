@@ -34,7 +34,9 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: JSON.stringify({ valid: false, error: 'Payment not completed' }) };
     }
 
-    const email = session.customer_email || session.customer_details?.email || '';
+    const email     = session.customer_email || session.customer_details?.email || '';
+    const direction = session.metadata?.direction || '';
+    const capital   = session.metadata?.capital   || 'career-only';
 
     // Idempotency — return existing code if already issued for this session
     const { data: existing } = await supabase
@@ -47,7 +49,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ valid: true, email, access_code: existing.code }),
+        body: JSON.stringify({ valid: true, email, access_code: existing.code, direction, capital }),
       };
     }
 
@@ -66,7 +68,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ valid: true, email, access_code: accessCode }),
+      body: JSON.stringify({ valid: true, email, access_code: accessCode, direction, capital }),
     };
   } catch (err) {
     console.error('compass-verify error:', err.message);
