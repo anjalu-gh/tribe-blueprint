@@ -17,18 +17,20 @@ const supabase = createClient(
 // Extract the root JSON object using brace counting — tolerates trailing prose
 // or stray text around the JSON. Required because we no longer use
 // assistant-message prefill (newer Claude models reject it).
+// Locks to the FIRST `{` we see and walks until its matching `}` — so any
+// leading markdown fences (```json ... ```) or preamble text are skipped.
 function extractRootJSON(str) {
-  let depth = 0, inStr = false, esc = false;
+  let depth = 0, inStr = false, esc = false, start = -1;
   for (let i = 0; i < str.length; i++) {
     const c = str[i];
     if (esc)                 { esc = false; continue; }
     if (c === '\\' && inStr) { esc = true;  continue; }
     if (c === '"')           { inStr = !inStr; continue; }
     if (inStr)               continue;
-    if (c === '{')           depth++;
-    if (c === '}')           { depth--; if (depth === 0) return str.substring(0, i + 1); }
+    if (c === '{')           { if (start === -1) start = i; depth++; }
+    if (c === '}')           { depth--; if (depth === 0 && start !== -1) return str.substring(start, i + 1); }
   }
-  return str;
+  return str.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
 }
 
 // Category labels — matches generate-results.js exactly

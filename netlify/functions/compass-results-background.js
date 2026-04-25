@@ -86,19 +86,23 @@ function buildScoreSummary(answers) {
     .join('\n\n');
 }
 
-// Extract just the root JSON object using brace counting — handles trailing text robustly
+// Extract just the root JSON object using brace counting — handles markdown
+// code fences (```json ... ```), preamble text, and trailing text robustly.
+// Locks to the FIRST `{` we see and walks until its matching `}`.
 function extractRootJSON(str) {
-  let depth = 0, inStr = false, esc = false;
+  let depth = 0, inStr = false, esc = false, start = -1;
   for (let i = 0; i < str.length; i++) {
     const c = str[i];
     if (esc)                 { esc = false; continue; }
     if (c === '\\' && inStr) { esc = true;  continue; }
     if (c === '"')           { inStr = !inStr; continue; }
     if (inStr)               continue;
-    if (c === '{')           depth++;
-    if (c === '}')           { depth--; if (depth === 0) return str.substring(0, i + 1); }
+    if (c === '{')           { if (start === -1) start = i; depth++; }
+    if (c === '}')           { depth--; if (depth === 0 && start !== -1) return str.substring(start, i + 1); }
   }
-  return str;
+  // Fallback: if no balanced object found, strip a leading ```json fence
+  // and trailing ``` so JSON.parse at least gets a fighting chance.
+  return str.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
 }
 
 exports.handler = async (event) => {
