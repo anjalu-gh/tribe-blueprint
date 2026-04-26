@@ -382,7 +382,15 @@ async function sendResultsEmail(email, results) {
   const html = `
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- Tell Apple Mail / Outlook to NOT auto-invert our gold accents in dark
+       mode. Without these tags, Mail.app turns #F4C83F into a muddy brown. -->
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
+  <style>:root { color-scheme: light only; supported-color-schemes: light only; }</style>
+</head>
 <body style="margin:0;padding:0;background:#F0F8FA;font-family:'Helvetica Neue',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;padding:40px 20px;">
     <tr><td align="center">
@@ -510,7 +518,7 @@ async function sendResultsEmail(email, results) {
             <p style="margin:0 0 8px;color:#F4C83F;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;">Your Blueprint is step 1 of 2</p>
             <h3 style="margin:0 0 14px;color:#ffffff;font-size:22px;">Now map exactly where to go next.</h3>
             <p style="margin:0 0 22px;color:#B8D4DA;font-size:14px;line-height:1.7;">The Blueprint tells you who you are. <strong style="color:#ffffff;">Pathworks Compass</strong> takes your Blueprint profile and your direction statement and generates 5–7 career paths, 5–7 businesses matched to your capital, 12 real companies where you'd thrive, and 20 startup ideas — plus a full 90-day action plan and resources list, delivered as a PDF.</p>
-            <a href="https://www.pathworkscompass.com" style="background:#F4C83F;color:#0F4F53;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;margin-bottom:22px;">Continue to Pathworks Compass →</a>
+            <a href="https://www.pathworkscompass.com" style="background:#F4C83F;color:#000000;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;margin-bottom:22px;">Continue to Pathworks Compass →</a>
             <p style="margin:0 0 6px;color:#B8D4DA;font-size:12px;">Or explore the full Pathworks Project:</p>
             <a href="https://pathworksproject.com" style="color:#F4C83F;text-decoration:none;font-weight:600;font-size:13px;">pathworksproject.com →</a>
             <p style="margin:24px 0 0;color:#4A6670;font-size:12px;">© ${new Date().getFullYear()} Pathworks Project · A Changing Tribes company</p>

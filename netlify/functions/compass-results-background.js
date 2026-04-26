@@ -1114,7 +1114,16 @@ async function sendCompassEmail(email, direction, results) {
     `<tr><td style="padding:8px 0;border-bottom:1px solid #F0E8E0;"><strong style="color:#0F4F53;font-size:13px;">🛠️ ${t.name || ''}</strong><p style="margin:3px 0 0;color:#4A6670;font-size:12px;line-height:1.5;">${t.why || ''}</p></td></tr>`).join('');
 
   const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- Tell Apple Mail / Outlook to NOT auto-invert our gold accents in dark
+       mode. Without these tags, Mail.app turns #F4C83F into a muddy brown. -->
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
+  <style>:root { color-scheme: light only; supported-color-schemes: light only; }</style>
+</head>
 <body style="margin:0;padding:0;background:#F0F8FA;font-family:'Helvetica Neue',Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;padding:40px 20px;">
 <tr><td align="center"><table width="620" cellpadding="0" cellspacing="0" style="max-width:620px;width:100%;">
@@ -1217,7 +1226,7 @@ async function sendCompassEmail(email, direction, results) {
   <!-- FOOTER CTA -->
   <tr><td style="background:#0F4F53;border-radius:0 0 16px 16px;padding:36px 32px;text-align:center;">
     <p style="margin:0 0 20px;color:#B8D4DA;font-size:14px;line-height:1.7;">Ready to take action? Get personalized assistance in reaching your goals.</p>
-    <a href="https://www.changingtribes.com" style="background:#E7B928;color:#ffffff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
+    <a href="https://www.changingtribes.com" style="background:#F4C83F;color:#000000;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Visit Changing Tribes →</a>
     <p style="margin:28px 0 0;color:#4A6670;font-size:12px;">© ${new Date().getFullYear()} Changing Tribes · <a href="https://www.changingtribes.com" style="color:#B8D4DA;">changingtribes.com</a></p>
   </td></tr>
 
