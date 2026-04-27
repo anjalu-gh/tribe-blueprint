@@ -396,9 +396,18 @@ async function sendResultsEmail(email, results) {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
+        <!-- PART 1 OF 2 STAMP -->
+        <tr>
+          <td style="background:#F4C83F;border-radius:16px 16px 0 0;padding:13px 24px;text-align:center;">
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;color:#0F4F53;font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;line-height:1.5;">
+              ✦ Part 1 of 2 complete · Continue to Pathworks Compass ↓
+            </p>
+          </td>
+        </tr>
+
         <!-- HEADER -->
         <tr>
-          <td style="background:#0F4F53;border-radius:16px 16px 0 0;padding:36px 32px 32px;text-align:center;">
+          <td style="background:#0F4F53;padding:36px 32px 32px;text-align:center;">
             <!-- Pathworks Blueprint lockup -->
             <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 20px;">
               <tr>
@@ -423,9 +432,31 @@ async function sendResultsEmail(email, results) {
           </td>
         </tr>
 
+        <!-- TWO-STEP ROADMAP -->
+        <tr>
+          <td style="background:#ffffff;padding:24px 32px 8px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48%" style="background:#0F4F53;border-radius:6px;padding:12px 14px;vertical-align:top;">
+                  <p style="margin:0 0 4px;color:#F4C83F;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;">Step 1 ✓ Complete</p>
+                  <p style="margin:0;color:#ffffff;font-size:14px;font-weight:700;line-height:1.3;">Pathworks Blueprint</p>
+                  <p style="margin:2px 0 0;color:#B8D4DA;font-size:11px;line-height:1.4;">Who you are — the profile below.</p>
+                </td>
+                <td width="4%">&nbsp;</td>
+                <td width="48%" style="background:#FFF8E5;border:2px dashed #F4C83F;border-radius:6px;padding:11px 14px;vertical-align:top;">
+                  <p style="margin:0 0 4px;color:#0F4F53;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;">Step 2 — Next</p>
+                  <p style="margin:0;color:#0F4F53;font-size:14px;font-weight:700;line-height:1.3;">Pathworks Compass</p>
+                  <p style="margin:2px 0 0;color:#4A6670;font-size:11px;line-height:1.4;">Where to go — link at bottom.</p>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:18px 0 0;color:#0F4F53;font-size:13px;line-height:1.6;text-align:center;font-style:italic;">Your Blueprint is the <strong>foundation</strong>. Compass uses it to map your specific career paths, businesses, companies, and a 90-day plan.</p>
+          </td>
+        </tr>
+
         <!-- PROFILE DESCRIPTION -->
         <tr>
-          <td style="background:#ffffff;padding:32px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+          <td style="background:#ffffff;padding:24px 32px 32px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
             <p style="margin:0;color:#4A6670;font-size:15px;line-height:1.75;">${results.tribe_description || ''}</p>
           </td>
         </tr>
@@ -537,7 +568,7 @@ async function sendResultsEmail(email, results) {
   const { data: resendData, error: resendError } = await resend.emails.send({
     from: 'Pathworks Blueprint <hello@changingtribes.com>',
     to: email,
-    subject: `Your Pathworks Blueprint: ${results.tribe_name || 'Results Inside'}`,
+    subject: `Part 1 of 2: Your Blueprint — ${results.tribe_name || 'Results Inside'} (Compass is next)`,
     html,
     text: buildBlueprintPlainText(results),
   });
