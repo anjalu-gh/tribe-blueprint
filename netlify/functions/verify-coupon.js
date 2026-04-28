@@ -50,6 +50,17 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: JSON.stringify({ valid: false }) };
     }
 
+    // Enforce email binding: if the coupon was issued to a specific email
+    // (e.g. a follow-up coupon sent after a paid Compass), the submitted
+    // email MUST match. Generic coupons (bound_email = null) are unaffected.
+    if (couponData.bound_email) {
+      const submittedLc = String(email || '').trim().toLowerCase();
+      const boundLc     = String(couponData.bound_email).trim().toLowerCase();
+      if (submittedLc !== boundLc) {
+        return { statusCode: 200, body: JSON.stringify({ valid: false }) };
+      }
+    }
+
     // Increment usage count atomically
     const { error: updateErr } = await supabase
       .from('coupons')

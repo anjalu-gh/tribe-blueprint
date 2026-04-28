@@ -5,6 +5,7 @@
 const Anthropic        = require('@anthropic-ai/sdk');
 const { createClient } = require('@supabase/supabase-js');
 const { Resend }       = require('resend');
+const crypto           = require('crypto');
 
 // Load pdfkit safely — email still sends without PDF if unavailable
 let PDFDocument = null;
@@ -384,13 +385,49 @@ MANDATORY: All three lists must be fully populated with 5 REAL, recognisable ite
   }
 
   // ── Send Results Email + PDF ─────────────────────
+  let compassEmailSent = false;
   if (resolvedEmail && process.env.RESEND_API_KEY) {
     console.log('BG Step 5: Sending results email...');
     try {
       await sendCompassEmail(resolvedEmail, direction, results);
       console.log('BG Step 5 done: email sent to', resolvedEmail);
+      compassEmailSent = true;
     } catch (err) {
       console.error('BG email error:', err.message);
+    }
+  }
+
+  // ── Issue Follow-Up Coupon (paid users only, once per email) ──────
+  // After a successful PAID Compass, send a second email with a personal
+  // coupon good for 2 more Compass runs, locked to this email, expiring
+  // in 60 days. Skipped if the original Compass was redeemed via coupon
+  // (source !== 'stripe') or if this email already has a follow-up coupon.
+  if (compassEmailSent && resolvedEmail && accessData.source === 'stripe') {
+    try {
+      const { data: existingCoupon } = await supabase
+        .from('coupons')
+        .select('id, code')
+        .eq('bound_email', resolvedEmail)
+        .limit(1)
+        .maybeSingle();
+
+      if (existingCoupon) {
+        console.log('BG Step 6: skipping follow-up — email already has coupon', existingCoupon.code);
+      } else {
+        const followup = await issueFollowupCoupon(resolvedEmail);
+        console.log('BG Step 6: follow-up coupon created:', followup.code);
+        try {
+          await sendFollowupCouponEmail(resolvedEmail, followup.code, followup.expiresAt);
+          console.log('BG Step 6 done: follow-up email sent to', resolvedEmail);
+        } catch (sendErr) {
+          // Coupon is still valid in DB — user could be told the code by
+          // support if delivery failed. Don't bubble up.
+          console.error('BG Step 6: follow-up email delivery failed (coupon still valid):', sendErr.message);
+        }
+      }
+    } catch (err) {
+      // Non-fatal — the user already got their main Compass email.
+      console.error('BG Step 6: follow-up coupon issuance failed (non-fatal):', err.message);
     }
   }
 };
@@ -1261,4 +1298,160 @@ async function sendCompassEmail(email, direction, results) {
     throw new Error(`Resend send failed: ${resendError.message || resendError.name}`);
   }
   console.log('[compass] Resend accepted, message id:', resendData?.id || '(no id returned)');
+}
+
+// ── FOLLOW-UP COUPON ──────────────────────────────────────────────
+// After a paid Compass, issue a personal coupon for 2 more free runs
+// locked to the user's email and expiring in 60 days. Lets users explore
+// alternate directions ("fireman vs. police officer", "healthcare vs.
+// animal-assisted therapy") without paying $39 per try.
+
+async function issueFollowupCoupon(email) {
+  // PATHWORKS-XXXXXXXX (8 hex chars = ~4B possibilities, collision risk negligible)
+  const code = 'PATHWORKS-' + crypto.randomBytes(4).toString('hex').toUpperCase();
+  const expiresAt = new Date();
+  expiresAt.setDate(expiresAt.getDate() + 60);
+
+  const { error: insertErr } = await supabase.from('coupons').insert({
+    code,
+    bound_email: email,
+    active:      true,
+    max_uses:    2,
+    uses_count:  0,
+    expires_at:  expiresAt.toISOString(),
+  });
+
+  if (insertErr) {
+    throw new Error('Failed to insert follow-up coupon: ' + insertErr.message);
+  }
+
+  return { code, expiresAt };
+}
+
+function buildFollowupCouponPlainText(code, expiresAt, compassUrl) {
+  const expiryStr = expiresAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  return [
+    'Your Pathworks Compass just landed — and we have a gift to go with it.',
+    '',
+    'Some people find their direction immediately. Others want to test a few — fireman vs. police officer, healthcare technology vs. animal-assisted therapy, building online vs. consulting locally. We get it.',
+    '',
+    'Here are 2 bonus Compass runs on us, locked to your email and good for 60 days:',
+    '',
+    `   COUPON CODE: ${code}`,
+    `   EXPIRES: ${expiryStr}`,
+    `   USES: 2 more Compass reports`,
+    '',
+    'Run another Compass:',
+    compassUrl,
+    '',
+    'A few things to know:',
+    `  • The coupon is tied to your email — only you can use it.`,
+    `  • Each run gives you a complete new Compass report (PDF + email).`,
+    `  • Try a different direction, a different capital level, or both.`,
+    `  • Expires in 60 days, then poof.`,
+    '',
+    'If you have questions, reply to this email and we\'ll get back to you.',
+    '',
+    '— The Pathworks team',
+  ].join('\n');
+}
+
+async function sendFollowupCouponEmail(email, code, expiresAt) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const expiryStr = expiresAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const compassUrl = `https://www.pathworkscompass.com/?email=${encodeURIComponent(email)}&coupon=${encodeURIComponent(code)}`;
+
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
+  <style>:root { color-scheme: light only; supported-color-schemes: light only; }</style>
+</head>
+<body style="margin:0;padding:0;background:#F0F8FA;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;padding:40px 20px;">
+<tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- BONUS STAMP -->
+  <tr><td style="background:#F4C83F;border-radius:16px 16px 0 0;padding:13px 24px;text-align:center;">
+    <p style="margin:0;font-family:Arial,Helvetica,sans-serif;color:#0F4F53;font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;line-height:1.5;">🎁 A gift with your Compass · 2 bonus runs inside</p>
+  </td></tr>
+
+  <!-- HEADER -->
+  <tr><td style="background:#0F4F53;padding:36px 32px 32px;text-align:center;">
+    <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 16px;"><tr>
+      <td style="vertical-align:middle;padding-right:12px;"><div style="width:28px;height:28px;border-radius:50%;background:#F4C83F;font-size:0;line-height:0;">&nbsp;</div></td>
+      <td style="vertical-align:middle;text-align:left;">
+        <div style="font-family:Georgia,'Times New Roman',serif;font-weight:900;font-size:22px;color:#ffffff;line-height:1;letter-spacing:-0.01em;">pathworks</div>
+        <div style="font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:9px;color:#F4C83F;letter-spacing:0.22em;margin-top:6px;">COMPASS</div>
+      </td>
+    </tr></table>
+    <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;line-height:1.25;">Your Compass just landed.<br>Want to try another direction?</h1>
+  </td></tr>
+
+  <!-- INTRO -->
+  <tr><td style="background:#ffffff;padding:32px 36px 24px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+    <p style="margin:0 0 16px;color:#0F4F53;font-size:15px;line-height:1.7;">Some people find their direction the first time. Others want to test a few — <em>fireman vs. police officer</em>, <em>healthcare technology vs. animal-assisted therapy</em>, <em>build online vs. consult locally</em>. We get it.</p>
+    <p style="margin:0;color:#4A6670;font-size:14px;line-height:1.7;">As a thank-you for paying for your first Compass, here are <strong style="color:#0F4F53;">2 more Compass runs on us</strong>, locked to <strong style="color:#0F4F53;">${email}</strong> and good for 60 days.</p>
+  </td></tr>
+
+  <!-- COUPON CARD -->
+  <tr><td style="background:#ffffff;padding:8px 36px 32px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:#FFF8E5;border:2px dashed #F4C83F;border-radius:12px;"><tr>
+      <td style="padding:24px 28px;text-align:center;">
+        <p style="margin:0 0 8px;color:#0F4F53;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;">Your bonus coupon</p>
+        <p style="margin:0 0 4px;font-family:'Courier New',Courier,monospace;color:#0F4F53;font-size:24px;font-weight:700;letter-spacing:0.08em;">${code}</p>
+        <p style="margin:10px 0 0;color:#5A6B72;font-size:12px;">2 uses · Expires <strong>${expiryStr}</strong></p>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <!-- CTA -->
+  <tr><td style="background:#ffffff;padding:0 36px 36px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;text-align:center;">
+    <a href="${compassUrl}" style="background:#F4C83F;color:#000000;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;">Run another Compass →</a>
+    <p style="margin:14px 0 0;color:#5A6B72;font-size:12px;">Your email and coupon are pre-filled — just enter a new direction.</p>
+  </td></tr>
+
+  <!-- HOW IT WORKS -->
+  <tr><td style="background:#EDF4F8;padding:28px 36px;border-left:1px solid #B8D4DA;border-right:1px solid #B8D4DA;">
+    <p style="margin:0 0 10px;color:#0F4F53;font-size:13px;font-weight:700;letter-spacing:0.04em;">A few things to know:</p>
+    <ul style="margin:0;padding:0 0 0 18px;color:#4A6670;font-size:13px;line-height:1.8;">
+      <li>The coupon is tied to <strong>your email</strong> — only you can use it.</li>
+      <li>Each run gives you a complete new Compass report (PDF + email).</li>
+      <li>Try a different direction, a different capital level, or both.</li>
+      <li>Expires in 60 days, then poof.</li>
+    </ul>
+  </td></tr>
+
+  <!-- FOOTER -->
+  <tr><td style="background:#0F4F53;border-radius:0 0 16px 16px;padding:28px 32px;text-align:center;">
+    <p style="margin:0;color:#B8D4DA;font-size:12px;line-height:1.7;">Questions? Just reply to this email.</p>
+    <p style="margin:14px 0 0;color:#4A6670;font-size:11px;">© ${new Date().getFullYear()} Changing Tribes · <a href="https://www.changingtribes.com" style="color:#B8D4DA;">changingtribes.com</a></p>
+  </td></tr>
+
+</table></td></tr>
+</table>
+</body>
+</html>`;
+
+  const emailPayload = {
+    from:    process.env.RESEND_FROM_EMAIL || 'Pathworks <hello@changingtribes.com>',
+    to:      email,
+    subject: `🎁 Your Pathworks Compass — bonus: 2 more free runs (${expiryStr})`,
+    html,
+    text:    buildFollowupCouponPlainText(code, expiresAt, compassUrl),
+  };
+
+  const { data: resendData, error: resendError } = await resend.emails.send(emailPayload);
+  if (resendError) {
+    console.error('[compass-followup] Resend error:', JSON.stringify({
+      name:       resendError.name,
+      message:    resendError.message,
+      statusCode: resendError.statusCode,
+    }));
+    throw new Error(`Resend send failed: ${resendError.message || resendError.name}`);
+  }
+  console.log('[compass-followup] Resend accepted, message id:', resendData?.id || '(no id returned)');
 }

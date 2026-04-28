@@ -1894,16 +1894,24 @@ const TEST_COMPASS_RESULTS = {
   const isCompass = compassDomains.includes(host);
   const defaultPage = isCompass ? 'compass-access' : 'landing';
 
-  // If the user arrived from Blueprint with ?email= in the URL, pre-fill
-  // the Compass email field so they don't have to retype it.
+  // If the user arrived from Blueprint with ?email= in the URL (or from the
+  // follow-up coupon email with ?email=...&coupon=...), pre-fill the Compass
+  // email and coupon fields so they don't have to retype anything.
   if (isCompass) {
     try {
       const params = new URLSearchParams(window.location.search);
-      const emailParam = params.get('email');
+      const emailParam  = params.get('email');
+      const couponParam = params.get('coupon');
       if (emailParam) {
         compass.email = emailParam;
         const emailInput = document.getElementById('compass-email-input');
         if (emailInput) emailInput.value = emailParam;
+      }
+      if (couponParam) {
+        const couponInput = document.getElementById('compass-coupon-input');
+        if (couponInput) couponInput.value = couponParam.toUpperCase();
+      }
+      if (emailParam || couponParam) {
         // Clean the URL so refreshes don't keep re-injecting it.
         window.history.replaceState({}, '', window.location.pathname);
       }
