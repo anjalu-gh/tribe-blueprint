@@ -297,6 +297,19 @@
     .why-pathworks-callout { max-width: 760px; margin: 2.75rem auto 0; font-family: 'Merriweather', serif; font-size: 1.02rem; color: var(--forest); line-height: 1.7; font-style: italic; border-left: 3px solid #F4C83F; padding: 6px 0 6px 22px; }
     @media (max-width: 720px) { .why-pathworks-grid { grid-template-columns: 1fr; } .why-pathworks-section { padding: 4rem 1.75rem; } }
 
+    /* ══════════════ STARTING POINT (Blueprint -> Compass) ══════════════ */
+    .compass-what { background: var(--forest); padding: 5rem 3rem; }
+    .compass-what-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .compass-what-text h2 { font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+    .compass-what-text h2 em { font-style: normal; color: var(--gold-lt); }
+    .compass-what-text p { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.98rem; line-height: 1.8; color: rgba(240,248,250,0.8); margin-bottom: 2rem; }
+    .compass-items { display: flex; flex-direction: column; gap: 1.5rem; }
+    .compass-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); }
+    .compass-item-num { font-family: 'Public Sans', sans-serif; font-weight: 700; font-size: 2rem; color: var(--gold-lt); line-height: 1; flex-shrink: 0; min-width: 2.5rem; }
+    .compass-item-body h3 { font-family: 'Public Sans', sans-serif; font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 0.3rem; }
+    .compass-item-body p { font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.82rem; line-height: 1.6; color: rgba(240,248,250,0.7); margin: 0; }
+    @media (max-width: 880px) { .compass-what-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+
     /* ══════════════ HOW IT WORKS ══════════════ */
     .how-section { background: var(--paper); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 5rem 3rem; }
     .how-inner { max-width: 1100px; margin: 0 auto; }
@@ -776,6 +789,39 @@
       <p class="foundation-body">We've distilled the most useful tenets of each into a single 7-minute, sliding-scale assessment that captures your <strong>work style</strong>, <strong>preferences</strong>, <strong>energizers</strong>, and <strong>natural interests</strong>. The result is your <strong>Pathworks Blueprint Profile</strong> — a clear snapshot of who you actually are at work. That Profile then becomes the foundation for the <strong>Pathworks Compass</strong>: add a few sentences about what you want to do next, and the system generates a personalized roadmap of AI-resistant careers, businesses you can start, a 90-day action plan, a 10-year arc, and the resources to help you get started.</p>
     </div>
   </section>
+
+  <!-- STARTING POINT (Blueprint -> Compass) -->
+  <div class="compass-what">
+    <div class="compass-what-inner">
+      <div class="compass-what-text">
+        <h2>Your Blueprint<br>is just the<br><em>starting point.</em></h2>
+        <p>The Compass takes everything revealed in your Blueprint and plots where it can realistically take you — based on who you actually are, not who you think you should be.</p>
+      </div>
+      <div class="compass-items">
+        <div class="compass-item">
+          <div class="compass-item-num">01</div>
+          <div class="compass-item-body">
+            <h3>Complete your Blueprint (free)</h3>
+            <p>7 minutes to surface your strengths, values, and work style through our guided assessment.</p>
+          </div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-item-num">02</div>
+          <div class="compass-item-body">
+            <h3>Step 2 — Unlock Pathworks Compass</h3>
+            <p>Using your email address from Blueprint, you then write a few brief sentences about what career or business you would like to start. With a one-time payment of $39 the system transforms your Blueprint and future goals into an AI-Resistant Compass Roadmap with a full navigational guide for your next chapter.</p>
+          </div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-item-num">03</div>
+          <div class="compass-item-body">
+            <h3>Choose your direction</h3>
+            <p>Browse 5–7 AI-resistant careers, 5–7 capital-matched businesses, 12 real companies, and a 20-idea brainstorm — then follow your personalized 90-day roadmap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- HOW IT WORKS -->
   <section class="how-section" id="how">
