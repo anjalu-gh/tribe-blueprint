@@ -159,6 +159,27 @@
     .hero-twostep-text span { color: rgba(240,248,250,0.62); font-size: 0.7rem; letter-spacing: 0.02em; margin-top: 2px; line-height: 1.3; }
     .hero-twostep-arrow { color: rgba(244,200,63,0.55); font-size: 1.3rem; align-self: center; flex-shrink: 0; font-weight: 700; }
     @media (max-width: 720px) { .hero-twostep { flex-direction: column; gap: 0.5rem; } .hero-twostep-arrow { display: none; } }
+    /* ── "See a real Compass report" sticker burst ──────────── */
+    .compass-burst {
+      position: absolute;
+      right: 1.5rem;
+      top: 4.5rem;
+      width: 150px;
+      height: 150px;
+      text-decoration: none;
+      transform: rotate(-8deg);
+      transition: transform 0.25s ease, filter 0.25s ease;
+      z-index: 5;
+      filter: drop-shadow(0 6px 14px rgba(0,0,0,0.28));
+    }
+    .compass-burst:hover { transform: rotate(-3deg) scale(1.07); filter: drop-shadow(0 9px 18px rgba(0,0,0,0.35)); }
+    .compass-burst-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .compass-burst-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 22px; text-align: center; pointer-events: none; }
+    .compass-burst-text .b-eyebrow { font-family: 'Public Sans', sans-serif; font-size: 9.5px; font-weight: 800; color: #0F4F53; letter-spacing: 0.14em; text-transform: uppercase; }
+    .compass-burst-text .b-main { font-family: 'Merriweather', serif; font-size: 14px; font-weight: 700; color: #0F4F53; line-height: 1.1; margin-top: 4px; letter-spacing: -0.01em; }
+    .compass-burst-text .b-arrow { font-family: 'Public Sans', sans-serif; font-size: 15px; font-weight: 800; color: #0F4F53; margin-top: 5px; }
+    @media (max-width: 1080px) { .compass-burst { width: 130px; height: 130px; right: 1rem; top: 3.5rem; } .compass-burst-text .b-main { font-size: 12.5px; } .compass-burst-text .b-eyebrow { font-size: 8.5px; } }
+    @media (max-width: 720px) { .compass-burst { display: none; } }
     .btn-gold {
       background: var(--gold-lt); color: var(--ink); font-family: 'Public Sans', sans-serif;
       font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; padding: 1rem 2.4rem;
@@ -645,6 +666,16 @@
   <!-- HERO -->
   <section class="hero-split">
     <div class="hero-left">
+      <a href="/sample-compass-report.pdf" target="_blank" rel="noopener" class="compass-burst" aria-label="See a real Pathworks Compass Report (opens PDF in a new tab)">
+        <svg class="compass-burst-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="100,1 116.9,25.9 141.7,13.5 147.4,40.6 177.4,38.3 168.5,67 193.6,78.6 176,100 196.5,122 168.5,133 175.1,159.9 147.4,159.4 143,189.2 116.9,174.1 100,196 83.1,174.1 57,189.2 52.6,159.4 24.9,159.9 31.5,133 3.5,122 24,100 6.4,78.6 31.5,67 22.6,38.3 52.6,40.6 58.3,13.5 83.1,25.9" fill="#F4C83F" stroke="#E7B928" stroke-width="2"/>
+        </svg>
+        <span class="compass-burst-text">
+          <span class="b-eyebrow">See a real</span>
+          <span class="b-main">Compass<br>Report</span>
+          <span class="b-arrow">→</span>
+        </span>
+      </a>
       <div class="hero-eyebrow">A 2-Part Career &amp; Life Transition Assessment</div>
       <h1 class="hero-h1">Turn What<br>You Know<br><em>Into What<br>Comes Next</em></h1>
       <p class="hero-body">Pathworks comes in <strong>two parts</strong>. First, the free <strong>Blueprint</strong> shows you how you actually work best — strengths, blind spots, energizers, and your AI-age advantage. Then the <strong>Compass</strong> overlays your Blueprint onto the future you want and maps exactly where to take it next.</p>
