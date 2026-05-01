@@ -185,7 +185,7 @@
       font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; padding: 1rem 2.4rem;
       border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s;
     }
-    .btn-gold:hover { background: var(--gold); }
+    @media (hover: hover) { .btn-gold:hover { background: var(--gold); } }
     .btn-ghost {
       font-family: 'Public Sans', sans-serif; font-weight: 500; font-size: 0.9rem;
       color: var(--gold-lt); text-decoration: none; border-bottom: 1px solid rgba(244,200,63,0.4); padding-bottom: 2px; cursor: pointer;
@@ -411,7 +411,7 @@
       font-weight: 600; font-size: 0.95rem; padding: 1rem 2.2rem; border: none; cursor: pointer;
       text-decoration: none; display: block; text-align: center; letter-spacing: 0.03em; transition: background 0.2s; width: 100%;
     }
-    .btn-gold-solid:hover { background: var(--gold); }
+    @media (hover: hover) { .btn-gold-solid:hover { background: var(--gold); } }
     .pricing-note { text-align: center; margin-top: 1.5rem; font-family: 'Merriweather', serif; font-weight: 300; font-size: 0.85rem; color: var(--mist); }
 
     /* ══════════════ FAQ (landing) ══════════════ */
@@ -654,7 +654,7 @@
     <li><a onclick="navTo('#how')">How It Works</a></li>
     <li><a onclick="navTo('#pricing')">Pricing</a></li>
     <li><a onclick="navTo('#faq')">FAQ</a></li>
-    <li><a onclick="showPage('access')" class="nav-cta">Start Free →</a></li>
+    <li><a href="#" onclick="event.preventDefault(); showPage('access');" class="nav-cta">Start Free →</a></li>
   </ul>
 </nav>
 
@@ -691,7 +691,7 @@
         </div>
       </div>
       <div class="hero-cta-row">
-        <button class="btn-gold" onclick="showPage('access')">Start Part 1: My Free Blueprint →</button>
+        <button type="button" class="btn-gold" onclick="showPage('access')">Start Part 1: My Free Blueprint →</button>
         <a class="btn-ghost" onclick="navTo('#foundation')">See how it works</a>
       </div>
       <p class="hero-sub-note">Free · 7 minutes · This is Part 1 of 2 (Compass is $39 after)</p>
@@ -873,7 +873,7 @@
       <div class="what-text">
         <h2>Your Blueprint<br>includes <em>everything</em><br>you need to start</h2>
         <p>Most career assessments tell you what personality type you are. Pathworks Blueprint tells you what to actually do — and gives you the roadmap to do it. For free.</p>
-        <button class="btn-gold" onclick="showPage('access')">Start My Free Assessment →</button>
+        <button type="button" class="btn-gold" onclick="showPage('access')">Start My Free Assessment →</button>
       </div>
       <div class="what-items">
         <div class="what-item">
@@ -939,7 +939,7 @@
             <li>A 30-day personal roadmap</li>
             <li>Results emailed to you instantly</li>
           </ul>
-          <button class="btn-dark" onclick="showPage('access')">Start Free →</button>
+          <button type="button" class="btn-dark" onclick="showPage('access')">Start Free →</button>
         </div>
         <div class="price-card price-card-dark">
           <div class="price-badge price-badge-gold">✦ Upgrade — One-Time</div>
