@@ -709,13 +709,22 @@ function generateCompassPDF(email, direction, results) {
          .text('Real companies (public, private, and notable startups) where your direction and blueprint line up with the kind of work they do.', M, doc.y, { width: CW })
          .moveDown(0.6);
 
-      // 2-column card grid — pair rows together so the taller card sets row height
+      // 2-column card grid — pair rows together so the taller card sets row height.
+      // IMPORTANT: heightOfString uses the *currently active* font for measurement.
+      // We must set the same font we'll render with BEFORE measuring — bold text
+      // is wider than regular, so a name measured under regular Helvetica may
+      // wrap to fewer lines than it actually does in Helvetica-Bold, causing the
+      // sector + why_fit lines below it to overlap the wrapped name.
       const colGap = 10;
       const cardW  = (CW - colGap) / 2;
       const computeCardH = (co) => {
-        const nameH   = doc.heightOfString(safe(co.name || ''),    { width: cardW - 24, fontSize: 11 });
-        const sectorH = doc.heightOfString(safe(co.sector || ''),  { width: cardW - 24, fontSize: 9 });
-        const whyH    = doc.heightOfString(safe(co.why_fit || ''), { width: cardW - 24, fontSize: 9.5 });
+        doc.font('Helvetica-Bold');
+        const nameH   = doc.heightOfString(safe(co.name || ''), { width: cardW - 24, fontSize: 11 });
+        doc.font('Helvetica-Bold');
+        const sectorH = doc.heightOfString(safe(co.sector || '').toUpperCase(), { width: cardW - 24, fontSize: 9, characterSpacing: 0.3 });
+        doc.font('Helvetica');
+        const whyH    = doc.heightOfString(safe(co.why_fit || ''), { width: cardW - 24, fontSize: 9.5, lineGap: 1.5 });
+        // Vertical layout (px): 10 top + nameH + 6 + sectorH + 8 + whyH + 14 bottom
         return { nameH, sectorH, whyH, total: nameH + sectorH + whyH + 38 };
       };
       for (let i = 0; i < results.companies.length; i += 2) {
@@ -732,11 +741,11 @@ function generateCompassPDF(email, direction, results) {
           doc.rect(x, rowY, cardW, rowH).fill('#F0F8FA').strokeColor(BORDER).lineWidth(0.5).stroke();
           doc.rect(x, rowY, 3, rowH).fill(ORANGE);
           doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(11)
-             .text(safe(co.name || ''), x + 12, rowY + 8, { width: cardW - 24 });
+             .text(safe(co.name || ''), x + 12, rowY + 10, { width: cardW - 24 });
           doc.fillColor(ORANGE).font('Helvetica-Bold').fontSize(9)
-             .text(safe(co.sector || '').toUpperCase(), x + 12, rowY + 8 + dims.nameH + 4, { width: cardW - 24, characterSpacing: 0.3 });
+             .text(safe(co.sector || '').toUpperCase(), x + 12, rowY + 10 + dims.nameH + 6, { width: cardW - 24, characterSpacing: 0.3 });
           doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
-             .text(safe(co.why_fit || ''), x + 12, rowY + 8 + dims.nameH + 4 + dims.sectorH + 6, { width: cardW - 24, lineGap: 1.5 });
+             .text(safe(co.why_fit || ''), x + 12, rowY + 10 + dims.nameH + 6 + dims.sectorH + 8, { width: cardW - 24, lineGap: 1.5 });
         };
         drawCard(left, lH, 0);
         if (right) drawCard(right, rH, cardW + colGap);
@@ -756,10 +765,16 @@ function generateCompassPDF(email, direction, results) {
 
       const iColGap = 10;
       const iCardW  = (CW - iColGap) / 2;
+      // Same heightOfString-uses-current-font caveat as the companies grid.
+      // Set the rendering font before measuring so wrapped bold names don't
+      // collide with the benefit text below.
       const computeIdeaH = (s) => {
+        doc.font('Helvetica-Bold');
         const nameH = doc.heightOfString(safe(s.name || ''),    { width: iCardW - 34, fontSize: 10.5 });
-        const benH  = doc.heightOfString(safe(s.benefit || ''), { width: iCardW - 34, fontSize: 9.5 });
-        return { nameH, benH, total: nameH + benH + 22 };
+        doc.font('Helvetica');
+        const benH  = doc.heightOfString(safe(s.benefit || ''), { width: iCardW - 34, fontSize: 9.5, lineGap: 1.5 });
+        // Vertical layout (px): 10 top + nameH + 6 + benH + 14 bottom
+        return { nameH, benH, total: nameH + benH + 30 };
       };
       for (let i = 0; i < results.startup_ideas.length; i += 2) {
         const left  = results.startup_ideas[i];
@@ -773,13 +788,13 @@ function generateCompassPDF(email, direction, results) {
         const drawIdea = (s, dims, idx, xOffset) => {
           const x = M + xOffset;
           doc.rect(x, rowY, iCardW, rowH).fill('#FFF9EC').strokeColor(GOLD).lineWidth(0.5).stroke();
-          doc.circle(x + 14, rowY + 16, 10).fill(GOLD);
+          doc.circle(x + 14, rowY + 18, 10).fill(GOLD);
           doc.fillColor('#ffffff').font('Helvetica-Bold').fontSize(9)
-             .text(String(idx + 1), x + 8, rowY + 12, { width: 12, align: 'center' });
+             .text(String(idx + 1), x + 8, rowY + 14, { width: 12, align: 'center' });
           doc.fillColor(BROWN).font('Helvetica-Bold').fontSize(10.5)
-             .text(safe(s.name || ''), x + 28, rowY + 8, { width: iCardW - 34 });
+             .text(safe(s.name || ''), x + 28, rowY + 10, { width: iCardW - 34 });
           doc.fillColor(MUTED).font('Helvetica').fontSize(9.5)
-             .text(safe(s.benefit || ''), x + 28, rowY + 8 + dims.nameH + 3, { width: iCardW - 34, lineGap: 1.5 });
+             .text(safe(s.benefit || ''), x + 28, rowY + 10 + dims.nameH + 6, { width: iCardW - 34, lineGap: 1.5 });
         };
         drawIdea(left, lH, i, 0);
         if (right) drawIdea(right, rH, i + 1, iCardW + iColGap);
@@ -1095,13 +1110,19 @@ async function sendCompassEmail(email, direction, results) {
   for (let i = 0; i < companiesArr.length; i += 2) {
     const a = companiesArr[i];
     const b = companiesArr[i + 1];
+    // NOTE: long company names (e.g. "Fogo de Chão (Brazilian Steakhouse Chain)")
+    // can wrap to a second line. We use <div> for every row instead of relying
+    // on <strong style="display:block"> because some email clients (notably
+    // older Outlook builds) silently strip display:block on inline tags,
+    // causing the next element to overlap the wrapped name. Block-level <div>s
+    // with margin separators are robust everywhere.
     const cell = (co) => co ? `
       <td width="50%" valign="top" style="padding:8px;">
         <table width="100%" cellpadding="0" cellspacing="0" style="background:#F0F8FA;border-left:3px solid #1A6B72;border-radius:0 8px 8px 0;">
-          <tr><td style="padding:12px 14px;">
-            <strong style="color:#0F4F53;font-size:14px;display:block;margin-bottom:2px;">${co.name || ''}</strong>
-            <span style="color:#1A6B72;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${co.sector || ''}</span>
-            <p style="margin:6px 0 0;color:#4A6670;font-size:12px;line-height:1.55;">${co.why_fit || ''}</p>
+          <tr><td style="padding:14px 16px;">
+            <div style="color:#0F4F53;font-size:14px;font-weight:700;line-height:1.3;margin:0 0 6px;">${co.name || ''}</div>
+            <div style="color:#1A6B72;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;line-height:1.4;margin:0 0 8px;">${co.sector || ''}</div>
+            <div style="color:#4A6670;font-size:12px;line-height:1.55;margin:0;">${co.why_fit || ''}</div>
           </td></tr>
         </table>
       </td>` : `<td width="50%">&nbsp;</td>`;
