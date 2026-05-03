@@ -551,6 +551,72 @@
       .footer-note { text-align: left; }
       .footer-links { flex-wrap: wrap; gap: 1.2rem; }
     }
+
+    /* Tablet + large mobile — stack heroes, narrow grids, tighten padding */
+    @media (max-width: 880px) {
+      /* Nav: tighten gaps, slightly smaller links */
+      .cp-nav { padding: 1rem 1.5rem; }
+      .cp-nav-links { gap: 1.2rem; }
+      .cp-nav-links a { font-size: 0.85rem; }
+
+      /* HERO: collapse to single column. Hide right-side journey viz on
+         mobile entirely — it has absolutely-positioned cards that collide
+         at narrow widths, and the .hero-twostep cards already convey the
+         same Step 1 → Step 2 framing. */
+      .compass-hero { grid-template-columns: 1fr; min-height: auto; }
+      .compass-hero-right { display: none; }
+      .compass-hero-left { padding: 4rem 2rem 3rem; }
+      .compass-hero-left::before { width: 220px; height: 220px; top: -60px; right: -60px; }
+      .compass-hero-left::after { width: 140px; height: 140px; bottom: -40px; left: -40px; }
+      .compass-hero-h1 { font-size: clamp(2.5rem, 7vw, 3.8rem); }
+      .compass-hero-body { font-size: 1rem; line-height: 1.65; max-width: 100%; }
+
+      /* "Your Blueprint is just the starting point" — single column */
+      .compass-what { padding: 4rem 2rem; }
+      .compass-what-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .compass-what-text h2 { font-size: clamp(1.9rem, 5.5vw, 2.6rem); }
+      .compass-what-text p { font-size: 0.95rem; }
+
+      /* Features: 2-column grid instead of 4 */
+      .compass-features { grid-template-columns: repeat(2, 1fr); }
+      .compass-feature { padding: 2rem 1.5rem; border-right: none; border-bottom: 1px solid rgba(15,79,83,0.15); }
+      .compass-feature:nth-child(odd) { border-right: 1px solid rgba(15,79,83,0.15); }
+
+      /* Foundation tighter */
+      .foundation-section { padding: 4rem 2rem; }
+
+      /* Why-Pathworks already handled at 720px */
+    }
+
+    /* Small phone — single-column features, tighter typography and padding */
+    @media (max-width: 560px) {
+      .cp-nav { padding: 0.75rem 1rem; }
+      .cp-nav-links { gap: 0.5rem; }
+      /* On phones the nav had to collapse — hide secondary links and keep
+         only the primary "Get Started" CTA visible alongside the logo. */
+      .cp-nav-links li:not(:last-child) { display: none; }
+      .cp-nav-cta { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+      .compass-hero-left { padding: 3rem 1.25rem 2.5rem; }
+      .compass-hero-right { min-height: 320px; padding: 1.5rem 1rem 3rem; }
+      .compass-hero-h1 { font-size: 2.3rem; line-height: 1.05; }
+      .compass-hero-body { font-size: 0.95rem; }
+      .compass-cta-row { gap: 1rem; }
+
+      .compass-what { padding: 3rem 1.25rem; }
+      .compass-what-text h2 { font-size: 1.9rem; }
+
+      .compass-features { grid-template-columns: 1fr; }
+      .compass-feature { border-right: none !important; }
+      .compass-feature:last-child { border-bottom: none; }
+
+      .foundation-section { padding: 3rem 1.25rem; }
+
+      .why-pathworks-section { padding: 3rem 1.25rem; }
+      .why-pathworks-h2 { font-size: 1.5rem; }
+
+      .pricing-section, .faq-landing { padding: 3rem 1.25rem; }
+    }
     @media (max-width: 600px) {
       .pricing-section, .faq-landing { padding: 3.5rem 1.5rem; }
     }
