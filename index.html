@@ -179,7 +179,15 @@
     .compass-burst-text .b-main { font-family: 'Merriweather', serif; font-size: 14px; font-weight: 700; color: #0F4F53; line-height: 1.1; margin-top: 4px; letter-spacing: -0.01em; }
     .compass-burst-text .b-arrow { font-family: 'Public Sans', sans-serif; font-size: 15px; font-weight: 800; color: #0F4F53; margin-top: 5px; }
     @media (max-width: 1080px) { .compass-burst { width: 130px; height: 130px; right: 1rem; top: 3.5rem; } .compass-burst-text .b-main { font-size: 12.5px; } .compass-burst-text .b-eyebrow { font-size: 8.5px; } }
-    @media (max-width: 720px) { .compass-burst { display: none; } }
+    /* Phone — burst stays visible but shrinks and tucks into the top-right
+       corner above the H1, with smaller text. */
+    @media (max-width: 720px) {
+      .compass-burst { width: 88px; height: 88px; right: 0.5rem; top: 0.5rem; padding: 0; transform: rotate(-10deg); }
+      .compass-burst-text { padding: 0 8px; }
+      .compass-burst-text .b-eyebrow { font-size: 6.5px; letter-spacing: 0.1em; }
+      .compass-burst-text .b-main { font-size: 9px; line-height: 1.05; margin-top: 2px; }
+      .compass-burst-text .b-arrow { font-size: 10px; margin-top: 2px; }
+    }
     .btn-gold {
       background: var(--gold-lt); color: var(--ink); font-family: 'Public Sans', sans-serif;
       font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em; padding: 1rem 2.4rem;
