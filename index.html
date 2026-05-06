@@ -493,7 +493,19 @@
     .msg.success { color: var(--green); }
     .divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; color: var(--muted); font-size: 0.875rem; }
     .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-    .security-note { text-align: center; font-size: 0.78rem; color: var(--muted); margin-top: 1rem; line-height: 1.5; }
+    .security-note {
+      background: var(--paper);
+      border-left: 3px solid var(--gold-lt);
+      border-radius: 0 6px 6px 0;
+      padding: 11px 14px;
+      font-size: 0.82rem;
+      color: var(--slate);
+      line-height: 1.55;
+      margin: 0.75rem 0;
+      text-align: left;
+    }
+    .security-note strong { color: var(--forest); font-weight: 600; }
+    .security-note a { color: var(--forest); font-weight: 600; text-decoration: underline; }
 
     /* ══════════════ ASSESSMENT PAGE ══════════════ */
     .assess-wrap { max-width: 720px; margin: 0 auto; padding: 2rem; }
@@ -1036,8 +1048,8 @@
       <label for="email-input">Your Email Address</label>
       <input type="email" id="email-input" placeholder="you@example.com" />
     </div>
-    <button class="btn-primary" onclick="startAssessment()" style="width:100%;margin-top:0.5rem;">Begin My Free Assessment →</button>
-    <p class="security-note">Your email is used only to send your results. We never sell or share it. See our <a href="privacy.html" target="_blank" style="color:var(--slate);">Privacy Policy</a>.</p>
+    <p class="security-note"><strong>We won't sell or share your email.</strong> It's used to deliver your Blueprint results, track your individual profile, and link to <strong>Pathworks Compass</strong> if you decide to continue. <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
+    <button type="button" class="btn-primary" onclick="startAssessment()" style="width:100%;margin-top:0.5rem;">Begin My Free Assessment →</button>
   </div>
 </div>
 
